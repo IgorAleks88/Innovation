@@ -2,7 +2,7 @@
 import '../scss/style.scss';
 
 // import js modules
-import displayHeader from './display/displayHeader';
+import displayPlayerTable from './display/playerTable/displayPlayerTable';
 
 // app
-displayHeader();
+document.body.appendChild(displayPlayerTable.init());
