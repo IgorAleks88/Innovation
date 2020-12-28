@@ -10,13 +10,18 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
-  watch: false,
   entry: {
     main: path.resolve(__dirname, './src/js/app.js'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
+  },
+  devServer: {
+    contentBase: 'dist',
+    hot: true,
+    inline: true,
+    open: true,
   },
   plugins: [
     new webpack.ProgressPlugin(),
