@@ -10,7 +10,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
-  watch: false,
   entry: {
     main: path.resolve(__dirname, './src/js/app.js'),
   },
@@ -18,25 +17,23 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
   },
+  devServer: {
+    contentBase: 'dist',
+    hot: true,
+    inline: true,
+    open: true,
+  },
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/html/index.html'),
+      template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/html/game.html'),
-      filename: 'game.html',
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css',
     }),
     new CopyPlugin({
       patterns: [
-        {
-          from: path.resolve(__dirname, './src/html'),
-          to: path.resolve(__dirname, './dist'),
-        },
         {
           from: path.resolve(__dirname, './assets'),
           to: path.resolve(__dirname, './dist'),
