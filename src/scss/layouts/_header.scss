@@ -1,5 +1,5 @@
 .header {
-  background-color: rgb(167, 100, 100);
-  height: 50px;
-  width: 50px;
+  @include size(50px, 50px);
+  background-color: $color-test;
+  background-image: url('../../assets/icons/favicon.svg');
 }
