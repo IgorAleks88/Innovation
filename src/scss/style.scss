@@ -6,6 +6,9 @@
 @import 'base/base';
 @import 'base/normalize';
 
+// components
+@import 'components/card';
+
 // layouts
 @import './layouts/playerTable';
 @import './layouts/header';

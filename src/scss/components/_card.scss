@@ -1,0 +1,13 @@
+.card {
+  @include size(250px, 150px);
+  @include flex(column, center, center);
+  border: 1px solid #000;
+}
+
+.card--military {
+  background-color: rgb(156, 35, 35);
+}
+
+.card--culture {
+  background-color: rgb(110, 11, 110);
+}

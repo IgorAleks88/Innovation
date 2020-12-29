@@ -1,5 +1,13 @@
 .active-zone-wrapper {
+  @include flex(row, space-around, center);
   border: solid 2px #000;
   height: 60%;
   width: 80%;
+}
+
+.active-zone-wrapper__stack {
+  @include size(350px, 200px);
+  @include flex(column, center, center);
+  background-color: royalblue;
+  border: solid 2px #000;
 }

@@ -1,28 +1,28 @@
 .aside-wrapper {
+  @include flex(column, center, center);
   border: solid 2px #000;
   height: 100%;
   position: absolute;
   right: 0;
   top: 0;
   width: 20%;
-  @include flex(column, center, center);
 }
 // TEST
 .aside-wrapper__decks-block {
-  @include size(120px, 220px);
+  @include size(220px, 370px);
   @include flex(column, flex-start, center);
+  background-color: rgb(7, 243, 243);
   overflow: auto;
   padding: 10px;
-  background-color: rgb(7, 243, 243);
 }
 // TEST
 .aside-wrapper__deck {
-  @include size(100px, 200px) margin-bottom: 10px;
-  text-align: center;
-  font-size: 50px;
-  min-height: 200px;
-  border: 1px solid #000;
+  @include size(200px, 350px) margin-bottom: 10px;
   background-color: rgb(131, 248, 13);
+  border: 1px solid #000;
+  font-size: 50px;
+  min-height: 350px;
+  text-align: center;
 }
 
 .aside-wrapper__deck--active {
