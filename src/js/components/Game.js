@@ -18,6 +18,11 @@ export default class Game {
       cardsArray: [],
     };
 
+    // initialize game field in players object
+    //! Important! HARDCODED FOR 2 PLAYERS, change later
+    this.players[0].game = this;
+    this.players[1].game = this;
+
     // !important
     // Turn points
     this.turnPoints = 2;
@@ -43,8 +48,10 @@ export default class Game {
       // give turn to next player when this function run
       if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];
       else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
-      // add timeout because cards dissapear too fast
-      setTimeout(() => { this.currentPlayer.renderHand(); }, 500);
+      // add timeout because cards dissapear too fast, test
+      // !IMPORTANT render table for player which turn starts
+      setTimeout(() => { this.currentPlayer.renderHand(); }, 100);
+      setTimeout(() => { this.currentPlayer.renderActiveZone(); }, 100);
 
       this.turnPoints = 2;
       this.newTurn();
@@ -93,6 +100,11 @@ export default class Game {
     this.currentPlayer.renderLastTakenCard();
 
     // starts next phase of turn
+    this.newTurn();
+  }
+
+  actionDone() {
+    this.turnPoints -= 1;
     this.newTurn();
   }
 }

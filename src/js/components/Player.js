@@ -3,6 +3,9 @@ export default class Player {
     // player name
     this.name = name;
 
+    // this field will be set at game object initialization
+    this.game = null;
+
     // current age default value
     this.currentAge = 1;
 
@@ -86,6 +89,17 @@ export default class Player {
     });
   }
 
+  // render all cards in active zone of current player
+  renderActiveZone() {
+    Object.keys(this.activeStacks).forEach((stackName) => {
+      // clear previous rendered active zone
+      this.activeStacks[stackName].domElement.innerHTML = '';
+      this.activeStacks[stackName].cardsArray.forEach((card) => {
+        this.renderCard(card, this.activeStacks[stackName].domElement);
+      });
+    });
+  }
+
   // render card to hand
   // TODO Here must be nice render function
   renderCard(cardObj, domElement) {
@@ -95,10 +109,21 @@ export default class Player {
     const text = document.createElement('span');
     text.innerText = `${cardObj.age} age\n${cardObj.category}\n${cardObj.text}\n`;
     card.append(text);
-
-    //! TODO COMPLETE PLAY CARD METHOD
-    // card.onclick = this.playCard(card);
-
+    // add event listener to each card
+    card.onclick = () => { this.playCard(cardObj, card) };
+    // append ready card to arg dom element
     domElement.append(card);
+  }
+
+  // on click event for cards in head. Play card in stack depends on category
+  // TODO: later this method should add dogma function to each played card
+  playCard(cardObj, cardElement) {
+    Object.keys(this.activeStacks).forEach((stackName) => {
+      if (stackName === cardObj.category) {
+        this.activeStacks[stackName].cardsArray.push(cardObj);
+        this.activeStacks[stackName].domElement.append(cardElement);
+      }
+    });
+    this.game.actionDone();
   }
 }
