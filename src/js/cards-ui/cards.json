@@ -1,0 +1,144 @@
+[
+  {
+    "age": 1,
+    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "color": "blue",
+    "cards": [
+      {
+        "innovation": "гончарное дело",
+        "agePosition": "topLeft",
+        "dogma": [
+          {
+            "dogmaType": "corporate",
+            "dogmaEffect": "Вы можете переработать до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.",
+            "dogmaIcon": ["fab", "fa-pagelines"],
+            "dogmaColor": "green"
+          },
+          {
+            "dogmaType": "aggressive",
+            "dogmaEffect": "Возьмите <span class = 'age__number'>1</span>",
+            "dogmaIcon": ["fab", "fa-pagelines"],
+            "dogmaColor": "green"
+          }
+        ],
+        "resourses": [
+          {
+            "resoursePosition": "bottomLeft",
+            "resourseType": ["fab", "fa-pagelines"],
+            "resourseColor": "green"
+          },
+          {
+            "resoursePosition": "bottomCenter",
+            "resourseType": ["fab", "fa-pagelines"],
+            "resourseColor": "green"
+          },
+          {
+            "resoursePosition": "bottomRight",
+            "resourseType": ["fab", "fa-pagelines"],
+            "resourseColor": "green"
+          }
+        ]
+      },
+      {
+        "innovation": "инструменты",
+        "agePosition": "topLeft",
+        "dogma": [
+          {
+            "dogmaType": "corporate",
+            "dogmaEffect": "Вы можете переработать три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>",
+            "dogmaIcon": ["fas", "fa-lightbulb"],
+            "dogmaColor": "purple"
+          },
+          {
+            "dogmaType": "corporate",
+            "dogmaEffect": "Вы можете переработать <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>",
+            "dogmaIcon": ["fas", "fa-lightbulb"],
+            "dogmaColor": "purple"
+          }
+        ],
+        "resourses": [
+          {
+            "resoursePosition": "bottomLeft",
+            "resourseType": ["fas", "fa-lightbulb"],
+            "resourseColor": "purple"
+          },
+          {
+            "resoursePosition": "bottomCenter",
+            "resourseType": ["fas", "fa-lightbulb"],
+            "resourseColor": "purple"
+          },
+          {
+            "resoursePosition": "bottomRight",
+            "resourseType": ["fab", "fa-fort-awesome"],
+            "resourseColor": "grey"
+          }
+        ]
+      },
+      {
+        "innovation": "письменность",
+        "agePosition": "topLeft",
+        "dogma": [
+          {
+            "dogmaType": "corporate",
+            "dogmaEffect": "Возьмите <span class = 'age__number'>2</span>",
+            "dogmaIcon": ["fas", "fa-lightbulb"],
+            "dogmaColor": "purple"
+          }
+        ],
+        "resourses": [
+          {
+            "resoursePosition": "bottomLeft",
+            "resourseType": ["fas", "fa-lightbulb"],
+            "resourseColor": "purple"
+          },
+          {
+            "resoursePosition": "bottomCenter",
+            "resourseType": ["fas", "fa-lightbulb"],
+            "resourseColor": "purple"
+          },
+          {
+            "resoursePosition": "bottomRight",
+            "resourseType": ["fas", "fa-crown"],
+            "resourseColor": "yellow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "age": 1,
+    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "color": "red",
+    "cards": [
+      {
+        "innovation": "кузнечное дело",
+        "agePosition": "bottomCenter",
+        "dogma": [
+          {
+            "dogmaType": "corporate",
+            "dogmaEffect": "Возьмите и покажите всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon'></i>, зачтите ее  выполните эту догму снова. В противном случае заберите ее на руку.",
+            "dogmaIcon": ["fab", "fa-fort-awesome"],
+            "dogmaColor": "grey"
+          }
+        ],
+        "resourses": [
+          {
+            "resoursePosition": "topLeft",
+            "resourseType": ["fab", "fa-fort-awesome"],
+            "resourseColor": "grey"
+          },
+          {
+            "resoursePosition": "bottomLeft",
+            "resourseType": ["fab", "fa-fort-awesome"],
+            "resourseColor": "grey"
+          },
+          {
+            "resoursePosition": "bottomRight",
+            "resourseType": ["fab", "fa-fort-awesome"],
+            "resourseColor": "grey"
+          }
+        ]
+      }
+    ]
+  }
+]
