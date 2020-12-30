@@ -1,7 +1,7 @@
 .active-zone-wrapper {
   @include flex(row, space-around, center);
   border: solid 2px #000;
-  height: 60%;
+  height: calc(100vh - 37rem);
   width: 80%;
 }
 

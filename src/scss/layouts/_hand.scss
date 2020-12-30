@@ -1,6 +1,40 @@
-.hand-wrapper {
-  @include flex(row, center, center);
-  border: solid 2px #000;
-  height: 25%;
+.hand {
+  position: relative;
+  @include flex(row, flex-start, flex-start);
+  height: 22rem;
   width: 80%;
+}
+
+.hand__cards {
+  width: calc(100% - 100px);
+  height: 22rem;
+  @include flex(row, center, center);
+  background-color: rgb(148, 118, 53);
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: 0 0 0 1rem;
+  scroll-behavior: smooth;
+}
+
+.hand__controls {
+  width: 10rem;
+  height: 22rem;
+  background-color: rgb(185, 161, 110);
+  position: fixed;
+  right: 20%;
+}
+
+.hand__controls--top {
+  @include size(10rem, 11rem);
+  background-color: rgb(89, 228, 228);
+}
+
+.hand__controls--bottom {
+  @include size(10rem, 11rem);
+  background-color: rgb(90, 224, 224);
+}
+
+.hand__controls--disabled {
+  cursor: default;
+  filter: brightness(0.3);
 }

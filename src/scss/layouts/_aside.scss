@@ -1,7 +1,7 @@
 .aside-wrapper {
   @include flex(column, center, center);
   border: solid 2px #000;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   right: 0;
   top: 0;
@@ -9,7 +9,7 @@
 }
 // TEST
 .aside-wrapper__decks-block {
-  @include size(220px, 370px);
+  @include size(230px, 320px);
   @include flex(column, flex-start, center);
   background-color: rgb(7, 243, 243);
   overflow: auto;
@@ -17,7 +17,7 @@
 }
 // TEST
 .aside-wrapper__deck {
-  @include size(200px, 350px) margin-bottom: 10px;
+  @include size(200px, 300px) margin-bottom: 10px;
   background-color: rgb(131, 248, 13);
   border: 1px solid #000;
   font-size: 50px;

@@ -25,7 +25,7 @@ export default class Game {
 
     // !important
     // Turn points
-    this.turnPoints = 2;
+    this.turnPoints = 100; //! TEMP need 2
 
     // !important
     // start game

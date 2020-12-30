@@ -59,7 +59,7 @@ export default class Player {
 
   // TODO take hand wrapper as dom element. Change later
   setHandDomElem() {
-    const handElem = document.querySelector('.hand-wrapper');
+    const handElem = document.querySelector('.hand__cards');
     this.hand.domElement = handElem;
   }
 
@@ -76,7 +76,7 @@ export default class Player {
   }
 
   // render last taken card.
-  // TODO hand currently use hand-wrapper, change later
+  // TODO hand currently use hand, change later
   renderLastTakenCard() {
     this.renderCard(this.hand.cardsArray[this.hand.cardsArray.length - 1], this.hand.domElement);
   }

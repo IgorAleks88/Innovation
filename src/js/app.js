@@ -3,12 +3,14 @@ import '../scss/style.scss';
 
 // import js modules
 import displayPlayerTable from './display/playerTable/displayPlayerTable';
+import setHandControls from './utility/setHandControls';
 import GameField from './components/GameField'; // TEST
 import Player from './components/Player'; // TEST
 import Game from './components/Game'; // TEST
 
 // app
 document.body.appendChild(displayPlayerTable.init());
+setHandControls(); // add event listeners to hand controls
 
 //! TEST BLOCK
 // TODO remove commented console.logs, added for tests

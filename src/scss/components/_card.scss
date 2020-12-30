@@ -1,7 +1,7 @@
 .card {
-  @include size(250px, 150px);
+  @include size(30rem, 20rem);
   @include flex(column, center, center);
-  border: 1px solid #000;
+  margin: 1rem 1rem 1rem 0;
 }
 
 .card--military {
