@@ -7,22 +7,27 @@ export default class CardsUI {
     divTmp.classList.add('example_cards');
     arrCards.forEach((i) => {
       i.cards.forEach((card) => {
-        const divCard = document.createElement('div');
-        divCard.classList.add('card');
-        divCard.style.background = `url("${i.cardImg}")`;
-
-        divCard.appendChild(CardsUI.cardHeader(card, i.color));
-        divCard.appendChild(CardsUI.cardMain(card, i.color));
-        divCard.appendChild(CardsUI.cardFooter());
-
-        divTmp.appendChild(divCard);
-
-        CardsUI.setObjByPosition(divCard, card, i.age, i.color);
+        divTmp.appendChild(CardsUI.getCard(i, card));
       });
       document.body.appendChild(divTmp);
     });
   }
 
+  // get playing card
+  static getCard(i, card) {
+    const divCard = document.createElement('div');
+    divCard.classList.add('card');
+    divCard.style.background = `url("${i.cardImg}")`;
+
+    divCard.appendChild(CardsUI.cardHeader(card, i.color));
+    divCard.appendChild(CardsUI.cardMain(card, i.color));
+    divCard.appendChild(CardsUI.cardFooter());
+    CardsUI.setObjByPosition(divCard, card, i.age, i.color);
+
+    return divCard;
+  }
+
+  // get card header
   static cardHeader(card, color) {
     const divHeader = document.createElement('div');
     divHeader.classList.add('card__card-header', `card__color--${color}`);
@@ -39,6 +44,7 @@ export default class CardsUI {
     return divHeader;
   }
 
+  // get card body
   static cardMain(card, color) {
     const divMain = document.createElement('div');
     divMain.classList.add('card__card-main', `card__color--${color}-transparent`);
@@ -53,7 +59,7 @@ export default class CardsUI {
       divDogma.appendChild(icon);
 
       const dogma = document.createElement('span');
-      dogma.classList.add();
+      dogma.classList.add('dogma__effect');
       dogma.innerHTML = item.dogmaEffect;
       divDogma.appendChild(dogma);
 
@@ -62,6 +68,7 @@ export default class CardsUI {
     return divMain;
   }
 
+  // get card footer
   static cardFooter() {
     const divFooter = document.createElement('div');
     divFooter.classList.add('card__card-footer');
@@ -81,14 +88,15 @@ export default class CardsUI {
     return divFooter;
   }
 
+  // place age number and resourses by card position
   static setObjByPosition(divCard, card, age, color) {
     const agePos = divCard.querySelector(`.card__${card.agePosition}`);
-    agePos.classList.add(`card__color--${color}`);
+    agePos.classList.add(`card__color--${color}`, 'card__age--border');
     agePos.textContent = age;
 
     card.resourses.forEach((res) => {
       const pos = divCard.querySelector(`.card__${res.resoursePosition}`);
-      pos.classList.add(`${res.resourseType[0]}`, `${res.resourseType[1]}`, `card__icon-color--${res.resourseColor}`);
+      pos.classList.add(`${res.resourseType[0]}`, `${res.resourseType[1]}`, `card__icon-color--${res.resourseColor}`, `card__icon-border--${color}`);
     });
   }
 }
