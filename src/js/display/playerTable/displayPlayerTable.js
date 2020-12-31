@@ -1,7 +1,7 @@
 import displayHeader from './displayHeader';
 import displayAside from './displayAside';
 import displayActiveZone from './displayActiveZone';
-import displayHand from './displayHand';
+import DisplayHand from './displayHand';
 
 const displayPlayerTable = {
   wrapper: null,
@@ -18,8 +18,8 @@ const displayPlayerTable = {
     this.wrapper.appendChild(this.aside);
     this.activeZone = displayActiveZone.init();
     this.wrapper.appendChild(this.activeZone);
-    this.hand = displayHand.init();
-    this.wrapper.appendChild(this.hand);
+    this.hand = new DisplayHand().init();
+    this.wrapper.append(this.hand);
     return this.wrapper;
   },
 

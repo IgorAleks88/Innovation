@@ -58,7 +58,7 @@ class Menu {
     this.rulesWrraper.hidden = true;
     this.rulesWrraper.innerHTML = /* html */ `
         <span class="close">&#10006</span>
-        <iframe class="iframe" src="./innovation_rules_rus_final.pdf" width="70%" height="70%"></iframe>
+        <iframe class="iframe" src="../assets/innovation_rules_rus_final.pdf" width="70%" height="70%"></iframe>
     `;
 
     this.menu.append(this.rulesWrraper);
