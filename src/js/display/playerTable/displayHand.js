@@ -5,7 +5,7 @@ const displayHand = {
     this.wrapper.classList.add('hand');
 
     this.cardsBlock = document.createElement('div');
-    this.cardsBlock.classList.add('hand__cards')
+    this.cardsBlock.classList.add('hand__cards');
 
     this.controlsBlock = document.createElement('div');
     this.controlsBlock.classList.add('hand__controls');

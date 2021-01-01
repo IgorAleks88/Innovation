@@ -9,7 +9,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  // devtool: 'source-map',
+  devtool: 'source-map',
   entry: {
     main: path.resolve(__dirname, './src/js/app.js'),
   },
@@ -36,7 +36,7 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, './assets'),
-          to: path.resolve(__dirname, './dist'),
+          to: path.resolve(__dirname, './dist/assets'),
         },
       ],
     }),
@@ -63,9 +63,8 @@ module.exports = {
             test: /\.(png|svg|jpg|jpeg|gif)$/i,
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              publicPath: './img',
-              outputPath: './img',
+              name: '[path][name].[ext]',
+              publicPath: './',
             },
           },
         ],

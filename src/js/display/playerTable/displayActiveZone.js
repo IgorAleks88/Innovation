@@ -8,13 +8,12 @@ const displayActiveZone = {
     // + 'be five card decks of each color';  // TODO remove later
 
     // create playets stacks
-    // TODO add 5 stacks later | fix names of stacks depends on cards obj
-    const stacksNames = ['military', 'culture'];
+    // !Stack names are the color fields of cards object
+    const stacksNames = ['blue', 'red', 'green', 'purple', 'yellow'];
     for (let i = 0; i < stacksNames.length; i += 1) {
       const stack = document.createElement('div');
       stack.classList.add('active-zone-wrapper__stack');
       stack.id = stacksNames[i]; // id stackName for each stack
-      stack.innerText = `${stacksNames[i]} Stack`; // TODO remove later
       this.wrapper.append(stack);
     }
 

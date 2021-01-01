@@ -1,40 +1,59 @@
 .hand {
-  position: relative;
   @include flex(row, flex-start, flex-start);
   height: 22rem;
+  position: relative;
   width: 80%;
 }
 
 .hand__cards {
-  width: calc(100% - 100px);
-  height: 22rem;
   @include flex(row, center, center);
   background-color: rgb(148, 118, 53);
   flex-wrap: wrap;
+  height: 22rem;
   overflow: hidden;
   padding: 0 0 0 1rem;
   scroll-behavior: smooth;
+  width: calc(100% - 100px);
+
+  & .card {
+    cursor: pointer;
+    transition: all 0.2s linear;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .hand__controls {
-  width: 10rem;
-  height: 22rem;
   background-color: rgb(185, 161, 110);
+  height: 22rem;
   position: fixed;
   right: 20%;
+  width: 10rem;
 }
 
 .hand__controls--top {
   @include size(10rem, 11rem);
   background-color: rgb(89, 228, 228);
+  transition: all 0.2s linear;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .hand__controls--bottom {
   @include size(10rem, 11rem);
   background-color: rgb(90, 224, 224);
+  transition: all 0.2s linear;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .hand__controls--disabled {
   cursor: default;
   filter: brightness(0.3);
+  &:hover {
+    transform: none;
+  }
 }

@@ -1,4 +1,4 @@
-import cardsObject from '../cards/cardsObj';
+import arrOfCardObjects from '../cards-ui/parseCards';
 
 export default class GameField {
   constructor() {
@@ -31,7 +31,7 @@ export default class GameField {
     this.specialDeck = [];
 
     // fill age decks with objects and DOM elements
-    this.setDeckArrays(cardsObject);
+    this.setDeckArrays(arrOfCardObjects);
     this.setDeckDomElems();
   }
 

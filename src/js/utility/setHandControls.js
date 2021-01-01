@@ -27,7 +27,8 @@ export default function setGameControls() {
   // event activated on each inserted card
   hand.addEventListener('DOMNodeInserted', () => {
     // scroll to inserted card (or do nothing)
-    hand.scrollTop += cardsLineHeight;
+    hand.scrollTop = hand.scrollHeight - cardsLineHeight;
+    disableBtn(btnBottom);
 
     // if scrolled to second+ line of cards
     if (hand.scrollHeight > cardsLineHeight) {
@@ -42,8 +43,8 @@ export default function setGameControls() {
       if (hand.scrollHeight === cardsLineHeight) {
         disableBtn(btnBottom);
         disableBtn(btnTop);
-        // if view ison last line
-      } else if (hand.scrollHeight - hand.scrollTop === 220) { //! REMOVER && HERE, !== 0; TEST
+      // if point of view is on last line
+      } else if (hand.scrollHeight - hand.scrollTop === cardsLineHeight) {
         disableBtn(btnBottom);
       }
     }, timeoutTime);
@@ -51,30 +52,44 @@ export default function setGameControls() {
 
   // event on click at top button
   btnTop.addEventListener('click', () => {
-    // scroll up on one line
+    // block multiple clicks faster then timeoutTime value
+    btnTop.disabled = true;
+
+    // scroll up one line
     hand.scrollTop -= cardsLineHeight;
 
+    // disable/enable buttons depends on scroll position
+    // !important: dont use else here, need 2 separate if blocks
     setTimeout(() => {
-      // if point of view is on first line or not
+      // if point of view at first line
       if (hand.scrollTop === 0) {
         disableBtn(btnTop);
         enableBtn(btnBottom);
       }
+      // if point of view not at first line
       if (hand.scrollTop !== 0) {
         enableBtn(btnBottom);
+        // remove disabled attribute added for blocking multiple clicks
+        btnTop.disabled = false;
       }
     }, timeoutTime);
   });
 
-  // revent on click on botom button
+  // event on click at botom button
   btnBottom.addEventListener('click', () => {
+    // block multiple clicks faster then timeoutTime value
+    btnBottom.disabled = true;
+
     // scroll down on one line
     hand.scrollTop += cardsLineHeight;
 
+    // disable/enable buttons depends on scroll position
     setTimeout(() => {
       // if point of view isnt on first line
       if (hand.scrollTop !== 0) {
         enableBtn(btnTop);
+        // remove disabled attribute added for blocking multiple clicks
+        btnBottom.disabled = false;
       }
       // if point of view on last line
       if (hand.scrollHeight - hand.scrollTop === cardsLineHeight && hand.scrollTop !== 0) {

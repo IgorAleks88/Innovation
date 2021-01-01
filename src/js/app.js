@@ -8,9 +8,19 @@ import GameField from './components/GameField'; // TEST
 import Player from './components/Player'; // TEST
 import Game from './components/Game'; // TEST
 
+// last pull
+import CardsUI from './cards-ui/cards-ui';
+import Menu from './mainMenu';
+
 // app
 document.body.appendChild(displayPlayerTable.init());
 setHandControls(); // add event listeners to hand controls
+
+// last pull
+const menu = new Menu(document.body);
+menu.render();
+
+// CardsUI.init();
 
 //! TEST BLOCK
 // TODO remove commented console.logs, added for tests

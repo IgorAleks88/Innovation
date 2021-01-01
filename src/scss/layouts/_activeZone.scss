@@ -1,13 +1,17 @@
 .active-zone-wrapper {
-  @include flex(row, space-around, center);
-  border: solid 2px #000;
+  @include flex(row, flex-start, flex-end);
+  background-color: rgb(151, 140, 190);
   height: calc(100vh - 37rem);
+  overflow-x: auto;
+  overflow-y: auto;
   width: 80%;
 }
 
 .active-zone-wrapper__stack {
-  @include size(350px, 200px);
-  @include flex(column, center, center);
+  @include flex(column, flex-start, center);
+  flex-shrink: 0;
+  max-height: calc(100vh - 41rem);
   background-color: royalblue;
-  border: solid 2px #000;
+  margin: 1rem 1rem 1rem 0;
+  overflow: auto;
 }

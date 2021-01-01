@@ -1,3 +1,5 @@
+import displayCard from '../cards-ui/cards-ui';
+
 export default class Player {
   constructor(name) {
     // player name
@@ -16,13 +18,25 @@ export default class Player {
     };
 
     // player active cards object
-    // TODO fix names, add 5 sets of cards
+    //! Names of stacks are color fields in card objects
     this.activeStacks = {
-      military: {
+      blue: {
         domElement: null,
         cardsArray: [],
       },
-      culture: {
+      red: {
+        domElement: null,
+        cardsArray: [],
+      },
+      green: {
+        domElement: null,
+        cardsArray: [],
+      },
+      purple: {
+        domElement: null,
+        cardsArray: [],
+      },
+      yellow: {
         domElement: null,
         cardsArray: [],
       },
@@ -78,14 +92,21 @@ export default class Player {
   // render last taken card.
   // TODO hand currently use hand, change later
   renderLastTakenCard() {
-    this.renderCard(this.hand.cardsArray[this.hand.cardsArray.length - 1], this.hand.domElement);
+    const lastTakenCard = this.hand.cardsArray[this.hand.cardsArray.length - 1];
+    const cardElement = displayCard.init(lastTakenCard);
+    cardElement.onclick = () => { this.playCard(lastTakenCard, cardElement); };
+    this.hand.domElement.append(cardElement);
   }
 
   // used in game to render game of next player. Previously hand cleared
   renderHand() {
     this.hand.domElement.innerHTML = '';
     this.hand.cardsArray.forEach((card) => {
-      this.renderCard(card, this.hand.domElement);
+      const cardElement = displayCard.init(card);
+      cardElement.onclick = () => {
+        this.playCard(card, cardElement);
+      };
+      this.hand.domElement.append(cardElement);
     });
   }
 
@@ -95,31 +116,37 @@ export default class Player {
       // clear previous rendered active zone
       this.activeStacks[stackName].domElement.innerHTML = '';
       this.activeStacks[stackName].cardsArray.forEach((card) => {
-        this.renderCard(card, this.activeStacks[stackName].domElement);
+        this.activeStacks[stackName].domElement.append(displayCard.init(card));
       });
     });
   }
 
   // render card to hand
   // TODO Here must be nice render function
-  renderCard(cardObj, domElement) {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.classList.add(`card--${cardObj.category}`);
-    const text = document.createElement('span');
-    text.innerText = `${cardObj.age} age\n${cardObj.category}\n${cardObj.text}\n`;
-    card.append(text);
-    // add event listener to each card
-    card.onclick = () => { this.playCard(cardObj, card) };
-    // append ready card to arg dom element
-    domElement.append(card);
-  }
+  // renderCard(cardObj, domElement) {
+  //   const card = document.createElement('div');
+  //   card.classList.add('card');
+  //   card.classList.add(`card--${cardObj.category}`);
+  //   const text = document.createElement('span');
+  //   text.innerText = `${cardObj.age} age\n${cardObj.category}\n${cardObj.text}\n`;
+  //   card.append(text);
+  //   // add event listener to each card
+  //   card.onclick = () => { this.playCard(cardObj, card) };
+  //   // append ready card to arg dom element
+  //   domElement.append(card);
+  // }
 
   // on click event for cards in head. Play card in stack depends on category
   // TODO: later this method should add dogma function to each played card
   playCard(cardObj, cardElement) {
     Object.keys(this.activeStacks).forEach((stackName) => {
-      if (stackName === cardObj.category) {
+      if (stackName === cardObj.color) {
+        this.hand.cardsArray.forEach((e, i) => {
+          if (e === cardObj) {
+            this.hand.cardsArray.splice(i, 1);
+          }
+        });
+        console.log(this.hand.cardsArray);
         this.activeStacks[stackName].cardsArray.push(cardObj);
         this.activeStacks[stackName].domElement.append(cardElement);
       }
