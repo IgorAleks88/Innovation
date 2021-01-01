@@ -21,6 +21,30 @@ export default class GameField {
         domElement: null,
         cardsArray: [],
       },
+      age5: {
+        domElement: null,
+        cardsArray: [],
+      },
+      age6: {
+        domElement: null,
+        cardsArray: [],
+      },
+      age7: {
+        domElement: null,
+        cardsArray: [],
+      },
+      age8: {
+        domElement: null,
+        cardsArray: [],
+      },
+      age9: {
+        domElement: null,
+        cardsArray: [],
+      },
+      age10: {
+        domElement: null,
+        cardsArray: [],
+      },
     };
 
     // TODO leadership later (method + array + dom)
@@ -51,6 +75,24 @@ export default class GameField {
           break;
         case 4:
           this.ageDecks.age4.cardsArray.push(e);
+          break;
+        case 5:
+          this.ageDecks.age5.cardsArray.push(e);
+          break;
+        case 6:
+          this.ageDecks.age6.cardsArray.push(e);
+          break;
+        case 7:
+          this.ageDecks.age7.cardsArray.push(e);
+          break;
+        case 8:
+          this.ageDecks.age8.cardsArray.push(e);
+          break;
+        case 9:
+          this.ageDecks.age9.cardsArray.push(e);
+          break;
+        case 10:
+          this.ageDecks.age10.cardsArray.push(e);
           break;
         default:
           throw new Error(`Wrong number on age field in ${e}`);

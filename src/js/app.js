@@ -10,7 +10,7 @@ import Game from './components/Game'; // TEST
 
 // last pull
 import CardsUI from './cards-ui/cards-ui';
-import Menu from './mainMenu';
+import Menu from './components/mainMenu';
 
 // app
 document.body.appendChild(displayPlayerTable.init());
