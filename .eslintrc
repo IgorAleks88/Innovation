@@ -6,6 +6,7 @@
         "node": true
     },
     "rules": {
-      "no-param-reassign": "off"
+      "no-param-reassign": "off",
+      "prefer-destructuring": "off",
     }
 }

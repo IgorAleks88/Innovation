@@ -19,7 +19,7 @@ const displayAside = {
       deck.classList.add('aside-wrapper__deck');
       deck.id = `age${i + 1}`; // id age1-10 for each deck
       deck.innerText = `${i + 1} Age`; // TODO remove later
-      deck.style.backgroundImage = "url(./assets/img/cards-bg/age-01-back.jpg)";
+      deck.style.backgroundImage = 'url(./assets/img/cards-bg/age-01-back.jpg)';
       this.decksBlock.append(deck);
     }
 

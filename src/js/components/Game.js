@@ -1,11 +1,12 @@
 export default class Game {
-  constructor(player1, player2, gameField) {
+  constructor(gameUI, player1, player2, gameField) {
     // store args objects
     this.players = [
       player1,
       player2,
     ];
     this.gameField = gameField;
+    this.gameUI = gameUI;
 
     // TODO describe later wich methods changes it
     // changes on newTurn method runs
@@ -14,8 +15,8 @@ export default class Game {
     // TODO describe later wich methods changes it
     // changes on setActiveDeck method runs
     this.currentDeck = {
-      domElement: null,
-      cardsArray: [],
+      domElement: gameUI.ageDecks.age1,
+      cardsArray: gameField.ageDecks.age1,
     };
 
     // initialize game field in players object
@@ -25,11 +26,7 @@ export default class Game {
 
     // !important
     // Turn points
-    this.turnPoints = 100; //! TEMP need 2
-
-    // !important
-    // start game
-    this.newTurn();
+    this.turnPoints = 2; //! TEMP need 2
   }
 
   // ! if player still have turn points - activate new deck
@@ -62,8 +59,8 @@ export default class Game {
   setActiveDeck(currentPlayer) {
     Object.keys(this.gameField.ageDecks).forEach((ageDeckKey) => {
       if (ageDeckKey === `age${currentPlayer.currentAge}`) {
-        this.currentDeck.domElement = this.gameField.ageDecks[ageDeckKey].domElement;
-        this.currentDeck.cardsArray = this.gameField.ageDecks[ageDeckKey].cardsArray;
+        this.currentDeck.domElement = this.gameUI.ageDecks[`age${currentPlayer.currentAge}`];
+        this.currentDeck.cardsArray = this.gameField.ageDecks[ageDeckKey];
         //! IMPORTANT! Change players currentAge if needed deck empty.
         //! Need reset and recalculate after turn, mb change later!
         if (this.currentDeck.cardsArray.length === 0) {
@@ -72,6 +69,7 @@ export default class Game {
       }
     });
     // set style and event listener of active deck when all calculations finished
+    // console.log(this.gameUI.ageDecks.age1)
     this.currentDeck.domElement.classList.add('aside-wrapper__deck--active');
     //! USED onclick because got bug with AddEvenListener - cant remove listener
     this.currentDeck.domElement.onclick = this.takeCard.bind(this);
@@ -80,17 +78,15 @@ export default class Game {
   // remove active deck class and eeventlistener
   //! use before each setActiveDeck method
   removeActiveDeck() {
-    Object.keys(this.gameField.ageDecks).forEach((ageDeckKey) => {
-      this.gameField.ageDecks[ageDeckKey].domElement.classList.remove('aside-wrapper__deck--active');
-      //! USED onclick because got bug with AddEvenListener - cant remove listener
-      this.gameField.ageDecks[ageDeckKey].domElement.onclick = '';
-    });
+    this.currentDeck.domElement.classList.remove('aside-wrapper__deck--active');
+    //! USED onclick because got bug with AddEvenListener - cant remove listener
+    this.currentDeck.domElement.onclick = '';
   }
 
   //! This method consume turn points!
   takeCard() {
     this.currentPlayer.setCurrentAge();
-    this.currentPlayer.hand.cardsArray.push(this.currentDeck.cardsArray.pop());
+    this.currentPlayer.hand.push(this.currentDeck.cardsArray.pop());
     this.turnPoints -= 1;
     // TODO remove later, added for tests
     // console.log(this.players[0]);

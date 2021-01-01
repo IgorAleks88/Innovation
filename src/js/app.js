@@ -10,6 +10,7 @@ import Player from './components/Player';
 import Game from './components/Game';
 import cardsJSON from './cards/cards.json';
 import parseCards from './cards/parseCards';
+import GameUI from './components/GameUI';
 
 // display game UI
 document.body.appendChild(displayPlayerTable.init());
@@ -24,9 +25,12 @@ setHandControls();
 
 //! UNDER CONSTRUCTION
 const arrOfCards = parseCards(cardsJSON);
-const gameField = new GameField(arrOfCards);
 
-const player1 = new Player('Player1');
-const player2 = new Player('Player2');
+const gameUI = new GameUI();
 
-const game = new Game(player1, player2, gameField);
+const gameField = new GameField(gameUI, arrOfCards);
+const player1 = new Player(gameUI, 'Player1');
+const player2 = new Player(gameUI, 'Player2');
+
+const game = new Game(gameUI, player1, player2, gameField);
+game.newTurn();
