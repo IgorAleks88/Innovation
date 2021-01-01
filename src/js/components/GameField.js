@@ -1,7 +1,5 @@
-import arrOfCardObjects from '../cards-ui/parseCards';
-
 export default class GameField {
-  constructor() {
+  constructor(arrOfCardObjects) {
     // TODO add 10 decks
     // create empty decks with array and dom element for each age
     this.ageDecks = {

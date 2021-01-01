@@ -1,30 +1,24 @@
-// import parseCards from './parseCards';
-
-// const arrCards = parseCards(); //! change name!!!!
-
-export default class CardsUI {
-  static init(cardObj) {
-    return CardsUI.getCard(cardObj);
-  }
-
+// get single card object and return builded card DOM element
+const getCard = {
   // get playing card
-  static getCard(cardObj) {
+  frontSide(cardObj) {
     const divCard = document.createElement('div');
+
     divCard.classList.add('card');
     divCard.style.background = `url("${cardObj.cardImg}")`;
 
-    divCard.appendChild(CardsUI.cardHeader(cardObj, cardObj.color));
-    divCard.appendChild(CardsUI.cardMain(cardObj, cardObj.color));
-    divCard.appendChild(CardsUI.cardFooter());
-    CardsUI.setObjByPosition(divCard, cardObj, cardObj.age, cardObj.color);
+    divCard.appendChild(this.getCardHeader(cardObj));
+    divCard.appendChild(this.getCardMain(cardObj));
+    divCard.appendChild(this.getCardFooter());
+    this.setObjByPosition(divCard, cardObj, cardObj.age, cardObj.color);
 
     return divCard;
-  }
+  },
 
   // get card header
-  static cardHeader(card, color) {
+  getCardHeader(card) {
     const divHeader = document.createElement('div');
-    divHeader.classList.add('card__card-header', `card__color--${color}`);
+    divHeader.classList.add('card__card-header', `card__color--${card.color}`);
 
     const posTopLeft = document.createElement('div');
     posTopLeft.classList.add('card__topLeft');
@@ -36,12 +30,12 @@ export default class CardsUI {
     divHeader.appendChild(posTopLeft);
     divHeader.appendChild(title);
     return divHeader;
-  }
+  },
 
   // get card body
-  static cardMain(card, color) {
+  getCardMain(card) {
     const divMain = document.createElement('div');
-    divMain.classList.add('card__card-main', `card__color--${color}-transparent`);
+    divMain.classList.add('card__card-main', `card__color--${card.color}-transparent`);
 
     card.dogma.forEach((item) => {
       const divDogma = document.createElement('div');
@@ -60,10 +54,10 @@ export default class CardsUI {
       divMain.appendChild(divDogma);
     });
     return divMain;
-  }
+  },
 
   // get card footer
-  static cardFooter() {
+  getCardFooter() {
     const divFooter = document.createElement('div');
     divFooter.classList.add('card__card-footer');
 
@@ -80,17 +74,20 @@ export default class CardsUI {
     divFooter.appendChild(posBottomRight);
 
     return divFooter;
-  }
+  },
 
   // place age number and resourses by card position
-  static setObjByPosition(divCard, card, age, color) {
+  setObjByPosition(divCard, card) {
     const agePos = divCard.querySelector(`.card__${card.agePosition}`);
-    agePos.classList.add(`card__color--${color}`, 'card__age--border');
-    agePos.textContent = age;
+    agePos.classList.add(`card__color--${card.color}`, 'card__age--border');
+    agePos.textContent = card.age;
 
     card.resourses.forEach((res) => {
       const pos = divCard.querySelector(`.card__${res.resoursePosition}`);
-      pos.classList.add(`${res.resourseType[0]}`, `${res.resourseType[1]}`, `card__icon-color--${res.resourseColor}`, `card__icon-border--${color}`);
+      pos.classList.add(`${res.resourseType[0]}`, `${res.resourseType[1]}`,
+        `card__icon-color--${res.resourseColor}`, `card__icon-border--${card.color}`);
     });
-  }
-}
+  },
+};
+
+export default getCard;

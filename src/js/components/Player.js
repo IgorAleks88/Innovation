@@ -1,4 +1,4 @@
-import displayCard from '../cards-ui/cards-ui';
+import getCard from '../cards/getCard';
 
 export default class Player {
   constructor(name) {
@@ -93,7 +93,7 @@ export default class Player {
   // TODO hand currently use hand, change later
   renderLastTakenCard() {
     const lastTakenCard = this.hand.cardsArray[this.hand.cardsArray.length - 1];
-    const cardElement = displayCard.init(lastTakenCard);
+    const cardElement = getCard.frontSide(lastTakenCard);
     cardElement.onclick = () => { this.playCard(lastTakenCard, cardElement); };
     this.hand.domElement.append(cardElement);
   }
@@ -102,7 +102,7 @@ export default class Player {
   renderHand() {
     this.hand.domElement.innerHTML = '';
     this.hand.cardsArray.forEach((card) => {
-      const cardElement = displayCard.init(card);
+      const cardElement = getCard.frontSide(card);
       cardElement.onclick = () => {
         this.playCard(card, cardElement);
       };
@@ -116,7 +116,7 @@ export default class Player {
       // clear previous rendered active zone
       this.activeStacks[stackName].domElement.innerHTML = '';
       this.activeStacks[stackName].cardsArray.forEach((card) => {
-        this.activeStacks[stackName].domElement.append(displayCard.init(card));
+        this.activeStacks[stackName].domElement.append(getCard.frontSide(card));
       });
     });
   }
