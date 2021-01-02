@@ -29,7 +29,6 @@ export default function setGameControls() {
     // scroll to inserted card (or do nothing)
     hand.scrollTop = hand.scrollHeight - cardsLineHeight;
     disableBtn(btnBottom);
-
     // if scrolled to second+ line of cards
     if (hand.scrollHeight > cardsLineHeight) {
       enableBtn(btnTop);

@@ -12,25 +12,27 @@ import cardsJSON from './cards/cards.json';
 import parseCards from './cards/parseCards';
 import GameUI from './components/GameUI';
 
-// display game UI
-document.body.appendChild(displayPlayerTable.init());
-
 // set up and display main menu
-//! important: render menu must run after display game UI block. Else - bugged.
 const menu = new Menu(document.body);
 menu.render();
+
+// display game UI
+document.body.prepend(displayPlayerTable.init());
 
 // add event listeners to hand controls
 setHandControls();
 
-//! UNDER CONSTRUCTION
-const arrOfCards = parseCards(cardsJSON);
-
+// contains dom elements
 const gameUI = new GameUI();
 
-const gameField = new GameField(gameUI, arrOfCards);
+// contains sorted card objects
+const arrOfCards = parseCards(cardsJSON);
+const gameField = new GameField(arrOfCards);
+
+// contains players properties and cards
 const player1 = new Player(gameUI, 'Player1');
 const player2 = new Player(gameUI, 'Player2');
 
+// work with all main objects
 const game = new Game(gameUI, player1, player2, gameField);
 game.newTurn();

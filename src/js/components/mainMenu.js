@@ -1,3 +1,4 @@
+// TODO need some refactor later, move to display folder, use function?
 class Menu {
   constructor(parent) {
     this.parent = parent;

@@ -59,7 +59,8 @@
 .menu__link:hover svg {
   opacity: 1;
   stroke-dashoffset: 0;
-  transition: opacity 0s, stroke-dashoffset 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0s,
+    stroke-dashoffset 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .iframe__wrraper {
@@ -73,7 +74,7 @@
 }
 
 .close {
-  color: red;
+  color: rgb(252, 4, 4);
   cursor: pointer;
   position: absolute;
   right: -20px;

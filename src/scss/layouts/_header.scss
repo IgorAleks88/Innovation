@@ -1,6 +1,7 @@
-.header-wrapper {
+.header {
   @include flex(column, center, center);
-  border: solid 2px #000;
-  height: 150px;
+  background-color: rgb(89, 149, 151);
+  font-size: 6rem;
+  height: 10rem;
   width: 80%;
 }

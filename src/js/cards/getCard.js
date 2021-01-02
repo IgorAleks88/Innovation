@@ -1,9 +1,8 @@
-// get single card object and return builded card DOM element
+// take card object and return builded card DOM element
 const getCard = {
   // get playing card
   frontSide(cardObj) {
     const divCard = document.createElement('div');
-
     divCard.classList.add('card');
     divCard.style.background = `url("${cardObj.cardImg}")`;
 
@@ -29,6 +28,7 @@ const getCard = {
 
     divHeader.appendChild(posTopLeft);
     divHeader.appendChild(title);
+
     return divHeader;
   },
 
@@ -53,6 +53,7 @@ const getCard = {
 
       divMain.appendChild(divDogma);
     });
+
     return divMain;
   },
 

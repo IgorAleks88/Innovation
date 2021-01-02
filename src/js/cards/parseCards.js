@@ -6,8 +6,7 @@ export default function parseCards(cardsJSON) {
     setOfCards.cards.forEach((card) => {
       const cardObject = {};
       Object.assign(cardObject, setOfCards, card);
-      // remove duplicated field
-      delete cardObject.cards;
+      delete cardObject.cards; // remove duplicated field
       resultArr.push(cardObject);
     });
   });

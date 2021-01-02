@@ -1,5 +1,11 @@
+/*
+* take cards objects and sort them to separate decks
+* store all cards avaible for all players (ages/leadership/special)
+* store cards as objects
+* this object passed as argument to Game constructor
+*/
 export default class GameField {
-  constructor(gameUI, arrOfCardObjects) {
+  constructor(arrOfCardObjects) {
     // create empty decks for each age
     this.ageDecks = {
       age1: [],
@@ -25,6 +31,7 @@ export default class GameField {
     this.setDeckArrays(arrOfCardObjects);
   }
 
+  // TODO add shuffle later
   // fill deck arays depends on card age field
   setDeckArrays(cardsObj) {
     cardsObj.forEach((e) => {

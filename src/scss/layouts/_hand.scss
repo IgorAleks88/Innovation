@@ -13,11 +13,12 @@
   overflow: hidden;
   padding: 0 0 0 1rem;
   scroll-behavior: smooth;
-  width: calc(100% - 100px);
+  width: calc(100% - 10rem);
 
-  & .card {
+  .card {
     cursor: pointer;
     transition: all 0.2s linear;
+
     &:hover {
       transform: scale(1.05);
     }
@@ -36,6 +37,7 @@
   @include size(10rem, 11rem);
   background-color: rgb(89, 228, 228);
   transition: all 0.2s linear;
+
   &:hover {
     transform: scale(1.05);
   }
@@ -45,6 +47,7 @@
   @include size(10rem, 11rem);
   background-color: rgb(90, 224, 224);
   transition: all 0.2s linear;
+
   &:hover {
     transform: scale(1.05);
   }
@@ -53,6 +56,7 @@
 .hand__controls--disabled {
   cursor: default;
   filter: brightness(0.3);
+
   &:hover {
     transform: none;
   }

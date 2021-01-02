@@ -1,23 +1,21 @@
 import getCard from '../cards/getCard';
 
+/*
+* store all player cards objects (hand/table/lead/influence)
+* this obj passed as argument to Game constructor
+*/
 export default class Player {
-  constructor(gameUI, name) {
-    // player name
-    this.name = name;
-
-    // this field will be set at game object initialization
-    this.game = null;
-
+  constructor(gameUI, playerName) {
+    // store passed values
+    this.name = playerName;
     this.gameUI = gameUI;
 
-    // current age default value
+    // set default values
+    this.game = null; //! this field will be set at game object initialization
     this.currentAge = 1;
-
-    // player hand object
     this.hand = [];
 
-    // player active cards object
-    //! Names of stacks are color fields in card objects
+    //! Names of stacks are color field in card objects
     this.activeStacks = {
       blue: [],
       red: [],
@@ -29,27 +27,14 @@ export default class Player {
     // player leadership and influence objects
     // TODO LATER
     this.ownedLeadership = {
-      domElement: null,
+      domElement: null, // TODO remove
       cardsArray: [],
     };
     // TODO LATER
     this.influence = {
-      domElement: null,
+      domElement: null, // TODO remove
       cardsArray: [],
     };
-
-    // add dom elems to stacks
-    this.setActiveCardsDomElems();
-  }
-
-  // TODO control dom fill when add 10 decks
-  // fill stack dom elements fields
-  // !Important! Control order of elements on page. Be sure that dom already builded.
-  setActiveCardsDomElems() {
-    const stackElems = Array.from(document.getElementsByClassName('active-zone-wrapper__stack'));
-    Object.keys(this.activeStacks).forEach((activeStackKey) => {
-      this.activeStacks[activeStackKey].domElement = stackElems.shift();
-    });
   }
 
   // calculate and set current age, iterates througth each stack
@@ -64,8 +49,7 @@ export default class Player {
     });
   }
 
-  // render last taken card.
-  // TODO hand currently use hand, change later
+  // render last taken card in hand of current player
   renderLastTakenCard() {
     const lastTakenCard = this.hand[this.hand.length - 1];
     const cardElement = getCard.frontSide(lastTakenCard);
@@ -73,9 +57,9 @@ export default class Player {
     this.gameUI.hand.append(cardElement);
   }
 
-  // used in game to render game of next player. Previously hand cleared
+  // render all cards in hand of current player
   renderHand() {
-    this.gameUI.hand.innerHTML = '';
+    this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
     this.hand.forEach((card) => {
       const cardElement = getCard.frontSide(card);
       cardElement.onclick = () => {
@@ -88,15 +72,14 @@ export default class Player {
   // render all cards in active zone of current player
   renderActiveZone() {
     Object.keys(this.activeStacks).forEach((stackName) => {
-      // clear previous rendered active zone
-      this.gameUI.activeStacks[stackName].innerHTML = '';
+      this.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
       this.activeStacks[stackName].forEach((card) => {
-        this.activeStacks[stackName].domElement.append(getCard.frontSide(card));
+        this.gameUI.activeStacks[stackName].append(getCard.frontSide(card));
       });
     });
   }
 
-  // on click event for cards in head. Play card in stack depends on category
+  // on click event for cards in hand. Play card in stack depends on category
   // TODO: later this method should add dogma function to each played card
   playCard(cardObj, cardElement) {
     Object.keys(this.activeStacks).forEach((stackName) => {
