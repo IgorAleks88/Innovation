@@ -8,77 +8,79 @@ b {
 }
 
 .card {
-  width: 300px;
-  height: 200px;
   background-size: cover !important;
   border-radius: 10px;
-  overflow: hidden;
+  flex-shrink: 0;
   font-family: 'Fira Sans Condensed', sans-serif;
-  margin: 5px;
+  height: 200px;
+  margin: 10px;
+  overflow: hidden;
   position: relative;
+  transition: all 2s;
+  width: 300px;
 
   .card__card-header {
+    box-shadow: 0 0 3px 2px rgb(41, 37, 37);
     display: flex;
     height: 30px;
-    box-shadow: 0 0 3px 2px rgb(41, 37, 37);
     position: relative;
     z-index: 2;
 
     .card__topLeft {
-      width: 60px;
-      height: 60px;
+      align-items: center;
       background: #fff;
       border-radius: 50px;
-      margin-top: -10px;
-      margin-left: -10px;
       display: flex;
-      justify-content: center;
-      align-items: center;
       font-size: 30px;
-      padding-top: 7px;
-      padding-left: 3px;
       font-weight: 700;
+      height: 60px;
+      justify-content: center;
+      margin-left: -10px;
+      margin-top: -10px;
+      padding-left: 3px;
+      padding-top: 7px;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      width: 60px;
     }
 
     .card-header__title {
       color: #fff;
-      text-transform: uppercase;
-      padding: 5px;
-      text-align: right;
-      width: calc(100% - 60px);
       font-size: 16px;
       font-weight: 600;
-      text-shadow: 1px 1px black;
+      padding: 5px;
+      text-align: right;
+      text-shadow: 1px 1px #000;
+      text-transform: uppercase;
+      width: calc(100% - 60px);
     }
   }
 
   .card__card-main {
-    font-size: 13px;
     color: #fff;
-    line-height: 1.3;
+    font-size: 13px;
     height: calc(100% - 30px);
+    line-height: 1.3;
     margin-left: calc(100% - 227px);
     padding: 5px;
     z-index: 1;
 
     .age__number {
       background: #000;
-      padding: 0 3px;
       border: 1px solid #fff;
+      padding: 0 3px;
     }
 
     .resourse__icon {
       background: #000;
-      padding: 3px 3px;
       border: 1px solid #fff;
       border-radius: 50px;
       font-size: 11px;
+      padding: 3px;
     }
 
     .card__icon {
-      margin-right: 5px;
       font-size: 12px;
+      margin-right: 5px;
     }
 
     .card__dogma {
@@ -95,51 +97,51 @@ b {
 
     .card__dogma[data-dogmatype='corporate'] {
       .card__icon::before {
+        align-items: center;
         background-image: url('../../assets/img/cards-bg/corporate.png');
-        width: 30px;
-        height: 30px;
         background-size: 30px 30px;
         display: inline-flex;
+        height: 30px;
         justify-content: center;
-        align-items: center;
+        width: 30px;
       }
     }
 
     .card__dogma[data-dogmatype='aggressive'] {
       .card__icon::before {
+        align-items: center;
         background-image: url('../../assets/img/cards-bg/aggressive.png');
-        width: 30px;
-        height: 30px;
         background-size: 30px 30px;
         display: inline-flex;
+        height: 30px;
         justify-content: center;
-        align-items: center;
+        width: 30px;
       }
     }
   }
 
   .card__card-footer {
-    position: absolute;
-    top: 155px;
     display: flex;
     justify-content: space-between;
-    width: 104%;
     left: -7px;
+    position: absolute;
+    top: 155px;
+    width: 104%;
 
     .card__bottomLeft,
     .card__bottomCenter,
     .card__bottomRight {
-      width: 60px;
-      height: 60px;
+      align-items: center;
       background: #fff;
       border-radius: 50px;
       display: flex;
-      justify-content: center;
-      align-items: center;
       font-size: 30px;
-      padding-bottom: 12px;
       font-weight: 700;
-      text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.8);
+      height: 60px;
+      justify-content: center;
+      padding-bottom: 12px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+      width: 60px;
     }
   }
 }
@@ -207,27 +209,27 @@ b {
 
 .card__icon-border--blue {
   border: 2px solid rgb(62, 49, 136) !important;
-  box-shadow: 0px 1px 3px #000 !important;
+  box-shadow: 0 1px 3px #000 !important;
 }
 
 .card__icon-border--red {
   border: 2px solid rgb(197, 6, 16) !important;
-  box-shadow: 0px 1px 3px #000 !important;
+  box-shadow: 0 1px 3px #000 !important;
 }
 
 .card__icon-border--green {
   border: 2px solid rgb(9, 189, 48) !important;
-  box-shadow: 0px 1px 3px #000 !important;
+  box-shadow: 0 1px 3px #000 !important;
 }
 
 .card__icon-border--purple {
   border: 2px solid rgb(131, 6, 120) !important;
-  box-shadow: 0px 1px 3px #000 !important;
+  box-shadow: 0 1px 3px #000 !important;
 }
 
 .card__icon-border--yellow {
   border: 2px solid rgb(221, 162, 0) !important;
-  box-shadow: 0px 1px 3px #000 !important;
+  box-shadow: 0 1px 3px #000 !important;
 }
 
 .card__age--border {
