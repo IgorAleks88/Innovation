@@ -1,19 +1,19 @@
 // function which disable passed dom element button
 function disableBtn(btnElement) {
   btnElement.disabled = true;
-  btnElement.classList.add('hand__controls--disabled');
+  btnElement.classList.add('hand__btn--disabled');
 }
 
 // function which enable passed dom element button
 function enableBtn(btnElement) {
   btnElement.disabled = false;
-  btnElement.classList.remove('hand__controls--disabled');
+  btnElement.classList.remove('hand__btn--disabled');
 }
 
 export default function setGameControls() {
   // get needed dom elements
-  const btnTop = document.querySelector('.hand__controls--top');
-  const btnBottom = document.querySelector('.hand__controls--bottom');
+  const btnTop = document.querySelector('.hand__btn--top');
+  const btnBottom = document.querySelector('.hand__btn--bottom');
   const hand = document.querySelector('.hand__cards');
 
   // const height of one line of cards (current = 200px card + 10px margin + 10px margin)

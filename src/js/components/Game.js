@@ -44,9 +44,8 @@ export default class Game {
       if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];
       else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
 
-      // timeout to show last played card on table, before next turn starts
-      setTimeout(() => { this.currentPlayer.renderHand(); }, 200);
-      setTimeout(() => { this.currentPlayer.renderActiveZone(); }, 200);
+      this.currentPlayer.renderHand();
+      this.currentPlayer.renderActiveZone();
 
       // start new turn with full(2) turn points
       this.turnPoints = 2;

@@ -26,38 +26,84 @@
 }
 
 .hand__controls {
-  background-color: rgb(185, 161, 110);
+  background-color: rgb(127, 212, 77);
   height: 22rem;
   position: fixed;
   right: 20%;
   width: 10rem;
 }
 
-.hand__controls--top {
-  @include size(10rem, 11rem);
-  background-color: rgb(89, 228, 228);
-  transition: all 0.2s linear;
+.hand__controls-svg {
+  &--circle {
+    opacity: 0.3;
+    stroke: #f8aa28;
+    stroke-dasharray: 650;
+    stroke-dashoffset: 650;
+    transition: all 0.5s ease-in-out;
+  }
 
-  &:hover {
-    transform: scale(1.05);
+  &--triangle {
+    stroke: #000;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 480;
+    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
   }
 }
 
-.hand__controls--bottom {
+.hand__btn {
   @include size(10rem, 11rem);
-  background-color: rgb(90, 224, 224);
-  transition: all 0.2s linear;
+  @include flex(row, center, center);
+  cursor: pointer;
+  transition: all 0.5s ease;
 
-  &:hover {
-    transform: scale(1.05);
+  &--top {
+    transform: rotate(-90deg);
   }
-}
 
-.hand__controls--disabled {
-  cursor: default;
-  filter: brightness(0.3);
+  &--bottom {
+    transform: rotate(90deg);
+  }
+
+  &--disabled {
+    cursor: default;
+    filter: brightness(0.3);
+    opacity: 0.2;
+  }
 
   &:hover {
-    transform: none;
+    .hand__controls-svg--triangle {
+      animation: nudge 0.7s ease-in-out;
+      opacity: 1;
+      stroke: #f8aa28;
+      stroke-dashoffset: 0;
+
+      @keyframes nudge {
+        0% {
+          transform: translateX(0);
+        }
+
+        30% {
+          transform: translateX(-5px);
+        }
+
+        50% {
+          transform: translateX(5px);
+        }
+
+        70% {
+          transform: translateX(-2px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    .hand__controls-svg--circle {
+      opacity: 1;
+      stroke-dashoffset: 0;
+    }
   }
 }
