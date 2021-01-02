@@ -1,8 +1,38 @@
-.aside-wrapper {
-  border: solid 2px #000;
-  height: 100%;
+.aside {
+  @include flex(column, center, center);
+  background-color: rgb(196, 99, 30);
+  height: 100vh;
   position: absolute;
   right: 0;
   top: 0;
   width: 20%;
+}
+
+.aside__decks-block {
+  @include size(250px, 400px);
+  @include flex(column, flex-start, center);
+  background-color: rgb(7, 243, 243);
+  overflow: auto;
+  padding: 10px;
+}
+
+.aside__deck {
+  @include size(20rem, 30rem);
+  background-size: cover;
+  border: 1px solid #000;
+  filter: brightness(0.2);
+  flex-shrink: 0;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.aside__deck--active {
+  cursor: pointer;
+  filter: brightness(1);
+  transition: all 0.2s linear;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
