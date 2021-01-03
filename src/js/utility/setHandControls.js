@@ -43,7 +43,8 @@ export default function setGameControls() {
         disableBtn(btnBottom);
         disableBtn(btnTop);
       // if point of view is on last line
-      } else if (hand.scrollHeight - hand.scrollTop === cardsLineHeight) {
+      //! cardsLineHeight * 2 because at different resolutions height in px may differ a bit
+      } else if (hand.scrollHeight - hand.scrollTop < cardsLineHeight * 2) {
         disableBtn(btnBottom);
       }
     }, timeoutTime);
@@ -91,7 +92,8 @@ export default function setGameControls() {
         btnBottom.disabled = false;
       }
       // if point of view on last line
-      if (hand.scrollHeight - hand.scrollTop === cardsLineHeight && hand.scrollTop !== 0) {
+      //! cardsLineHeight * 2 because at different resolutions height in px may differ a bit
+      if (hand.scrollHeight - hand.scrollTop < cardsLineHeight * 2 && hand.scrollTop !== 0) {
         disableBtn(btnBottom);
       }
     }, timeoutTime);
