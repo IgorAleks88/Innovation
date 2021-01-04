@@ -71,7 +71,7 @@
     opacity: 0.2;
   }
 
-  &:hover {
+  &:hover:not(.hand__btn--disabled) {
     .hand__controls-svg--triangle {
       animation: nudge 0.7s ease-in-out;
       opacity: 1;
