@@ -1,7 +1,7 @@
 .active-zone {
   @include flex(row, flex-start, flex-end);
   background-color: rgb(151, 140, 190);
-  height: calc(100vh - 32rem); // 32rem = 10rem header + 22rem hand
+  height: calc(100vh - 37rem); // 32rem = 10rem header + 27rem hand
   overflow-x: auto;
   overflow-y: auto;
   width: 80%; // 20% for aside
