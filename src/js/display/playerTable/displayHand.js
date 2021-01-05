@@ -6,6 +6,9 @@ const displayHand = {
     this.cardsBlock = document.createElement('div');
     this.cardsBlock.classList.add('hand__cards');
 
+    this.cardsBlockOverlay = document.createElement('div');
+    this.cardsBlockOverlay.classList.add('hand__overlay');
+
     this.controlsBlock = document.createElement('div');
     this.controlsBlock.classList.add('hand__controls');
 
@@ -48,6 +51,7 @@ const displayHand = {
     this.controlsBlock.append(this.arrowTop);
     this.controlsBlock.append(this.arrowBottom);
 
+    this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);
     this.wrapper.append(this.controlsBlock);
     return this.wrapper;
