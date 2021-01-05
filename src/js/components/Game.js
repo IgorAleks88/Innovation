@@ -27,7 +27,7 @@ export default class Game {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1,
     };
-    this.turnPoints = 2;
+    this.turnPoints = 1000; //! set to 2. FOR TESTING
   }
 
   // if current player still have turn points - recalculate active deck
