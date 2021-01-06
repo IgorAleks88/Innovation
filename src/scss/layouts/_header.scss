@@ -1,7 +1,44 @@
 .header {
-  @include flex(column, center, center);
+  @include flex(row, space-around, center);
   background-color: rgb(89, 149, 151);
   font-size: 6rem;
+  height: 12rem;
+  width: 100rem;
+}
+
+.player-container {
+  @include flex(column, space-around, center);
+  border: solid 1px #000;
   height: 10rem;
-  width: 80%;
+  width: 23.5rem;
+}
+
+.head-row {
+  @include flex(row, space-around, center);
+  border: solid 1px #000;
+  height: 3.6rem;
+  width: 100%;
+}
+
+.active-zone-row {
+  @include flex(row, space-around, center);
+  height: 2.2rem;
+  width: 100%;
+  
+  &__red {
+    @include header-active-card;
+    background-color: #f00;
+  }
+  
+  &__green {
+    @include header-active-card;
+    background-color: #14ef10;
+  }
+}
+
+.recources-row {
+  @include flex(row, space-around, center);
+  border: solid 1px #000;
+  height: 5.2rem;
+  width: 100%;
 }

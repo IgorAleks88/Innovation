@@ -5,9 +5,10 @@ import getCard from '../cards/getCard';
 * this obj passed as argument to Game constructor
 */
 export default class Player {
-  constructor(gameUI, playerName) {
+  constructor(gameUI, playerName, id) {
     // store passed values
     this.name = playerName;
+    this.id = id;
     this.gameUI = gameUI;
 
     // set default values

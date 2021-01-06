@@ -27,15 +27,15 @@ export default class Game {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1,
     };
-    this.turnPoints = 1000; //! set to 2. FOR TESTING
+    this.turnPoints = 2; //! set to 2. FOR TESTING
   }
 
   // if current player still have turn points - recalculate active deck
   // else give turn to next player
   newTurn() {
     if (this.turnPoints > 0) {
-      const header = document.querySelector('.header'); // TODO remove later, added for tests
-      header.innerText = this.currentPlayer.name; // TODO remove later, added for tests
+      // const header = document.querySelector('.header'); // TODO remove later, added for tests
+      // header.innerText = this.currentPlayer.name; // TODO remove later, added for tests
       this.removeActiveDeck();
       this.setActiveDeck(this.currentPlayer);
     } else {
@@ -49,6 +49,7 @@ export default class Game {
 
       // start new turn with full(2) turn points
       this.turnPoints = 2;
+      console.log(this.currentPlayer);
       this.newTurn();
     }
   }
