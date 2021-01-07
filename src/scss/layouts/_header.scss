@@ -1,7 +1,6 @@
 .header {
   @include flex(column, center, center);
   background-color: rgb(89, 149, 151);
-  font-size: 6rem;
-  height: 10rem;
-  width: 80%;
+  height: 17rem; // 10rem block, 1+1rem margins, 5 rem decoration
+  width: 100%;
 }

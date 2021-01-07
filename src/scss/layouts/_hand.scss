@@ -2,7 +2,7 @@
   @include flex(row, flex-start, flex-start);
   height: 22rem;
   position: relative;
-  width: 80%;
+  width: 100%;
 }
 
 .hand__cards {
@@ -29,7 +29,7 @@
   background-color: rgb(127, 212, 77);
   height: 22rem;
   position: fixed;
-  right: 20%;
+  right: 37rem;
   width: 10rem;
 }
 
