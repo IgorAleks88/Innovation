@@ -1,119 +1,152 @@
-// import game from '../../components/Game';
-
 const displayHeader = {
   wrapper: null,
-  player1Container: null,
-  player1Red: null,
-  player1Green: null,
-  player1Blue: null,
-  player1Purple: null,
-  player1Yellow: null,
-  player2Container: null,
-  player3Container: null,
-  player4Container: null,
-  testPlayer1: {
-    id: 1,
-    activeStacks: {
-      blue: [],
-      red: [1, 2, 3],
-      green: [],
-      purple: [],
-      yellow: [],
-    },
+  resourcesNames: [{ tree: ['fab', 'fa-pagelines', 'green'] }, { tower: ['fab', 'fa-fort-awesome', 'grey'] }, { crown: ['fas', 'fa-crown', 'yellow'] }, { bulb: ['fas', 'fa-lightbulb', 'purple'] }, { factory: ['fas', 'fa-industry', 'red'] }, { clock: ['far', 'fa-clock', 'blue'] }],
+  player1: {
+    container: null,
+    name: null,
+    hand: null,
+    influence: null,
+    leadership: null,
+    red: null,
+    green: null,
+    blue: null,
+    purple: null,
+    yellow: null,
+    tree: null,
+    tower: null,
+    crown: null,
+    bulb: null,
+    factory: null,
+    clock: null,
   },
-  testPlayer2: {
-    id: 2,
-    activeStacks: {
-      blue: [],
-      red: [4, 5, 6, 7, 8],
-      green: [],
-      purple: [],
-      yellow: [],
-    },
+  player2: {
+    container: null,
+    name: null,
+    hand: null,
+    influence: null,
+    leadership: null,
+    red: null,
+    green: null,
+    blue: null,
+    purple: null,
+    yellow: null,
+    tree: null,
+    tower: null,
+    crown: null,
+    bulb: null,
+    factory: null,
+    clock: null,
   },
-  testPlayer3: {
-    id: 3,
-    activeStacks: {
-      blue: [],
-      red: [9, 10, 11],
-      green: [],
-      purple: [],
-      yellow: [],
-    },
+  player3: {
+    container: null,
+    name: null,
+    hand: null,
+    influence: null,
+    leadership: null,
+    red: null,
+    green: null,
+    blue: null,
+    purple: null,
+    yellow: null,
+    tree: null,
+    tower: null,
+    crown: null,
+    bulb: null,
+    factory: null,
+    clock: null,
   },
-  testPlayer4: {
-    id: 4,
-    activeStacks: {
-      blue: [],
-      red: [],
-      green: [],
-      purple: [],
-      yellow: [],
-    },
+  player4: {
+    container: null,
+    name: null,
+    hand: null,
+    influence: null,
+    leadership: null,
+    red: null,
+    green: null,
+    blue: null,
+    purple: null,
+    yellow: null,
+    tree: null,
+    tower: null,
+    crown: null,
+    bulb: null,
+    factory: null,
+    clock: null,
   },
 
   initPlayerStats(id) {
-    const container = `player${id}Container`;
-    const red = `player${id}Red`;
-    const green = `player${id}Green`;
-    const blue = `player${id}Blue`;
-    const purple = `player${id}Purple`;
-    const yellow = `player${id}Yellow`;
-    this[container] = document.createElement('div');
-    this[container].classList.add('player-container');
+    const player = `player${id}`;
+
+    this[player].container = document.createElement('div');
+    this[player].container.classList.add('player-container');
 
     const headRow = document.createElement('div');
     headRow.classList.add('head-row');
-    this[container].appendChild(headRow);
+    this[player].name = document.createElement('div');
+    this[player].name.classList.add('head-row__name');
+    this[player].name.textContent = `Player${id}`;
+    headRow.appendChild(this[player].name);
+    this[player].container.appendChild(headRow);
 
     const activeZoneRow = document.createElement('div');
     activeZoneRow.classList.add('active-zone-row');
 
-    this[red] = document.createElement('div');
-    this[red].classList.add('active-zone-row__red');
-    this[red].textContent = 0;
-    activeZoneRow.appendChild(this[red]);
+    this[player].red = document.createElement('div');
+    this[player].red.classList.add('active-zone-row__red');
+    this[player].red.textContent = 0;
+    activeZoneRow.appendChild(this[player].red);
 
-    this[green] = document.createElement('div');
-    this[green].classList.add('active-zone-row__green');
-    this[green].textContent = 0;
-    activeZoneRow.appendChild(this[green]);
+    this[player].green = document.createElement('div');
+    this[player].green.classList.add('active-zone-row__green');
+    this[player].green.textContent = 0;
+    activeZoneRow.appendChild(this[player].green);
 
-    this[blue] = document.createElement('div');
-    this[blue].classList.add('active-zone-row__blue');
-    this[blue].textContent = 0;
-    activeZoneRow.appendChild(this[blue]);
+    this[player].blue = document.createElement('div');
+    this[player].blue.classList.add('active-zone-row__blue');
+    this[player].blue.textContent = 0;
+    activeZoneRow.appendChild(this[player].blue);
 
-    this[purple] = document.createElement('div');
-    this[purple].classList.add('active-zone-row__purple');
-    this[purple].textContent = 0;
-    activeZoneRow.appendChild(this[purple]);
+    this[player].purple = document.createElement('div');
+    this[player].purple.classList.add('active-zone-row__purple');
+    this[player].purple.textContent = 0;
+    activeZoneRow.appendChild(this[player].purple);
 
-    this[yellow] = document.createElement('div');
-    this[yellow].classList.add('active-zone-row__yellow');
-    this[yellow].textContent = 0;
-    activeZoneRow.appendChild(this[yellow]);
+    this[player].yellow = document.createElement('div');
+    this[player].yellow.classList.add('active-zone-row__yellow');
+    this[player].yellow.textContent = 0;
+    activeZoneRow.appendChild(this[player].yellow);
 
-    this[container].appendChild(activeZoneRow);
+    this[player].container.appendChild(activeZoneRow);
 
     const recourcesRow = document.createElement('div');
     recourcesRow.classList.add('recources-row');
-    this[container].appendChild(recourcesRow);
-    this.wrapper.appendChild(this[container]);
+    this.resourcesNames.forEach((e) => {
+      const i = Object.keys(e)[0];
+      // console.log(e[i][0]);
+      const container = document.createElement('div');
+      container.classList.add('recource-container');
+      const iconContainer = document.createElement('div');
+      iconContainer.classList.add(`${e[i][0]}`, `${e[i][1]}`, 'recource-container__icon', `card__icon-color--${e[i][2]}`);
+      container.appendChild(iconContainer);
+      this[player][i] = document.createElement('div');
+      this[player][i].classList.add('recource-container__counter');
+      this[player][i].textContent = 0;
+      container.appendChild(this[player][i]);
+      recourcesRow.appendChild(container);
+    });
+
+    this[player].container.appendChild(recourcesRow);
+    this.wrapper.appendChild(this[player].container);
   },
 
   changePlayerStats(player) {
-    const red = `player${player.id}Red`;
-    const green = `player${player.id}Green`;
-    const blue = `player${player.id}Blue`;
-    const purple = `player${player.id}Purple`;
-    const yellow = `player${player.id}Yellow`;
+    const playerId = `player${player.id}`;
 
-    this[red].textContent = player.activeStacks.red.length;
-    this[green].textContent = player.activeStacks.green.length;
-    this[blue].textContent = player.activeStacks.blue.length;
-    this[purple].textContent = player.activeStacks.purple.length;
-    this[yellow].textContent = player.activeStacks.yellow.length;
+    this[playerId].red.textContent = player.activeStacks.red.length;
+    this[playerId].green.textContent = player.activeStacks.green.length;
+    this[playerId].blue.textContent = player.activeStacks.blue.length;
+    this[playerId].purple.textContent = player.activeStacks.purple.length;
+    this[playerId].yellow.textContent = player.activeStacks.yellow.length;
   },
 
   init() {
@@ -128,3 +161,5 @@ const displayHeader = {
 };
 
 export default displayHeader;
+
+/* 'tower', 'crown', 'bulb', 'factory', 'clock' */
