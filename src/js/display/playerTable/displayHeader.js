@@ -1,5 +1,6 @@
 const displayHeader = {
   wrapper: null,
+  headRowNames: [{ hand: ['fas', 'fa-hand-paper', 'yellow'] }, { influence: ['fas', 'fa-shield-alt', 'red'] }, { leadership: ['fas', 'fa-trophy', 'yellow'] }],
   resourcesNames: [{ tree: ['fab', 'fa-pagelines', 'green'] }, { tower: ['fab', 'fa-fort-awesome', 'grey'] }, { crown: ['fas', 'fa-crown', 'yellow'] }, { bulb: ['fas', 'fa-lightbulb', 'purple'] }, { factory: ['fas', 'fa-industry', 'red'] }, { clock: ['far', 'fa-clock', 'blue'] }],
   player1: {
     container: null,
@@ -86,6 +87,22 @@ const displayHeader = {
     this[player].name.classList.add('head-row__name');
     this[player].name.textContent = `Player${id}`;
     headRow.appendChild(this[player].name);
+
+    this.headRowNames.forEach((e) => {
+      const i = Object.keys(e)[0];
+      // console.log(e[i][0]);
+      const container = document.createElement('div');
+      container.classList.add('cards-container');
+      const iconContainer = document.createElement('div');
+      iconContainer.classList.add(`${e[i][0]}`, `${e[i][1]}`, 'cards-container__icon', `card__icon-color--${e[i][2]}`);
+      container.appendChild(iconContainer);
+      this[player][i] = document.createElement('div');
+      this[player][i].classList.add('cards-container__counter');
+      this[player][i].textContent = 0;
+      container.appendChild(this[player][i]);
+      headRow.appendChild(container);
+    });
+
     this[player].container.appendChild(headRow);
 
     const activeZoneRow = document.createElement('div');
