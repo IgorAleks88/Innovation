@@ -6,6 +6,8 @@
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+import header from '../display/playerTable/displayHeader';
+
 export default class Game {
   constructor(gameUI, player1, player2, gameField) { // TODO should take more then 2 players
     // store passed objects
@@ -27,15 +29,15 @@ export default class Game {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1,
     };
-    this.turnPoints = 1000; //! set to 2. FOR TESTING
+    this.turnPoints = 2; //! set to 2. FOR TESTING
   }
 
   // if current player still have turn points - recalculate active deck
   // else give turn to next player
   newTurn() {
     if (this.turnPoints > 0) {
-      const header = document.querySelector('.header'); // TODO remove later, added for tests
-      header.innerText = this.currentPlayer.name; // TODO remove later, added for tests
+      // const header = document.querySelector('.header'); // TODO remove later, added for tests
+      // header.innerText = this.currentPlayer.name; // TODO remove later, added for tests
       this.removeActiveDeck();
       this.setActiveDeck(this.currentPlayer);
     } else {
@@ -87,6 +89,7 @@ export default class Game {
     this.currentPlayer.setCurrentAge(); // recalculate current age of player
     this.currentPlayer.hand.push(this.currentDeck.cardsArray.pop());
     this.currentPlayer.renderLastTakenCard();
+    header.changePlayerStats(this.currentPlayer);
     // starts next phase of turn
     this.actionDone();
   }
