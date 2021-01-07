@@ -25,17 +25,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           }
         ]
       },
@@ -60,17 +63,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-lightbulb"],
-            "resourseColor": "purple"
+            "resourseColor": "purple",
+            "resourceName": "bulb"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fas", "fa-lightbulb"],
-            "resourseColor": "purple"
+            "resourseColor": "purple",
+            "resourceName": "bulb"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       },
@@ -89,17 +95,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-lightbulb"],
-            "resourseColor": "purple"
+            "resourseColor": "purple",
+            "resourceName": "bulb"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fas", "fa-lightbulb"],
-            "resourseColor": "purple"
+            "resourseColor": "purple",
+            "resourceName": "bulb"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           }
         ]
       }
@@ -125,17 +134,20 @@
           {
             "resoursePosition": "topLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       },
@@ -154,17 +166,20 @@
           {
             "resoursePosition": "topLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-lightbulb"],
-            "resourseColor": "purple"
+            "resourseColor": "purple",
+            "resourceName": "bulb"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       },
@@ -189,17 +204,20 @@
           {
             "resoursePosition": "topLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       }
@@ -225,17 +243,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       },
@@ -260,17 +281,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           }
         ]
       },
@@ -289,17 +313,20 @@
           {
             "resoursePosition": "topLeft",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           }
         ]
       }
@@ -325,17 +352,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       },
@@ -354,17 +384,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           }
         ]
       },
@@ -383,17 +416,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       }
@@ -419,17 +455,20 @@
           {
             "resoursePosition": "topLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       },
@@ -448,17 +487,20 @@
           {
             "resoursePosition": "topLeft",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           },
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fas", "fa-crown"],
-            "resourseColor": "yellow"
+            "resourseColor": "yellow",
+            "resourceName": "crown"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-fort-awesome"],
-            "resourseColor": "grey"
+            "resourseColor": "grey",
+            "resourceName": "tower"
           }
         ]
       },
@@ -477,17 +519,20 @@
           {
             "resoursePosition": "bottomLeft",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           },
           {
             "resoursePosition": "bottomCenter",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           },
           {
             "resoursePosition": "bottomRight",
             "resourseType": ["fab", "fa-pagelines"],
-            "resourseColor": "green"
+            "resourseColor": "green",
+            "resourceName": "tree"
           }
         ]
       }

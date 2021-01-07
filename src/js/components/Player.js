@@ -19,12 +19,35 @@ export default class Player {
 
     //! Names of stacks are color field in card objects
     this.activeStacks = {
-      blue: [],
-      red: [],
-      green: [],
-      purple: [],
-      yellow: [],
+      blue: {
+        cards: [],
+        shift: null,
+      },
+      red: {
+        cards: [],
+        shift: null,
+      },
+      green: {
+        cards: [],
+        shift: null,
+      },
+      purple: {
+        cards: [],
+        shift: null,
+      },
+      yellow: {
+        cards: [],
+        shift: null,
+      },
     };
+
+    // Resources
+    this.tree = 0;
+    this.tower = 0;
+    this.crown = 0;
+    this.bulb = 0;
+    this.factory = 0;
+    this.clock = 0;
 
     // player leadership and influence objects
     // TODO LATER
@@ -39,11 +62,30 @@ export default class Player {
     };
   }
 
+  // calculate current recourses
+  calculateResources() {
+    this.tree = 0;
+    this.tower = 0;
+    this.crown = 0;
+    this.bulb = 0;
+    this.factory = 0;
+    this.clock = 0;
+    Object.keys(this.activeStacks).forEach((stack) => {
+      const currentStack = this.activeStacks[stack];
+      if (currentStack.cards.length > 0) {
+        const highestCard = currentStack.cards[currentStack.cards.length - 1];
+        highestCard.resourses.forEach((e) => {
+          this[e.resourceName] += 1;
+        });
+      }
+    });
+  }
+
   // calculate and set current age, iterates througth each stack
   //! Runs from Game each time when card taken
   setCurrentAge() {
     Object.keys(this.activeStacks).forEach((stack) => {
-      this.activeStacks[stack].forEach((card) => {
+      this.activeStacks[stack].cards.forEach((card) => {
         if (+card.age > this.currentAge) {
           this.currentAge = +card.age;
         }
@@ -75,7 +117,7 @@ export default class Player {
   renderActiveZone() {
     Object.keys(this.activeStacks).forEach((stackName) => {
       this.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
-      this.activeStacks[stackName].forEach((card) => {
+      this.activeStacks[stackName].cards.forEach((card) => {
         this.gameUI.activeStacks[stackName].append(getCard.frontSide(card));
       });
     });
@@ -91,10 +133,11 @@ export default class Player {
             this.hand.splice(i, 1);
           }
         });
-        this.activeStacks[stackName].push(cardObj);
+        this.activeStacks[stackName].cards.push(cardObj);
         this.gameUI.activeStacks[stackName].append(cardElement);
       }
     });
+    this.calculateResources();
     header.changePlayerStats(this);
     this.game.actionDone();
   }

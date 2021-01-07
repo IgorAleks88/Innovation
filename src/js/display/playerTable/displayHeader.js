@@ -90,7 +90,6 @@ const displayHeader = {
 
     this.headRowNames.forEach((e) => {
       const i = Object.keys(e)[0];
-      // console.log(e[i][0]);
       const container = document.createElement('div');
       container.classList.add('cards-container');
       const iconContainer = document.createElement('div');
@@ -159,11 +158,18 @@ const displayHeader = {
   changePlayerStats(player) {
     const playerId = `player${player.id}`;
 
-    this[playerId].red.textContent = player.activeStacks.red.length;
-    this[playerId].green.textContent = player.activeStacks.green.length;
-    this[playerId].blue.textContent = player.activeStacks.blue.length;
-    this[playerId].purple.textContent = player.activeStacks.purple.length;
-    this[playerId].yellow.textContent = player.activeStacks.yellow.length;
+    this[playerId].hand.textContent = player.hand.length;
+    this[playerId].red.textContent = player.activeStacks.red.cards.length;
+    this[playerId].green.textContent = player.activeStacks.green.cards.length;
+    this[playerId].blue.textContent = player.activeStacks.blue.cards.length;
+    this[playerId].purple.textContent = player.activeStacks.purple.cards.length;
+    this[playerId].yellow.textContent = player.activeStacks.yellow.cards.length;
+    this[playerId].tree.textContent = player.tree;
+    this[playerId].tower.textContent = player.tower;
+    this[playerId].crown.textContent = player.crown;
+    this[playerId].bulb.textContent = player.bulb;
+    this[playerId].factory.textContent = player.factory;
+    this[playerId].clock.textContent = player.clock;
   },
 
   init() {
