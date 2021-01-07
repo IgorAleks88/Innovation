@@ -200,6 +200,8 @@ const displayAside = {
       deck.innerText = `${i + 1} Age`; // TODO remove later
       deck.style.backgroundImage = 'url(./assets/img/cards-bg/age-01.jpg)'; //! use `` age-0${i+1} later
 
+      deck.addEventListener('click', () => this.ageDecksBlock.classList.toggle('age-decks--hidden'));
+
       if (i < 4) {
         firstLine.append(deck);
       } else if (i < 7) {

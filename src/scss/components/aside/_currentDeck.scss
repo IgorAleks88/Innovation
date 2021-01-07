@@ -5,7 +5,7 @@
 }
 
 .current-deck__title {
-  @include size(30rem, 4rem);
+  @include size(30rem, 3rem);
   @include flex(column, center, center);
   background-color: rgb(255, 255, 0);
   border-radius: 1rem;
