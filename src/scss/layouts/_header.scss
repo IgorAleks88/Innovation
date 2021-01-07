@@ -34,6 +34,21 @@
     @include header-active-card;
     background-color: #14ef10;
   }
+
+  &__blue {
+    @include header-active-card;
+    background-color: #1713e7;
+  }
+
+  &__purple {
+    @include header-active-card;
+    background-color: #d729db;
+  }
+
+  &__yellow {
+    @include header-active-card;
+    background-color: #edf117;
+  }
 }
 
 .recources-row {

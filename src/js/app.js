@@ -37,8 +37,8 @@ shuffle(arrOfCards);
 const gameField = new GameField(arrOfCards);
 
 // contains players properties and cards
-const player1 = new Player(gameUI, 'Player1');
-const player2 = new Player(gameUI, 'Player2');
+const player1 = new Player(gameUI, 'Player1', 1);
+const player2 = new Player(gameUI, 'Player2', 2);
 
 // work with all main objects
 const game = new Game(gameUI, player1, player2, gameField);

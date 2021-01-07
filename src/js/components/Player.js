@@ -1,4 +1,5 @@
 import getCard from '../cards/getCard';
+import header from '../display/playerTable/displayHeader';
 
 /*
 * store all player cards objects (hand/table/lead/influence)
@@ -94,6 +95,7 @@ export default class Player {
         this.gameUI.activeStacks[stackName].append(cardElement);
       }
     });
+    header.changePlayerStats(this);
     this.game.actionDone();
   }
 }

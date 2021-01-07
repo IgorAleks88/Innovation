@@ -52,13 +52,13 @@ const displayHeader = {
     },
   },
 
-  initPlayerStats(player) {
-    const container = `player${player.id}Container`;
-    const red = `player${player.id}Red`;
-    const green = `player${player.id}Green`;
-    const blue = `player${player.id}Blue`;
-    const purple = `player${player.id}Purple`;
-    const yellow = `player${player.id}Yellow`;
+  initPlayerStats(id) {
+    const container = `player${id}Container`;
+    const red = `player${id}Red`;
+    const green = `player${id}Green`;
+    const blue = `player${id}Blue`;
+    const purple = `player${id}Purple`;
+    const yellow = `player${id}Yellow`;
     this[container] = document.createElement('div');
     this[container].classList.add('player-container');
 
@@ -71,13 +71,28 @@ const displayHeader = {
 
     this[red] = document.createElement('div');
     this[red].classList.add('active-zone-row__red');
-    this[red].textContent = player.activeStacks.red.length;
+    this[red].textContent = 0;
     activeZoneRow.appendChild(this[red]);
 
     this[green] = document.createElement('div');
     this[green].classList.add('active-zone-row__green');
-    this[green].textContent = player.activeStacks.green.length;
+    this[green].textContent = 0;
     activeZoneRow.appendChild(this[green]);
+
+    this[blue] = document.createElement('div');
+    this[blue].classList.add('active-zone-row__blue');
+    this[blue].textContent = 0;
+    activeZoneRow.appendChild(this[blue]);
+
+    this[purple] = document.createElement('div');
+    this[purple].classList.add('active-zone-row__purple');
+    this[purple].textContent = 0;
+    activeZoneRow.appendChild(this[purple]);
+
+    this[yellow] = document.createElement('div');
+    this[yellow].classList.add('active-zone-row__yellow');
+    this[yellow].textContent = 0;
+    activeZoneRow.appendChild(this[yellow]);
 
     this[container].appendChild(activeZoneRow);
 
@@ -87,13 +102,27 @@ const displayHeader = {
     this.wrapper.appendChild(this[container]);
   },
 
+  changePlayerStats(player) {
+    const red = `player${player.id}Red`;
+    const green = `player${player.id}Green`;
+    const blue = `player${player.id}Blue`;
+    const purple = `player${player.id}Purple`;
+    const yellow = `player${player.id}Yellow`;
+
+    this[red].textContent = player.activeStacks.red.length;
+    this[green].textContent = player.activeStacks.green.length;
+    this[blue].textContent = player.activeStacks.blue.length;
+    this[purple].textContent = player.activeStacks.purple.length;
+    this[yellow].textContent = player.activeStacks.yellow.length;
+  },
+
   init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
-    this.initPlayerStats(this.testPlayer1);
-    this.initPlayerStats(this.testPlayer2);
-    this.initPlayerStats(this.testPlayer3);
-    this.initPlayerStats(this.testPlayer4);
+    this.initPlayerStats(1);
+    this.initPlayerStats(2);
+    /* this.initPlayerStats(this.testPlayer3);
+    this.initPlayerStats(this.testPlayer4); */
     return this.wrapper;
   },
 };
