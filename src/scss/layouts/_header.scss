@@ -1,6 +1,103 @@
 .header {
+<<<<<<< HEAD
   @include flex(column, center, center);
   background-color: rgb(89, 149, 151);
   height: 17rem; // 10rem block, 1+1rem margins, 5 rem decoration
   width: 100%;
+=======
+  @include flex(row, space-around, center);
+  height: 12rem;
+  width: 100rem;
+}
+
+.player-container {
+  @include flex(column, space-around, center);
+  border: solid 1px #000;
+  height: 10rem;
+  width: 23.5rem;
+}
+
+.head-row {
+  @include flex(row, space-around, center);
+  height: 2.2rem;
+  width: 100%;
+
+  &__name {
+    font-size: 2rem;
+    height: 100%;
+    text-align: center;
+    width: 40%;    
+  }
+}
+
+.cards-container {
+  @include flex(row, space-around, center);
+  height: 100%;
+  padding: 0.3rem;
+  width: 20%;
+
+  &__icon {
+    font-size: 2rem;
+    height: 100%;   
+  }
+
+  &__counter {
+    font-size: 2rem;
+    height: 100%; 
+  }
+}
+
+.active-zone-row {
+  @include flex(row, space-around, center);
+  height: 2.2rem;
+  width: 100%;
+  
+  &__red {
+    @include header-active-card;
+    background-color: #f00;
+  }
+  
+  &__green {
+    @include header-active-card;
+    background-color: #14ef10;
+  }
+
+  &__blue {
+    @include header-active-card;
+    background-color: #1713e7;
+  }
+
+  &__purple {
+    @include header-active-card;
+    background-color: #d729db;
+  }
+
+  &__yellow {
+    @include header-active-card;
+    background-color: #edf117;
+  }
+}
+
+.recources-row {
+  @include flex(row, space-around, center);
+  height: 4.2rem;
+  width: 100%;
+}
+
+.recource-container {
+  @include flex(column, space-around, center);
+  height: 100%;
+  padding: 0.3rem;
+  width: 16%;
+
+  &__icon {
+    font-size: 1.6rem;
+    height: 50%;   
+  }
+
+  &__counter {
+    font-size: 1.6rem;
+    height: 50%; 
+  }
+>>>>>>> a4638269cae15e0b9effb93328c701f1e86ae15e
 }

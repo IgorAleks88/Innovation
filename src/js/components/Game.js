@@ -6,6 +6,8 @@
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+import header from '../display/playerTable/displayHeader';
+
 export default class Game {
   constructor(gameUI, player1, player2, gameField) { // TODO should take more then 2 players
     // store passed objects
@@ -89,6 +91,7 @@ export default class Game {
     this.currentPlayer.setCurrentAge(); // recalculate current age of player
     this.currentPlayer.hand.push(this.currentDeck.cardsArray.pop());
     this.currentPlayer.renderLastTakenCard();
+    header.changePlayerStats(this.currentPlayer);
     // starts next phase of turn
     this.actionDone();
   }
