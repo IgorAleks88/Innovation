@@ -11,6 +11,10 @@ import Game from './components/Game';
 import cardsJSON from './cards/cards.json';
 import parseCards from './cards/parseCards';
 import GameUI from './components/GameUI';
+import Intro from './components/Intro';
+
+// display intro
+Intro.init();
 
 // set up and display main menu
 const menu = new Menu(document.body);
