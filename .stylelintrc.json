@@ -3,6 +3,8 @@
   "rules": { 
     "selector-class-pattern": null,
     "max-nesting-depth": null,
-    "selector-max-compound-selectors": null
+    "selector-max-compound-selectors": null,
+    "function-parentheses-space-inside": null,
+    "selector-max-id": 1
   }
 }   
