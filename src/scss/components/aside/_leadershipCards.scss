@@ -34,18 +34,3 @@
   background-size: cover;
   font-size: 10rem;
 }
-
-.leadership-cards__btn {
-  @include size(15rem, 5rem);
-  background-color: rgba(141, 137, 137, 0.8);
-  border-radius: 1rem;
-  font-size: 2rem;
-  margin: 1rem;
-  padding: 1rem;
-  transition: 0.3s linear;
-
-  &:hover {
-    background-color: rgba(141, 137, 137, 1);
-    transform: scale(1.05);
-  }
-}

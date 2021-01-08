@@ -178,8 +178,13 @@ const displayAside = {
     const agesNumber = 10;
     const ageDecksBlock = document.createElement('div');
     ageDecksBlock.classList.add('age-decks');
-    ageDecksBlock.classList.add('age-decks--hidden'); // hidden by default
+    ageDecksBlock.classList.add('age-decks--hidden');
 
+    // Animation classes and attributes for modal block here
+    ageDecksBlock.classList.add('xyz-in');
+    ageDecksBlock.setAttribute('xyz', 'fade-100% duration-6');
+
+    // create blocks - lines of cards
     const firstLine = document.createElement('div');
     firstLine.classList.add('age-decks__first-line');
 
@@ -202,6 +207,10 @@ const displayAside = {
 
       deck.addEventListener('click', () => this.ageDecksBlock.classList.toggle('age-decks--hidden'));
 
+      // Animation classes and attributes for cards here
+      deck.classList.add('xyz-in');
+      deck.setAttribute('xyz', 'flip-left-25% rotate-right-25% up-5 duration-6');
+
       if (i < 4) {
         firstLine.append(deck);
       } else if (i < 7) {
@@ -212,11 +221,8 @@ const displayAside = {
       if (i === 9) {
         // create close button
         const button = document.createElement('button');
-        button.classList.add('age-decks__btn');
+        button.classList.add('close-modal-btn');
         button.innerText = 'Закрыть';
-        button.addEventListener('click', () => {
-          this.ageDecksBlock.classList.toggle('age-decks--hidden');
-        });
         btnLine.append(button);
       }
     }
@@ -233,8 +239,13 @@ const displayAside = {
     // create leadership decks modal block
     const leadershipCardsBlock = document.createElement('div');
     leadershipCardsBlock.classList.add('leadership-cards');
-    leadershipCardsBlock.classList.add('leadership-cards--hidden'); // hidden by default
+    leadershipCardsBlock.classList.add('leadership-cards--hidden');
 
+    // Animation classes and attributes for modal block here
+    leadershipCardsBlock.classList.add('xyz-in');
+    leadershipCardsBlock.setAttribute('xyz', 'fade-100% duration-6');
+
+    // create blocks - lines of cards
     const firstLine = document.createElement('div');
     firstLine.classList.add('leadership-cards__first-line');
 
@@ -251,17 +262,18 @@ const displayAside = {
       leadershipCard.classList.add('leadership-cards__card');
       leadershipCard.innerText = `${i + 1}`;
 
+      // Animation classes and attributes for cards here
+      leadershipCard.classList.add('xyz-in');
+      leadershipCard.setAttribute('xyz', 'flip-left-25% rotate-right-25% up-5 duration-6');
+
       if (i < 5) firstLine.append(leadershipCard);
       else if (i < 10) secondLine.append(leadershipCard);
 
       if (i === 9) {
         // create close button
         const button = document.createElement('button');
-        button.classList.add('leadership-cards__btn');
+        button.classList.add('close-modal-btn');
         button.innerText = 'Закрыть';
-        button.addEventListener('click', () => {
-          this.leadershipCardsBlock.classList.toggle('leadership-cards--hidden');
-        });
         btnLine.append(button);
       }
     }
@@ -279,6 +291,11 @@ const displayAside = {
     specialCardsBlock.classList.add('special-cards');
     specialCardsBlock.classList.add('special-cards--hidden');
 
+    // Animation classes and attributes for modal block here
+    specialCardsBlock.classList.add('xyz-in');
+    specialCardsBlock.setAttribute('xyz', 'fade-100% duration-6');
+
+    // create blocks - lines of cards
     const firstLine = document.createElement('div');
     firstLine.classList.add('special-cards__first-line');
 
@@ -294,17 +311,18 @@ const displayAside = {
       const specialCard = document.createElement('div');
       specialCard.classList.add('special-cards__card');
 
+      // Animation classes and attributes for cards here
+      specialCard.classList.add('xyz-in');
+      specialCard.setAttribute('xyz', 'flip-left-25% rotate-right-25% up-5 duration-6');
+
       if (i < 3) firstLine.append(specialCard);
       else if (i < 5) secondLine.append(specialCard);
 
+      // create close button
       if (i === 4) {
-        // create close button
         const button = document.createElement('button');
-        button.classList.add('special-cards__btn');
+        button.classList.add('close-modal-btn');
         button.innerText = 'Закрыть';
-        button.addEventListener('click', () => {
-          this.specialCardsBlock.classList.toggle('special-cards--hidden');
-        });
         btnLine.append(button);
       }
     }
