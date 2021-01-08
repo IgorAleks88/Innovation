@@ -207,6 +207,14 @@ b {
   color: rgb(250, 192, 3);
 }
 
+.card__icon-color--red {
+  color: rgb(197, 6, 16);
+}
+
+.card__icon-color--blue {
+  color: rgb(62, 49, 136);
+}
+
 .card__icon-border--blue {
   border: 2px solid rgb(62, 49, 136) !important;
   box-shadow: 0 1px 3px #000 !important;

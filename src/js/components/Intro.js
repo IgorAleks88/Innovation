@@ -1,3 +1,5 @@
+import Menu from './mainMenu';
+
 export default class Intro {
   static init() {
     const divIntro = document.createElement('div');
@@ -9,6 +11,11 @@ export default class Intro {
     const introTop = document.createElement('div');
     introTop.classList.add('intro__top');
 
+    // set up and display main menu
+    const menu = new Menu(introTop);
+    menu.render();
+
+    // svg title letters - I n n o v a t i o n
     const introCenter = document.createElement('div');
     introCenter.classList.add('intro__center');
     introCenter.innerHTML = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -80,15 +87,36 @@ c2.513-1.183,2.621-2.839,2.621-6.74V46.458z"/>
         <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
     </filter>
 </defs>
-</svg>
-<div class="center__title"></div>`;
+</svg>`;
+
+    const introCenterTitle = document.createElement('div');
+    introCenterTitle.classList.add('center__title');
+    introCenter.appendChild(introCenterTitle);
 
     const introBottom = document.createElement('div');
     introBottom.classList.add('intro__bottom');
+    const introBottomLamps = document.createElement('div');
+    introBottomLamps.classList.add('bottom__lamp');
+    for (let i = 0; i < 3; i += 1) {
+      const introBottomLamp = document.createElement('div');
+      introBottomLamp.classList.add(`bottom__lamp--${i + 1}`);
+      introBottomLamps.appendChild(introBottomLamp);
+    }
+    introBottom.appendChild(introBottomLamps);
+
+    const introGear = document.createElement('div');
+    introGear.classList.add('intro__gear');
+    const introGear1 = document.createElement('div');
+    introGear1.classList.add('intro__gear1');
+    const introGear2 = document.createElement('div');
+    introGear2.classList.add('intro__gear2');
+    introGear.appendChild(introGear1);
+    introGear.appendChild(introGear2);
 
     introContainer.appendChild(introTop);
     introContainer.appendChild(introCenter);
     introContainer.appendChild(introBottom);
+    introContainer.appendChild(introGear);
     divIntro.appendChild(introContainer);
     document.body.appendChild(divIntro);
   }

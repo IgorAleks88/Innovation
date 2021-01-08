@@ -6,6 +6,8 @@
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+import header from '../display/playerTable/displayHeader';
+
 export default class Game {
   constructor(gameUI, player1, player2, gameField) { // TODO should take more then 2 players
     // store passed objects
@@ -27,15 +29,14 @@ export default class Game {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1,
     };
-    this.turnPoints = 1000; //! set to 2. FOR TESTING
+    this.turnPoints = 2;
   }
 
   // if current player still have turn points - recalculate active deck
   // else give turn to next player
   newTurn() {
+    this.updateInfoTable();
     if (this.turnPoints > 0) {
-      const header = document.querySelector('.header'); // TODO remove later, added for tests
-      header.innerText = this.currentPlayer.name; // TODO remove later, added for tests
       this.removeActiveDeck();
       this.setActiveDeck(this.currentPlayer);
     } else {
@@ -69,15 +70,18 @@ export default class Game {
       }
     });
     // set style and event listener of active deck when all calculations finished
-    this.currentDeck.domElement.classList.add('aside__deck--active');
+    this.currentDeck.domElement.classList.add('age-deck--active');
     //! USED onclick because got bug with AddEvenListener - cant remove listener
     this.currentDeck.domElement.onclick = this.takeCard.bind(this);
+
+    // update current active deck displayed in aside
+    this.updateCurrentDeckBlock();
   }
 
   // remove active deck class and eventlistener
   //! should use before each setActiveDeck method
   removeActiveDeck() {
-    this.currentDeck.domElement.classList.remove('aside__deck--active');
+    this.currentDeck.domElement.classList.remove('age-deck--active');
     //! USED onclick because got bug with AddEvenListener - cant remove listener
     this.currentDeck.domElement.onclick = '';
   }
@@ -87,6 +91,7 @@ export default class Game {
     this.currentPlayer.setCurrentAge(); // recalculate current age of player
     this.currentPlayer.hand.push(this.currentDeck.cardsArray.pop());
     this.currentPlayer.renderLastTakenCard();
+    header.changePlayerStats(this.currentPlayer);
     // starts next phase of turn
     this.actionDone();
   }
@@ -95,5 +100,27 @@ export default class Game {
   actionDone() {
     this.turnPoints -= 1;
     this.newTurn();
+  }
+
+  // update info table in aside, use after each action done in newTurn method
+  updateInfoTable() {
+    this.gameUI.infoTable.name.innerText = this.currentPlayer.name;
+    this.gameUI.infoTable.actionPoints.innerText = this.turnPoints;
+  }
+
+  // update current active deck displayed in aside, use after each time when setActiveDeck run
+  updateCurrentDeckBlock() {
+    // remove previous active deck if exists
+    const prevDeckClone = document.querySelector('#cloneCurrentDeck');
+    if (prevDeckClone !== null) prevDeckClone.remove();
+
+    // clone current active deck
+    const cloneCurrentDeck = this.currentDeck.domElement.cloneNode();
+    cloneCurrentDeck.innerText = this.currentDeck.domElement.innerText;
+    cloneCurrentDeck.id = 'cloneCurrentDeck';
+    cloneCurrentDeck.onclick = this.takeCard.bind(this);
+
+    // display cloned deck in currentDeck block
+    this.gameUI.currentDeck.append(cloneCurrentDeck);
   }
 }

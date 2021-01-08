@@ -43,6 +43,8 @@ class Menu {
       }
       if (e.target.className.includes('start')) {
         this.menu.classList.toggle('hide');
+        const intro = this.menu.parentElement.parentElement.parentElement;
+        intro.classList.toggle('intro--hide');
       }
       if (e.target.className.includes('rules')) {
         this.rulesWrraper.hidden = false;
