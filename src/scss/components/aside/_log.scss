@@ -17,12 +17,12 @@
 .log__text {
   background-color: rgb(0, 129, 0);
   border-radius: 1rem;
-  height: calc(100vh - 60rem);
-  width: 100%;
+  color: rgb(255, 255, 255);
+  height: calc(100vh - 65rem);
 
   overflow-y: scroll;
-  padding-left: 10px;
-  color: white;
+  padding-left: 1rem;
+  width: 100%;
 }
 
 .log__form {
@@ -30,12 +30,14 @@
 }
 
 .log__input {
-  height: 30px;
-  outline: none;
   border-radius: 1rem;
+  height: 3rem;
+  outline: none;
+  width: calc(100% - 7rem);
 }
 
 .log__btn {
-  height: 30px;
-  background-color: cornflowerblue;
+  background-color: rgb(114, 153, 226);
+  height: 3rem;
+  width: 7rem;
 }

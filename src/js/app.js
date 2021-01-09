@@ -15,10 +15,10 @@ import parseCards from './cards/parseCards';
 import GameUI from './components/GameUI';
 import Intro from './components/Intro';
 
+import chat from './utility/chat';
+
 // display intro
 Intro.init();
-
-import chat from './utility/chat';
 
 // set up and display main menu
 // const menu = new Menu(document.body);

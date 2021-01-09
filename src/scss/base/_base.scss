@@ -1,5 +1,17 @@
 html {
   font-size: 10px;
+
+  @media (max-height: 900px) {
+    font-size: 9px;
+  }
+
+  @media (max-height: 750px) {
+    font-size: 8px;
+  }
+
+  @media (max-height: 650px) {
+    font-size: 7px;
+  }
 }
 
 body {
