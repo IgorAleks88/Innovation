@@ -11,6 +11,7 @@ import Game from './components/Game';
 import cardsJSON from './cards/cards.json';
 import parseCards from './cards/parseCards';
 import GameUI from './components/GameUI';
+import chat from './utility/chat';
 
 // set up and display main menu
 const menu = new Menu(document.body);
@@ -43,3 +44,5 @@ const player2 = new Player(gameUI, 'Player2', 2);
 // work with all main objects
 const game = new Game(gameUI, player1, player2, gameField);
 game.newTurn();
+
+chat();

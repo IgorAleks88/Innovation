@@ -22,6 +22,7 @@ module.exports = {
     hot: true,
     inline: true,
     open: true,
+    port: 3000,
   },
   plugins: [
     new webpack.ProgressPlugin(),
