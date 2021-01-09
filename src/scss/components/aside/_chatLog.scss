@@ -22,7 +22,8 @@
   }
 }
 
-input[type='radio'] {
+#chat-block,
+#log-block {
   display: none;
 }
 
@@ -54,6 +55,7 @@ input[type='radio'] {
   height: calc(100vh - 65.5rem);
   left: 0;
   opacity: 0;
+  overflow: auto;
   padding: 0 1rem;
   position: absolute;
   text-align: start;
@@ -83,7 +85,7 @@ input[type='radio'] {
 }
 
 .chat-log__input {
-  border: none;
+  border: 0;
   border-radius: 1rem;
   height: 2.5rem;
   margin-left: 0.5rem;

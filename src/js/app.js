@@ -14,8 +14,8 @@ import cardsJSON from './cards/cards.json';
 import parseCards from './cards/parseCards';
 import GameUI from './components/GameUI';
 import Intro from './components/Intro';
-
-import chat from './utility/chat';
+import setChat from './utility/setChat';
+import shuffle from './utility/shuffle';
 
 // display intro
 Intro.init();
@@ -34,13 +34,11 @@ const gameUI = new GameUI();
 
 // contains sorted card objects
 const arrOfCards = parseCards(cardsJSON);
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+
+// shuffle arr of cards objects
 shuffle(arrOfCards);
+
+// create gameField which contains all cards avaiable for players
 const gameField = new GameField(arrOfCards);
 
 // contains players properties and cards
@@ -51,4 +49,5 @@ const player2 = new Player(gameUI, 'Player2', 2);
 const game = new Game(gameUI, player1, player2, gameField);
 game.newTurn();
 
-chat();
+// init chat
+setChat();
