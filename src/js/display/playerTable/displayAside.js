@@ -157,18 +157,53 @@ const displayAside = {
     const logBlock = document.createElement('div');
     logBlock.classList.add('log');
 
-    // create log block title
-    const logBlockTitle = document.createElement('div');
-    logBlockTitle.classList.add('log__title');
-    logBlockTitle.innerText = 'Чат/Лог';
+    // chat tab
+    logBlock.innerHTML = `<div class="tab">
+ <input type="radio" id="tab1" name="tab-group" checked>
+ <label for="tab1" class="tab-title">Чат</label> 
+ <section class="tab-content">
+  Содержимое вкладки1
+ </section> 
+</div>`;
+    // log tab
+    logBlock.innerHTML += `<div class="tab">
+ <input type="radio" id="tab2" name="tab-group">
+ <label for="tab2" class="tab-title">Лог</label> 
+ <section class="tab-content">
+  Содержимое вкладки2
+ </section> 
+</div>`;
 
-    // create log block text block
-    const logBlockText = document.createElement('div');
-    logBlockText.classList.add('log__text');
+    // input
+    logBlock.innerHTML += `<form class="log__form">
+<input class="log__input">
+<button class="log__btn" type="text">Отправить</button>
+</form>`;
+    
+    // spread button
+    const spreadBtn = document.createElement('div');
+    spreadBtn.classList.add('log__spread');
+    logBlock.append(spreadBtn);
 
-    // append title and text block to log block
-    logBlock.append(logBlockTitle);
-    logBlock.append(logBlockText);
+
+    spreadBtn.addEventListener('click', () => {
+      logBlock.classList.toggle('log--full-screen');
+      spreadBtn.classList.toggle('log__spread--open')
+    })
+
+
+    // // create log block title
+    // const logBlockTitle = document.createElement('div');
+    // logBlockTitle.classList.add('log__title');
+    // logBlockTitle.innerText = 'Чат/Лог';
+
+    // // create log block text block
+    // const logBlockText = document.createElement('div');
+    // logBlockText.classList.add('log__text');
+
+    // // append title and text block to log block
+    // logBlock.append(logBlockTitle);
+    // logBlock.append(logBlockText);
 
     return logBlock;
   },
