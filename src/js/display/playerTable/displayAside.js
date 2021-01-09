@@ -155,31 +155,41 @@ const displayAside = {
   getLogBlock() {
     // create log block
     const logBlock = document.createElement('div');
-    logBlock.classList.add('log');
+    logBlock.classList.add('chat-log');
 
-    // create log block title
-    const logBlockTitle = document.createElement('div');
-    logBlockTitle.classList.add('log__title');
-    logBlockTitle.innerText = 'Чат/Лог';
+    // chat tab
+    logBlock.innerHTML = `<div class="chat-log__tab">
+      <input type="radio" id="chat-block" name="tab-group" checked>
+      <label for="chat-block" class="chat-log__tab-title">Чат</label> 
+      <section class="chat-log__tab-content">
+        Содержимое вкладки 1 
+      </section> 
+    </div>`;
 
-    // create log block text block
-    const logBlockText = document.createElement('div');
-    logBlockText.classList.add('log__text');
+    // log tab
+    logBlock.innerHTML += `<div class="chat-log__tab">
+      <input type="radio" id="log-block" name="tab-group">
+      <label for="log-block" class="chat-log__tab-title">Лог</label> 
+      <section class="chat-log__tab-content">
+        Содержимое вкладки 2
+      </section> 
+    </div>`;
 
-    // create log form for chat / log
-    const logForm = document.createElement('form');
-    const logInput = document.createElement('input');
-    const logBtn = document.createElement('button');
-    logForm.classList.add('log__form');
-    logInput.classList.add('log__input');
-    logBtn.classList.add('log__btn');
-    logBtn.type = 'text';
-    logBtn.textContent = 'Отправить';
+    // input
+    logBlock.innerHTML += `<form class="chat-log__form">
+      <input class="chat-log__input">
+      <button class="chat-log__btn" type="text">Отправить</button>
+    </form>`;
 
-    // append title and text block to log block
-    logForm.append(logInput, logBtn);
-    logBlock.append(logBlockTitle, logBlockText, logForm);
-    // logBlock.append(logBlockText);
+    // spread button
+    const spreadBtn = document.createElement('div');
+    spreadBtn.classList.add('chat-log__spread');
+    logBlock.append(spreadBtn);
+
+    spreadBtn.addEventListener('click', () => {
+      logBlock.classList.toggle('chat-log--full-screen');
+      spreadBtn.classList.toggle('chat-log__spread--open');
+    });
 
     return logBlock;
   },

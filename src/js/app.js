@@ -20,10 +20,6 @@ import chat from './utility/chat';
 // display intro
 Intro.init();
 
-// set up and display main menu
-// const menu = new Menu(document.body);
-// menu.render();
-
 // display game UI
 document.body.prepend(displayPlayerTable.init());
 
