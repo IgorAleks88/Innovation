@@ -1,29 +1,34 @@
 .active-zone {
   @include flex(row, flex-start, flex-end);
-  height: calc(100vh - 37rem); // 32rem = 10rem header + 27rem hand
-  overflow-x: auto;
-  overflow-y: auto;
-  width: 100%; // 20% for aside
-  position: relative;
   background: linear-gradient(
     90deg,
     rgba(33, 14, 6, 1) 0%,
     rgba(77, 35, 12, 1) 50%,
     rgba(33, 14, 6, 1) 100%
   );
+  height: calc(100vh - 37rem); // 32rem = 10rem header + 27rem hand
+  overflow-x: auto;
+  overflow-y: auto;
+  position: relative;
+  width: 100%; // 20% for aside
 
   .active-zone__overlay {
     background: url('../../assets/img/block-bg.png');
-    mix-blend-mode: overlay;
     background-size: contain;
-    width: calc(100% - 6rem);
     height: 96%;
+    mix-blend-mode: overlay;
     position: absolute;
     top: 11px;
+    width: calc(100% - 6rem);
   }
 
   .active-zone__cards {
     @include flex(row, center, center);
+    border: 1px solid transparent;
+    border-image: url('../../assets/img/border-center.png');
+    border-image-repeat: round;
+    border-image-slice: 47 46 37 46;
+    border-image-width: 25px;
     /* background-color: rgb(148, 118, 53);*/
     flex-wrap: wrap;
     height: 100%;
@@ -31,11 +36,6 @@
     padding: 0 0 0 1rem;
     scroll-behavior: smooth;
     width: calc(100% - 5rem);
-    border: 1px solid transparent;
-    border-image: url('../../assets/img/border-center.png');
-    border-image-slice: 47 46 37 46;
-    border-image-width: 25px;
-    border-image-repeat: round;
     z-index: 2;
   }
 }

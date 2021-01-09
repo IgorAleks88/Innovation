@@ -17,9 +17,9 @@ export default function setGameControls() {
   const hand = document.querySelector('.hand__cards');
 
   // const height of one line of cards (current = 200px card + 10px margin + 10px margin)
-  const cardsLineHeight = 220;
+  const cardsLineHeight = 270;
   // const timeout used because time needed for scroll animation before values updated
-  const timeoutTime = 300;
+  const timeoutTime = 350;
 
   // disable scrolling in hand block
   hand.onwheel = function disableScroll() { return false; };
