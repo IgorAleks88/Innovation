@@ -1,9 +1,11 @@
 // import styles
 import '../scss/style.scss';
+import '@animxyz/core';
 
 // import js modules
 import displayPlayerTable from './display/playerTable/displayPlayerTable';
 import setHandControls from './utility/setHandControls';
+import setAsideControls from './utility/setAsideControls';
 import Menu from './components/mainMenu';
 import GameField from './components/GameField';
 import Player from './components/Player';
@@ -22,6 +24,9 @@ document.body.prepend(displayPlayerTable.init());
 
 // add event listeners to hand controls
 setHandControls();
+
+// add event listeners and animations to aside buttons
+setAsideControls();
 
 // contains dom elements
 const gameUI = new GameUI();
