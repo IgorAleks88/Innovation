@@ -16,8 +16,13 @@ export default function setGameControls() {
   const btnBottom = document.querySelector('.hand__btn--bottom');
   const hand = document.querySelector('.hand__cards');
 
-  // const height of one line of cards (current = 200px card + 10px margin + 10px margin)
-  const cardsLineHeight = 270;
+  // const height of one line of cards (current = 200px card + 70px margins/decoration)
+  // dinamically calculated depends on html font-size property
+  const html = document.documentElement;
+  const style = window.getComputedStyle(html, null).getPropertyValue('font-size');
+  const fontSize = parseFloat(style);
+
+  const cardsLineHeight = fontSize * 27;
   // const timeout used because time needed for scroll animation before values updated
   const timeoutTime = 350;
 
