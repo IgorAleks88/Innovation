@@ -161,8 +161,7 @@ const displayAside = {
     logBlock.innerHTML = `<div class="chat-log__tab">
       <input type="radio" id="chat-block" name="tab-group" checked>
       <label for="chat-block" class="chat-log__tab-title">Чат</label> 
-      <section class="chat-log__tab-content">
-        Содержимое вкладки 1 
+      <section class="chat-log__tab-content chat-block">
       </section> 
     </div>`;
 
@@ -170,15 +169,14 @@ const displayAside = {
     logBlock.innerHTML += `<div class="chat-log__tab">
       <input type="radio" id="log-block" name="tab-group">
       <label for="log-block" class="chat-log__tab-title">Лог</label> 
-      <section class="chat-log__tab-content">
-        Содержимое вкладки 2
+      <section class="chat-log__tab-content log-block">
       </section> 
     </div>`;
 
     // input
-    logBlock.innerHTML += `<form class="chat-log__form">
+    logBlock.innerHTML += `<form class="chat-log__form" id="input-form">
       <input class="chat-log__input">
-      <button class="chat-log__btn" type="text">Отправить</button>
+      <button class="chat-log__btn" type="submit" form="input-form">Отправить</button>
     </form>`;
 
     // spread button

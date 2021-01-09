@@ -21,7 +21,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cards/parseCards */ "./src/js/cards/parseCards.js");
 /* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/GameUI */ "./src/js/components/GameUI.js");
 /* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
-/* harmony import */ var _utility_chat__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utility/chat */ "./src/js/utility/chat.js");
+/* harmony import */ var _utility_setChat__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utility/setChat */ "./src/js/utility/setChat.js");
+/* harmony import */ var _utility_shuffle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utility/shuffle */ "./src/js/utility/shuffle.js");
 // import styles
 
  // import js modules
@@ -29,6 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // import Menu from './components/mainMenu';
+
 
 
 
@@ -49,26 +51,19 @@ document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_
 
 var gameUI = new _components_GameUI__WEBPACK_IMPORTED_MODULE_10__.default(); // contains sorted card objects
 
-var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_9__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_8__);
+var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_9__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_8__); // shuffle arr of cards objects
 
-function shuffle(array) {
-  for (var i = array.length - 1; i > 0; i -= 1) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var _ref = [array[j], array[i]];
-    array[i] = _ref[0];
-    array[j] = _ref[1];
-  }
-}
+(0,_utility_shuffle__WEBPACK_IMPORTED_MODULE_13__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
 
-shuffle(arrOfCards);
 var gameField = new _components_GameField__WEBPACK_IMPORTED_MODULE_5__.default(arrOfCards); // contains players properties and cards
 
 var player1 = new _components_Player__WEBPACK_IMPORTED_MODULE_6__.default(gameUI, 'Player1', 1);
 var player2 = new _components_Player__WEBPACK_IMPORTED_MODULE_6__.default(gameUI, 'Player2', 2); // work with all main objects
 
 var game = new _components_Game__WEBPACK_IMPORTED_MODULE_7__.default(gameUI, player1, player2, gameField);
-game.newTurn();
-(0,_utility_chat__WEBPACK_IMPORTED_MODULE_12__.default)();
+game.newTurn(); // init chat
+
+(0,_utility_setChat__WEBPACK_IMPORTED_MODULE_12__.default)();
 
 /***/ }),
 
@@ -1075,11 +1070,11 @@ var displayAside = {
     var logBlock = document.createElement('div');
     logBlock.classList.add('chat-log'); // chat tab
 
-    logBlock.innerHTML = "<div class=\"chat-log__tab\">\n      <input type=\"radio\" id=\"chat-block\" name=\"tab-group\" checked>\n      <label for=\"chat-block\" class=\"chat-log__tab-title\">\u0427\u0430\u0442</label> \n      <section class=\"chat-log__tab-content\">\n        \u0421\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0435 \u0432\u043A\u043B\u0430\u0434\u043A\u0438 1 \n      </section> \n    </div>"; // log tab
+    logBlock.innerHTML = "<div class=\"chat-log__tab\">\n      <input type=\"radio\" id=\"chat-block\" name=\"tab-group\" checked>\n      <label for=\"chat-block\" class=\"chat-log__tab-title\">\u0427\u0430\u0442</label> \n      <section class=\"chat-log__tab-content chat-block\">\n      </section> \n    </div>"; // log tab
 
-    logBlock.innerHTML += "<div class=\"chat-log__tab\">\n      <input type=\"radio\" id=\"log-block\" name=\"tab-group\">\n      <label for=\"log-block\" class=\"chat-log__tab-title\">\u041B\u043E\u0433</label> \n      <section class=\"chat-log__tab-content\">\n        \u0421\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0435 \u0432\u043A\u043B\u0430\u0434\u043A\u0438 2\n      </section> \n    </div>"; // input
+    logBlock.innerHTML += "<div class=\"chat-log__tab\">\n      <input type=\"radio\" id=\"log-block\" name=\"tab-group\">\n      <label for=\"log-block\" class=\"chat-log__tab-title\">\u041B\u043E\u0433</label> \n      <section class=\"chat-log__tab-content log-block\">\n      </section> \n    </div>"; // input
 
-    logBlock.innerHTML += "<form class=\"chat-log__form\">\n      <input class=\"chat-log__input\">\n      <button class=\"chat-log__btn\" type=\"text\">\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C</button>\n    </form>"; // spread button
+    logBlock.innerHTML += "<form class=\"chat-log__form\" id=\"input-form\">\n      <input class=\"chat-log__input\">\n      <button class=\"chat-log__btn\" type=\"submit\" form=\"input-form\">\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C</button>\n    </form>"; // spread button
 
     var spreadBtn = document.createElement('div');
     spreadBtn.classList.add('chat-log__spread');
@@ -1535,68 +1530,6 @@ var displayPlayerTable = {
 
 /***/ }),
 
-/***/ "./src/js/utility/chat.js":
-/*!********************************!*\
-  !*** ./src/js/utility/chat.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-function chat() {
-  // eslint-disable-next-line no-undef
-  var socket = io();
-  var messageContainer = document.querySelector('.log__text');
-  var messageForm = document.querySelector('.log__form');
-  var messageInput = document.querySelector('.log__input');
-  var players = document.querySelectorAll('.head-row__name');
-  var userName = prompt('What is your name?');
-
-  function appendMessage(message) {
-    var messageElement = document.createElement('div');
-    messageElement.innerText = message;
-    messageContainer.append(messageElement);
-  }
-
-  function autoScroll() {
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-  }
-
-  appendMessage('You joined');
-  socket.emit('new-user', userName);
-  socket.on('chat-message', function (data) {
-    appendMessage("".concat(data.name, ": ").concat(data.message));
-    autoScroll();
-  });
-  socket.on('user-connected', function (name) {
-    appendMessage("".concat(name, " connected"));
-  });
-  socket.on('players', function (name) {
-    var nameOfUsers = Object.values(name);
-    players.forEach(function (el, i) {
-      el.textContent = nameOfUsers[i];
-    });
-  });
-  socket.on('user-disconnected', function (name) {
-    appendMessage("".concat(name, " disconnected"));
-  });
-  messageForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (messageInput.value === '') return;
-    var message = messageInput.value;
-    appendMessage("You: ".concat(message));
-    socket.emit('send-chat-message', message);
-    autoScroll();
-    messageInput.value = '';
-  });
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (chat);
-
-/***/ }),
-
 /***/ "./src/js/utility/setAsideControls.js":
 /*!********************************************!*\
   !*** ./src/js/utility/setAsideControls.js ***!
@@ -1638,6 +1571,66 @@ function setAsideControls() {
 
   buttons.forEach(function (button) {
     button.addEventListener('click', animation);
+  });
+}
+
+/***/ }),
+
+/***/ "./src/js/utility/setChat.js":
+/*!***********************************!*\
+  !*** ./src/js/utility/setChat.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ setChat
+/* harmony export */ });
+function setChat() {
+  // eslint-disable-next-line no-undef
+  var socket = io();
+  var messageContainer = document.querySelector('.chat-block');
+  var messageForm = document.querySelector('.chat-log__form');
+  var messageInput = document.querySelector('.chat-log__input');
+  var players = document.querySelectorAll('.head-row__name');
+  var userName = prompt('What is your name?');
+
+  function appendMessage(message) {
+    var messageElement = document.createElement('div');
+    messageElement.innerText = message;
+    messageContainer.append(messageElement);
+  }
+
+  function autoScroll() {
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  }
+
+  appendMessage('You joined');
+  socket.emit('new-user', userName);
+  socket.on('chat-message', function (data) {
+    appendMessage("".concat(data.name, ": ").concat(data.message));
+    autoScroll();
+  });
+  socket.on('user-connected', function (name) {
+    appendMessage("".concat(name, " connected"));
+  });
+  socket.on('players', function (name) {
+    var nameOfUsers = Object.values(name);
+    players.forEach(function (el, i) {
+      el.textContent = nameOfUsers[i];
+    });
+  });
+  socket.on('user-disconnected', function (name) {
+    appendMessage("".concat(name, " disconnected"));
+  });
+  messageForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (messageInput.value === '') return;
+    var message = messageInput.value;
+    appendMessage("You: ".concat(message));
+    socket.emit('send-chat-message', message);
+    autoScroll();
+    messageInput.value = '';
   });
 }
 
@@ -1751,6 +1744,27 @@ function setGameControls() {
       }
     }, timeoutTime);
   });
+}
+
+/***/ }),
+
+/***/ "./src/js/utility/shuffle.js":
+/*!***********************************!*\
+  !*** ./src/js/utility/shuffle.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ shuffle
+/* harmony export */ });
+function shuffle(array) {
+  for (var i = array.length - 1; i > 0; i -= 1) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [array[j], array[i]];
+    array[i] = _ref[0];
+    array[j] = _ref[1];
+  }
 }
 
 /***/ }),
