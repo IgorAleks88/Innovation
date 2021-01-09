@@ -11,15 +11,16 @@
 @import './components/menu';
 @import './components/intro';
 @import './components/ageDeck';
+@import './components/closeModalBtn';
 // components__aside
 @import './components/aside/infoTable';
 @import './components/aside/hoverBtn';
 @import './components/aside/currentDeck';
-@import './components/aside/modalAgeDecks';
+@import './components/aside/ageDecks';
 @import './components/aside/extraCards';
 @import './components/aside/log';
-@import './components/aside/modalLeadershipCards';
-@import './components/aside/modalSpecialCards';
+@import './components/aside/leadershipCards';
+@import './components/aside/specialCards';
 
 // layouts
 @import './layouts/playerTable';

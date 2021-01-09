@@ -18,6 +18,8 @@ import Intro from './components/Intro';
 // display intro
 Intro.init();
 
+import chat from './utility/chat';
+
 // set up and display main menu
 // const menu = new Menu(document.body);
 // menu.render();
@@ -52,3 +54,5 @@ const player2 = new Player(gameUI, 'Player2', 2);
 // work with all main objects
 const game = new Game(gameUI, player1, player2, gameField);
 game.newTurn();
+
+chat();

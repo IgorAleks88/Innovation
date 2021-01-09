@@ -166,9 +166,20 @@ const displayAside = {
     const logBlockText = document.createElement('div');
     logBlockText.classList.add('log__text');
 
+    // create log form for chat / log
+    const logForm = document.createElement('form');
+    const logInput = document.createElement('input');
+    const logBtn = document.createElement('button');
+    logForm.classList.add('log__form');
+    logInput.classList.add('log__input');
+    logBtn.classList.add('log__btn');
+    logBtn.type = 'text';
+    logBtn.textContent = 'Отправить';
+
     // append title and text block to log block
-    logBlock.append(logBlockTitle);
-    logBlock.append(logBlockText);
+    logForm.append(logInput, logBtn);
+    logBlock.append(logBlockTitle, logBlockText, logForm);
+    // logBlock.append(logBlockText);
 
     return logBlock;
   },
