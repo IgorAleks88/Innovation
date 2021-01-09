@@ -6,18 +6,23 @@ import '@animxyz/core';
 import displayPlayerTable from './display/playerTable/displayPlayerTable';
 import setHandControls from './utility/setHandControls';
 import setAsideControls from './utility/setAsideControls';
-import Menu from './components/mainMenu';
+// import Menu from './components/mainMenu';
 import GameField from './components/GameField';
 import Player from './components/Player';
 import Game from './components/Game';
 import cardsJSON from './cards/cards.json';
 import parseCards from './cards/parseCards';
 import GameUI from './components/GameUI';
+import Intro from './components/Intro';
+
+// display intro
+Intro.init();
+
 import chat from './utility/chat';
 
 // set up and display main menu
-const menu = new Menu(document.body);
-menu.render();
+// const menu = new Menu(document.body);
+// menu.render();
 
 // display game UI
 document.body.prepend(displayPlayerTable.init());

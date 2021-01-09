@@ -1,0 +1,272 @@
+.intro {
+  align-items: center;
+  /* background-color: rgba(0, 0, 0, 0.8);*/
+  background: url('../../assets/img/intro/bg-left-top.png') left top no-repeat,
+    url('../../assets/img/intro/bg-bottom-right.png') right bottom no-repeat,
+    url('../../assets/img/intro/bg.png') left top repeat,
+    linear-gradient(181deg, rgba(139, 77, 1, 1) 0%, rgba(55, 16, 0, 1) 100%);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 50%;
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 6;
+
+  &--hide {
+    display: none;
+  }
+
+  .intro__container {
+    @include size(690px, 592px);
+
+    .intro__top {
+      @include size(690px, 592px);
+      background: url('../../assets/img/intro/top.png');
+      position: absolute;
+    }
+
+    .intro__center {
+      @include size(690px, 592px);
+      background: url('../../assets/img/intro/center.png');
+      position: absolute;
+      animation: close 5s ease-in-out 15s forwards;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 6;
+
+      @keyframes close {
+        100% {
+          width: 0;
+        }
+      }
+
+      .center__title {
+        background: url('../../assets/img/intro/title.svg') center no-repeat;
+        @include size(500px, 120px);
+        animation: show-title 0.5s linear 14s forwards,
+          close-title 3.5s ease-in-out 15s forwards;
+        opacity: 0;
+        position: absolute;
+
+        @keyframes close-title {
+          0% {
+            width: 500px;
+          }
+          100% {
+            width: 0;
+          }
+        }
+
+        @keyframes show-title {
+          100% {
+            opacity: 1;
+          }
+        }
+      }
+
+      .letter-1 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 4s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-2 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 5s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-3 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 6s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-4 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 7s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-5 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 8s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-6 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 9s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-7 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 10s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-8 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 11s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-9 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 12s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      .letter-10 {
+        filter: url('#mySVGfilter');
+        opacity: 0;
+        animation: draw-letter 2s ease-in-out 13s forwards,
+          hide-letter 0.5s linear 14s forwards;
+      }
+
+      @keyframes draw-letter {
+        100% {
+          opacity: 1;
+          filter: none;
+        }
+      }
+
+      @keyframes hide-letter {
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  .intro__bottom {
+    @include size(690px, 592px);
+    background: url('../../assets/img/intro/bottom.png');
+    position: absolute;
+    filter: drop-shadow(-2px 0px 5px #000);
+    z-index: 6;
+
+    .bottom__lamp {
+      @include size(90px, 20px);
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      filter: drop-shadow(-2px 0px 2px rgb(39, 39, 39));
+      bottom: 91px;
+      left: 190px;
+
+      &--1,
+      &--2,
+      &--3 {
+        @include size(20px, 20px);
+        background: url('../../assets/img/intro/lamp.png');
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: inset -1px 1px 1px rgba(255, 255, 255, 0.8);
+        border-radius: 50px;
+
+        &::before {
+          content: '';
+          background: url('../../assets/img/intro/lamp-in.png') center no-repeat;
+          @include size(11px, 11px);
+          mix-blend-mode: hard-light;
+          box-shadow: inset -1px 1px 2px white;
+          border-radius: 50px;
+        }
+      }
+
+      &--1 {
+        &::before {
+          animation: lightning 3s linear 4s forwards;
+        }
+      }
+
+      &--2 {
+        &::before {
+          animation: lightning 3s linear 8s forwards;
+        }
+      }
+
+      &--3 {
+        &::before {
+          animation: lightning 2s linear 13s forwards;
+        }
+      }
+
+      @keyframes lightning {
+        100% {
+          filter: invert(78%) sepia(13%) saturate(6863%) hue-rotate(90deg)
+            brightness(104%) contrast(104%);
+        }
+      }
+    }
+  }
+}
+
+.menu {
+  animation: show-menu 0.5s linear 18s forwards;
+}
+
+@keyframes show-menu {
+  100% {
+    z-index: 10;
+  }
+}
+
+.intro__gear {
+  position: absolute;
+  z-index: 10;
+  filter: drop-shadow(-2px 0px 3px #000);
+
+  .intro__gear1 {
+    @include size(174px, 174px);
+    background: url('../../assets/img/intro/gear1.png');
+    position: absolute;
+    top: 50px;
+    animation: gear-rotate 4.5s linear 15s forwards;
+  }
+
+  .intro__gear2 {
+    @include size(135px, 135px);
+    background: url('../../assets/img/intro/gear2.png');
+    position: absolute;
+    left: 150px;
+    animation: gear-rotate-back 4.5s linear 15s forwards;
+  }
+
+  @keyframes gear-rotate {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(180deg);
+    }
+  }
+
+  @keyframes gear-rotate-back {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(-180deg);
+    }
+  }
+}

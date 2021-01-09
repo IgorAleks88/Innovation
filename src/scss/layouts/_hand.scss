@@ -1,23 +1,47 @@
 .hand {
   @include flex(row, flex-start, flex-start);
-  height: 22rem;
+  height: 27rem;
   position: relative;
   width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(33, 14, 6, 1) 0%,
+    rgba(77, 35, 12, 1) 50%,
+    rgba(33, 14, 6, 1) 100%
+  );
+}
+
+.hand__overlay {
+  background: url('../../assets/img/block-bg.png');
+  mix-blend-mode: overlay;
+  background-size: contain;
+  width: calc(100% - 6rem);
+  height: 96%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .hand__cards {
   @include flex(row, center, center);
-  background-color: rgb(148, 118, 53);
+  /* background-color: rgb(148, 118, 53);*/
   flex-wrap: wrap;
-  height: 22rem;
+  height: 100%;
   overflow: hidden;
   padding: 0 0 0 1rem;
   scroll-behavior: smooth;
-  width: calc(100% - 10rem);
+  width: calc(100% - 5rem);
+  border: 1px solid transparent;
+  border-image: url('../../assets/img/border.png');
+  border-image-slice: 47 46 37 46;
+  border-image-width: 25px;
+  border-image-repeat: round;
+  z-index: 2;
 
   .card {
     cursor: pointer;
     transition: all 0.2s linear;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 
     &:hover {
       transform: scale(1.05);
@@ -26,11 +50,14 @@
 }
 
 .hand__controls {
-  background-color: rgb(127, 212, 77);
-  height: 22rem;
-  position: fixed;
-  right: 37rem;
-  width: 10rem;
+  height: 100%;
+  position: absolute;
+  right: 3px;
+  width: 6rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hand__controls-svg {
@@ -52,23 +79,27 @@
 }
 
 .hand__btn {
-  @include size(10rem, 11rem);
+  @include size(63px, 65px);
   @include flex(row, center, center);
   cursor: pointer;
   transition: all 0.5s ease;
+  filter: drop-shadow(-2px 0px 5px #000);
 
   &--top {
     transform: rotate(-90deg);
+    background: url('../../assets/img/button-top.png') no-repeat;
+    margin-bottom: 10px;
   }
 
   &--bottom {
     transform: rotate(90deg);
+    background: url('../../assets/img/button-bottom.png') no-repeat;
   }
 
   &--disabled {
     cursor: default;
-    filter: brightness(0.3);
-    opacity: 0.2;
+    filter: brightness(0.5);
+    opacity: 0.5;
   }
 
   &:hover:not(.hand__btn--disabled) {
