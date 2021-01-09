@@ -120,6 +120,9 @@ export default class Game {
     cloneCurrentDeck.id = 'cloneCurrentDeck';
     cloneCurrentDeck.onclick = this.takeCard.bind(this);
 
+    // remove animation on each update of aside current deck
+    cloneCurrentDeck.classList.remove('xyz-in');
+
     // display cloned deck in currentDeck block
     this.gameUI.currentDeck.append(cloneCurrentDeck);
   }
