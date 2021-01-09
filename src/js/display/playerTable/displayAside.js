@@ -155,55 +155,41 @@ const displayAside = {
   getLogBlock() {
     // create log block
     const logBlock = document.createElement('div');
-    logBlock.classList.add('log');
+    logBlock.classList.add('chat-log');
 
     // chat tab
-    logBlock.innerHTML = `<div class="tab">
- <input type="radio" id="tab1" name="tab-group" checked>
- <label for="tab1" class="tab-title">Чат</label> 
- <section class="tab-content">
-  Содержимое вкладки1
- </section> 
-</div>`;
+    logBlock.innerHTML = `<div class="chat-log__tab">
+      <input type="radio" id="chat-block" name="tab-group" checked>
+      <label for="chat-block" class="chat-log__tab-title">Чат</label> 
+      <section class="chat-log__tab-content">
+        Содержимое вкладки 1 
+      </section> 
+    </div>`;
+
     // log tab
-    logBlock.innerHTML += `<div class="tab">
- <input type="radio" id="tab2" name="tab-group">
- <label for="tab2" class="tab-title">Лог</label> 
- <section class="tab-content">
-  Содержимое вкладки2
- </section> 
-</div>`;
+    logBlock.innerHTML += `<div class="chat-log__tab">
+      <input type="radio" id="log-block" name="tab-group">
+      <label for="log-block" class="chat-log__tab-title">Лог</label> 
+      <section class="chat-log__tab-content">
+        Содержимое вкладки 2
+      </section> 
+    </div>`;
 
     // input
-    logBlock.innerHTML += `<form class="log__form">
-<input class="log__input">
-<button class="log__btn" type="text">Отправить</button>
-</form>`;
-    
+    logBlock.innerHTML += `<form class="chat-log__form">
+      <input class="chat-log__input">
+      <button class="chat-log__btn" type="text">Отправить</button>
+    </form>`;
+
     // spread button
     const spreadBtn = document.createElement('div');
-    spreadBtn.classList.add('log__spread');
+    spreadBtn.classList.add('chat-log__spread');
     logBlock.append(spreadBtn);
 
-
     spreadBtn.addEventListener('click', () => {
-      logBlock.classList.toggle('log--full-screen');
-      spreadBtn.classList.toggle('log__spread--open')
-    })
-
-
-    // // create log block title
-    // const logBlockTitle = document.createElement('div');
-    // logBlockTitle.classList.add('log__title');
-    // logBlockTitle.innerText = 'Чат/Лог';
-
-    // // create log block text block
-    // const logBlockText = document.createElement('div');
-    // logBlockText.classList.add('log__text');
-
-    // // append title and text block to log block
-    // logBlock.append(logBlockTitle);
-    // logBlock.append(logBlockText);
+      logBlock.classList.toggle('chat-log--full-screen');
+      spreadBtn.classList.toggle('chat-log__spread--open');
+    });
 
     return logBlock;
   },
