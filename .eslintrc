@@ -8,5 +8,6 @@
     "rules": {
       "no-param-reassign": "off",
       "prefer-destructuring": "off",
+      "linebreak-style": "off"
     }
 }
