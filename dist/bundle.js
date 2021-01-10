@@ -191,6 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
 /* harmony import */ var _display_displayModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayModal */ "./src/js/display/displayModal.js");
+/* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -205,6 +206,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+
 
 
 
@@ -225,13 +227,13 @@ var Game = /*#__PURE__*/function () {
       player.game = _this;
     }); // set default values
 
-    this.currentPlayer = player1; // TODO should be random later
+    this.currentPlayer = player2; // TODO should be random later
 
     this.currentDeck = {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1
     };
-    this.turnPoints = 2;
+    this.turnPoints = 0;
   } // if current player still have turn points - recalculate active deck
   // else give turn to next player
 
@@ -241,23 +243,37 @@ var Game = /*#__PURE__*/function () {
     value: function newTurn() {
       var _this2 = this;
 
+      // TODO HARDCODED FOR TWO PLAYERS. CHANGE LATER
+      // set current player
+      if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
+      (0,_display_displayModal__WEBPACK_IMPORTED_MODULE_1__.default)('hot-seat-next-player', this.currentPlayer); // start new turn with full(2) turn points
+
+      this.turnPoints = 2;
+      setTimeout(function () {
+        _this2.removeActiveDeck();
+
+        _this2.setActiveDeck(_this2.currentPlayer);
+
+        _this2.currentPlayer.renderHand();
+
+        _this2.currentPlayer.renderActiveZone();
+
+        _this2.updateInfoTable();
+      }, 450); //! displayNextTurnBtn(this.newTurn.bind(this));
+      //! displayModal('hot-seat-next-player', this.currentPlayer);
+    }
+  }, {
+    key: "actionDone",
+    // use this after each action
+    value: function actionDone() {
+      this.turnPoints -= 1;
       this.updateInfoTable();
 
       if (this.turnPoints > 0) {
         this.removeActiveDeck();
         this.setActiveDeck(this.currentPlayer);
       } else {
-        // TODO HARDCODED FOR TWO PLAYERS. CHANGE LATER
-        // set current player
-        if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
-        (0,_display_displayModal__WEBPACK_IMPORTED_MODULE_1__.default)('hot-seat-next-player', this.currentPlayer);
-        this.currentPlayer.renderHand();
-        this.currentPlayer.renderActiveZone(); // start new turn with full(2) turn points
-
-        this.turnPoints = 2;
-        setTimeout(function () {
-          _this2.newTurn();
-        }, 450);
+        (0,_display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__.default)(this.newTurn.bind(this));
       }
     } // set active deck for current player
 
@@ -306,13 +322,6 @@ var Game = /*#__PURE__*/function () {
       _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer); // starts next phase of turn
 
       this.actionDone();
-    } // use this after each action
-
-  }, {
-    key: "actionDone",
-    value: function actionDone() {
-      this.turnPoints -= 1;
-      this.newTurn();
     } // update info table in aside, use after each action done in newTurn method
 
   }, {
@@ -769,20 +778,17 @@ var Player = /*#__PURE__*/function () {
     value: function renderHand() {
       var _this4 = this;
 
-      setTimeout(function () {
-        _this4.gameUI.hand.innerHTML = ''; // clear previous rendered hand
-      }, 450);
-      setTimeout(function () {
-        _this4.hand.forEach(function (card) {
-          var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card);
+      this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
 
-          cardElement.onclick = function () {
-            _this4.playCard(card, cardElement);
-          };
+      this.hand.forEach(function (card) {
+        var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card);
 
-          _this4.gameUI.hand.append(cardElement);
-        });
-      }, 450);
+        cardElement.onclick = function () {
+          _this4.playCard(card, cardElement);
+        };
+
+        _this4.gameUI.hand.append(cardElement);
+      });
     } // render all cards in active zone of current player
 
   }, {
@@ -790,15 +796,13 @@ var Player = /*#__PURE__*/function () {
     value: function renderActiveZone() {
       var _this5 = this;
 
-      setTimeout(function () {
-        Object.keys(_this5.activeStacks).forEach(function (stackName) {
-          _this5.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
+      Object.keys(this.activeStacks).forEach(function (stackName) {
+        _this5.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
 
-          _this5.activeStacks[stackName].cards.forEach(function (card) {
-            _this5.gameUI.activeStacks[stackName].append(_cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card));
-          });
+        _this5.activeStacks[stackName].cards.forEach(function (card) {
+          _this5.gameUI.activeStacks[stackName].append(_cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card));
         });
-      }, 450);
+      });
     } // on click event for cards in hand. Play card in stack depends on category
     // TODO: later this method should add dogma function to each played card
 
@@ -956,6 +960,34 @@ function getModalBlock(currentPlayerName) {
   modalBlock.append(modalText, modalBtn);
   modalBg.append(modalBlock);
   return modalBg;
+}
+
+/***/ }),
+
+/***/ "./src/js/display/displayNextTurnBtn.js":
+/*!**********************************************!*\
+  !*** ./src/js/display/displayNextTurnBtn.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ displayNextTurnBtn
+/* harmony export */ });
+function displayNextTurnBtn(newTurnFunction) {
+  var nextTurnBtn = document.createElement('div');
+  nextTurnBtn.classList.add('info-table__next-turn-btn');
+  nextTurnBtn.innerText = 'Закончить ход';
+  nextTurnBtn.addEventListener('click', function () {
+    newTurnFunction();
+    setTimeout(function () {
+      var excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
+      console.log(excistedNextTurnBtn);
+      excistedNextTurnBtn.remove();
+    }, 500);
+  });
+  var infoTable = document.querySelector('.info-table');
+  infoTable.append(nextTurnBtn);
 }
 
 /***/ }),

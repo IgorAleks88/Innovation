@@ -8,6 +8,7 @@
 */
 import header from '../display/playerTable/displayHeader';
 import displayModal from '../display/displayModal';
+import displayNextTurnBtn from '../display/displayNextTurnBtn';
 
 export default class Game {
   constructor(gameUI, player1, player2, gameField) { // TODO should take more then 2 players
@@ -25,37 +26,46 @@ export default class Game {
     });
 
     // set default values
-    this.currentPlayer = player1; // TODO should be random later
+    this.currentPlayer = player2; // TODO should be random later
     this.currentDeck = {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1,
     };
-    this.turnPoints = 2;
+    this.turnPoints = 0;
   }
 
   // if current player still have turn points - recalculate active deck
   // else give turn to next player
   newTurn() {
+    // TODO HARDCODED FOR TWO PLAYERS. CHANGE LATER
+    // set current player
+    if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];
+    else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
+    displayModal('hot-seat-next-player', this.currentPlayer);
+
+    // start new turn with full(2) turn points
+    this.turnPoints = 2;
+
+    setTimeout(() => {
+      this.removeActiveDeck();
+      this.setActiveDeck(this.currentPlayer);
+      this.currentPlayer.renderHand();
+      this.currentPlayer.renderActiveZone();
+      this.updateInfoTable();
+    }, 450);
+      //! displayNextTurnBtn(this.newTurn.bind(this));
+      //! displayModal('hot-seat-next-player', this.currentPlayer);
+  };
+
+  // use this after each action
+  actionDone() {
+    this.turnPoints -= 1;
     this.updateInfoTable();
     if (this.turnPoints > 0) {
       this.removeActiveDeck();
       this.setActiveDeck(this.currentPlayer);
     } else {
-      // TODO HARDCODED FOR TWO PLAYERS. CHANGE LATER
-      // set current player
-      if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];
-      else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
-
-      displayModal('hot-seat-next-player', this.currentPlayer);
-
-      this.currentPlayer.renderHand();
-      this.currentPlayer.renderActiveZone();
-
-      // start new turn with full(2) turn points
-      this.turnPoints = 2;
-      setTimeout(() => {
-        this.newTurn();
-      }, 450);
+      displayNextTurnBtn(this.newTurn.bind(this));
     }
   }
 
@@ -99,12 +109,6 @@ export default class Game {
     header.changePlayerStats(this.currentPlayer);
     // starts next phase of turn
     this.actionDone();
-  }
-
-  // use this after each action
-  actionDone() {
-    this.turnPoints -= 1;
-    this.newTurn();
   }
 
   // update info table in aside, use after each action done in newTurn method

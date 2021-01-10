@@ -618,6 +618,7 @@ b {
   font-weight: 700; }
 
 .info-table {
+  position: relative;
   height: 6rem;
   width: 20rem;
   background-color: yellow;
@@ -649,6 +650,22 @@ b {
 .info-table__action-points {
   font-weight: 700;
   margin-left: 0.5rem; }
+
+.info-table__next-turn-btn {
+  height: 6rem;
+  width: 20rem;
+  background-color: #6579d3;
+  border-radius: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 1rem;
+  z-index: 5000;
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
 
 .hover-btn {
   background-color: rgba(141, 137, 137, 0.4);

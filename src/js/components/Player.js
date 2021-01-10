@@ -114,31 +114,25 @@ export default class Player {
 
   // render all cards in hand of current player
   renderHand() {
-    setTimeout(() => {
-      this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
-    }, 450);
+    this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
 
-    setTimeout(() => {
-      this.hand.forEach((card) => {
-        const cardElement = getCard.frontSide(card);
-        cardElement.onclick = () => {
-          this.playCard(card, cardElement);
-        };
-        this.gameUI.hand.append(cardElement);
-      });
-    }, 450);
+    this.hand.forEach((card) => {
+      const cardElement = getCard.frontSide(card);
+      cardElement.onclick = () => {
+        this.playCard(card, cardElement);
+      };
+      this.gameUI.hand.append(cardElement);
+    });
   }
 
   // render all cards in active zone of current player
   renderActiveZone() {
-    setTimeout(() => {
-      Object.keys(this.activeStacks).forEach((stackName) => {
-        this.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
-        this.activeStacks[stackName].cards.forEach((card) => {
-          this.gameUI.activeStacks[stackName].append(getCard.frontSide(card));
-        });
+    Object.keys(this.activeStacks).forEach((stackName) => {
+      this.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
+      this.activeStacks[stackName].cards.forEach((card) => {
+        this.gameUI.activeStacks[stackName].append(getCard.frontSide(card));
       });
-    }, 450);
+    });
   }
 
   // on click event for cards in hand. Play card in stack depends on category
