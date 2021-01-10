@@ -1,3 +1,5 @@
+import initHotSeatGame from '../utility/initHotSeatGame';
+
 // TODO need some refactor later, move to display folder, use function?
 class Menu {
   constructor(parent) {
@@ -51,6 +53,7 @@ class Menu {
         this.menu.classList.toggle('hide');
         const intro = this.menu.parentElement.parentElement.parentElement;
         intro.classList.toggle('intro--hide');
+        initHotSeatGame('Player1', 'Player2'); //! Hardcoded for 2 players. Should take player names as arguments
       }
       if (e.target.className.includes('rules')) {
         this.rulesWrraper.hidden = false;

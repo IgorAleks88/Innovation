@@ -6,7 +6,6 @@ export default function displayNextTurnBtn(newTurnFunction) {
     newTurnFunction();
     setTimeout(() => {
       const excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
-      console.log(excistedNextTurnBtn);
       excistedNextTurnBtn.remove();
     }, 500);
   });

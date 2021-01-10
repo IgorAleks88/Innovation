@@ -1,18 +1,4 @@
-export default function displayModal(title, currentPlayer) {
-  switch (title) {
-    case 'hot-seat-next-player':
-      const modalBlock = getModalBlock(currentPlayer.name);
-      document.body.prepend(modalBlock);
-      setTimeout(() => {
-        modalBlock.classList.toggle('modal--hidden');
-      }, 0);
-      break;
-    default:
-      throw new Error('Wrong modal name!');
-  }
-}
-
-function getModalBlock(currentPlayerName) {
+export default function displayModal(playerName) {
   const modalBg = document.createElement('div');
   modalBg.classList.add('modal');
   modalBg.classList.add('modal--hidden');
@@ -22,12 +8,13 @@ function getModalBlock(currentPlayerName) {
 
   const modalText = document.createElement('div');
   modalText.classList.add('modal__text');
-  modalText.innerText = `Сейчас ход игрока ${currentPlayerName}`;
+  modalText.innerText = `Сейчас ход игрока ${playerName}`;
 
   const modalBtn = document.createElement('button');
   modalBtn.classList.add('modal__btn');
   modalBtn.innerText = 'Начать ход!';
   modalBtn.addEventListener('click', () => {
+    modalBg.style = '';
     modalBg.classList.toggle('modal--hidden');
     setTimeout(() => {
       modalBg.remove();
@@ -37,5 +24,8 @@ function getModalBlock(currentPlayerName) {
   modalBlock.append(modalText, modalBtn);
   modalBg.append(modalBlock);
 
-  return modalBg;
+  document.body.prepend(modalBg);
+  setTimeout(() => {
+    modalBg.classList.toggle('modal--hidden');
+  }, 0);
 }

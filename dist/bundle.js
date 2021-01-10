@@ -14,56 +14,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display/playerTable/displayPlayerTable */ "./src/js/display/playerTable/displayPlayerTable.js");
 /* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
 /* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
-/* harmony import */ var _components_GameField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/GameField */ "./src/js/components/GameField.js");
-/* harmony import */ var _components_Player__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Player */ "./src/js/components/Player.js");
-/* harmony import */ var _components_Game__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Game */ "./src/js/components/Game.js");
-/* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cards/cards.json */ "./src/js/cards/cards.json");
-/* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cards/parseCards */ "./src/js/cards/parseCards.js");
-/* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/GameUI */ "./src/js/components/GameUI.js");
-/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
-/* harmony import */ var _utility_setChat__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utility/setChat */ "./src/js/utility/setChat.js");
-/* harmony import */ var _utility_shuffle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utility/shuffle */ "./src/js/utility/shuffle.js");
+/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
 // import styles
 
  // import js modules
 
 
 
- // import Menu from './components/mainMenu';
 
+ // display intro & menu
 
-
-
-
-
-
-
-
- // display intro
-// Intro.init();
-// display game UI
+_components_Intro__WEBPACK_IMPORTED_MODULE_5__.default.init(); // display game UI
 
 document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__.default.init()); // add event listeners to hand controls
 
 (0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__.default)(); // add event listeners and animations to aside buttons
 
-(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); // contains dom elements
-
-var gameUI = new _components_GameUI__WEBPACK_IMPORTED_MODULE_10__.default(); // contains sorted card objects
-
-var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_9__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_8__); // shuffle arr of cards objects
-
-(0,_utility_shuffle__WEBPACK_IMPORTED_MODULE_13__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
-
-var gameField = new _components_GameField__WEBPACK_IMPORTED_MODULE_5__.default(arrOfCards); // contains players properties and cards
-
-var player1 = new _components_Player__WEBPACK_IMPORTED_MODULE_6__.default(gameUI, 'Player1', 1);
-var player2 = new _components_Player__WEBPACK_IMPORTED_MODULE_6__.default(gameUI, 'Player2', 2); // work with all main objects
-
-var game = new _components_Game__WEBPACK_IMPORTED_MODULE_7__.default(gameUI, player1, player2, gameField);
-game.newTurn(); // init chat
-
-(0,_utility_setChat__WEBPACK_IMPORTED_MODULE_12__.default)();
+(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)();
 
 /***/ }),
 
@@ -190,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => /* binding */ Game
 /* harmony export */ });
 /* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
-/* harmony import */ var _display_displayModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayModal */ "./src/js/display/displayModal.js");
+/* harmony import */ var _display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayNewTurnModal */ "./src/js/display/displayNewTurnModal.js");
 /* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -211,15 +178,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var Game = /*#__PURE__*/function () {
-  function Game(gameUI, player1, player2, gameField) {
+  function Game(gameUI, gameField, players) {
     var _this = this;
 
     _classCallCheck(this, Game);
 
-    // TODO should take more then 2 players
     // store passed objects
-    this.players = [// TODO should take all players passed as args
-    player1, player2];
+    this.players = players;
     this.gameField = gameField;
     this.gameUI = gameUI; // initialize game field in players objects
 
@@ -227,28 +192,23 @@ var Game = /*#__PURE__*/function () {
       player.game = _this;
     }); // set default values
 
-    this.currentPlayer = player2; // TODO should be random later
-
+    this.currentPlayer = null;
     this.currentDeck = {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1
     };
     this.turnPoints = 0;
-  } // if current player still have turn points - recalculate active deck
-  // else give turn to next player
-
+  }
 
   _createClass(Game, [{
     key: "newTurn",
     value: function newTurn() {
       var _this2 = this;
 
-      // TODO HARDCODED FOR TWO PLAYERS. CHANGE LATER
-      // set current player
-      if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
-      (0,_display_displayModal__WEBPACK_IMPORTED_MODULE_1__.default)('hot-seat-next-player', this.currentPlayer); // start new turn with full(2) turn points
+      this.setCurrentPlayer();
+      (0,_display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__.default)(this.currentPlayer.name);
+      this.turnPoints = 2; // timeout to display modal
 
-      this.turnPoints = 2;
       setTimeout(function () {
         _this2.removeActiveDeck();
 
@@ -259,21 +219,38 @@ var Game = /*#__PURE__*/function () {
         _this2.currentPlayer.renderActiveZone();
 
         _this2.updateInfoTable();
-      }, 450); //! displayNextTurnBtn(this.newTurn.bind(this));
-      //! displayModal('hot-seat-next-player', this.currentPlayer);
-    }
+      }, 450);
+    } // use this after each action
+
   }, {
     key: "actionDone",
-    // use this after each action
     value: function actionDone() {
       this.turnPoints -= 1;
       this.updateInfoTable();
+      this.removeActiveDeck();
 
       if (this.turnPoints > 0) {
-        this.removeActiveDeck();
         this.setActiveDeck(this.currentPlayer);
       } else {
+        this.disableHandEvents();
         (0,_display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__.default)(this.newTurn.bind(this));
+      }
+    } // set current players depends on previous player
+
+  }, {
+    key: "setCurrentPlayer",
+    value: function setCurrentPlayer() {
+      if (this.currentPlayer === null) {
+        this.currentPlayer = this.players[0];
+      } else {
+        for (var i = 0; i < this.players.length; i += 1) {
+          if (this.currentPlayer === this.players[i]) {
+            i += 1;
+            if (i === this.players.length) i = 0;
+            this.currentPlayer = this.players[i];
+            break;
+          }
+        }
       }
     } // set active deck for current player
 
@@ -307,9 +284,18 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "removeActiveDeck",
     value: function removeActiveDeck() {
-      this.currentDeck.domElement.classList.remove('age-deck--active'); //! USED onclick because got bug with AddEvenListener - cant remove listener
-
+      var cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
+      if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
+      this.currentDeck.domElement.classList.remove('age-deck--active');
       this.currentDeck.domElement.onclick = '';
+    }
+  }, {
+    key: "disableHandEvents",
+    value: function disableHandEvents() {
+      var cards = Array.from(document.querySelectorAll('.card'));
+      cards.forEach(function (card) {
+        card.onclick = '';
+      });
     } // get card and render it in hand
 
   }, {
@@ -847,13 +833,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// TODO need some refactor later, move to display folder, use function?
+ // TODO need some refactor later, move to display folder, use function?
+
 var Menu = /*#__PURE__*/function () {
   function Menu(parent) {
     _classCallCheck(this, Menu);
@@ -883,6 +871,7 @@ var Menu = /*#__PURE__*/function () {
 
           var intro = _this.menu.parentElement.parentElement.parentElement;
           intro.classList.toggle('intro--hide');
+          (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)('Player1', 'Player2'); //! Hardcoded for 2 players. Should take player names as arguments
         }
 
         if (e.target.className.includes('rules')) {
@@ -914,32 +903,17 @@ var Menu = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/js/display/displayModal.js":
-/*!****************************************!*\
-  !*** ./src/js/display/displayModal.js ***!
-  \****************************************/
+/***/ "./src/js/display/displayNewTurnModal.js":
+/*!***********************************************!*\
+  !*** ./src/js/display/displayNewTurnModal.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ displayModal
 /* harmony export */ });
-function displayModal(title, currentPlayer) {
-  switch (title) {
-    case 'hot-seat-next-player':
-      var modalBlock = getModalBlock(currentPlayer.name);
-      document.body.prepend(modalBlock);
-      setTimeout(function () {
-        modalBlock.classList.toggle('modal--hidden');
-      }, 0);
-      break;
-
-    default:
-      throw new Error('Wrong modal name!');
-  }
-}
-
-function getModalBlock(currentPlayerName) {
+function displayModal(playerName) {
   var modalBg = document.createElement('div');
   modalBg.classList.add('modal');
   modalBg.classList.add('modal--hidden');
@@ -947,11 +921,12 @@ function getModalBlock(currentPlayerName) {
   modalBlock.classList.add('modal__block');
   var modalText = document.createElement('div');
   modalText.classList.add('modal__text');
-  modalText.innerText = "\u0421\u0435\u0439\u0447\u0430\u0441 \u0445\u043E\u0434 \u0438\u0433\u0440\u043E\u043A\u0430 ".concat(currentPlayerName);
+  modalText.innerText = "\u0421\u0435\u0439\u0447\u0430\u0441 \u0445\u043E\u0434 \u0438\u0433\u0440\u043E\u043A\u0430 ".concat(playerName);
   var modalBtn = document.createElement('button');
   modalBtn.classList.add('modal__btn');
   modalBtn.innerText = 'Начать ход!';
   modalBtn.addEventListener('click', function () {
+    modalBg.style = '';
     modalBg.classList.toggle('modal--hidden');
     setTimeout(function () {
       modalBg.remove();
@@ -959,7 +934,10 @@ function getModalBlock(currentPlayerName) {
   });
   modalBlock.append(modalText, modalBtn);
   modalBg.append(modalBlock);
-  return modalBg;
+  document.body.prepend(modalBg);
+  setTimeout(function () {
+    modalBg.classList.toggle('modal--hidden');
+  }, 0);
 }
 
 /***/ }),
@@ -982,7 +960,6 @@ function displayNextTurnBtn(newTurnFunction) {
     newTurnFunction();
     setTimeout(function () {
       var excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
-      console.log(excistedNextTurnBtn);
       excistedNextTurnBtn.remove();
     }, 500);
   });
@@ -1629,6 +1606,60 @@ var displayPlayerTable = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayPlayerTable);
+
+/***/ }),
+
+/***/ "./src/js/utility/initHotSeatGame.js":
+/*!*******************************************!*\
+  !*** ./src/js/utility/initHotSeatGame.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ initHotSeatGame
+/* harmony export */ });
+/* harmony import */ var _components_GameField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/GameField */ "./src/js/components/GameField.js");
+/* harmony import */ var _components_Player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Player */ "./src/js/components/Player.js");
+/* harmony import */ var _components_Game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Game */ "./src/js/components/Game.js");
+/* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
+/* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
+/* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
+/* harmony import */ var _setChat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setChat */ "./src/js/utility/setChat.js");
+/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
+
+
+
+
+
+
+
+
+function initHotSeatGame() {
+  // contains dom elements
+  var gameUI = new _components_GameUI__WEBPACK_IMPORTED_MODULE_5__.default(); // contains sorted card objects
+
+  var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_4__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_3__); // shuffle arr of cards objects
+
+  (0,_shuffle__WEBPACK_IMPORTED_MODULE_7__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
+
+  var gameField = new _components_GameField__WEBPACK_IMPORTED_MODULE_0__.default(arrOfCards); // contains players properties and cards
+
+  var players = [];
+
+  for (var i = 0; i < arguments.length; i += 1) {
+    var player = new _components_Player__WEBPACK_IMPORTED_MODULE_1__.default(gameUI, arguments[i], i + 1);
+    players.push(player);
+  } // work with all main objects
+
+
+  var game = new _components_Game__WEBPACK_IMPORTED_MODULE_2__.default(gameUI, gameField, players);
+  game.newTurn(); // display first modal without animation
+
+  document.querySelector('.modal').style.opacity = '1'; // init chat
+
+  (0,_setChat__WEBPACK_IMPORTED_MODULE_6__.default)();
+}
 
 /***/ }),
 

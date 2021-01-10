@@ -16,6 +16,8 @@ body {
   width: 100vw; }
   body ::-webkit-scrollbar {
     width: 0.5rem; }
+  body ::-webkit-scrollbar {
+    width: 0.5rem; }
   body ::-webkit-scrollbar-track {
     background: #e7e7e7; }
   body ::-webkit-scrollbar-thumb {
@@ -575,14 +577,14 @@ b {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  transition: all 0.5s;
   background: url(./assets/img/intro/bg-left-top.png) left top no-repeat, url(./assets/img/intro/bg-bottom-right.png) right bottom no-repeat, url(./assets/img/intro/bg.png) left top repeat, linear-gradient(181deg, #8b4d01 0%, #371000 100%);
+  height: 100vh;
+  left: 0;
   opacity: 1;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s;
+  width: 100%;
   z-index: 100000; }
   .modal--hidden {
     opacity: 0; }
@@ -603,26 +605,26 @@ b {
   justify-content: center;
   height: 30rem;
   width: 30rem;
-  font-size: 4rem;
   color: #e69839;
+  font-size: 4rem;
   font-weight: 700;
   text-align: center; }
 
 .modal__btn {
-  margin: 7.5rem 0;
   height: 5rem;
   width: 15rem;
   background-color: #8d500b;
   color: #e69839;
   font-size: 2rem;
-  font-weight: 700; }
+  font-weight: 700;
+  margin: 7.5rem 0; }
 
 .info-table {
-  position: relative;
   height: 6rem;
   width: 20rem;
   background-color: yellow;
-  border-radius: 1rem; }
+  border-radius: 1rem;
+  position: relative; }
 
 .info-table__player-block {
   align-items: center;
@@ -654,18 +656,23 @@ b {
 .info-table__next-turn-btn {
   height: 6rem;
   width: 20rem;
-  background-color: #6579d3;
-  border-radius: 1rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 1rem;
-  z-index: 5000;
-  cursor: pointer;
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  animation: blinker 1s linear infinite;
+  background-color: #6579d3;
+  border-radius: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 5000; }
+
+@keyframes blinker {
+  50% {
+    background-color: red; } }
 
 .hover-btn {
   background-color: rgba(141, 137, 137, 0.4);
@@ -1198,19 +1205,18 @@ b {
     top: 1.1rem;
     width: calc(100% - 6rem); }
   .active-zone .active-zone__cards {
-    align-items: center;
+    align-items: flex-end;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     border: 0.1rem solid transparent;
     border-image: url(./assets/img/border-center.png);
     border-image-repeat: round;
     border-image-slice: 47 46 37 46;
     border-image-width: 2.5rem;
-    /* background-color: rgb(148, 118, 53);*/
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     padding: 0 0 0 1rem;
     scroll-behavior: smooth;
     width: calc(100% - 5rem);
@@ -1221,14 +1227,12 @@ b {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: #4168df;
   flex-shrink: 0;
   margin: 1rem 1rem 1rem 0;
-  max-height: calc(100vh - 41rem);
+  max-height: calc(100vh - 38.5rem);
   overflow: auto; }
 
 .hand {
-  transition: all 0.5s;
   align-items: flex-start;
   display: flex;
   flex-direction: row;
@@ -1236,6 +1240,7 @@ b {
   background: linear-gradient(90deg, #210e06 0%, #4d230c 50%, #210e06 100%);
   height: 27rem;
   position: relative;
+  transition: all 0.5s;
   width: 100%; }
   .hand .card {
     margin: 3.5rem; }

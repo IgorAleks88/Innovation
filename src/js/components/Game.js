@@ -7,16 +7,13 @@
 * when avaible ections ends - turn passed to next player
 */
 import header from '../display/playerTable/displayHeader';
-import displayModal from '../display/displayModal';
+import displayNewTurnModal from '../display/displayNewTurnModal';
 import displayNextTurnBtn from '../display/displayNextTurnBtn';
 
 export default class Game {
-  constructor(gameUI, player1, player2, gameField) { // TODO should take more then 2 players
+  constructor(gameUI, gameField, players) {
     // store passed objects
-    this.players = [ // TODO should take all players passed as args
-      player1,
-      player2,
-    ];
+    this.players = players;
     this.gameField = gameField;
     this.gameUI = gameUI;
 
@@ -26,7 +23,7 @@ export default class Game {
     });
 
     // set default values
-    this.currentPlayer = player2; // TODO should be random later
+    this.currentPlayer = null;
     this.currentDeck = {
       domElement: gameUI.ageDecks.age1,
       cardsArray: gameField.ageDecks.age1,
@@ -34,18 +31,11 @@ export default class Game {
     this.turnPoints = 0;
   }
 
-  // if current player still have turn points - recalculate active deck
-  // else give turn to next player
   newTurn() {
-    // TODO HARDCODED FOR TWO PLAYERS. CHANGE LATER
-    // set current player
-    if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];
-    else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
-    displayModal('hot-seat-next-player', this.currentPlayer);
-
-    // start new turn with full(2) turn points
+    this.setCurrentPlayer();
+    displayNewTurnModal(this.currentPlayer.name);
     this.turnPoints = 2;
-
+    // timeout to display modal
     setTimeout(() => {
       this.removeActiveDeck();
       this.setActiveDeck(this.currentPlayer);
@@ -53,19 +43,34 @@ export default class Game {
       this.currentPlayer.renderActiveZone();
       this.updateInfoTable();
     }, 450);
-      //! displayNextTurnBtn(this.newTurn.bind(this));
-      //! displayModal('hot-seat-next-player', this.currentPlayer);
-  };
+  }
 
   // use this after each action
   actionDone() {
     this.turnPoints -= 1;
     this.updateInfoTable();
+    this.removeActiveDeck();
     if (this.turnPoints > 0) {
-      this.removeActiveDeck();
       this.setActiveDeck(this.currentPlayer);
     } else {
+      this.disableHandEvents();
       displayNextTurnBtn(this.newTurn.bind(this));
+    }
+  }
+
+  // set current players depends on previous player
+  setCurrentPlayer() {
+    if (this.currentPlayer === null) {
+      this.currentPlayer = this.players[0];
+    } else {
+      for (let i = 0; i < this.players.length; i += 1) {
+        if (this.currentPlayer === this.players[i]) {
+          i += 1;
+          if (i === this.players.length) i = 0;
+          this.currentPlayer = this.players[i];
+          break;
+        }
+      }
     }
   }
 
@@ -96,9 +101,18 @@ export default class Game {
   // remove active deck class and eventlistener
   //! should use before each setActiveDeck method
   removeActiveDeck() {
+    const cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
+    if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
+
     this.currentDeck.domElement.classList.remove('age-deck--active');
-    //! USED onclick because got bug with AddEvenListener - cant remove listener
     this.currentDeck.domElement.onclick = '';
+  }
+
+  disableHandEvents() {
+    const cards = Array.from(document.querySelectorAll('.card'));
+    cards.forEach((card) => {
+      card.onclick = '';
+    });
   }
 
   // get card and render it in hand
