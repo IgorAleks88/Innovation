@@ -97,20 +97,36 @@ export default class Player {
   renderLastTakenCard() {
     const lastTakenCard = this.hand[this.hand.length - 1];
     const cardElement = getCard.frontSide(lastTakenCard);
+
+    // add animation when card render to hand
+    cardElement.setAttribute('xyz', 'fade right-3 flip-right rotate-left');
+    cardElement.classList.add('xyz-in');
+
     cardElement.onclick = () => { this.playCard(lastTakenCard, cardElement); };
     this.gameUI.hand.append(cardElement);
+
+    // remove animation when card rendered
+    setTimeout(() => {
+      cardElement.removeAttribute('xyz');
+      cardElement.classList.remove('xyz-in');
+    }, 450);
   }
 
   // render all cards in hand of current player
   renderHand() {
-    this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
-    this.hand.forEach((card) => {
-      const cardElement = getCard.frontSide(card);
-      cardElement.onclick = () => {
-        this.playCard(card, cardElement);
-      };
-      this.gameUI.hand.append(cardElement);
-    });
+    setTimeout(() => {
+      this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
+    }, 450);
+
+    setTimeout(() => {
+      this.hand.forEach((card) => {
+        const cardElement = getCard.frontSide(card);
+        cardElement.onclick = () => {
+          this.playCard(card, cardElement);
+        };
+        this.gameUI.hand.append(cardElement);
+      });
+    }, 450);
   }
 
   // render all cards in active zone of current player

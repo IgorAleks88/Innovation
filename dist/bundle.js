@@ -40,8 +40,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // display intro
-
-_components_Intro__WEBPACK_IMPORTED_MODULE_11__.default.init(); // display game UI
+// Intro.init();
+// display game UI
 
 document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__.default.init()); // add event listeners to hand controls
 
@@ -740,13 +740,21 @@ var Player = /*#__PURE__*/function () {
       var _this3 = this;
 
       var lastTakenCard = this.hand[this.hand.length - 1];
-      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(lastTakenCard);
+      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(lastTakenCard); // add animation when card render to hand
+
+      cardElement.setAttribute('xyz', 'fade right-3 flip-right rotate-left');
+      cardElement.classList.add('xyz-in');
 
       cardElement.onclick = function () {
         _this3.playCard(lastTakenCard, cardElement);
       };
 
-      this.gameUI.hand.append(cardElement);
+      this.gameUI.hand.append(cardElement); // remove animation when card rendered
+
+      setTimeout(function () {
+        cardElement.removeAttribute('xyz');
+        cardElement.classList.remove('xyz-in');
+      }, 450);
     } // render all cards in hand of current player
 
   }, {
@@ -754,17 +762,20 @@ var Player = /*#__PURE__*/function () {
     value: function renderHand() {
       var _this4 = this;
 
-      this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
+      setTimeout(function () {
+        _this4.gameUI.hand.innerHTML = ''; // clear previous rendered hand
+      }, 450);
+      setTimeout(function () {
+        _this4.hand.forEach(function (card) {
+          var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card);
 
-      this.hand.forEach(function (card) {
-        var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card);
+          cardElement.onclick = function () {
+            _this4.playCard(card, cardElement);
+          };
 
-        cardElement.onclick = function () {
-          _this4.playCard(card, cardElement);
-        };
-
-        _this4.gameUI.hand.append(cardElement);
-      });
+          _this4.gameUI.hand.append(cardElement);
+        });
+      }, 450);
     } // render all cards in active zone of current player
 
   }, {
