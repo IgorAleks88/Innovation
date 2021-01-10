@@ -11,10 +11,6 @@ export default class Intro {
     const introTop = document.createElement('div');
     introTop.classList.add('intro__top');
 
-    // set up and display main menu
-    const menu = new Menu(introTop);
-    menu.render();
-
     // svg title letters - I n n o v a t i o n
     const introCenter = document.createElement('div');
     introCenter.classList.add('intro__center');
@@ -119,5 +115,15 @@ c2.513-1.183,2.621-2.839,2.621-6.74V46.458z"/>
     introContainer.appendChild(introGear);
     divIntro.appendChild(introContainer);
     document.body.appendChild(divIntro);
+
+    const img = new Image();
+    img.src = './assets/img/intro/center.png';
+
+    img.addEventListener('load', () => {
+      introBottom.classList.add('show');
+      // set up and display main menu
+      const menu = new Menu(introTop);
+      menu.render();
+    });
   }
 }
