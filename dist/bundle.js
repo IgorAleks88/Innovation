@@ -567,10 +567,7 @@ var Intro = /*#__PURE__*/function () {
       var introContainer = document.createElement('div');
       introContainer.classList.add('intro__container');
       var introTop = document.createElement('div');
-      introTop.classList.add('intro__top'); // set up and display main menu
-
-      var menu = new _mainMenu__WEBPACK_IMPORTED_MODULE_0__.default(introTop);
-      menu.render(); // svg title letters - I n n o v a t i o n
+      introTop.classList.add('intro__top'); // svg title letters - I n n o v a t i o n
 
       var introCenter = document.createElement('div');
       introCenter.classList.add('intro__center');
@@ -604,6 +601,14 @@ var Intro = /*#__PURE__*/function () {
       introContainer.appendChild(introGear);
       divIntro.appendChild(introContainer);
       document.body.appendChild(divIntro);
+      var img = new Image();
+      img.src = './assets/img/intro/center.png';
+      img.addEventListener('load', function () {
+        introBottom.classList.add('show'); // set up and display main menu
+
+        var menu = new _mainMenu__WEBPACK_IMPORTED_MODULE_0__.default(introTop);
+        menu.render();
+      });
     }
   }]);
 

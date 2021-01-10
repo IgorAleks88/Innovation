@@ -379,7 +379,7 @@ b {
       height: 592px;
       width: 690px;
       align-items: center;
-      animation: close 5s ease-in-out 15s forwards;
+      animation: close 5s ease-in-out 11s forwards;
       background: url(./assets/img/intro/center.png);
       display: flex;
       justify-content: center;
@@ -392,7 +392,7 @@ b {
       .intro .intro__container .intro__center .center__title {
         height: 120px;
         width: 500px;
-        animation: show-title 0.5s linear 14s forwards, close-title 3.5s ease-in-out 15s forwards;
+        animation: show-title 0.5s linear 10s forwards, close-title 3.5s ease-in-out 11s forwards;
         background: url(./assets/img/intro/title.svg) center no-repeat;
         opacity: 0;
         position: absolute; }
@@ -407,43 +407,43 @@ b {
   100% {
     opacity: 1; } }
       .intro .intro__container .intro__center .letter-1 {
-        animation: draw-letter 2s ease-in-out 4s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-2 {
-        animation: draw-letter 2s ease-in-out 5s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 1s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-3 {
-        animation: draw-letter 2s ease-in-out 6s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 2s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-4 {
-        animation: draw-letter 2s ease-in-out 7s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 3s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-5 {
-        animation: draw-letter 2s ease-in-out 8s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 4s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-6 {
-        animation: draw-letter 2s ease-in-out 9s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 5s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-7 {
-        animation: draw-letter 2s ease-in-out 10s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 6s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-8 {
-        animation: draw-letter 2s ease-in-out 11s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 7s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-9 {
-        animation: draw-letter 2s ease-in-out 12s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 8s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-10 {
-        animation: draw-letter 2s ease-in-out 13s forwards, hide-letter 0.5s linear 14s forwards;
+        animation: draw-letter 2s ease-in-out 9s forwards, hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
 
@@ -455,14 +455,14 @@ b {
 @keyframes hide-letter {
   100% {
     opacity: 0; } }
-  .intro .intro__bottom {
+  .intro .intro__bottom.show {
     height: 592px;
     width: 690px;
     background: url(./assets/img/intro/bottom.png);
     filter: drop-shadow(-2px 0 5px #000);
     position: absolute;
     z-index: 6; }
-    .intro .intro__bottom .bottom__lamp {
+    .intro .intro__bottom.show .bottom__lamp {
       height: 20px;
       width: 90px;
       align-items: center;
@@ -472,7 +472,7 @@ b {
       justify-content: space-between;
       left: 190px;
       position: absolute; }
-      .intro .intro__bottom .bottom__lamp--1, .intro .intro__bottom .bottom__lamp--2, .intro .intro__bottom .bottom__lamp--3 {
+      .intro .intro__bottom.show .bottom__lamp--1, .intro .intro__bottom.show .bottom__lamp--2, .intro .intro__bottom.show .bottom__lamp--3 {
         height: 20px;
         width: 20px;
         align-items: center;
@@ -481,7 +481,7 @@ b {
         box-shadow: inset -1px 1px 1px rgba(255, 255, 255, 0.8);
         display: flex;
         justify-content: center; }
-        .intro .intro__bottom .bottom__lamp--1::before, .intro .intro__bottom .bottom__lamp--2::before, .intro .intro__bottom .bottom__lamp--3::before {
+        .intro .intro__bottom.show .bottom__lamp--1::before, .intro .intro__bottom.show .bottom__lamp--2::before, .intro .intro__bottom.show .bottom__lamp--3::before {
           height: 11px;
           width: 11px;
           background: url(./assets/img/intro/lamp-in.png) center no-repeat;
@@ -489,19 +489,19 @@ b {
           box-shadow: inset -1px 1px 2px white;
           content: '';
           mix-blend-mode: hard-light; }
-      .intro .intro__bottom .bottom__lamp--1::before {
+      .intro .intro__bottom.show .bottom__lamp--1::before {
+        animation: lightning 3s linear forwards; }
+      .intro .intro__bottom.show .bottom__lamp--2::before {
         animation: lightning 3s linear 4s forwards; }
-      .intro .intro__bottom .bottom__lamp--2::before {
-        animation: lightning 3s linear 8s forwards; }
-      .intro .intro__bottom .bottom__lamp--3::before {
-        animation: lightning 2s linear 13s forwards; }
+      .intro .intro__bottom.show .bottom__lamp--3::before {
+        animation: lightning 2s linear 9s forwards; }
 
 @keyframes lightning {
   100% {
     filter: invert(78%) sepia(13%) saturate(6863%) hue-rotate(90deg) brightness(104%) contrast(104%); } }
 
 .menu {
-  animation: show-menu 0.5s linear 18s forwards; }
+  animation: show-menu 0.5s linear 14s forwards; }
 
 @keyframes show-menu {
   100% {
@@ -514,14 +514,14 @@ b {
   .intro__gear .intro__gear1 {
     height: 174px;
     width: 174px;
-    animation: gear-rotate 4.5s linear 15s forwards;
+    animation: gear-rotate 4.5s linear 11s forwards;
     background: url(./assets/img/intro/gear1.png);
     position: absolute;
     top: 50px; }
   .intro__gear .intro__gear2 {
     height: 135px;
     width: 135px;
-    animation: gear-rotate-back 4.5s linear 15s forwards;
+    animation: gear-rotate-back 4.5s linear 11s forwards;
     background: url(./assets/img/intro/gear2.png);
     left: 150px;
     position: absolute; }
@@ -1350,6 +1350,11 @@ b {
   .hand__btn:hover:not(.hand__btn--disabled) .hand__controls-svg--circle {
     opacity: 1;
     stroke-dashoffset: 0; }
+
+.js-loading *,
+.js-loading *::before,
+.js-loading *::after {
+  animation-play-state: paused !important; }
 
 @-webkit-keyframes xyz-in-keyframes {
   from {
