@@ -18,7 +18,7 @@ import setChat from './utility/setChat';
 import shuffle from './utility/shuffle';
 
 // display intro
-Intro.init();
+// Intro.init();
 
 // display game UI
 document.body.prepend(displayPlayerTable.init());

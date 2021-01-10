@@ -7,6 +7,7 @@
 * when avaible ections ends - turn passed to next player
 */
 import header from '../display/playerTable/displayHeader';
+import displayModal from '../display/displayModal';
 
 export default class Game {
   constructor(gameUI, player1, player2, gameField) { // TODO should take more then 2 players
@@ -45,12 +46,16 @@ export default class Game {
       if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];
       else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
 
+      displayModal('hot-seat-next-player', this.currentPlayer);
+
       this.currentPlayer.renderHand();
       this.currentPlayer.renderActiveZone();
 
       // start new turn with full(2) turn points
       this.turnPoints = 2;
-      this.newTurn();
+      setTimeout(() => {
+        this.newTurn();
+      }, 450);
     }
   }
 

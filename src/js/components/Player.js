@@ -131,12 +131,14 @@ export default class Player {
 
   // render all cards in active zone of current player
   renderActiveZone() {
-    Object.keys(this.activeStacks).forEach((stackName) => {
-      this.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
-      this.activeStacks[stackName].cards.forEach((card) => {
-        this.gameUI.activeStacks[stackName].append(getCard.frontSide(card));
+    setTimeout(() => {
+      Object.keys(this.activeStacks).forEach((stackName) => {
+        this.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
+        this.activeStacks[stackName].cards.forEach((card) => {
+          this.gameUI.activeStacks[stackName].append(getCard.frontSide(card));
+        });
       });
-    });
+    }, 450);
   }
 
   // on click event for cards in hand. Play card in stack depends on category

@@ -190,6 +190,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => /* binding */ Game
 /* harmony export */ });
 /* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
+/* harmony import */ var _display_displayModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayModal */ "./src/js/display/displayModal.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -204,6 +205,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+
 
 
 var Game = /*#__PURE__*/function () {
@@ -237,6 +239,8 @@ var Game = /*#__PURE__*/function () {
   _createClass(Game, [{
     key: "newTurn",
     value: function newTurn() {
+      var _this2 = this;
+
       this.updateInfoTable();
 
       if (this.turnPoints > 0) {
@@ -246,29 +250,32 @@ var Game = /*#__PURE__*/function () {
         // TODO HARDCODED FOR TWO PLAYERS. CHANGE LATER
         // set current player
         if (this.players[0] === this.currentPlayer) this.currentPlayer = this.players[1];else if (this.players[1] === this.currentPlayer) this.currentPlayer = this.players[0];
+        (0,_display_displayModal__WEBPACK_IMPORTED_MODULE_1__.default)('hot-seat-next-player', this.currentPlayer);
         this.currentPlayer.renderHand();
         this.currentPlayer.renderActiveZone(); // start new turn with full(2) turn points
 
         this.turnPoints = 2;
-        this.newTurn();
+        setTimeout(function () {
+          _this2.newTurn();
+        }, 450);
       }
     } // set active deck for current player
 
   }, {
     key: "setActiveDeck",
     value: function setActiveDeck(currentPlayer) {
-      var _this2 = this;
+      var _this3 = this;
 
       Object.keys(this.gameField.ageDecks).forEach(function (ageDeckKey) {
         if (ageDeckKey === "age".concat(currentPlayer.currentAge)) {
           // store active deck dom element
-          _this2.currentDeck.domElement = _this2.gameUI.ageDecks["age".concat(currentPlayer.currentAge)]; // store active deck cards array
+          _this3.currentDeck.domElement = _this3.gameUI.ageDecks["age".concat(currentPlayer.currentAge)]; // store active deck cards array
 
-          _this2.currentDeck.cardsArray = _this2.gameField.ageDecks[ageDeckKey]; //! Change current players currentAge if needed deck empty to go for the next deck
+          _this3.currentDeck.cardsArray = _this3.gameField.ageDecks[ageDeckKey]; //! Change current players currentAge if needed deck empty to go for the next deck
           //! Need recalcualte current age after each action, done by players method setCurrentAge
 
-          if (_this2.currentDeck.cardsArray.length === 0) {
-            _this2.currentPlayer.currentAge += 1;
+          if (_this3.currentDeck.cardsArray.length === 0) {
+            _this3.currentPlayer.currentAge += 1;
           }
         }
       }); // set style and event listener of active deck when all calculations finished
@@ -783,13 +790,15 @@ var Player = /*#__PURE__*/function () {
     value: function renderActiveZone() {
       var _this5 = this;
 
-      Object.keys(this.activeStacks).forEach(function (stackName) {
-        _this5.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
+      setTimeout(function () {
+        Object.keys(_this5.activeStacks).forEach(function (stackName) {
+          _this5.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
 
-        _this5.activeStacks[stackName].cards.forEach(function (card) {
-          _this5.gameUI.activeStacks[stackName].append(_cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card));
+          _this5.activeStacks[stackName].cards.forEach(function (card) {
+            _this5.gameUI.activeStacks[stackName].append(_cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card));
+          });
         });
-      });
+      }, 450);
     } // on click event for cards in hand. Play card in stack depends on category
     // TODO: later this method should add dogma function to each played card
 
@@ -898,6 +907,56 @@ var Menu = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Menu);
+
+/***/ }),
+
+/***/ "./src/js/display/displayModal.js":
+/*!****************************************!*\
+  !*** ./src/js/display/displayModal.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ displayModal
+/* harmony export */ });
+function displayModal(title, currentPlayer) {
+  switch (title) {
+    case 'hot-seat-next-player':
+      var modalBlock = getModalBlock(currentPlayer.name);
+      document.body.prepend(modalBlock);
+      setTimeout(function () {
+        modalBlock.classList.toggle('modal--hidden');
+      }, 0);
+      break;
+
+    default:
+      throw new Error('Wrong modal name!');
+  }
+}
+
+function getModalBlock(currentPlayerName) {
+  var modalBg = document.createElement('div');
+  modalBg.classList.add('modal');
+  modalBg.classList.add('modal--hidden');
+  var modalBlock = document.createElement('div');
+  modalBlock.classList.add('modal__block');
+  var modalText = document.createElement('div');
+  modalText.classList.add('modal__text');
+  modalText.innerText = "\u0421\u0435\u0439\u0447\u0430\u0441 \u0445\u043E\u0434 \u0438\u0433\u0440\u043E\u043A\u0430 ".concat(currentPlayerName);
+  var modalBtn = document.createElement('button');
+  modalBtn.classList.add('modal__btn');
+  modalBtn.innerText = 'Начать ход!';
+  modalBtn.addEventListener('click', function () {
+    modalBg.classList.toggle('modal--hidden');
+    setTimeout(function () {
+      modalBg.remove();
+    }, 500);
+  });
+  modalBlock.append(modalText, modalBtn);
+  modalBg.append(modalBlock);
+  return modalBg;
+}
 
 /***/ }),
 
