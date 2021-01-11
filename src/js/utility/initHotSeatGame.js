@@ -7,6 +7,8 @@ import GameUI from '../components/GameUI';
 import setChat from './setChat';
 import shuffle from './shuffle';
 
+import gameStateService from '../components/gameStateService';
+
 export default function initHotSeatGame() {
   // contains dom elements
   const gameUI = new GameUI();
@@ -33,6 +35,8 @@ export default function initHotSeatGame() {
   // display first modal without animation
   document.querySelector('.modal').style.opacity = '1';
 
+  gameStateService.initPlayers('Player1', 'Player2');
+  gameStateService.initAgeDecks(arrOfCards);
   // init chat
   setChat();
 }

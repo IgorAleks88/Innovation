@@ -746,6 +746,169 @@ var Player = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/components/gameState.js":
+/*!****************************************!*\
+  !*** ./src/js/components/gameState.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+var gameState = {
+  ageDecks: {
+    age1: [],
+    age2: [],
+    age3: [],
+    age4: [],
+    age5: [],
+    age6: [],
+    age7: [],
+    age8: [],
+    age9: [],
+    age10: []
+  },
+  leadershipDeck: [],
+  specialDeck: [],
+  players: [],
+  currentPlayer: null,
+  activePlayer: null,
+  player0: {
+    name: null,
+    id: 0,
+    actionPoints: 0,
+    hand: [],
+    activeDecks: {
+      red: [],
+      green: [],
+      blue: [],
+      purple: [],
+      yellow: []
+    }
+  },
+  player1: {
+    name: null,
+    id: 1,
+    actionPoints: 0,
+    hand: [],
+    activeDecks: {
+      red: [],
+      green: [],
+      blue: [],
+      purple: [],
+      yellow: []
+    }
+  },
+  player2: {
+    name: null,
+    id: 2,
+    actionPoints: 0,
+    hand: [],
+    activeDecks: {
+      red: [],
+      green: [],
+      blue: [],
+      purple: [],
+      yellow: []
+    }
+  },
+  player3: {
+    name: null,
+    id: 3,
+    actionPoints: 0,
+    hand: [],
+    activeDecks: {
+      red: [],
+      green: [],
+      blue: [],
+      purple: [],
+      yellow: []
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameState);
+
+/***/ }),
+
+/***/ "./src/js/components/gameStateService.js":
+/*!***********************************************!*\
+  !*** ./src/js/components/gameStateService.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
+
+var gameStateService = {
+  initPlayers: function initPlayers() {
+    for (var i = 0; i < arguments.length; i += 1) {
+      var player = "player".concat(i);
+      _gameState__WEBPACK_IMPORTED_MODULE_0__.default[player].name = i < 0 || arguments.length <= i ? undefined : arguments[i];
+      _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players.push(_gameState__WEBPACK_IMPORTED_MODULE_0__.default[player]);
+    }
+
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints = 2;
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
+    console.log(_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer);
+  },
+  initAgeDecks: function initAgeDecks(cardsObj) {
+    cardsObj.forEach(function (e) {
+      switch (+e.age) {
+        case 1:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age1.push(e.innovation);
+          break;
+
+        case 2:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age2.push(e.innovation);
+          break;
+
+        case 3:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age3.push(e.innovation);
+          break;
+
+        case 4:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age4.push(e.innovation);
+          break;
+
+        case 5:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age5.push(e.innovation);
+          break;
+
+        case 6:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age6.push(e.innovation);
+          break;
+
+        case 7:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age7.push(e.innovation);
+          break;
+
+        case 8:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age8.push(e.innovation);
+          break;
+
+        case 9:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age9.push(e.innovation);
+          break;
+
+        case 10:
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age10.push(e.innovation);
+          break;
+
+        default:
+          throw new Error("Wrong number on age field in ".concat(e));
+      }
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameStateService);
+
+/***/ }),
+
 /***/ "./src/js/display/displayNewTurnModal.js":
 /*!***********************************************!*\
   !*** ./src/js/display/displayNewTurnModal.js ***!
@@ -1470,6 +1633,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
 /* harmony import */ var _setChat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setChat */ "./src/js/utility/setChat.js");
 /* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
+/* harmony import */ var _components_gameStateService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/gameStateService */ "./src/js/components/gameStateService.js");
+
 
 
 
@@ -1499,7 +1664,9 @@ function initHotSeatGame() {
   var game = new _components_Game__WEBPACK_IMPORTED_MODULE_2__.default(gameUI, gameField, players);
   game.newTurn(); // display first modal without animation
 
-  document.querySelector('.modal').style.opacity = '1'; // init chat
+  document.querySelector('.modal').style.opacity = '1';
+  _components_gameStateService__WEBPACK_IMPORTED_MODULE_8__.default.initPlayers('Player1', 'Player2');
+  _components_gameStateService__WEBPACK_IMPORTED_MODULE_8__.default.initAgeDecks(arrOfCards); // init chat
 
   (0,_setChat__WEBPACK_IMPORTED_MODULE_6__.default)();
 }
