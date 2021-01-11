@@ -145,7 +145,14 @@ export default class Player {
             this.hand.splice(i, 1);
           }
         });
+        if (this.activeStacks[stackName].cards.length === 0) {
+          document.querySelector(`#${stackName}`).classList.remove('active-zone__stack--empty');
+        }
         this.activeStacks[stackName].cards.push(cardObj);
+
+        cardElement.style.position = 'absolute';
+        cardElement.style.bottom = '0';
+
         this.gameUI.activeStacks[stackName].append(cardElement);
       }
     });

@@ -21,6 +21,7 @@ const displayActiveZone = {
     for (let i = 0; i < stacksNames.length; i += 1) {
       const stack = document.createElement('div');
       stack.classList.add('active-zone__stack');
+      stack.classList.add('active-zone__stack--empty');
       stack.id = stacksNames[i]; // id stackName for each stack
       this.cardsBlockWrapper.append(stack);
     }

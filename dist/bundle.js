@@ -814,7 +814,14 @@ var Player = /*#__PURE__*/function () {
             }
           });
 
+          if (_this6.activeStacks[stackName].cards.length === 0) {
+            document.querySelector("#".concat(stackName)).classList.remove('active-zone__stack--empty');
+          }
+
           _this6.activeStacks[stackName].cards.push(cardObj);
+
+          cardElement.style.position = 'absolute';
+          cardElement.style.bottom = '0';
 
           _this6.gameUI.activeStacks[stackName].append(cardElement);
         }
@@ -1007,6 +1014,7 @@ var displayActiveZone = {
     for (var i = 0; i < stacksNames.length; i += 1) {
       var stack = document.createElement('div');
       stack.classList.add('active-zone__stack');
+      stack.classList.add('active-zone__stack--empty');
       stack.id = stacksNames[i]; // id stackName for each stack
 
       this.cardsBlockWrapper.append(stack);
