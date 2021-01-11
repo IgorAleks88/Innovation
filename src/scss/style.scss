@@ -12,6 +12,7 @@
 @import './components/intro';
 @import './components/ageDeck';
 @import './components/closeModalBtn';
+@import './components/modal';
 // components__aside
 @import './components/aside/infoTable';
 @import './components/aside/hoverBtn';
@@ -30,7 +31,7 @@
 @import './layouts/hand';
 
 .js-loading *,
-.js-loading *:before,
-.js-loading *:after {
+.js-loading *::before,
+.js-loading *::after {
   animation-play-state: paused !important;
 }

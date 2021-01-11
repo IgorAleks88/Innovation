@@ -23,16 +23,15 @@
   }
 
   .active-zone__cards {
-    @include flex(row, center, center);
+    @include flex(row, flex-start, flex-end);
     border: 0.1rem solid transparent;
     border-image: url('../../assets/img/border-center.png');
     border-image-repeat: round;
     border-image-slice: 47 46 37 46;
     border-image-width: 2.5rem;
-    /* background-color: rgb(148, 118, 53);*/
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     padding: 0 0 0 1rem;
     scroll-behavior: smooth;
     width: calc(100% - 5rem);
@@ -42,9 +41,8 @@
 
 .active-zone__stack {
   @include flex(column, flex-start, center);
-  background-color: rgb(65, 104, 223);
   flex-shrink: 0;
   margin: 1rem 1rem 1rem 0;
-  max-height: calc(100vh - 41rem);
+  max-height: calc(100vh - 38.5rem);
   overflow: auto;
 }

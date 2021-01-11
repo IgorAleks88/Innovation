@@ -114,19 +114,15 @@ export default class Player {
 
   // render all cards in hand of current player
   renderHand() {
-    setTimeout(() => {
-      this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
-    }, 450);
+    this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
 
-    setTimeout(() => {
-      this.hand.forEach((card) => {
-        const cardElement = getCard.frontSide(card);
-        cardElement.onclick = () => {
-          this.playCard(card, cardElement);
-        };
-        this.gameUI.hand.append(cardElement);
-      });
-    }, 450);
+    this.hand.forEach((card) => {
+      const cardElement = getCard.frontSide(card);
+      cardElement.onclick = () => {
+        this.playCard(card, cardElement);
+      };
+      this.gameUI.hand.append(cardElement);
+    });
   }
 
   // render all cards in active zone of current player
