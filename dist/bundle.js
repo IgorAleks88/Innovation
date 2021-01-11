@@ -211,7 +211,7 @@ var Game = /*#__PURE__*/function () {
 
       this.setCurrentPlayer();
       (0,_display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__.default)(this.currentPlayer.name);
-      this.turnPoints = 2; // timeout to display modal
+      this.turnPoints = 100; // timeout to display modal
 
       setTimeout(function () {
         _this2.removeActiveDeck();
@@ -994,7 +994,10 @@ var displayActiveZone = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('active-zone');
     this.cardsBlock = document.createElement('div');
-    this.cardsBlock.classList.add('active-zone__cards');
+    this.cardsBlock.classList.add('active-zone__cards-block');
+    this.cardsBlockWrapper = document.createElement('div');
+    this.cardsBlockWrapper.classList.add('active-zone__cards-wrapper');
+    this.cardsBlock.append(this.cardsBlockWrapper);
     this.cardsBlockOverlay = document.createElement('div');
     this.cardsBlockOverlay.classList.add('active-zone__overlay'); // create players active stacks
     // !Stack names are the color fields of cards object
@@ -1006,7 +1009,7 @@ var displayActiveZone = {
       stack.classList.add('active-zone__stack');
       stack.id = stacksNames[i]; // id stackName for each stack
 
-      this.cardsBlock.append(stack);
+      this.cardsBlockWrapper.append(stack);
     }
 
     this.wrapper.append(this.cardsBlockOverlay);

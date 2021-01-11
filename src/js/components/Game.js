@@ -34,7 +34,7 @@ export default class Game {
   newTurn() {
     this.setCurrentPlayer();
     displayNewTurnModal(this.currentPlayer.name);
-    this.turnPoints = 2;
+    this.turnPoints = 100;
     // timeout to display modal
     setTimeout(() => {
       this.removeActiveDeck();
