@@ -665,23 +665,28 @@ var Player = /*#__PURE__*/function () {
     this.activeStacks = {
       blue: {
         cards: [],
-        shift: null
+        shift: 'top' //! TEST
+
       },
       red: {
         cards: [],
-        shift: null
+        shift: 'right' //! TEST
+
       },
       green: {
         cards: [],
-        shift: null
+        shift: 'right' //! TEST
+
       },
       purple: {
         cards: [],
-        shift: null
+        shift: 'top' //! TEST
+
       },
       yellow: {
         cards: [],
-        shift: null
+        shift: null //! TEST
+
       }
     }; // Resources
 
@@ -818,10 +823,17 @@ var Player = /*#__PURE__*/function () {
             document.querySelector("#".concat(stackName)).classList.remove('active-zone__stack--empty');
           }
 
-          _this6.activeStacks[stackName].cards.push(cardObj);
-
           cardElement.style.position = 'absolute';
-          cardElement.style.bottom = '0';
+
+          if (_this6.activeStacks[stackName].shift === 'top') {
+            cardElement.style.bottom = "".concat(_this6.activeStacks[stackName].cards.length * 40, "px");
+          } else if (_this6.activeStacks[stackName].shift === 'right' && _this6.activeStacks[stackName].cards.length !== 0) {
+            cardElement.style.left = "".concat(_this6.activeStacks[stackName].cards.length * 40, "px"); // this.gameUI.activeStacks[stackName].offsetWidth += 40;
+
+            _this6.gameUI.activeStacks[stackName].style.width = _this6.gameUI.activeStacks[stackName].offsetWidth + _this6.activeStacks[stackName].cards.length * 40 + 'px';
+          }
+
+          _this6.activeStacks[stackName].cards.push(cardObj);
 
           _this6.gameUI.activeStacks[stackName].append(cardElement);
         }

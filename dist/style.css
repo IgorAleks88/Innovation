@@ -103,7 +103,7 @@ b {
     display: flex;
     height: 3rem;
     position: relative;
-    z-index: 2; }
+    z-index: 0; }
     .card .card__card-header .card__topLeft {
       align-items: center;
       background: #fff;
@@ -1233,7 +1233,8 @@ b {
   overflow: auto;
   width: 100%;
   height: calc(100vh - 44.5rem);
-  margin-left: 1rem; }
+  margin-left: 1rem;
+  transition: all 0.3s; }
 
 .active-zone__stack {
   width: 32rem;
@@ -1247,6 +1248,11 @@ b {
   .active-zone__stack--empty {
     width: 0;
     height: 0; }
+  .active-zone__stack .card {
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    transition: all 0.2s linear;
+    bottom: 0; }
 
 .hand {
   align-items: flex-start;

@@ -21,23 +21,23 @@ export default class Player {
     this.activeStacks = {
       blue: {
         cards: [],
-        shift: null,
+        shift: 'top', //! TEST
       },
       red: {
         cards: [],
-        shift: null,
+        shift: 'right', //! TEST
       },
       green: {
         cards: [],
-        shift: null,
+        shift: 'right', //! TEST
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: 'top', //! TEST
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: null, //! TEST
       },
     };
 
@@ -148,10 +148,17 @@ export default class Player {
         if (this.activeStacks[stackName].cards.length === 0) {
           document.querySelector(`#${stackName}`).classList.remove('active-zone__stack--empty');
         }
-        this.activeStacks[stackName].cards.push(cardObj);
 
         cardElement.style.position = 'absolute';
-        cardElement.style.bottom = '0';
+        if (this.activeStacks[stackName].shift === 'top') {
+          cardElement.style.bottom = `${this.activeStacks[stackName].cards.length * 40}px`;
+        } else if (this.activeStacks[stackName].shift === 'right' && this.activeStacks[stackName].cards.length !== 0) {
+          cardElement.style.left = `${this.activeStacks[stackName].cards.length * 40}px`;
+          // this.gameUI.activeStacks[stackName].offsetWidth += 40;
+          this.gameUI.activeStacks[stackName].style.width = (this.gameUI.activeStacks[stackName].offsetWidth + this.activeStacks[stackName].cards.length * 40) + 'px';
+        }
+
+        this.activeStacks[stackName].cards.push(cardObj);
 
         this.gameUI.activeStacks[stackName].append(cardElement);
       }

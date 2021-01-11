@@ -46,6 +46,7 @@
   width: 100%;
   height: calc(100vh - 44.5rem);
   margin-left: 1rem;
+  transition: all 0.3s;
 }
 
 .active-zone__stack {
@@ -60,5 +61,12 @@
   &--empty {
     width: 0;
     height: 0;
+  }
+
+  .card {
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    transition: all 0.2s linear;
+    bottom: 0;
   }
 }
