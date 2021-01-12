@@ -4,7 +4,7 @@ import Game from '../components/Game';
 import cardsJSON from '../cards/cards.json';
 import parseCards from '../cards/parseCards';
 import GameUI from '../components/GameUI';
-import setChat from './setChat';
+// import setChat from './setChat';
 import shuffle from './shuffle';
 import getCardObject from './getCardObject';
 
@@ -38,5 +38,5 @@ export default function initHotSeatGame() {
 
   console.log(gameState);
   // init chat
-  setChat();
+  // setChat();
 }
