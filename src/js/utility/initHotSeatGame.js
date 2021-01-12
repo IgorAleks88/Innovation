@@ -10,7 +10,7 @@ import getCardObject from './getCardObject';
 
 import gameState from '../components/gameState';
 
-export default function initHotSeatGame() {
+export default function initHotSeatGame(playerNames) {
   // contains dom elements
   const gameUI = new GameUI();
 
@@ -25,8 +25,8 @@ export default function initHotSeatGame() {
 
   // contains players properties and cards
   const players = [];
-  for (let i = 0; i < arguments.length; i += 1) {
-    const player = new Player(gameUI, arguments[i], i + 1);
+  for (let i = 0; i < playerNames.length; i += 1) {
+    const player = new Player(gameUI, playerNames[i], i + 1);
     players.push(player);
   }
 

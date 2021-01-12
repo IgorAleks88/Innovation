@@ -6,11 +6,11 @@ import '@animxyz/core';
 import displayPlayerTable from './display/playerTable/displayPlayerTable';
 import setHandControls from './utility/setHandControls';
 import setAsideControls from './utility/setAsideControls';
-// import Intro from './components/Intro';
-import initHotSeatGame from './utility/initHotSeatGame';
+import Intro from './components/Intro';
+// import initHotSeatGame from './utility/initHotSeatGame';
 
 // display intro & menu
-// Intro.init();
+Intro.init();
 
 // display game UI
 document.body.prepend(displayPlayerTable.init());
@@ -21,4 +21,4 @@ setHandControls();
 // add event listeners and animations to aside buttons
 setAsideControls();
 
-initHotSeatGame('Player1', 'Player2');
+// initHotSeatGame('Player1', 'Player2');

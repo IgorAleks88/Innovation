@@ -14,25 +14,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display/playerTable/displayPlayerTable */ "./src/js/display/playerTable/displayPlayerTable.js");
 /* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
 /* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
-/* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
+/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
 // import styles
 
  // import js modules
 
 
 
- // import Intro from './components/Intro';
 
- // display intro & menu
-// Intro.init();
-// display game UI
+ // import initHotSeatGame from './utility/initHotSeatGame';
+// display intro & menu
+
+_components_Intro__WEBPACK_IMPORTED_MODULE_5__.default.init(); // display game UI
 
 document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__.default.init()); // add event listeners to hand controls
 
 (0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__.default)(); // add event listeners and animations to aside buttons
 
-(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)();
-(0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_5__.default)('Player1', 'Player2');
+(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); // initHotSeatGame('Player1', 'Player2');
 
 /***/ }),
 
@@ -600,6 +599,90 @@ var GameUI = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/components/Intro.js":
+/*!************************************!*\
+  !*** ./src/js/components/Intro.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ Intro
+/* harmony export */ });
+/* harmony import */ var _mainMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mainMenu */ "./src/js/components/mainMenu.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Intro = /*#__PURE__*/function () {
+  function Intro() {
+    _classCallCheck(this, Intro);
+  }
+
+  _createClass(Intro, null, [{
+    key: "init",
+    value: function init() {
+      var divIntro = document.createElement('div');
+      divIntro.classList.add('intro');
+      var introContainer = document.createElement('div');
+      introContainer.classList.add('intro__container');
+      var introTop = document.createElement('div');
+      introTop.classList.add('intro__top'); // svg title letters - I n n o v a t i o n
+
+      var introCenter = document.createElement('div');
+      introCenter.classList.add('intro__center');
+      introCenter.innerHTML = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\nwidth=\"500px\" height=\"120px\" viewBox=\"0 0 500 120\" enable-background=\"new 0 0 500 120\" xml:space=\"preserve\">\n<path class=\"letter-1\" d=\"M27.346,80.317c3.604,1.819,7.755,0.485,7.755,2.67c0,0.728-0.656,1.334-2.075,1.334c-0.983,0-6.117-0.606-15.292-0.606\nS3.536,84.321,2.553,84.321c-1.42,0-2.184-0.606-2.184-1.334c0-2.185,4.259-0.851,7.863-2.67c3.386-1.698,3.932-4.49,3.932-9.829\nv-54.61c0-5.218-0.546-8.01-3.604-9.587C5.721,4.835,0.369,5.685,0.369,3.985c0-0.728,1.857-1.213,3.167-1.213\nc1.202,0,5.898,0.485,14.199,0.485c8.628,0,13.544-0.485,14.417-0.485c1.201,0,2.949,0.364,2.949,1.092\nc0,1.457-3.604,0.971-7.208,2.063s-4.478,4.125-4.478,9.951v54.61C23.415,75.949,24.07,78.739,27.346,80.317z\"/>\n<path class=\"letter-2\" d=\"M49.627,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.075-1.183-5.242-0.354-5.242-1.892c0-1.064,1.638-1.3,4.26-1.892\nc5.789-1.3,9.065-3.191,10.157-3.191c2.075,0,1.856,3.31,2.512,11.585c4.26-7.447,10.157-11.231,18.021-11.231\nc10.375,0,16.165,5.674,16.165,15.724v27.546c0,3.901,0.109,5.439,2.622,6.74c2.839,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.546,1.064-1.639,1.064c-1.419,0-5.133-0.709-11.031-0.709c-5.898,0-9.502,0.709-10.922,0.709\nc-1.092,0-1.748-0.473-1.748-1.3c0-1.655,2.512-1.064,5.243-2.364c2.512-1.183,2.622-2.839,2.622-6.74V47.994\nc0-8.394-3.386-12.532-10.267-12.532c-7.427,0-13.762,7.094-13.762,17.024v22.345c0,3.901,0.109,5.439,2.621,6.74\nc2.84,1.419,5.243,0.709,5.243,2.6c0,0.592-0.655,1.064-1.748,1.064c-1.42,0-5.024-0.709-10.922-0.709\nc-5.898,0-9.611,0.709-11.031,0.709c-1.092,0-1.638-0.473-1.638-1.3c0-1.655,2.512-1.064,5.242-2.364\nc2.512-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<path class=\"letter-3\" d=\"M116.135,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.076-1.183-5.243-0.354-5.243-1.892c0-1.064,1.638-1.3,4.26-1.892\nc5.789-1.3,9.065-3.191,10.157-3.191c2.076,0,1.856,3.31,2.512,11.585c4.26-7.447,10.157-11.231,18.021-11.231\nc10.376,0,16.165,5.674,16.165,15.724v62.068c0,3.901,0.109,5.439,2.622,6.74c2.839,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.546,1.064-1.639,1.064c-1.42,0-5.134-0.709-11.032-0.709s-9.501,0.709-10.921,0.709c-1.092,0-1.748-0.473-1.748-1.3\nc0-1.655,2.512-1.064,5.243-2.364c2.512-1.183,2.622-2.839,2.622-6.74V47.994c0-8.394-3.386-12.532-10.267-12.532\nc-7.427,0-13.762,7.094-13.762,17.024v22.345c0,3.901,0.11,5.439,2.621,6.74c2.84,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.655,1.064-1.748,1.064c-1.419,0-5.024-0.709-10.922-0.709s-9.611,0.709-11.032,0.709c-1.092,0-1.638-0.473-1.638-1.3\nc0-1.655,2.513-1.064,5.243-2.364c2.512-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<path class=\"letter-4\" d=\"M189.871,31.561c6.881,0,12.779,2.72,17.584,7.803c5.025,5.438,7.864,12.532,7.864,19.153c0,7.33-2.731,14.423-7.646,19.861\nc-5.133,5.677-10.813,8.275-18.131,8.275c-15.073,0-26.322-11.467-26.322-27.545C163.22,43.383,175.016,31.561,189.871,31.561z\n  M188.996,84.171c10.267,0,15.728-8.631,15.728-25.417c0-16.197-6.007-24.946-15.728-24.946c-8.737,0-15.181,9.339-15.181,25.418\nC173.815,75.305,179.385,84.171,188.996,84.171z\"/>\n<path class=\"letter-5\" d=\"M254.752,48.939c0-5.218-6.116-3.761-6.116-5.825c0-0.85,0.437-1.092,1.638-1.092c1.53,0,3.715,0.486,6.443,0.486\nc2.841,0,4.807-0.364,6.008-0.364c1.311,0,1.967,0.364,1.967,1.092c0,1.214-1.748,0.971-3.277,2.427\nc-1.747,1.699-3.387,5.583-5.68,11.892l-12.125,26.524c-0.438,1.214-0.983,1.699-1.857,1.699c-1.748,0-1.857-1.821-3.167-5.34\nl-20.852-51.993c-1.201-3.034-2.402-4.976-3.386-5.461c-3.058-1.456-4.697-0.849-4.697-2.548c0-0.85,0.656-1.092,1.857-1.092\nc2.075,0,5.679,0.485,11.031,0.485c4.37,0,7.209-0.364,8.52-0.364c1.529,0,2.293,0.243,2.293,1.092c0,1.335-1.856,0.971-4.15,1.578\nc-1.529,0.364-2.403,1.457-2.403,3.156c0,1.456,6.434,15.95,8.291,20.683l10.267,26.333\nC252.346,52.285,254.752,52.217,254.752,48.939z\"/>\n<path class=\"letter-6\" d=\"M269.073,82.822c-6.989,0-11.14-4.368-11.14-11.043c0-10.316,9.938-15.655,30.146-23.786v-9.587\nc0-6.433-3.276-9.466-10.486-9.466c-5.461,0-8.956,2.184-9.393,5.825c-0.547,3.883-0.982,6.311-4.696,6.311\nc-2.293,0-3.823-1.82-3.823-4.49c0-5.34,6.553-10.073,18.896-10.073c12.779,0,18.786,4.369,18.786,13.956v30.825\nc0,4.246,1.311,6.553,3.605,6.553c2.074,0,3.385-2.307,4.477-2.307c0.654,0,0.983,0.364,0.983,1.093c0,2.063-3.933,6.31-8.847,6.31\nc-5.134,0-8.848-3.276-9.83-8.494C282.509,79.91,275.845,82.822,269.073,82.822z M268.091,69.23c0,5.581,2.839,8.979,7.318,8.979\nc5.68,0,12.67-5.097,12.67-10.557V50.663C274.534,56.488,268.091,61.706,268.091,69.23z\"/>\n<path class=\"letter-7\" d=\"M315.265,36.43c-1.421,0-2.076-0.349-2.076-1.047c0-1.163,3.277-2.327,7.319-6.981c4.478-5.12,5.132-8.726,6.333-8.726\nc0.765,0,0.983,0.465,0.983,1.629V32.94h10.049c2.185,0,3.167,0.116,3.167,1.746c0,1.28-0.982,1.744-3.275,1.744h-9.831v35.022\nc0,7.098,1.966,10.471,6.99,10.471c5.134,0,6.444-5.584,8.192-5.584c0.655,0,1.31,0.698,1.31,1.628\nc0,2.909-5.024,7.446-13.106,7.446c-9.829,0-12.67-4.537-12.67-14.543V36.43H315.265z\"/>\n<path class=\"letter-8\" d=\"M352.395,36.349c-2.402-0.931-5.461,0.117-5.461-1.397c0-1.28,1.528-1.164,4.479-1.862\nc6.772-1.514,10.485-3.608,11.469-3.608c0.873,0,1.201,0.583,1.201,1.746v41.436c0,3.839,0.109,5.47,2.622,6.634\nc2.838,1.396,5.241,0.699,5.241,2.56c0,0.582-0.655,1.048-1.748,1.048c-1.31,0-4.913-0.699-10.921-0.699s-9.722,0.699-11.032,0.699\nc-1.092,0-1.638-0.466-1.638-1.048c0-1.86,2.402-1.163,5.242-2.56c2.402-1.164,2.621-2.677,2.621-6.634V41.004\nC354.47,38.211,354.142,37.047,352.395,36.349z M358.185-0.314c3.057,0,5.569,2.677,5.569,6.052c0,3.259-2.403,5.936-5.569,5.936\nc-3.168,0-5.68-2.677-5.68-5.936C352.505,2.363,355.017-0.314,358.185-0.314z\"/>\n<path class=\"letter-9\" d=\"M406.231,31.561c6.881,0,12.779,2.72,17.585,7.803c5.023,5.438,7.864,12.532,7.864,19.153c0,7.33-2.731,14.423-7.646,19.861\nc-5.133,5.677-10.813,8.275-18.131,8.275c-15.072,0-26.321-11.467-26.321-27.545C379.582,43.383,391.378,31.561,406.231,31.561z\n  M405.358,84.171c10.267,0,15.727-8.631,15.727-25.417c0-16.197-6.007-24.946-15.727-24.946c-8.738,0-15.182,9.339-15.182,25.418\nC390.177,75.305,395.747,84.171,405.358,84.171z\"/>\n<path class=\"letter-10\" d=\"M449.253,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.075-1.183-5.243-0.354-5.243-1.892c0-1.064,1.64-1.3,4.261-1.892\nc5.788-1.3,9.064-3.191,10.156-3.191c2.076,0,1.856,3.31,2.513,11.585c4.26-7.447,10.158-11.231,18.021-11.231\nc10.378,0,16.166,5.674,16.166,15.724v27.546c0,3.901,0.108,5.439,2.621,6.74c2.84,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.547,1.064-1.639,1.064c-1.421,0-5.133-0.709-11.03-0.709c-5.898,0-9.503,0.709-10.923,0.709\nc-1.093,0-1.747-0.473-1.747-1.3c0-1.655,2.511-1.064,5.242-2.364c2.512-1.183,2.621-2.839,2.621-6.74V47.994\nc0-8.394-3.386-12.532-10.266-12.532c-7.428,0-13.764,7.094-13.764,17.024v22.345c0,3.901,0.109,5.439,2.621,6.74\nc2.841,1.419,5.244,0.709,5.244,2.6c0,0.592-0.656,1.064-1.748,1.064c-1.421,0-5.025-0.709-10.922-0.709\nc-5.898,0-9.611,0.709-11.031,0.709c-1.093,0-1.64-0.473-1.64-1.3c0-1.655,2.513-1.064,5.243-2.364\nc2.513-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<defs>\n    <filter id=\"mySVGfilter\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n        <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"5\"/>\n    </filter>\n</defs>\n</svg>";
+      var introCenterTitle = document.createElement('div');
+      introCenterTitle.classList.add('center__title');
+      introCenter.appendChild(introCenterTitle);
+      var introBottom = document.createElement('div');
+      introBottom.classList.add('intro__bottom');
+      var introBottomLamps = document.createElement('div');
+      introBottomLamps.classList.add('bottom__lamp');
+
+      for (var i = 0; i < 3; i += 1) {
+        var introBottomLamp = document.createElement('div');
+        introBottomLamp.classList.add("bottom__lamp--".concat(i + 1));
+        introBottomLamps.appendChild(introBottomLamp);
+      }
+
+      introBottom.appendChild(introBottomLamps);
+      var introGear = document.createElement('div');
+      introGear.classList.add('intro__gear');
+      var introGear1 = document.createElement('div');
+      introGear1.classList.add('intro__gear1');
+      var introGear2 = document.createElement('div');
+      introGear2.classList.add('intro__gear2');
+      introGear.appendChild(introGear1);
+      introGear.appendChild(introGear2);
+      introContainer.appendChild(introTop);
+      introContainer.appendChild(introCenter);
+      introContainer.appendChild(introBottom);
+      introContainer.appendChild(introGear);
+      divIntro.appendChild(introContainer);
+      document.body.appendChild(divIntro);
+      var img = new Image();
+      img.src = './assets/img/intro/center.png';
+      img.addEventListener('load', function () {
+        introBottom.classList.add('show'); // set up and display main menu
+
+        var menu = new _mainMenu__WEBPACK_IMPORTED_MODULE_0__.default(introTop);
+        menu.render();
+      });
+    }
+  }]);
+
+  return Intro;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/js/components/Player.js":
 /*!*************************************!*\
   !*** ./src/js/components/Player.js ***!
@@ -951,6 +1034,162 @@ var gameState = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameState);
+
+/***/ }),
+
+/***/ "./src/js/components/mainMenu.js":
+/*!***************************************!*\
+  !*** ./src/js/components/mainMenu.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__,
+/* harmony export */   "usersInfo": () => /* binding */ usersInfo
+/* harmony export */ });
+/* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var usersInfo = {};
+
+function validation(userObj) {
+  return userObj.names.every(function (name) {
+    return name.length > 2 && name.length < 11;
+  });
+} // TODO need some refactor later, move to display folder, use function?
+
+
+var Menu = /*#__PURE__*/function () {
+  function Menu(parent) {
+    _classCallCheck(this, Menu);
+
+    this.parent = parent;
+  }
+
+  _createClass(Menu, [{
+    key: "createMenuItem",
+    value: function createMenuItem(text) {
+      return (
+        /* html */
+        "<a href=\"#\" class=\"menu__link ".concat((arguments.length <= 1 ? undefined : arguments[1]) || '', "\" ").concat((arguments.length <= 2 ? undefined : arguments[2]) || '', ">\n      ").concat(text, "\n      <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 152.9 43.4\" style=\"enable-background:new 0 0 152.9 43.4;\" xml:space=\"preserve\">\n        <path d=\"M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4\"/>\n      </svg>\n    </a><br>")
+      );
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      this.menu = document.createElement('div');
+      this.menu.classList.add('menu');
+      this.menu.innerHTML = "\n    ".concat(this.createMenuItem('Новая игра', 'start'), "\n    ").concat(this.createMenuItem('Продолжить'), "\n    ").concat(this.createMenuItem('Сохранить игру'), "\n    ").concat(this.createMenuItem('Правила игры', 'rules'), "\n    ").concat(this.createMenuItem('Обзор игры'), "\n    ");
+      this.parent.append(this.menu);
+      this.renderPdfRules();
+      this.menu.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'A' && e.target.tagName !== 'SPAN' && e.target !== _this.menu.querySelector('button')) {
+          return;
+        }
+
+        if (e.target.className.includes('start')) {
+          _this.createChoosePlayersItems();
+        } else if (e.target.className.includes('rules')) {
+          _this.rulesWrraper.hidden = false;
+        } else if (e.target.className.includes('close')) {
+          _this.rulesWrraper.hidden = true;
+        } else if (e.target.dataset.players) {
+          _this.createNameInputField(e.target.dataset.players);
+        } else if (e.target.className.includes('get-names')) {
+          e.preventDefault();
+
+          _this.writeNamesToObject();
+
+          if (validation(usersInfo) && usersInfo.names.length) {
+            var intro = _this.menu.parentElement.parentElement.parentElement;
+            intro.classList.toggle('intro--hide');
+            console.log(usersInfo); // initHotSeatGame('Player1', 'Player2');
+
+            (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)(usersInfo.names); //! Hardcoded for 2 players.
+            // Should take player names as arguments
+          }
+        } else if (e.target.className.includes('back')) {
+          _this.menu.remove();
+
+          _this.render();
+
+          _this.menu.classList.add('menu__used');
+        }
+      });
+    }
+  }, {
+    key: "renderPdfRules",
+    value: function renderPdfRules() {
+      this.rulesWrraper = document.createElement('div');
+      this.rulesWrraper.classList.add('iframe__wrraper');
+      this.rulesWrraper.hidden = true;
+      this.rulesWrraper.innerHTML =
+      /* html */
+      "\n        <span class=\"close\">&#10006</span>\n        <iframe class=\"iframe\" src=\"./assets/innovation_rules_rus_final.pdf\" width=\"70%\" height=\"70%\"></iframe>\n    ";
+      this.menu.append(this.rulesWrraper);
+    }
+  }, {
+    key: "createChoosePlayersItems",
+    value: function createChoosePlayersItems() {
+      for (var i = 0; i < this.menu.children.length; i += 1) {
+        this.menu.children[i].hidden = true;
+      }
+
+      this.menu.innerHTML =
+      /* html */
+      "\n    ".concat(this.createMenuItem('2 игрока', '', 'data-players=2'), "\n    ").concat(this.createMenuItem('3 игрока', '', 'data-players=3'), "\n    ").concat(this.createMenuItem('4 игрока', '', 'data-players=4'), "\n    ").concat(this.createMenuItem('Главное меню', 'back'), "\n    ");
+    }
+  }, {
+    key: "createNameInputField",
+    value: function createNameInputField(numberOfFields) {
+      usersInfo.players = numberOfFields;
+      this.menu.innerHTML =
+      /* html */
+      "\n      <form>\n        ".concat(this.createInputs(numberOfFields), "\n        <button class=\"menu__link get-names\" type=\"submit\">\u041F\u0440\u0438\u043D\u044F\u0442\u044C</button>\n      </form>\n      ").concat(this.createMenuItem('Главное меню', 'back'), "\n    ");
+    }
+  }, {
+    key: "createInputs",
+    value: function createInputs(num) {
+      var inputHTML = [];
+
+      for (var i = 1; i <= num; i += 1) {
+        inputHTML.push(
+        /* html */
+        "\n        <label for=\"plaeyr".concat(i, "\">\u0412\u0432\u0435\u0434\u0438\u0442\u0438 \u0438\u043C\u044F \u0438\u0433\u0440\u043E\u043A\u0430 \u2116 ").concat(i, "</label>\n        <input type=\"text\" id=\"player").concat(i, "\" name=\"name\" data-name=\"\" pattern=\"[a-zA-Z\u0430-\u044F\u0410-\u042F0-9_]{3,10}\" title=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043E\u0442 3 \u0434\u043E 10 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432\" required>\n      "));
+      }
+
+      return inputHTML;
+    }
+  }, {
+    key: "writeNamesToObject",
+    value: function writeNamesToObject() {
+      var inputs = this.menu.querySelectorAll('[data-name]');
+      var playerNames = [];
+
+      for (var i = 0; i < inputs.length; i += 1) {
+        if (inputs[i].value) {
+          playerNames.push(inputs[i].value);
+        }
+      }
+
+      usersInfo.names = playerNames;
+      return playerNames;
+    }
+  }]);
+
+  return Menu;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Menu);
+
 
 /***/ }),
 
@@ -1701,34 +1940,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
 /* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
 /* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
-/* harmony import */ var _setChat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setChat */ "./src/js/utility/setChat.js");
-/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
-/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./getCardObject */ "./src/js/utility/getCardObject.js");
-/* harmony import */ var _components_gameState__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/gameState */ "./src/js/components/gameState.js");
+/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
+/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./getCardObject */ "./src/js/utility/getCardObject.js");
+/* harmony import */ var _components_gameState__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/gameState */ "./src/js/components/gameState.js");
 
 
 
 
 
+ // import setChat from './setChat';
 
 
 
 
-
-function initHotSeatGame() {
+function initHotSeatGame(playerNames) {
   // contains dom elements
   var gameUI = new _components_GameUI__WEBPACK_IMPORTED_MODULE_5__.default(); // contains sorted card objects
 
   var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_4__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_3__); // shuffle arr of cards objects
 
-  (0,_shuffle__WEBPACK_IMPORTED_MODULE_7__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
+  (0,_shuffle__WEBPACK_IMPORTED_MODULE_6__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
 
   var gameField = new _components_GameField__WEBPACK_IMPORTED_MODULE_0__.default(arrOfCards); // contains players properties and cards
 
   var players = [];
 
-  for (var i = 0; i < arguments.length; i += 1) {
-    var player = new _components_Player__WEBPACK_IMPORTED_MODULE_1__.default(gameUI, arguments[i], i + 1);
+  for (var i = 0; i < playerNames.length; i += 1) {
+    var player = new _components_Player__WEBPACK_IMPORTED_MODULE_1__.default(gameUI, playerNames[i], i + 1);
     players.push(player);
   } // work with all main objects
 
@@ -1736,12 +1974,9 @@ function initHotSeatGame() {
   var game = new _components_Game__WEBPACK_IMPORTED_MODULE_2__.default(gameUI, gameField, players, arrOfCards);
   game.newTurn(); // display first modal without animation
 
-  document.querySelector('.modal').style.opacity = '1'; // gameStateService.initPlayers('Player1', 'Player2');
-  // gameStateService.initAgeDecks(arrOfCards);
-
-  console.log(_components_gameState__WEBPACK_IMPORTED_MODULE_9__.default); // init chat
-
-  (0,_setChat__WEBPACK_IMPORTED_MODULE_6__.default)();
+  document.querySelector('.modal').style.opacity = '1';
+  console.log(_components_gameState__WEBPACK_IMPORTED_MODULE_8__.default); // init chat
+  // setChat();
 }
 
 /***/ }),
@@ -1787,66 +2022,6 @@ function setAsideControls() {
 
   buttons.forEach(function (button) {
     button.addEventListener('click', animation);
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/utility/setChat.js":
-/*!***********************************!*\
-  !*** ./src/js/utility/setChat.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ setChat
-/* harmony export */ });
-function setChat() {
-  // eslint-disable-next-line no-undef
-  var socket = io();
-  var messageContainer = document.querySelector('.chat-block');
-  var messageForm = document.querySelector('.chat-log__form');
-  var messageInput = document.querySelector('.chat-log__input');
-  var players = document.querySelectorAll('.head-row__name');
-  var userName = prompt('What is your name?');
-
-  function appendMessage(message) {
-    var messageElement = document.createElement('div');
-    messageElement.innerText = message;
-    messageContainer.append(messageElement);
-  }
-
-  function autoScroll() {
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-  }
-
-  appendMessage('You joined');
-  socket.emit('new-user', userName);
-  socket.on('chat-message', function (data) {
-    appendMessage("".concat(data.name, ": ").concat(data.message));
-    autoScroll();
-  });
-  socket.on('user-connected', function (name) {
-    appendMessage("".concat(name, " connected"));
-  });
-  socket.on('players', function (name) {
-    var nameOfUsers = Object.values(name);
-    players.forEach(function (el, i) {
-      el.textContent = nameOfUsers[i];
-    });
-  });
-  socket.on('user-disconnected', function (name) {
-    appendMessage("".concat(name, " disconnected"));
-  });
-  messageForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (messageInput.value === '') return;
-    var message = messageInput.value;
-    appendMessage("You: ".concat(message));
-    socket.emit('send-chat-message', message);
-    autoScroll();
-    messageInput.value = '';
   });
 }
 
