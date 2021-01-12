@@ -177,7 +177,8 @@ function getRenderCard() {
       hand.append(cardElement);
     },
     toActive: function toActive(cardElement) {
-      if (hand === null || activeStacks === null) this.initObject();
+      if (hand === null || activeStacks === null) this.initObject(); // get properties of target stack to calcualte later
+
       var targetStack = {};
       activeStacks.forEach(function (stack) {
         if (cardElement.children[0].classList.contains("card__color--".concat(stack.id))) {
@@ -191,6 +192,7 @@ function getRenderCard() {
         }
       });
       cardElement.style.position = 'absolute';
+      cardElement.setAttribute('xyz', 'fade right-3 flip-right rotate-left');
       cardElement.classList.add('xyz-in');
       var cardHeight = cardElement.offsetHeight;
       var cardShiftValue = 40;
@@ -290,7 +292,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- //!! TEST
+ //! ! TEST
 
 
 
@@ -2120,16 +2122,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
 /* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
 /* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
-/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./getCardObject */ "./src/js/utility/getCardObject.js");
-/* harmony import */ var _components_gameState__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/gameState */ "./src/js/components/gameState.js");
 
 
 
 
 
  // import setChat from './setChat';
-
-
 
 
 function initHotSeatGame(playerNames) {

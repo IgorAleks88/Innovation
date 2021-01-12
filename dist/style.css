@@ -15,8 +15,8 @@ body {
   height: auto;
   width: 100vw; }
   body ::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 1rem; }
+    height: 1rem;
+    width: 0.5rem; }
   body ::-webkit-scrollbar-track {
     background: #e7e7e7; }
   body ::-webkit-scrollbar-thumb {
@@ -352,22 +352,22 @@ b {
 label {
   color: wheat; }
 
-input[type="text"] {
+input[type='text'] {
   display: block;
-  padding-left: 25px;
-  margin: 5px auto; }
-  input[type="text"]:valid {
-    border: green solid 3px;
+  margin: 5px auto;
+  padding-left: 25px; }
+  input[type='text']:valid {
     background-image: url(./assets/icons/succeess.svg.png);
-    background-size: 20px;
+    background-position: left;
     background-repeat: no-repeat;
-    background-position: left; }
-  input[type="text"]:invalid {
-    border: red solid 3px;
+    background-size: 20px;
+    border: #008800 solid 3px; }
+  input[type='text']:invalid {
     background-image: url(./assets/icons/unnamed.png);
-    background-size: 20px;
+    background-position: left;
     background-repeat: no-repeat;
-    background-position: left; }
+    background-size: 20px;
+    border: red solid 3px; }
 
 .hide {
   display: none; }
@@ -1253,30 +1253,30 @@ input[type="text"] {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 100%;
   height: calc(100vh - 44.5rem);
   margin-left: 1rem;
-  transition: all 0.3s; }
+  overflow-x: auto;
+  overflow-y: hidden;
+  transition: all 0.3s;
+  width: 100%; }
 
 .active-zone__stack {
-  width: 32rem;
-  height: calc(100vh - 46rem);
-  position: relative;
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  flex-shrink: 0; }
+  flex-shrink: 0;
+  height: calc(100vh - 46rem);
+  position: relative;
+  width: 32rem; }
   .active-zone__stack--empty {
-    width: 0;
-    height: 0; }
+    height: 0;
+    width: 0; }
   .active-zone__stack .card {
+    bottom: 0;
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
     cursor: pointer;
-    transition: all 0.2s linear;
-    bottom: 0; }
+    transition: all 0.2s linear; }
 
 .hand {
   align-items: flex-start;
