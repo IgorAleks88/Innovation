@@ -42,31 +42,30 @@
 .active-zone__cards-wrapper {
   @include flex(row, flex-start, flex-end);
   flex-wrap: nowrap;
-  overflow: auto;
-  width: 100%;
   height: calc(100vh - 44.5rem);
   margin-left: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
   transition: all 0.3s;
+  width: 100%;
 }
 
 .active-zone__stack {
-  width: 32rem;
-  height: calc(100vh - 46rem);
-  position: relative;
   @include flex(column, flex-start, flex-start);
   flex-shrink: 0;
-  // max-height: calc(100vh - 46rem);
-  // overflow-y: auto;
+  height: calc(100vh - 46rem);
+  position: relative;
+  width: 32rem;
 
   &--empty {
-    width: 0;
     height: 0;
+    width: 0;
   }
 
   .card {
+    bottom: 0;
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
     cursor: pointer;
     transition: all 0.2s linear;
-    bottom: 0;
   }
 }

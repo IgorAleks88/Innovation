@@ -53,7 +53,6 @@ class Menu {
         if (validation(usersInfo) && usersInfo.names.length) {
           const intro = this.menu.parentElement.parentElement.parentElement;
           intro.classList.toggle('intro--hide');
-          console.log(usersInfo);
           // initHotSeatGame('Player1', 'Player2');
           initHotSeatGame(usersInfo.names); //! Hardcoded for 2 players.
           // Should take player names as arguments

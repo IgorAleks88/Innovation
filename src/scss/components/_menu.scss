@@ -90,30 +90,30 @@
 }
 
 label {
-  color: wheat;
+  color: rgb(245, 222, 179);
 }
 
-input[type="text"] {
+input[type='text'] {
   display: block;
-  padding-left: 25px;
   margin: 5px auto;
+  padding-left: 25px;
+
   &:valid {
-    border: green solid 3px;
-    background-image: url(../../assets/icons/succeess.svg.png);
-    background-size: 20px;
-    background-repeat: no-repeat;
+    background-image: url('../../assets/icons/succeess.svg.png');
     background-position: left;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    border: rgb(0, 136, 0) solid 3px;
   }
+
   &:invalid {
-    border: red solid 3px;
-    background-image: url(../../assets/icons/unnamed.png);
-    background-size: 20px;
-    background-repeat: no-repeat;
+    background-image: url('../../assets/icons/unnamed.png');
     background-position: left;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    border: rgb(255, 0, 0) solid 3px;
   }
 }
-
-
 
 .hide {
   display: none;

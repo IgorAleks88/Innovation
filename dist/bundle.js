@@ -15,7 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
 /* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
 /* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
-/* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
 // import styles
 
  // import js modules
@@ -23,29 +22,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-<<<<<<< HEAD
  // display intro & menu
-// Intro.init();
-// display game UI
-=======
- // import initHotSeatGame from './utility/initHotSeatGame';
-// display intro & menu
 
 _components_Intro__WEBPACK_IMPORTED_MODULE_5__.default.init(); // display game UI
->>>>>>> 2ac4e147b9c14ab4dc9024cc36d3a5ed8de20a0e
 
 document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__.default.init()); // add event listeners to hand controls
 
 (0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__.default)(); // add event listeners and animations to aside buttons
 
-<<<<<<< HEAD
-(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); //! Added for testing! Uncomment next 2 lines and comment line 12 with Intro.init()
-
-
-(0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_6__.default)('Player1', 'Player2');
-=======
-(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); // initHotSeatGame('Player1', 'Player2');
->>>>>>> 2ac4e147b9c14ab4dc9024cc36d3a5ed8de20a0e
+(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)();
 
 /***/ }),
 
@@ -169,8 +154,11 @@ function parseCards(cardsJSON) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "renderCard": () => /* binding */ renderCard
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _components_gameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/gameState */ "./src/js/components/gameState.js");
+
+
 function getRenderCard() {
   var hand = null;
   var activeStacks = null;
@@ -190,18 +178,80 @@ function getRenderCard() {
     },
     toActive: function toActive(cardElement) {
       if (hand === null || activeStacks === null) this.initObject();
-      var targetStack = null;
+      var targetStack = {};
       activeStacks.forEach(function (stack) {
-        if (cardElement.children[0].classList.contains("card__color--".concat(stack.id))) targetStack = stack;
+        if (cardElement.children[0].classList.contains("card__color--".concat(stack.id))) {
+          stack.classList.remove('active-zone__stack--empty');
+          targetStack.dom = stack;
+          stack.style.width = null;
+          targetStack.width = stack.offsetWidth;
+          targetStack.height = stack.offsetHeight;
+          targetStack.shift = _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[targetStack.dom.id].shift;
+          targetStack.length = _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[targetStack.dom.id].cards.length;
+        }
       });
+      cardElement.style.position = 'absolute';
+      cardElement.classList.add('xyz-in');
+      var cardHeight = cardElement.offsetHeight;
+      var cardShiftValue = 40;
+
+      switch (targetStack.shift) {
+        case 'top':
+          while (targetStack.height < cardHeight + targetStack.length * cardShiftValue && cardShiftValue !== 10) {
+            cardShiftValue -= 10;
+          }
+
+          Array.from(targetStack.dom.children).forEach(function (card, i) {
+            card.style.bottom = "".concat(i * cardShiftValue, "px");
+          });
+          cardElement.style.bottom = "".concat(targetStack.length * cardShiftValue, "px");
+          break;
+
+        case 'left':
+          while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width + targetStack.length * cardShiftValue && cardShiftValue !== 10) {
+            cardShiftValue -= 10;
+          }
+
+          Array.from(targetStack.dom.children).forEach(function (card, i) {
+            card.style.right = "".concat(i * cardShiftValue, "px");
+          });
+          cardElement.style.right = "".concat(targetStack.length * cardShiftValue, "px");
+
+          if (targetStack.length !== 0) {
+            targetStack.dom.style.width = "".concat(targetStack.width + cardShiftValue * targetStack.length, "px");
+          }
+
+          break;
+
+        case 'right':
+          while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width + targetStack.length * cardShiftValue && cardShiftValue !== 10) {
+            cardShiftValue -= 10;
+          }
+
+          Array.from(targetStack.dom.children).forEach(function (card, i) {
+            card.style.left = "".concat(i * cardShiftValue, "px");
+          });
+          cardElement.style.left = "".concat(targetStack.length * cardShiftValue, "px");
+
+          if (targetStack.length !== 0) {
+            targetStack.dom.style.width = "".concat(targetStack.width + cardShiftValue * targetStack.length, "px");
+          }
+
+          break;
+
+        default:
+          break;
+      }
+
+      targetStack.dom.append(cardElement);
+      targetStack.dom.scrollIntoView();
     }
   };
-  renderCard.initObject();
   return renderCard;
 }
 
 var renderCard = getRenderCard();
-
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderCard);
 
 /***/ }),
 
@@ -218,13 +268,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
 /* harmony import */ var _display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayNewTurnModal */ "./src/js/display/displayNewTurnModal.js");
 /* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
-<<<<<<< HEAD
-/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
-/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
-=======
 /* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
 /* harmony import */ var _utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utility/getCardObject */ "./src/js/utility/getCardObject.js");
->>>>>>> 2ac4e147b9c14ab4dc9024cc36d3a5ed8de20a0e
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -241,9 +288,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 */
 
 
+
+
  //!! TEST
-
-
 
 
 
@@ -438,14 +485,14 @@ var Game = /*#__PURE__*/function () {
 
       var cardObject = this.currentDeck.cardsArray.pop();
       this.currentPlayer.hand.push(cardObject);
-      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_4__.default.frontSide(cardObject);
+      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_6__.default.frontSide(cardObject);
 
       cardElement.onclick = function () {
         _this4.currentPlayer.playCard(cardObject, cardElement);
       }; //! TEMP
 
 
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.renderCard.toActive(cardElement);
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_5__.default.toHand(cardElement);
       this.currentPlayer.setCurrentAge();
       _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer);
       this.actionDone();
@@ -810,12 +857,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => /* binding */ Player
 /* harmony export */ });
 /* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
-/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
+/* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 
 
@@ -985,74 +1036,12 @@ var Player = /*#__PURE__*/function () {
   }, {
     key: "playCard",
     value: function playCard(cardObj, cardElement) {
-      var _this6 = this;
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_1__.default.toActive(cardElement); // test block, emulate adding card to active zone
 
-      Object.keys(this.activeStacks).forEach(function (stackName) {
-        if (stackName === cardObj.color) {
-          _this6.hand.forEach(function (e, i) {
-            if (e === cardObj) {
-              _this6.hand.splice(i, 1);
-            }
-          });
-
-          if (_this6.activeStacks[stackName].cards.length === 0) {
-            document.querySelector("#".concat(stackName)).classList.remove('active-zone__stack--empty');
-          }
-
-          cardElement.style.position = 'absolute';
-          cardElement.classList.add('xyz-in');
-          var stackCards = _this6.activeStacks[stackName].cards;
-          var stackShift = _this6.activeStacks[stackName].shift;
-          var stackElement = _this6.gameUI.activeStacks[stackName];
-          var stackDefWidth = _this6.gameUI.activeStacks[stackName].offsetWidth;
-          var cardShiftValue = 40;
-          var cardDefHeight = cardElement.offsetHeight;
-          var stackDefHeight = _this6.gameUI.activeStacks[stackName].offsetHeight;
-
-          if (stackDefHeight < cardDefHeight + stackCards.length * cardShiftValue && Array.from(stackElement.children)[0].style !== '30px' && stackShift === 'top') {
-            cardShiftValue = 30;
-            Array.from(stackElement.children).forEach(function (child, i) {
-              child.style.bottom = "".concat(i * cardShiftValue, "px");
-            });
-          }
-
-          if (stackDefHeight < cardDefHeight + stackCards.length * cardShiftValue && Array.from(stackElement.children)[0].style !== '20px' && stackShift === 'top') {
-            cardShiftValue = 20;
-            Array.from(stackElement.children).forEach(function (child, i) {
-              child.style.bottom = "".concat(i * cardShiftValue, "px");
-            });
-          }
-
-          if (stackDefHeight < cardDefHeight + stackCards.length * cardShiftValue && stackShift === 'top') {
-            cardShiftValue = 10;
-            Array.from(stackElement.children).forEach(function (child, i) {
-              child.style.bottom = "".concat(i * cardShiftValue, "px");
-            });
-          }
-
-          if (stackShift === 'top') {
-            cardElement.style.bottom = "".concat(stackCards.length * cardShiftValue, "px");
-          } else if (stackShift === 'right' && stackCards.length !== 0) {
-            cardElement.style.left = "".concat(stackCards.length * 40, "px"); // this.gameUI.activeStacks[stackName].offsetWidth += 40;
-
-            stackElement.style.width = "".concat(stackDefWidth + 40, "px");
-          } else if (stackShift === 'left') {
-            cardElement.style.right = "".concat(stackCards.length * 40, "px"); // this.gameUI.activeStacks[stackName].offsetWidth += 40;
-
-            if (stackCards.length !== 0) {
-              stackElement.style.width = "".concat(stackDefWidth + 40, "px");
-            }
-          }
-
-          _this6.activeStacks[stackName].cards.push(cardObj);
-
-          _this6.gameUI.activeStacks[stackName].append(cardElement);
-
-          _this6.gameUI.activeStacks[stackName].scrollIntoView();
-        }
-      });
+      var test = cardElement.parentElement.id;
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.activePlayer.activeDecks[test].cards.push(1);
       this.calculateResources();
-      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_1__.default.changePlayerStats(this);
+      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__.default.changePlayerStats(this);
       this.game.actionDone();
     }
   }]);
@@ -1101,15 +1090,18 @@ var gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null
+        shift: 'right' //! test
+
       },
       green: {
         cards: [],
-        shift: null
+        shift: 'top' //! test
+
       },
       blue: {
         cards: [],
-        shift: null
+        shift: 'left' //! test
+
       },
       purple: {
         cards: [],
@@ -1117,7 +1109,8 @@ var gameState = {
       },
       yellow: {
         cards: [],
-        shift: null
+        shift: 'top' //! test
+
       }
     }
   },
@@ -1286,15 +1279,7 @@ var Menu = /*#__PURE__*/function () {
 
           if (validation(usersInfo) && usersInfo.names.length) {
             var intro = _this.menu.parentElement.parentElement.parentElement;
-            intro.classList.toggle('intro--hide');
-<<<<<<< HEAD
-            (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)('Player1', 'Player2'); //! Hardcoded for 2 players. Should take player names as arguments
-          }
-        } else if (e.target.className.includes('back')) {
-          _this.menu.remove();
-
-=======
-            console.log(usersInfo); // initHotSeatGame('Player1', 'Player2');
+            intro.classList.toggle('intro--hide'); // initHotSeatGame('Player1', 'Player2');
 
             (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)(usersInfo.names); //! Hardcoded for 2 players.
             // Should take player names as arguments
@@ -1302,7 +1287,6 @@ var Menu = /*#__PURE__*/function () {
         } else if (e.target.className.includes('back')) {
           _this.menu.remove();
 
->>>>>>> 2ac4e147b9c14ab4dc9024cc36d3a5ed8de20a0e
           _this.render();
 
           _this.menu.classList.add('menu__used');
@@ -2136,20 +2120,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
 /* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
 /* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
-<<<<<<< HEAD
-=======
 /* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./getCardObject */ "./src/js/utility/getCardObject.js");
 /* harmony import */ var _components_gameState__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/gameState */ "./src/js/components/gameState.js");
 
 
->>>>>>> 2ac4e147b9c14ab4dc9024cc36d3a5ed8de20a0e
 
 
 
  // import setChat from './setChat';
 
 
- // import setChat from './setChat';
 
 
 function initHotSeatGame(playerNames) {
@@ -2173,12 +2153,7 @@ function initHotSeatGame(playerNames) {
   var game = new _components_Game__WEBPACK_IMPORTED_MODULE_2__.default(gameUI, gameField, players, arrOfCards);
   game.newTurn(); // display first modal without animation
 
-<<<<<<< HEAD
   document.querySelector('.modal').style.opacity = '1'; // init chat
-=======
-  document.querySelector('.modal').style.opacity = '1';
-  console.log(_components_gameState__WEBPACK_IMPORTED_MODULE_8__.default); // init chat
->>>>>>> 2ac4e147b9c14ab4dc9024cc36d3a5ed8de20a0e
   // setChat();
 }
 

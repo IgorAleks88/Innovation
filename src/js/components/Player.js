@@ -1,5 +1,7 @@
 import getCard from '../cards/getCard';
+import renderCard from '../cards/renderCard';
 import header from '../display/playerTable/displayHeader';
+import gameState from './gameState';
 
 /*
 * store all player cards objects (hand/table/lead/influence)
@@ -138,68 +140,11 @@ export default class Player {
   // on click event for cards in hand. Play card in stack depends on category
   // TODO: later this method should add dogma function to each played card
   playCard(cardObj, cardElement) {
-    Object.keys(this.activeStacks).forEach((stackName) => {
-      if (stackName === cardObj.color) {
-        this.hand.forEach((e, i) => {
-          if (e === cardObj) {
-            this.hand.splice(i, 1);
-          }
-        });
-        if (this.activeStacks[stackName].cards.length === 0) {
-          document.querySelector(`#${stackName}`).classList.remove('active-zone__stack--empty');
-        }
+    renderCard.toActive(cardElement);
 
-        cardElement.style.position = 'absolute';
-        cardElement.classList.add('xyz-in');
-
-        const stackCards = this.activeStacks[stackName].cards;
-        const stackShift = this.activeStacks[stackName].shift;
-        const stackElement = this.gameUI.activeStacks[stackName];
-        const stackDefWidth = this.gameUI.activeStacks[stackName].offsetWidth;
-
-        let cardShiftValue = 40;
-        const cardDefHeight = cardElement.offsetHeight;
-        const stackDefHeight = this.gameUI.activeStacks[stackName].offsetHeight;
-        if (stackDefHeight < cardDefHeight + (stackCards.length * cardShiftValue) && Array.from(stackElement.children)[0].style !== '30px' && stackShift === 'top') {
-          cardShiftValue = 30;
-          Array.from(stackElement.children).forEach((child, i) => {
-            child.style.bottom = `${i * cardShiftValue}px`;
-          });
-        }
-        if (stackDefHeight < cardDefHeight + (stackCards.length * cardShiftValue) && Array.from(stackElement.children)[0].style !== '20px' && stackShift === 'top') {
-          cardShiftValue = 20;
-          Array.from(stackElement.children).forEach((child, i) => {
-            child.style.bottom = `${i * cardShiftValue}px`;
-          });
-        }
-        if (stackDefHeight < cardDefHeight + (stackCards.length * cardShiftValue) && stackShift === 'top') {
-          cardShiftValue = 10;
-          Array.from(stackElement.children).forEach((child, i) => {
-            child.style.bottom = `${i * cardShiftValue}px`;
-          });
-        }
-
-        if (stackShift === 'top') {
-          cardElement.style.bottom = `${stackCards.length * cardShiftValue}px`;
-        } else if (stackShift === 'right' && stackCards.length !== 0) {
-          cardElement.style.left = `${stackCards.length * 40}px`;
-          // this.gameUI.activeStacks[stackName].offsetWidth += 40;
-          stackElement.style.width = `${stackDefWidth + 40}px`;
-        } else if (stackShift === 'left') {
-          cardElement.style.right = `${stackCards.length * 40}px`;
-          // this.gameUI.activeStacks[stackName].offsetWidth += 40;
-          if (stackCards.length !== 0) {
-            stackElement.style.width = `${stackDefWidth + 40}px`;
-          }
-        }
-
-        this.activeStacks[stackName].cards.push(cardObj);
-
-        this.gameUI.activeStacks[stackName].append(cardElement);
-
-        this.gameUI.activeStacks[stackName].scrollIntoView()
-      }
-    });
+    // test block, emulate adding card to active zone
+    const test = cardElement.parentElement.id;
+    gameState.activePlayer.activeDecks[test].cards.push(1);
     this.calculateResources();
     header.changePlayerStats(this);
     this.game.actionDone();

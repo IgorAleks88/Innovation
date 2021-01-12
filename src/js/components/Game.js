@@ -12,8 +12,8 @@ import displayNextTurnBtn from '../display/displayNextTurnBtn';
 import gameState from './gameState';
 import getCardObject from '../utility/getCardObject';
 
-//!! TEST
-import { renderCard } from '../cards/renderCard';
+//! ! TEST
+import renderCard from '../cards/renderCard';
 import getCard from '../cards/getCard';
 
 export default class Game {
@@ -179,7 +179,7 @@ export default class Game {
 
     cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
 
-    renderCard.toActive(cardElement);
+    renderCard.toHand(cardElement);
 
     this.currentPlayer.setCurrentAge();
     header.changePlayerStats(this.currentPlayer);

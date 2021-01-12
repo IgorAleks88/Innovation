@@ -15,9 +15,8 @@ body {
   height: auto;
   width: 100vw; }
   body ::-webkit-scrollbar {
-    width: 0.5rem; }
-  body ::-webkit-scrollbar {
-    width: 0.5rem; }
+    width: 0.5rem;
+    height: 1rem; }
   body ::-webkit-scrollbar-track {
     background: #e7e7e7; }
   body ::-webkit-scrollbar-thumb {
@@ -1254,7 +1253,8 @@ input[type="text"] {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   width: 100%;
   height: calc(100vh - 44.5rem);
   margin-left: 1rem;
