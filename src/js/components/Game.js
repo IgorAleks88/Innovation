@@ -10,6 +10,7 @@ import header from '../display/playerTable/displayHeader';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import displayNextTurnBtn from '../display/displayNextTurnBtn';
 import gameState from './gameState';
+import getCardObject from '../utility/getCardObject';
 
 export default class Game {
   constructor(gameUI, gameField, players, arrOfCards) {
@@ -198,5 +199,39 @@ export default class Game {
 
     // display cloned deck in currentDeck block
     this.gameUI.currentDeck.append(cloneCurrentDeck);
+  }
+
+  updateGameState() {
+    // update resources for each player
+    gameState.players.forEach((player) => {
+      player.tree = 0;
+      player.tower = 0;
+      player.crown = 0;
+      player.bulb = 0;
+      player.factory = 0;
+      player.clock = 0;
+      Object.keys(player.activeDecks).forEach((stack) => {
+        const currentStack = player.activeDecks[stack];
+        if (currentStack.cards.length > 0) {
+          const highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+          const highestCard = getCardObject(highestCardInnovation);
+          highestCard.resourses.forEach((e) => {
+            player[e.resourceName] += 1;
+          });
+        }
+      });
+    });
+
+    // update currentAge for each player
+    gameState.players.forEach((player) => {
+      Object.keys(player.activeDecks).forEach((stack) => {
+        const currentStack = player.activeDecks[stack];
+        if (currentStack.cards.length > 0) {
+          const highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+          const highestCard = getCardObject(highestCardInnovation);
+          if (highestCard.age > player.currentAge) { player.currentAge = highestCard.age; }
+        }
+      });
+    });
   }
 }

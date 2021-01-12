@@ -21,6 +21,7 @@ const gameState = {
     id: 0,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
@@ -49,6 +50,7 @@ const gameState = {
     id: 1,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
@@ -77,6 +79,7 @@ const gameState = {
     id: 2,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
@@ -105,6 +108,7 @@ const gameState = {
     id: 3,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],

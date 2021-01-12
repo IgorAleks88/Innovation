@@ -161,6 +161,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayNewTurnModal */ "./src/js/display/displayNewTurnModal.js");
 /* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
 /* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
+/* harmony import */ var _utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utility/getCardObject */ "./src/js/utility/getCardObject.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -175,6 +176,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+
 
 
 
@@ -397,6 +399,45 @@ var Game = /*#__PURE__*/function () {
       cloneCurrentDeck.classList.remove('xyz-in'); // display cloned deck in currentDeck block
 
       this.gameUI.currentDeck.append(cloneCurrentDeck);
+    }
+  }, {
+    key: "updateGameState",
+    value: function updateGameState() {
+      // update resources for each player
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+        player.tree = 0;
+        player.tower = 0;
+        player.crown = 0;
+        player.bulb = 0;
+        player.factory = 0;
+        player.clock = 0;
+        Object.keys(player.activeDecks).forEach(function (stack) {
+          var currentStack = player.activeDecks[stack];
+
+          if (currentStack.cards.length > 0) {
+            var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation);
+            highestCard.resourses.forEach(function (e) {
+              player[e.resourceName] += 1;
+            });
+          }
+        });
+      }); // update currentAge for each player
+
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+        Object.keys(player.activeDecks).forEach(function (stack) {
+          var currentStack = player.activeDecks[stack];
+
+          if (currentStack.cards.length > 0) {
+            var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation);
+
+            if (highestCard.age > player.currentAge) {
+              player.currentAge = highestCard.age;
+            }
+          }
+        });
+      });
     }
   }]);
 
@@ -926,6 +967,7 @@ var gameState = {
     id: 0,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
@@ -954,6 +996,7 @@ var gameState = {
     id: 1,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
@@ -982,6 +1025,7 @@ var gameState = {
     id: 2,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
@@ -1010,6 +1054,7 @@ var gameState = {
     id: 3,
     actionPoints: 0,
     hand: [],
+    currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
