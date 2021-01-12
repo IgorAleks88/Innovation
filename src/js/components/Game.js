@@ -125,8 +125,10 @@ export default class Game {
     this.currentPlayer.hand.push(cardObject);
 
     const cardElement = getCard.frontSide(cardObject);
+
     cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
-    renderCard.toHand(cardElement);
+
+    renderCard.toActive(cardElement);
 
     this.currentPlayer.setCurrentAge();
     header.changePlayerStats(this.currentPlayer);

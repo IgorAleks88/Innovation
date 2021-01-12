@@ -1,15 +1,15 @@
 function getRenderCard() {
   let hand = null;
-  let active = null;
+  let activeStacks = null;
 
   const renderCard = {
     initObject() {
       hand = document.querySelector('.hand__cards');
-      active = document.querySelector('.active-zone__cards-wrapper');
+      activeStacks = document.querySelectorAll('.active-zone__stack');
     },
 
     toHand(cardElement) {
-      if (hand === null || active === null) this.initObject();
+      if (hand === null || activeStacks === null) this.initObject();
       cardElement.setAttribute('xyz', 'fade right-3 flip-right rotate-left');
       cardElement.classList.add('xyz-in');
       setTimeout(() => {
@@ -18,9 +18,13 @@ function getRenderCard() {
       hand.append(cardElement);
     },
 
-    toActive() {
-      if (hand === null || active === null) this.initObject();
-      console.log(active)
+    toActive(cardElement) {
+      if (hand === null || activeStacks === null) this.initObject();
+      let targetStack = null;
+      activeStacks.forEach((stack) => {
+        if (cardElement.children[0].classList.contains(`card__color--${stack.id}`)) targetStack = stack;
+      });
+      
     }
   };
 

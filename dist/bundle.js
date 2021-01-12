@@ -15,6 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
 /* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
 /* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
+/* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
 // import styles
 
  // import js modules
@@ -23,16 +24,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // display intro & menu
-
-_components_Intro__WEBPACK_IMPORTED_MODULE_5__.default.init(); // display game UI
+// Intro.init();
+// display game UI
 
 document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__.default.init()); // add event listeners to hand controls
 
 (0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__.default)(); // add event listeners and animations to aside buttons
 
 (0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); //! Added for testing! Uncomment next 2 lines and comment line 12 with Intro.init()
-// import initHotSeatGame from './utility/initHotSeatGame';
-// initHotSeatGame('Player1', 'Player2');
+
+
+(0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_6__.default)('Player1', 'Player2');
 
 /***/ }),
 
@@ -160,14 +162,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function getRenderCard() {
   var hand = null;
-  var active = null;
+  var activeStacks = null;
   var renderCard = {
     initObject: function initObject() {
       hand = document.querySelector('.hand__cards');
-      active = document.querySelector('.active-zone__cards-wrapper');
+      activeStacks = document.querySelectorAll('.active-zone__stack');
     },
     toHand: function toHand(cardElement) {
-      if (hand === null || active === null) this.initObject();
+      if (hand === null || activeStacks === null) this.initObject();
       cardElement.setAttribute('xyz', 'fade right-3 flip-right rotate-left');
       cardElement.classList.add('xyz-in');
       setTimeout(function () {
@@ -175,9 +177,12 @@ function getRenderCard() {
       }, 450);
       hand.append(cardElement);
     },
-    toActive: function toActive() {
-      if (hand === null || active === null) this.initObject();
-      console.log(active);
+    toActive: function toActive(cardElement) {
+      if (hand === null || activeStacks === null) this.initObject();
+      var targetStack = null;
+      activeStacks.forEach(function (stack) {
+        if (cardElement.children[0].classList.contains("card__color--".concat(stack.id))) targetStack = stack;
+      });
     }
   };
   renderCard.initObject();
@@ -360,7 +365,7 @@ var Game = /*#__PURE__*/function () {
       }; //! TEMP
 
 
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.renderCard.toHand(cardElement);
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.renderCard.toActive(cardElement);
       this.currentPlayer.setCurrentAge();
       _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer);
       this.actionDone();
