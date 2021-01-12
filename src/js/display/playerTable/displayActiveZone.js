@@ -22,11 +22,6 @@ const displayActiveZone = {
 
     this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);
-
-    this.controlsBlock = document.createElement('div');
-    this.controlsBlock.classList.add('active-zone__controls');
-
-    this.wrapper.append(this.controlsBlock);
     return this.wrapper;
   },
 };

@@ -7,16 +7,58 @@
     rgba(33, 14, 6, 1) 100%
   );
 
-  border: 0.1rem solid transparent;
-  border-image: url('../../assets/img/border.png');
-  border-image-repeat: round;
-  border-image-slice: 47 46 37 46;
-  border-image-width: 2.5rem;
   height: 100vh;
   position: absolute;
   right: 0;
   top: 0;
   width: 37rem;
+
+  .aside__overlay {
+    background: url('../../assets/img/block-bg.png') center;
+    height: 96%;
+    mix-blend-mode: overlay;
+    position: absolute;
+    width: 96%;
+    margin: 0;
+  }
+
+  .aside__top {
+    height: 17rem;
+    width: 100%;
+    position: absolute;
+    border: 0.1rem solid transparent;
+    border-image: url('../../assets/img/border-aside-top.png');
+    border-image-repeat: round;
+    border-image-slice: 72 72 72 72;
+    border-image-width: 4rem;
+    margin: 0;
+  }
+
+  .aside__center {
+    width: 100%;
+    height: calc(100vh - 44rem); // 44rem = 17rem header + 27rem hand
+    position: absolute;
+    border: 0.1rem solid transparent;
+    border-image: url('../../assets/img/border-aside-center.png');
+    border-image-repeat: round;
+    border-image-slice: 72 72 72 72;
+    border-image-width: 4rem;
+    margin: 0;
+    top: 17rem; //17rem header
+  }
+
+  .aside__bottom {
+    height: 27rem;
+    width: 100%;
+    position: absolute;
+    border: 0.1rem solid transparent;
+    border-image: url('../../assets/img/border-aside-bottom.png');
+    border-image-repeat: round;
+    border-image-slice: 72 72 72 72;
+    border-image-width: 4rem;
+    margin: 0;
+    top: calc(100% - 27rem); //27rem hand
+  }
 
   > div {
     margin: 0.5rem 1rem;

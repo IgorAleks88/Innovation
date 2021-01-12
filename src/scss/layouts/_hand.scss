@@ -18,7 +18,6 @@
 
 .hand__overlay {
   background: url('../../assets/img/block-bg.png');
-  background-size: contain;
   height: 96%;
   mix-blend-mode: overlay;
   position: absolute;
@@ -30,10 +29,10 @@
 .hand__cards {
   @include flex(row, center, center);
   border: 0.1rem solid transparent;
-  border-image: url('../../assets/img/border.png');
+  border-image: url('../../assets/img/border-bottom.png');
   border-image-repeat: round;
-  border-image-slice: 47 46 37 46;
-  border-image-width: 2.5rem;
+  border-image-slice: 72 72 72 72;
+  border-image-width: 4rem;
   /* background-color: rgb(148, 118, 53);*/
   flex-wrap: wrap;
   height: 100%;
@@ -60,9 +59,14 @@
   height: 100%;
   justify-content: center;
   position: absolute;
-  right: 0.3rem;
+  right: -0.05rem;
   width: 6rem;
   z-index: 1;
+  border: 0.1rem solid transparent;
+  border-image: url('../../assets/img/border-hand-control.png');
+  border-image-repeat: round;
+  border-image-slice: 72 72 72 72;
+  border-image-width: 4rem;
 }
 
 .hand__controls-svg {

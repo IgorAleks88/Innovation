@@ -6,20 +6,19 @@
     rgba(77, 35, 12, 1) 50%,
     rgba(33, 14, 6, 1) 100%
   );
-  height: calc(100vh - 37rem); // 32rem = 10rem header + 27rem hand
+  height: calc(100vh - 44rem); // 44rem = 17rem header + 27rem hand
   overflow-x: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   position: relative;
   width: 100%; // 20% for aside
 
   .active-zone__overlay {
-    background: url('../../assets/img/block-bg.png');
-    background-size: contain;
+    background: url('../../assets/img/block-bg.png') center;
     height: 96%;
     mix-blend-mode: overlay;
     position: absolute;
-    top: 1.1rem;
-    width: calc(100% - 6rem);
+    top: 1.5rem;
+    width: 100%;
   }
 
   .active-zone__cards {
@@ -27,14 +26,14 @@
     border: 0.1rem solid transparent;
     border-image: url('../../assets/img/border-center.png');
     border-image-repeat: round;
-    border-image-slice: 47 46 37 46;
-    border-image-width: 2.5rem;
+    border-image-slice: 72 72 72 72;
+    border-image-width: 4rem;
     flex-wrap: nowrap;
     height: 100%;
     overflow: auto;
     padding: 0 0 0 1rem;
     scroll-behavior: smooth;
-    width: calc(100% - 5rem);
+    width: 100%;
     z-index: 2;
   }
 }

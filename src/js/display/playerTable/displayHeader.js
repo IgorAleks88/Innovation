@@ -75,7 +75,7 @@ const displayHeader = {
     clock: null,
   },
 
-  initPlayerStats(id) {
+  initPlayerStats(id, parent) {
     const player = `player${id}`;
 
     this[player].container = document.createElement('div');
@@ -152,7 +152,7 @@ const displayHeader = {
     });
 
     this[player].container.appendChild(recourcesRow);
-    this.wrapper.appendChild(this[player].container);
+    this.headerTable.appendChild(this[player].container);
   },
 
   changePlayerStats(player) {
@@ -175,6 +175,15 @@ const displayHeader = {
   init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
+
+    this.headerOverlay = document.createElement('div');
+    this.headerOverlay.classList.add('header__overlay');
+    this.wrapper.appendChild(this.headerOverlay);
+
+    this.headerTable = document.createElement('div');
+    this.headerTable.classList.add('header__table');
+    this.wrapper.appendChild(this.headerTable);
+
     this.initPlayerStats(1);
     this.initPlayerStats(2);
     /* this.initPlayerStats(this.testPlayer3);

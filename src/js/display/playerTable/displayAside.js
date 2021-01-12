@@ -5,6 +5,12 @@ const displayAside = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('aside');
 
+    // append block for style aside backgroung and border
+    this.wrapper.append(this.getStyleBlock('overlay'));
+    this.wrapper.append(this.getStyleBlock('top'));
+    this.wrapper.append(this.getStyleBlock('center'));
+    this.wrapper.append(this.getStyleBlock('bottom'));
+
     // append createand blocks to aside wrapper
     this.wrapper.append(this.getInfoBlock());
     this.wrapper.append(this.getCurrentDeckBlock());
@@ -22,6 +28,12 @@ const displayAside = {
     document.body.append(this.specialCardsBlock);
 
     return this.wrapper;
+  },
+
+  getStyleBlock(name) {
+    const block = document.createElement('div');
+    block.classList.add(`aside__${name}`);
+    return block;
   },
 
   getInfoBlock() {
