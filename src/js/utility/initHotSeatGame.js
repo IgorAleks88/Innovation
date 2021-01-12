@@ -4,7 +4,7 @@ import Game from '../components/Game';
 import cardsJSON from '../cards/cards.json';
 import parseCards from '../cards/parseCards';
 import GameUI from '../components/GameUI';
-import setChat from './setChat';
+// import setChat from './setChat';
 import shuffle from './shuffle';
 
 export default function initHotSeatGame() {
@@ -34,5 +34,5 @@ export default function initHotSeatGame() {
   document.querySelector('.modal').style.opacity = '1';
 
   // init chat
-  setChat();
+  // setChat();
 }

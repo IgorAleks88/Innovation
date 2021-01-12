@@ -1,10 +1,10 @@
 export default function setChat() {
   // eslint-disable-next-line no-undef
   const socket = io();
-
-  const messageContainer = document.querySelector('.chat-block');
-  const messageForm = document.querySelector('.chat-log__form');
-  const messageInput = document.querySelector('.chat-log__input');
+  const parent = document.querySelector('.chat-log');
+  const messageContainer = parent.querySelector('.chat-block');
+  const messageForm = parent.querySelector('.chat-log__form');
+  const messageInput = parent.querySelector('.chat-log__input');
   const players = document.querySelectorAll('.head-row__name');
 
   const userName = prompt('What is your name?');
