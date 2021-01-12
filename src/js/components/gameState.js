@@ -22,11 +22,26 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     activeDecks: {
-      red: [],
-      green: [],
-      blue: [],
-      purple: [],
-      yellow: [],
+      red: {
+        cards: [],
+        shift: null,
+      },
+      green: {
+        cards: [],
+        shift: null,
+      },
+      blue: {
+        cards: [],
+        shift: null,
+      },
+      purple: {
+        cards: [],
+        shift: null,
+      },
+      yellow: {
+        cards: [],
+        shift: null,
+      },
     },
   },
   player1: {
@@ -35,11 +50,26 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     activeDecks: {
-      red: [],
-      green: [],
-      blue: [],
-      purple: [],
-      yellow: [],
+      red: {
+        cards: [],
+        shift: null,
+      },
+      green: {
+        cards: [],
+        shift: null,
+      },
+      blue: {
+        cards: [],
+        shift: null,
+      },
+      purple: {
+        cards: [],
+        shift: null,
+      },
+      yellow: {
+        cards: [],
+        shift: null,
+      },
     },
   },
   player2: {
@@ -48,11 +78,26 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     activeDecks: {
-      red: [],
-      green: [],
-      blue: [],
-      purple: [],
-      yellow: [],
+      red: {
+        cards: [],
+        shift: null,
+      },
+      green: {
+        cards: [],
+        shift: null,
+      },
+      blue: {
+        cards: [],
+        shift: null,
+      },
+      purple: {
+        cards: [],
+        shift: null,
+      },
+      yellow: {
+        cards: [],
+        shift: null,
+      },
     },
   },
   player3: {
@@ -61,11 +106,26 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     activeDecks: {
-      red: [],
-      green: [],
-      blue: [],
-      purple: [],
-      yellow: [],
+      red: {
+        cards: [],
+        shift: null,
+      },
+      green: {
+        cards: [],
+        shift: null,
+      },
+      blue: {
+        cards: [],
+        shift: null,
+      },
+      purple: {
+        cards: [],
+        shift: null,
+      },
+      yellow: {
+        cards: [],
+        shift: null,
+      },
     },
   },
 };

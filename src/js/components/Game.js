@@ -9,9 +9,10 @@
 import header from '../display/playerTable/displayHeader';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import displayNextTurnBtn from '../display/displayNextTurnBtn';
+import gameState from './gameState';
 
 export default class Game {
-  constructor(gameUI, gameField, players) {
+  constructor(gameUI, gameField, players, arrOfCards) {
     // store passed objects
     this.players = players;
     this.gameField = gameField;
@@ -29,6 +30,54 @@ export default class Game {
       cardsArray: gameField.ageDecks.age1,
     };
     this.turnPoints = 0;
+    this.initGameState(players, arrOfCards);
+  }
+
+  initGameState(players, arrOfCards) {
+    arrOfCards.forEach((e) => {
+      switch (+e.age) {
+        case 1:
+          gameState.ageDecks.age1.push(e.innovation);
+          break;
+        case 2:
+          gameState.ageDecks.age2.push(e.innovation);
+          break;
+        case 3:
+          gameState.ageDecks.age3.push(e.innovation);
+          break;
+        case 4:
+          gameState.ageDecks.age4.push(e.innovation);
+          break;
+        case 5:
+          gameState.ageDecks.age5.push(e.innovation);
+          break;
+        case 6:
+          gameState.ageDecks.age6.push(e.innovation);
+          break;
+        case 7:
+          gameState.ageDecks.age7.push(e.innovation);
+          break;
+        case 8:
+          gameState.ageDecks.age8.push(e.innovation);
+          break;
+        case 9:
+          gameState.ageDecks.age9.push(e.innovation);
+          break;
+        case 10:
+          gameState.ageDecks.age10.push(e.innovation);
+          break;
+        default:
+          throw new Error(`Wrong number on age field in ${e}`);
+      }
+    });
+    for (let i = 0; i < players.length; i += 1) {
+      const player = `player${i}`;
+      gameState[player].name = players[i].name;
+      gameState.players.push(gameState[player]);
+    }
+    gameState.currentPlayer = gameState.players[0];
+    gameState.currentPlayer.actionPoints = 2;
+    gameState.activePlayer = gameState.players[0];
   }
 
   newTurn() {

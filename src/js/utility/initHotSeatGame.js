@@ -8,7 +8,7 @@ import setChat from './setChat';
 import shuffle from './shuffle';
 import getCardObject from './getCardObject';
 
-import gameStateService from '../components/gameStateService';
+import gameState from '../components/gameState';
 
 export default function initHotSeatGame() {
   // contains dom elements
@@ -31,14 +31,12 @@ export default function initHotSeatGame() {
   }
 
   // work with all main objects
-  const game = new Game(gameUI, gameField, players);
+  const game = new Game(gameUI, gameField, players, arrOfCards);
   game.newTurn();
   // display first modal without animation
   document.querySelector('.modal').style.opacity = '1';
 
-  gameStateService.initPlayers('Player1', 'Player2');
-  gameStateService.initAgeDecks(arrOfCards);
-  console.log(getCardObject('колесо', arrOfCards));
+  console.log(gameState);
   // init chat
   setChat();
 }
