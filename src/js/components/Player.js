@@ -21,23 +21,23 @@ export default class Player {
     this.activeStacks = {
       blue: {
         cards: [],
-        shift: 'top', //! TEST
+        shift: 'right', //! TEST
       },
       red: {
         cards: [],
-        shift: 'right', //! TEST
+        shift: 'top', //! TEST
       },
       green: {
         cards: [],
-        shift: 'right', //! TEST
+        shift: null, //! TEST
       },
       purple: {
         cards: [],
-        shift: 'top', //! TEST
+        shift: 'left', //! TEST
       },
       yellow: {
         cards: [],
-        shift: null, //! TEST
+        shift: 'top', //! TEST
       },
     };
 
@@ -107,7 +107,7 @@ export default class Player {
 
     // remove animation when card rendered
     setTimeout(() => {
-      cardElement.removeAttribute('xyz');
+      // cardElement.removeAttribute('xyz');
       cardElement.classList.remove('xyz-in');
     }, 450);
   }
@@ -150,17 +150,54 @@ export default class Player {
         }
 
         cardElement.style.position = 'absolute';
-        if (this.activeStacks[stackName].shift === 'top') {
-          cardElement.style.bottom = `${this.activeStacks[stackName].cards.length * 40}px`;
-        } else if (this.activeStacks[stackName].shift === 'right' && this.activeStacks[stackName].cards.length !== 0) {
-          cardElement.style.left = `${this.activeStacks[stackName].cards.length * 40}px`;
+        cardElement.classList.add('xyz-in');
+
+        const stackCards = this.activeStacks[stackName].cards;
+        const stackShift = this.activeStacks[stackName].shift;
+        const stackElement = this.gameUI.activeStacks[stackName];
+        const stackDefWidth = this.gameUI.activeStacks[stackName].offsetWidth;
+
+        let cardShiftValue = 40;
+        const cardDefHeight = cardElement.offsetHeight;
+        const stackDefHeight = this.gameUI.activeStacks[stackName].offsetHeight;
+        if (stackDefHeight < cardDefHeight + (stackCards.length * cardShiftValue) && Array.from(stackElement.children)[0].style !== '30px' && stackShift === 'top') {
+          cardShiftValue = 30;
+          Array.from(stackElement.children).forEach((child, i) => {
+            child.style.bottom = `${i * cardShiftValue}px`;
+          });
+        }
+        if (stackDefHeight < cardDefHeight + (stackCards.length * cardShiftValue) && Array.from(stackElement.children)[0].style !== '20px' && stackShift === 'top') {
+          cardShiftValue = 20;
+          Array.from(stackElement.children).forEach((child, i) => {
+            child.style.bottom = `${i * cardShiftValue}px`;
+          });
+        }
+        if (stackDefHeight < cardDefHeight + (stackCards.length * cardShiftValue) && stackShift === 'top') {
+          cardShiftValue = 10;
+          Array.from(stackElement.children).forEach((child, i) => {
+            child.style.bottom = `${i * cardShiftValue}px`;
+          });
+        }
+
+        if (stackShift === 'top') {
+          cardElement.style.bottom = `${stackCards.length * cardShiftValue}px`;
+        } else if (stackShift === 'right' && stackCards.length !== 0) {
+          cardElement.style.left = `${stackCards.length * 40}px`;
           // this.gameUI.activeStacks[stackName].offsetWidth += 40;
-          this.gameUI.activeStacks[stackName].style.width = (this.gameUI.activeStacks[stackName].offsetWidth + this.activeStacks[stackName].cards.length * 40) + 'px';
+          stackElement.style.width = `${stackDefWidth + 40}px`;
+        } else if (stackShift === 'left') {
+          cardElement.style.right = `${stackCards.length * 40}px`;
+          // this.gameUI.activeStacks[stackName].offsetWidth += 40;
+          if (stackCards.length !== 0) {
+            stackElement.style.width = `${stackDefWidth + 40}px`;
+          }
         }
 
         this.activeStacks[stackName].cards.push(cardObj);
 
         this.gameUI.activeStacks[stackName].append(cardElement);
+
+        this.gameUI.activeStacks[stackName].scrollIntoView()
       }
     });
     this.calculateResources();

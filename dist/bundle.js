@@ -665,27 +665,27 @@ var Player = /*#__PURE__*/function () {
     this.activeStacks = {
       blue: {
         cards: [],
-        shift: 'top' //! TEST
+        shift: 'right' //! TEST
 
       },
       red: {
         cards: [],
-        shift: 'right' //! TEST
+        shift: 'top' //! TEST
 
       },
       green: {
         cards: [],
-        shift: 'right' //! TEST
+        shift: null //! TEST
 
       },
       purple: {
         cards: [],
-        shift: 'top' //! TEST
+        shift: 'left' //! TEST
 
       },
       yellow: {
         cards: [],
-        shift: null //! TEST
+        shift: 'top' //! TEST
 
       }
     }; // Resources
@@ -768,7 +768,7 @@ var Player = /*#__PURE__*/function () {
       this.gameUI.hand.append(cardElement); // remove animation when card rendered
 
       setTimeout(function () {
-        cardElement.removeAttribute('xyz');
+        // cardElement.removeAttribute('xyz');
         cardElement.classList.remove('xyz-in');
       }, 450);
     } // render all cards in hand of current player
@@ -824,18 +824,55 @@ var Player = /*#__PURE__*/function () {
           }
 
           cardElement.style.position = 'absolute';
+          cardElement.classList.add('xyz-in');
+          var stackCards = _this6.activeStacks[stackName].cards;
+          var stackShift = _this6.activeStacks[stackName].shift;
+          var stackElement = _this6.gameUI.activeStacks[stackName];
+          var stackDefWidth = _this6.gameUI.activeStacks[stackName].offsetWidth;
+          var cardShiftValue = 40;
+          var cardDefHeight = cardElement.offsetHeight;
+          var stackDefHeight = _this6.gameUI.activeStacks[stackName].offsetHeight;
 
-          if (_this6.activeStacks[stackName].shift === 'top') {
-            cardElement.style.bottom = "".concat(_this6.activeStacks[stackName].cards.length * 40, "px");
-          } else if (_this6.activeStacks[stackName].shift === 'right' && _this6.activeStacks[stackName].cards.length !== 0) {
-            cardElement.style.left = "".concat(_this6.activeStacks[stackName].cards.length * 40, "px"); // this.gameUI.activeStacks[stackName].offsetWidth += 40;
+          if (stackDefHeight < cardDefHeight + stackCards.length * cardShiftValue && Array.from(stackElement.children)[0].style !== '30px' && stackShift === 'top') {
+            cardShiftValue = 30;
+            Array.from(stackElement.children).forEach(function (child, i) {
+              child.style.bottom = "".concat(i * cardShiftValue, "px");
+            });
+          }
 
-            _this6.gameUI.activeStacks[stackName].style.width = _this6.gameUI.activeStacks[stackName].offsetWidth + _this6.activeStacks[stackName].cards.length * 40 + 'px';
+          if (stackDefHeight < cardDefHeight + stackCards.length * cardShiftValue && Array.from(stackElement.children)[0].style !== '20px' && stackShift === 'top') {
+            cardShiftValue = 20;
+            Array.from(stackElement.children).forEach(function (child, i) {
+              child.style.bottom = "".concat(i * cardShiftValue, "px");
+            });
+          }
+
+          if (stackDefHeight < cardDefHeight + stackCards.length * cardShiftValue && stackShift === 'top') {
+            cardShiftValue = 10;
+            Array.from(stackElement.children).forEach(function (child, i) {
+              child.style.bottom = "".concat(i * cardShiftValue, "px");
+            });
+          }
+
+          if (stackShift === 'top') {
+            cardElement.style.bottom = "".concat(stackCards.length * cardShiftValue, "px");
+          } else if (stackShift === 'right' && stackCards.length !== 0) {
+            cardElement.style.left = "".concat(stackCards.length * 40, "px"); // this.gameUI.activeStacks[stackName].offsetWidth += 40;
+
+            stackElement.style.width = "".concat(stackDefWidth + 40, "px");
+          } else if (stackShift === 'left') {
+            cardElement.style.right = "".concat(stackCards.length * 40, "px"); // this.gameUI.activeStacks[stackName].offsetWidth += 40;
+
+            if (stackCards.length !== 0) {
+              stackElement.style.width = "".concat(stackDefWidth + 40, "px");
+            }
           }
 
           _this6.activeStacks[stackName].cards.push(cardObj);
 
           _this6.gameUI.activeStacks[stackName].append(cardElement);
+
+          _this6.gameUI.activeStacks[stackName].scrollIntoView();
         }
       });
       this.calculateResources();
