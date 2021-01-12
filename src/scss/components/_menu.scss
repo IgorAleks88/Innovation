@@ -1,6 +1,5 @@
 .menu {
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.8); */
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -14,6 +13,10 @@
   transform: translate(-50%, -50%);
   width: 100%;
   z-index: 5;
+}
+
+.menu__used {
+  animation: show-menu 0.5s linear 0s forwards !important;
 }
 
 .menu__link {
@@ -85,6 +88,32 @@
   height: 100%;
   width: 100%;
 }
+
+label {
+  color: wheat;
+}
+
+input[type="text"] {
+  display: block;
+  padding-left: 25px;
+  margin: 5px auto;
+  &:valid {
+    border: green solid 3px;
+    background-image: url(../../assets/icons/succeess.svg.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+  &:invalid {
+    border: red solid 3px;
+    background-image: url(../../assets/icons/unnamed.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+}
+
+
 
 .hide {
   display: none;
