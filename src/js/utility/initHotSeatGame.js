@@ -6,6 +6,7 @@ import parseCards from '../cards/parseCards';
 import GameUI from '../components/GameUI';
 import setChat from './setChat';
 import shuffle from './shuffle';
+import getCardObject from './getCardObject';
 
 import gameStateService from '../components/gameStateService';
 
@@ -37,6 +38,7 @@ export default function initHotSeatGame() {
 
   gameStateService.initPlayers('Player1', 'Player2');
   gameStateService.initAgeDecks(arrOfCards);
+  console.log(getCardObject('колесо', arrOfCards));
   // init chat
   setChat();
 }
