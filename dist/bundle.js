@@ -948,7 +948,8 @@ var Player = /*#__PURE__*/function () {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__,
+/* harmony export */   "usersInfo": () => /* binding */ usersInfo
 /* harmony export */ });
 /* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -957,7 +958,15 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
- // TODO need some refactor later, move to display folder, use function?
+
+var usersInfo = {};
+
+function validation(userObj) {
+  return userObj.names.every(function (name) {
+    return name.length > 2 && name.length < 11;
+  });
+} // TODO need some refactor later, move to display folder, use function?
+
 
 var Menu = /*#__PURE__*/function () {
   function Menu(parent) {
@@ -967,36 +976,52 @@ var Menu = /*#__PURE__*/function () {
   }
 
   _createClass(Menu, [{
+    key: "createMenuItem",
+    value: function createMenuItem(text) {
+      return (
+        /* html */
+        "<a href=\"#\" class=\"menu__link ".concat((arguments.length <= 1 ? undefined : arguments[1]) || '', "\" ").concat((arguments.length <= 2 ? undefined : arguments[2]) || '', ">\n      ").concat(text, "\n      <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 152.9 43.4\" style=\"enable-background:new 0 0 152.9 43.4;\" xml:space=\"preserve\">\n        <path d=\"M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4\"/>\n      </svg>\n    </a><br>")
+      );
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this = this;
 
       this.menu = document.createElement('div');
       this.menu.classList.add('menu');
-      this.menu.innerHTML =
-      /* html */
-      "\n      <a href=\"#\" class=\"menu__link start\">\n        \u041D\u0430\u0447\u0430\u0442\u044C \u0438\u0433\u0440\u0443\n        <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 152.9 43.4\" style=\"enable-background:new 0 0 152.9 43.4;\" xml:space=\"preserve\">\n          <path d=\"M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4\"/>\n        </svg>\n      </a><br>\n      <a href=\"#\" class=\"menu__link\">\n        \u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C \u0438\u0433\u0440\u0443\n        <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 152.9 43.4\" style=\"enable-background:new 0 0 152.9 43.4;\" xml:space=\"preserve\">\n          <path d=\"M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4\"/>\n        </svg>\n      </a><br>\n      <a href=\"#\" class=\"menu__link\">\n      \u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0438\u0433\u0440\u0443\n      <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 152.9 43.4\" style=\"enable-background:new 0 0 152.9 43.4;\" xml:space=\"preserve\">\n        <path d=\"M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4\"/>\n      </svg>\n    </a><br>\n      <a href=\"#\" class=\"menu__link rules\">\n        \u041F\u0440\u0430\u0432\u0438\u043B\u0430 \u0438\u0433\u0440\u044B\n        <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 152.9 43.4\" style=\"enable-background:new 0 0 152.9 43.4;\" xml:space=\"preserve\">\n          <path d=\"M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4\"/>\n        </svg>\n      </a><br>\n      <a href=\"https://www.youtube.com/watch?v=um86iag3ip8&feature=youtu.be\" target=\"_blank\" class=\"menu__link\">\n        \u041E\u0431\u0437\u043E\u0440 \u0438\u0433\u0440\u044B\n        <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 152.9 43.4\" style=\"enable-background:new 0 0 152.9 43.4;\" xml:space=\"preserve\">\n          <path d=\"M151.9,13.6c0,0,3.3-9.5-85-8.3c-97,1.3-58.3,29-58.3,29s9.7,8.1,69.7,8.1c68.3,0,69.3-23.1,69.3-23.1 s1.7-10.5-14.7-18.4\"/>\n        </svg>\n      </a>\n    ";
+      this.menu.innerHTML = "\n    ".concat(this.createMenuItem('Новая игра', 'start'), "\n    ").concat(this.createMenuItem('Продолжить'), "\n    ").concat(this.createMenuItem('Сохранить игру'), "\n    ").concat(this.createMenuItem('Правила игры', 'rules'), "\n    ").concat(this.createMenuItem('Обзор игры'), "\n    ");
       this.parent.append(this.menu);
       this.renderPdfRules();
       this.menu.addEventListener('click', function (e) {
-        if (e.target.tagName !== 'A' && e.target.tagName !== 'SPAN') {
+        if (e.target.tagName !== 'A' && e.target.tagName !== 'SPAN' && e.target !== _this.menu.querySelector('button')) {
           return;
         }
 
         if (e.target.className.includes('start')) {
-          _this.menu.classList.toggle('hide');
-
-          var intro = _this.menu.parentElement.parentElement.parentElement;
-          intro.classList.toggle('intro--hide');
-          (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)('Player1', 'Player2'); //! Hardcoded for 2 players. Should take player names as arguments
-        }
-
-        if (e.target.className.includes('rules')) {
+          _this.createChoosePlayersItems();
+        } else if (e.target.className.includes('rules')) {
           _this.rulesWrraper.hidden = false;
-        }
-
-        if (e.target.className.includes('close')) {
+        } else if (e.target.className.includes('close')) {
           _this.rulesWrraper.hidden = true;
+        } else if (e.target.dataset.players) {
+          _this.createNameInputField(e.target.dataset.players);
+        } else if (e.target.className.includes('get-names')) {
+          e.preventDefault();
+
+          _this.writeNamesToObject();
+
+          if (validation(usersInfo) && usersInfo.names.length) {
+            var intro = _this.menu.parentElement.parentElement.parentElement;
+            intro.classList.toggle('intro--hide');
+            (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)('Player1', 'Player2'); //! Hardcoded for 2 players. Should take player names as arguments
+          }
+        } else if (e.target.className.includes('back')) {
+          _this.menu.remove();
+
+          _this.render();
+
+          _this.menu.classList.add('menu__used');
         }
       });
     }
@@ -1011,12 +1036,60 @@ var Menu = /*#__PURE__*/function () {
       "\n        <span class=\"close\">&#10006</span>\n        <iframe class=\"iframe\" src=\"./assets/innovation_rules_rus_final.pdf\" width=\"70%\" height=\"70%\"></iframe>\n    ";
       this.menu.append(this.rulesWrraper);
     }
+  }, {
+    key: "createChoosePlayersItems",
+    value: function createChoosePlayersItems() {
+      for (var i = 0; i < this.menu.children.length; i += 1) {
+        this.menu.children[i].hidden = true;
+      }
+
+      this.menu.innerHTML =
+      /* html */
+      "\n    ".concat(this.createMenuItem('2 игрока', '', 'data-players=2'), "\n    ").concat(this.createMenuItem('3 игрока', '', 'data-players=3'), "\n    ").concat(this.createMenuItem('4 игрока', '', 'data-players=4'), "\n    ").concat(this.createMenuItem('Главное меню', 'back'), "\n    ");
+    }
+  }, {
+    key: "createNameInputField",
+    value: function createNameInputField(numberOfFields) {
+      usersInfo.players = numberOfFields;
+      this.menu.innerHTML =
+      /* html */
+      "\n      <form>\n        ".concat(this.createInputs(numberOfFields), "\n        <button class=\"menu__link get-names\" type=\"submit\">\u041F\u0440\u0438\u043D\u044F\u0442\u044C</button>\n      </form>\n      ").concat(this.createMenuItem('Главное меню', 'back'), "\n    ");
+    }
+  }, {
+    key: "createInputs",
+    value: function createInputs(num) {
+      var inputHTML = [];
+
+      for (var i = 1; i <= num; i += 1) {
+        inputHTML.push(
+        /* html */
+        "\n        <label for=\"plaeyr".concat(i, "\">\u0412\u0432\u0435\u0434\u0438\u0442\u0438 \u0438\u043C\u044F \u0438\u0433\u0440\u043E\u043A\u0430 \u2116 ").concat(i, "</label>\n        <input type=\"text\" id=\"player").concat(i, "\" name=\"name\" data-name=\"\" pattern=\"[a-zA-Z\u0430-\u044F\u0410-\u042F0-9_]{3,10}\" title=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043E\u0442 3 \u0434\u043E 10 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432\" required>\n      "));
+      }
+
+      return inputHTML;
+    }
+  }, {
+    key: "writeNamesToObject",
+    value: function writeNamesToObject() {
+      var inputs = this.menu.querySelectorAll('[data-name]');
+      var playerNames = [];
+
+      for (var i = 0; i < inputs.length; i += 1) {
+        if (inputs[i].value) {
+          playerNames.push(inputs[i].value);
+        }
+      }
+
+      usersInfo.names = playerNames;
+      return playerNames;
+    }
   }]);
 
   return Menu;
 }();
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Menu);
+
 
 /***/ }),
 
@@ -1746,14 +1819,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
 /* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
 /* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
-/* harmony import */ var _setChat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setChat */ "./src/js/utility/setChat.js");
-/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
+/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
 
 
 
 
 
-
+ // import setChat from './setChat';
 
 
 function initHotSeatGame() {
@@ -1762,7 +1834,7 @@ function initHotSeatGame() {
 
   var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_4__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_3__); // shuffle arr of cards objects
 
-  (0,_shuffle__WEBPACK_IMPORTED_MODULE_7__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
+  (0,_shuffle__WEBPACK_IMPORTED_MODULE_6__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
 
   var gameField = new _components_GameField__WEBPACK_IMPORTED_MODULE_0__.default(arrOfCards); // contains players properties and cards
 
@@ -1778,8 +1850,7 @@ function initHotSeatGame() {
   game.newTurn(); // display first modal without animation
 
   document.querySelector('.modal').style.opacity = '1'; // init chat
-
-  (0,_setChat__WEBPACK_IMPORTED_MODULE_6__.default)();
+  // setChat();
 }
 
 /***/ }),
@@ -1825,66 +1896,6 @@ function setAsideControls() {
 
   buttons.forEach(function (button) {
     button.addEventListener('click', animation);
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/utility/setChat.js":
-/*!***********************************!*\
-  !*** ./src/js/utility/setChat.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ setChat
-/* harmony export */ });
-function setChat() {
-  // eslint-disable-next-line no-undef
-  var socket = io();
-  var messageContainer = document.querySelector('.chat-block');
-  var messageForm = document.querySelector('.chat-log__form');
-  var messageInput = document.querySelector('.chat-log__input');
-  var players = document.querySelectorAll('.head-row__name');
-  var userName = prompt('What is your name?');
-
-  function appendMessage(message) {
-    var messageElement = document.createElement('div');
-    messageElement.innerText = message;
-    messageContainer.append(messageElement);
-  }
-
-  function autoScroll() {
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-  }
-
-  appendMessage('You joined');
-  socket.emit('new-user', userName);
-  socket.on('chat-message', function (data) {
-    appendMessage("".concat(data.name, ": ").concat(data.message));
-    autoScroll();
-  });
-  socket.on('user-connected', function (name) {
-    appendMessage("".concat(name, " connected"));
-  });
-  socket.on('players', function (name) {
-    var nameOfUsers = Object.values(name);
-    players.forEach(function (el, i) {
-      el.textContent = nameOfUsers[i];
-    });
-  });
-  socket.on('user-disconnected', function (name) {
-    appendMessage("".concat(name, " disconnected"));
-  });
-  messageForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (messageInput.value === '') return;
-    var message = messageInput.value;
-    appendMessage("You: ".concat(message));
-    socket.emit('send-chat-message', message);
-    autoScroll();
-    messageInput.value = '';
   });
 }
 
