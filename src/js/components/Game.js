@@ -10,6 +10,10 @@ import header from '../display/playerTable/displayHeader';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import displayNextTurnBtn from '../display/displayNextTurnBtn';
 
+//!! TEST
+import { renderCard } from '../cards/renderCard';
+import getCard from '../cards/getCard';
+
 export default class Game {
   constructor(gameUI, gameField, players) {
     // store passed objects
@@ -117,11 +121,16 @@ export default class Game {
 
   // get card and render it in hand
   takeCard() {
-    this.currentPlayer.setCurrentAge(); // recalculate current age of player
-    this.currentPlayer.hand.push(this.currentDeck.cardsArray.pop());
-    this.currentPlayer.renderLastTakenCard();
+    const cardObject = this.currentDeck.cardsArray.pop();
+    this.currentPlayer.hand.push(cardObject);
+
+    const cardElement = getCard.frontSide(cardObject);
+    cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
+    renderCard.toHand(cardElement);
+
+    this.currentPlayer.setCurrentAge();
     header.changePlayerStats(this.currentPlayer);
-    // starts next phase of turn
+
     this.actionDone();
   }
 

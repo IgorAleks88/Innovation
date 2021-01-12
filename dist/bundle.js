@@ -15,7 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
 /* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
 /* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
-/* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
 // import styles
 
  // import js modules
@@ -24,17 +23,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // display intro & menu
-// Intro.init();
-// display game UI
+
+_components_Intro__WEBPACK_IMPORTED_MODULE_5__.default.init(); // display game UI
 
 document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__.default.init()); // add event listeners to hand controls
 
 (0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__.default)(); // add event listeners and animations to aside buttons
 
 (0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); //! Added for testing! Uncomment next 2 lines and comment line 12 with Intro.init()
-
-
-(0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_6__.default)('Player1', 'Player2');
+// import initHotSeatGame from './utility/initHotSeatGame';
+// initHotSeatGame('Player1', 'Player2');
 
 /***/ }),
 
@@ -150,6 +148,47 @@ function parseCards(cardsJSON) {
 
 /***/ }),
 
+/***/ "./src/js/cards/renderCard.js":
+/*!************************************!*\
+  !*** ./src/js/cards/renderCard.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderCard": () => /* binding */ renderCard
+/* harmony export */ });
+function getRenderCard() {
+  var hand = null;
+  var active = null;
+  var renderCard = {
+    initObject: function initObject() {
+      hand = document.querySelector('.hand__cards');
+      active = document.querySelector('.active-zone__cards-wrapper');
+    },
+    toHand: function toHand(cardElement) {
+      if (hand === null || active === null) this.initObject();
+      cardElement.setAttribute('xyz', 'fade right-3 flip-right rotate-left');
+      cardElement.classList.add('xyz-in');
+      setTimeout(function () {
+        cardElement.classList.remove('xyz-in');
+      }, 450);
+      hand.append(cardElement);
+    },
+    toActive: function toActive() {
+      if (hand === null || active === null) this.initObject();
+      console.log(active);
+    }
+  };
+  renderCard.initObject();
+  return renderCard;
+}
+
+var renderCard = getRenderCard();
+
+
+/***/ }),
+
 /***/ "./src/js/components/Game.js":
 /*!***********************************!*\
   !*** ./src/js/components/Game.js ***!
@@ -163,6 +202,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
 /* harmony import */ var _display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayNewTurnModal */ "./src/js/display/displayNewTurnModal.js");
 /* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -177,6 +218,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+
+
+ //!! TEST
 
 
 
@@ -305,12 +349,20 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "takeCard",
     value: function takeCard() {
-      this.currentPlayer.setCurrentAge(); // recalculate current age of player
+      var _this4 = this;
 
-      this.currentPlayer.hand.push(this.currentDeck.cardsArray.pop());
-      this.currentPlayer.renderLastTakenCard();
-      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer); // starts next phase of turn
+      var cardObject = this.currentDeck.cardsArray.pop();
+      this.currentPlayer.hand.push(cardObject);
+      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_4__.default.frontSide(cardObject);
 
+      cardElement.onclick = function () {
+        _this4.currentPlayer.playCard(cardObject, cardElement);
+      }; //! TEMP
+
+
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.renderCard.toHand(cardElement);
+      this.currentPlayer.setCurrentAge();
+      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer);
       this.actionDone();
     } // update info table in aside, use after each action done in newTurn method
 
