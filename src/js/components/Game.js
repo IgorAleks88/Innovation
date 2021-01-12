@@ -31,6 +31,7 @@ export default class Game {
     };
     this.turnPoints = 0;
     this.initGameState(players, arrOfCards);
+    header.initPlayerNames(players);
   }
 
   initGameState(players, arrOfCards) {

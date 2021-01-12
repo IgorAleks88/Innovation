@@ -1089,6 +1089,8 @@ input[type="text"] {
   border: solid 0.1rem #000;
   height: 10rem;
   width: 23.5rem; }
+  .player-container__hidden {
+    display: none; }
 
 .head-row {
   align-items: center;

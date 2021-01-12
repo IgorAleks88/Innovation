@@ -202,6 +202,7 @@ var Game = /*#__PURE__*/function () {
     };
     this.turnPoints = 0;
     this.initGameState(players, arrOfCards);
+    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.initPlayerNames(players);
   }
 
   _createClass(Game, [{
@@ -1679,6 +1680,24 @@ var displayHeader = {
   }, {
     clock: ['far', 'fa-clock', 'blue']
   }],
+  player0: {
+    container: null,
+    name: null,
+    hand: null,
+    influence: null,
+    leadership: null,
+    red: null,
+    green: null,
+    blue: null,
+    purple: null,
+    yellow: null,
+    tree: null,
+    tower: null,
+    crown: null,
+    bulb: null,
+    factory: null,
+    clock: null
+  },
   player1: {
     container: null,
     name: null,
@@ -1716,24 +1735,6 @@ var displayHeader = {
     clock: null
   },
   player3: {
-    container: null,
-    name: null,
-    hand: null,
-    influence: null,
-    leadership: null,
-    red: null,
-    green: null,
-    blue: null,
-    purple: null,
-    yellow: null,
-    tree: null,
-    tower: null,
-    crown: null,
-    bulb: null,
-    factory: null,
-    clock: null
-  },
-  player4: {
     container: null,
     name: null,
     hand: null,
@@ -1821,6 +1822,7 @@ var displayHeader = {
       recourcesRow.appendChild(container);
     });
     this[player].container.appendChild(recourcesRow);
+    this[player].container.classList.add('player-container__hidden');
     this.wrapper.appendChild(this[player].container);
   },
   changePlayerStats: function changePlayerStats(player) {
@@ -1838,14 +1840,20 @@ var displayHeader = {
     this[playerId].factory.textContent = player.factory;
     this[playerId].clock.textContent = player.clock;
   },
+  initPlayerNames: function initPlayerNames(players) {
+    for (var i = 0; i < players.length; i += 1) {
+      var currentPlayer = "player".concat(i);
+      this[currentPlayer].name.textContent = players[i].name;
+      this[currentPlayer].container.classList.remove('player-container__hidden');
+    }
+  },
   init: function init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
+    this.initPlayerStats(0);
     this.initPlayerStats(1);
     this.initPlayerStats(2);
-    /* this.initPlayerStats(this.testPlayer3);
-    this.initPlayerStats(this.testPlayer4); */
-
+    this.initPlayerStats(3);
     return this.wrapper;
   }
 };
