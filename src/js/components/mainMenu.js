@@ -53,7 +53,10 @@ class Menu {
         if (validation(usersInfo) && usersInfo.names.length) {
           const intro = this.menu.parentElement.parentElement.parentElement;
           intro.classList.toggle('intro--hide');
-          initHotSeatGame('Player1', 'Player2'); //! Hardcoded for 2 players. Should take player names as arguments
+          console.log(usersInfo);
+          // initHotSeatGame('Player1', 'Player2');
+          initHotSeatGame(usersInfo.names); //! Hardcoded for 2 players.
+          // Should take player names as arguments
         }
       } else if (e.target.className.includes('back')) {
         this.menu.remove();

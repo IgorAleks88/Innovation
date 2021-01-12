@@ -6,8 +6,11 @@ import parseCards from '../cards/parseCards';
 import GameUI from '../components/GameUI';
 // import setChat from './setChat';
 import shuffle from './shuffle';
+import getCardObject from './getCardObject';
 
-export default function initHotSeatGame() {
+import gameState from '../components/gameState';
+
+export default function initHotSeatGame(playerNames) {
   // contains dom elements
   const gameUI = new GameUI();
 
@@ -22,17 +25,18 @@ export default function initHotSeatGame() {
 
   // contains players properties and cards
   const players = [];
-  for (let i = 0; i < arguments.length; i += 1) {
-    const player = new Player(gameUI, arguments[i], i + 1);
+  for (let i = 0; i < playerNames.length; i += 1) {
+    const player = new Player(gameUI, playerNames[i], i + 1);
     players.push(player);
   }
 
   // work with all main objects
-  const game = new Game(gameUI, gameField, players);
+  const game = new Game(gameUI, gameField, players, arrOfCards);
   game.newTurn();
   // display first modal without animation
   document.querySelector('.modal').style.opacity = '1';
 
+  console.log(gameState);
   // init chat
   // setChat();
 }

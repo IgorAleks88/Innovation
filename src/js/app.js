@@ -7,6 +7,7 @@ import displayPlayerTable from './display/playerTable/displayPlayerTable';
 import setHandControls from './utility/setHandControls';
 import setAsideControls from './utility/setAsideControls';
 import Intro from './components/Intro';
+// import initHotSeatGame from './utility/initHotSeatGame';
 
 // display intro & menu
 Intro.init();
@@ -19,3 +20,5 @@ setHandControls();
 
 // add event listeners and animations to aside buttons
 setAsideControls();
+
+// initHotSeatGame('Player1', 'Player2');
