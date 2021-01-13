@@ -4,6 +4,9 @@ const displayActiveZone = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('active-zone');
 
+    this.activeZoneTitle = document.createElement('div');
+    this.activeZoneTitle.classList.add('active-zone__title');
+
     this.cardsBlock = document.createElement('div');
     this.cardsBlock.classList.add('active-zone__cards-block');
 
@@ -26,13 +29,9 @@ const displayActiveZone = {
       this.cardsBlockWrapper.append(stack);
     }
 
+    this.wrapper.append(this.activeZoneTitle);
     this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);
-
-    this.controlsBlock = document.createElement('div');
-    this.controlsBlock.classList.add('active-zone__controls');
-
-    this.wrapper.append(this.controlsBlock);
     return this.wrapper;
   },
 };
