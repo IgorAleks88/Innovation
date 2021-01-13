@@ -50,7 +50,7 @@ class Menu {
       } else if (e.target.className.includes('get-names')) {
         e.preventDefault();
         this.writeNamesToObject();
-        if (validation(usersInfo) && usersInfo.names.length) {
+        if (validation(usersInfo) && usersInfo.names.length > 1) {
           const intro = this.menu.parentElement.parentElement.parentElement;
           intro.classList.toggle('intro--hide');
           // initHotSeatGame('Player1', 'Player2');
