@@ -15,6 +15,10 @@
   z-index: 5;
 }
 
+.menu__skip {
+  z-index: 15;
+}
+
 .menu__used {
   animation: show-menu 0.5s linear 0s forwards !important;
 }
