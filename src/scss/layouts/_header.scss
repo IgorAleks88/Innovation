@@ -30,6 +30,10 @@
   border: solid 0.1rem #000;
   height: 14rem;
   width: 23.5rem;
+  
+  &__hidden {
+    display: none;
+  }
 }
 
 .head-row {

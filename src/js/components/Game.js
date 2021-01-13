@@ -9,9 +9,15 @@
 import header from '../display/playerTable/displayHeader';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import displayNextTurnBtn from '../display/displayNextTurnBtn';
+import gameState from './gameState';
+import getCardObject from '../utility/getCardObject';
+
+//! ! TEST
+import renderCard from '../cards/renderCard';
+import getCard from '../cards/getCard';
 
 export default class Game {
-  constructor(gameUI, gameField, players) {
+  constructor(gameUI, gameField, players, arrOfCards) {
     // store passed objects
     this.players = players;
     this.gameField = gameField;
@@ -29,12 +35,61 @@ export default class Game {
       cardsArray: gameField.ageDecks.age1,
     };
     this.turnPoints = 0;
+    this.initGameState(players, arrOfCards);
+    header.initPlayerNames(players);
+  }
+
+  initGameState(players, arrOfCards) {
+    arrOfCards.forEach((e) => {
+      switch (+e.age) {
+        case 1:
+          gameState.ageDecks.age1.push(e.innovation);
+          break;
+        case 2:
+          gameState.ageDecks.age2.push(e.innovation);
+          break;
+        case 3:
+          gameState.ageDecks.age3.push(e.innovation);
+          break;
+        case 4:
+          gameState.ageDecks.age4.push(e.innovation);
+          break;
+        case 5:
+          gameState.ageDecks.age5.push(e.innovation);
+          break;
+        case 6:
+          gameState.ageDecks.age6.push(e.innovation);
+          break;
+        case 7:
+          gameState.ageDecks.age7.push(e.innovation);
+          break;
+        case 8:
+          gameState.ageDecks.age8.push(e.innovation);
+          break;
+        case 9:
+          gameState.ageDecks.age9.push(e.innovation);
+          break;
+        case 10:
+          gameState.ageDecks.age10.push(e.innovation);
+          break;
+        default:
+          throw new Error(`Wrong number on age field in ${e}`);
+      }
+    });
+    for (let i = 0; i < players.length; i += 1) {
+      const player = `player${i}`;
+      gameState[player].name = players[i].name;
+      gameState.players.push(gameState[player]);
+    }
+    gameState.currentPlayer = gameState.players[0];
+    gameState.currentPlayer.actionPoints = 2;
+    gameState.activePlayer = gameState.players[0];
   }
 
   newTurn() {
     this.setCurrentPlayer();
     displayNewTurnModal(this.currentPlayer.name);
-    this.turnPoints = 2;
+    this.turnPoints = 100;
     // timeout to display modal
     setTimeout(() => {
       this.removeActiveDeck();
@@ -117,11 +172,18 @@ export default class Game {
 
   // get card and render it in hand
   takeCard() {
-    this.currentPlayer.setCurrentAge(); // recalculate current age of player
-    this.currentPlayer.hand.push(this.currentDeck.cardsArray.pop());
-    this.currentPlayer.renderLastTakenCard();
+    const cardObject = this.currentDeck.cardsArray.pop();
+    this.currentPlayer.hand.push(cardObject);
+
+    const cardElement = getCard.frontSide(cardObject);
+
+    cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
+
+    renderCard.toHand(cardElement);
+
+    this.currentPlayer.setCurrentAge();
     header.changePlayerStats(this.currentPlayer);
-    // starts next phase of turn
+
     this.actionDone();
   }
 
@@ -148,5 +210,39 @@ export default class Game {
 
     // display cloned deck in currentDeck block
     this.gameUI.currentDeck.append(cloneCurrentDeck);
+  }
+
+  updateGameState() {
+    // update resources for each player
+    gameState.players.forEach((player) => {
+      player.tree = 0;
+      player.tower = 0;
+      player.crown = 0;
+      player.bulb = 0;
+      player.factory = 0;
+      player.clock = 0;
+      Object.keys(player.activeDecks).forEach((stack) => {
+        const currentStack = player.activeDecks[stack];
+        if (currentStack.cards.length > 0) {
+          const highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+          const highestCard = getCardObject(highestCardInnovation);
+          highestCard.resourses.forEach((e) => {
+            player[e.resourceName] += 1;
+          });
+        }
+      });
+    });
+
+    // update currentAge for each player
+    gameState.players.forEach((player) => {
+      Object.keys(player.activeDecks).forEach((stack) => {
+        const currentStack = player.activeDecks[stack];
+        if (currentStack.cards.length > 0) {
+          const highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+          const highestCard = getCardObject(highestCardInnovation);
+          if (highestCard.age > player.currentAge) { player.currentAge = highestCard.age; }
+        }
+      });
+    });
   }
 }
