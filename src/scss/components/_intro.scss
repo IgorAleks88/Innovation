@@ -153,6 +153,10 @@
         }
       }
     }
+
+    .intro__skip {
+      background: none;
+    }
   }
 
   .intro__bottom.show {
@@ -222,7 +226,7 @@
 }
 
 .menu {
-  animation: show-menu 0.5s linear 1s forwards;
+  animation: show-menu 0.5s linear 14s forwards;
 }
 
 @keyframes show-menu {

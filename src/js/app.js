@@ -3,10 +3,10 @@ import '../scss/style.scss';
 import '@animxyz/core';
 
 // import js modules
+import intro from './components/Intro';
 import displayPlayerTable from './display/playerTable/displayPlayerTable';
 import setHandControls from './utility/setHandControls';
 import setAsideControls from './utility/setAsideControls';
-import intro from './components/Intro';
 
 // display intro & menu
 intro.init();
