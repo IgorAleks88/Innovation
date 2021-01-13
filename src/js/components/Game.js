@@ -11,6 +11,7 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import displayNextTurnBtn from '../display/displayNextTurnBtn';
 import gameState from './gameState';
 import getCardObject from '../utility/getCardObject';
+import getCardElement from '../utility/getCardElement';
 
 //! ! TEST
 import renderCard from '../cards/renderCard';
@@ -35,8 +36,14 @@ export default class Game {
       cardsArray: gameField.ageDecks.age1,
     };
     this.turnPoints = 0;
-    this.initGameState(players, arrOfCards);
+    this.arrOfCards = arrOfCards;
+    this.initGameState(players, this.arrOfCards);
     header.initPlayerNames(players);
+    // test
+    /* this.testCardObj = getCardObject('колесо', arrOfCards);
+    console.log(this.testCardObj);
+    this.testCardDOM = getCardElement(this.testCardObj);
+    console.log(this.testCardDOM); */
   }
 
   initGameState(players, arrOfCards) {
@@ -171,20 +178,43 @@ export default class Game {
   }
 
   // get card and render it in hand
-  takeCard() {
-    const cardObject = this.currentDeck.cardsArray.pop();
+  takeCard(e) {
+    /* const cardObject = this.currentDeck.cardsArray.pop();
     this.currentPlayer.hand.push(cardObject);
 
     const cardElement = getCard.frontSide(cardObject);
 
     cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
 
-    renderCard.toHand(cardElement);
+    renderCard.toHand(cardElement); */
 
     this.currentPlayer.setCurrentAge();
     header.changePlayerStats(this.currentPlayer);
 
+    this.takeCardNew(e);
+
     this.actionDone();
+  }
+
+  takeCardNew(e) {
+    let sourceDeck = e.target.id;
+    if (sourceDeck === 'cloneCurrentDeck') { sourceDeck = gameState.currentPlayer.currentDeck; }
+    const movingCardInnovation = gameState.ageDecks[sourceDeck].pop();
+    gameState.currentPlayer.hand.push(movingCardInnovation);
+    gameState.currentPlayer.actionPoints -= 1;
+    const movingCardObj = getCardObject(movingCardInnovation, this.arrOfCards);
+    const movingCardElement = getCardElement(movingCardObj);
+    movingCardElement.onclick = this.playCard.bind(this);
+    renderCard.toHand(movingCardElement);
+    // console.log(gameState.currentPlayer.hand);
+  }
+
+  playCard(e) {
+    const playingCardInnovation = e.target.closest('.card').dataset.innovation;
+    const playIndex = gameState.currentPlayer.hand.indexOf(playingCardInnovation);
+    gameState.currentPlayer.hand.splice(playIndex, 1);
+    const playingCardObj = getCardObject(playingCardInnovation, this.arrOfCards);
+    console.log(playingCardObj);
   }
 
   // update info table in aside, use after each action done in newTurn method

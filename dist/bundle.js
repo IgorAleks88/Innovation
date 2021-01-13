@@ -272,8 +272,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
 /* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
 /* harmony import */ var _utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utility/getCardObject */ "./src/js/utility/getCardObject.js");
-/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
-/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
+/* harmony import */ var _utility_getCardElement__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utility/getCardElement */ "./src/js/utility/getCardElement.js");
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -288,6 +289,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+
 
 
 
@@ -318,8 +320,14 @@ var Game = /*#__PURE__*/function () {
       cardsArray: gameField.ageDecks.age1
     };
     this.turnPoints = 0;
-    this.initGameState(players, arrOfCards);
-    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.initPlayerNames(players);
+    this.arrOfCards = arrOfCards;
+    this.initGameState(players, this.arrOfCards);
+    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.initPlayerNames(players); // test
+
+    /* this.testCardObj = getCardObject('колесо', arrOfCards);
+    console.log(this.testCardObj);
+    this.testCardDOM = getCardElement(this.testCardObj);
+    console.log(this.testCardDOM); */
   }
 
   _createClass(Game, [{
@@ -482,22 +490,42 @@ var Game = /*#__PURE__*/function () {
 
   }, {
     key: "takeCard",
-    value: function takeCard() {
-      var _this4 = this;
-
-      var cardObject = this.currentDeck.cardsArray.pop();
+    value: function takeCard(e) {
+      /* const cardObject = this.currentDeck.cardsArray.pop();
       this.currentPlayer.hand.push(cardObject);
-      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_6__.default.frontSide(cardObject);
-
-      cardElement.onclick = function () {
-        _this4.currentPlayer.playCard(cardObject, cardElement);
-      }; //! TEMP
-
-
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_5__.default.toHand(cardElement);
+        const cardElement = getCard.frontSide(cardObject);
+        cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
+        renderCard.toHand(cardElement); */
       this.currentPlayer.setCurrentAge();
       _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer);
+      this.takeCardNew(e);
       this.actionDone();
+    }
+  }, {
+    key: "takeCardNew",
+    value: function takeCardNew(e) {
+      var sourceDeck = e.target.id;
+
+      if (sourceDeck === 'cloneCurrentDeck') {
+        sourceDeck = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.currentDeck;
+      }
+
+      var movingCardInnovation = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks[sourceDeck].pop();
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.push(movingCardInnovation);
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints -= 1;
+      var movingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(movingCardInnovation, this.arrOfCards);
+      var movingCardElement = (0,_utility_getCardElement__WEBPACK_IMPORTED_MODULE_5__.default)(movingCardObj);
+      movingCardElement.onclick = this.playCard.bind(this);
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toHand(movingCardElement); // console.log(gameState.currentPlayer.hand);
+    }
+  }, {
+    key: "playCard",
+    value: function playCard(e) {
+      var playingCardInnovation = e.target.closest('.card').dataset.innovation;
+      var playIndex = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.indexOf(playingCardInnovation);
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.splice(playIndex, 1);
+      var playingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(playingCardInnovation, this.arrOfCards);
+      console.log(playingCardObj);
     } // update info table in aside, use after each action done in newTurn method
 
   }, {
@@ -1089,6 +1117,7 @@ var gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
+    currentDeck: 'age1',
     activeDecks: {
       red: {
         cards: [],
@@ -2077,6 +2106,91 @@ var displayPlayerTable = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayPlayerTable);
+
+/***/ }),
+
+/***/ "./src/js/utility/getCardElement.js":
+/*!******************************************!*\
+  !*** ./src/js/utility/getCardElement.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ getCardElement
+/* harmony export */ });
+function getCardElement(cardObj) {
+  // get card header
+  function getCardHeader(card) {
+    var divHeader = document.createElement('div');
+    divHeader.classList.add('card__card-header', "card__color--".concat(card.color));
+    var posTopLeft = document.createElement('div');
+    posTopLeft.classList.add('card__topLeft');
+    var title = document.createElement('div');
+    title.classList.add('card-header__title');
+    title.textContent = card.innovation;
+    divHeader.appendChild(posTopLeft);
+    divHeader.appendChild(title);
+    return divHeader;
+  } // get card body
+
+
+  function getCardMain(card) {
+    var divMain = document.createElement('div');
+    divMain.classList.add('card__card-main', "card__color--".concat(card.color, "-transparent"));
+    card.dogma.forEach(function (item) {
+      var divDogma = document.createElement('div');
+      divDogma.classList.add('card__dogma');
+      divDogma.setAttribute('data-dogmatype', item.dogmaType);
+      var icon = document.createElement('i');
+      icon.classList.add(item.dogmaIcon[0], item.dogmaIcon[1], 'card__icon', "card__icon-color--".concat(item.dogmaColor));
+      divDogma.appendChild(icon);
+      var dogma = document.createElement('span');
+      dogma.classList.add('dogma__effect');
+      dogma.innerHTML = item.dogmaEffect;
+      divDogma.appendChild(dogma);
+      divMain.appendChild(divDogma);
+    });
+    return divMain;
+  } // get card footer
+
+
+  function getCardFooter() {
+    var divFooter = document.createElement('div');
+    divFooter.classList.add('card__card-footer');
+    var posBottomLeft = document.createElement('div');
+    posBottomLeft.classList.add('card__bottomLeft');
+    divFooter.appendChild(posBottomLeft);
+    var posBottomCenter = document.createElement('div');
+    posBottomCenter.classList.add('card__bottomCenter');
+    divFooter.appendChild(posBottomCenter);
+    var posBottomRight = document.createElement('div');
+    posBottomRight.classList.add('card__bottomRight');
+    divFooter.appendChild(posBottomRight);
+    return divFooter;
+  } // place age number and resourses by card position
+
+
+  function setObjByPosition(divCard, card) {
+    var agePos = divCard.querySelector(".card__".concat(card.agePosition));
+    agePos.classList.add("card__color--".concat(card.color), 'card__age--border');
+    agePos.textContent = card.age;
+    card.resourses.forEach(function (res) {
+      var pos = divCard.querySelector(".card__".concat(res.resoursePosition));
+      pos.classList.add("".concat(res.resourseType[0]), "".concat(res.resourseType[1]), "card__icon-color--".concat(res.resourseColor), "card__icon-border--".concat(card.color));
+    });
+  }
+
+  var divCard = document.createElement('div');
+  divCard.classList.add('card');
+  divCard.style.background = "url(\"".concat(cardObj.cardImg, "\")");
+  divCard.dataset.innovation = cardObj.innovation;
+  divCard.appendChild(getCardHeader(cardObj));
+  divCard.appendChild(getCardMain(cardObj));
+  divCard.appendChild(getCardFooter());
+  setObjByPosition(divCard, cardObj, cardObj.age, cardObj.color);
+  return divCard;
+}
 
 /***/ }),
 
