@@ -75,7 +75,7 @@ const displayHeader = {
     clock: null,
   },
 
-  initPlayerStats(id, parent) {
+  initPlayerStats(id) {
     const player = `player${id}`;
 
     this[player].container = document.createElement('div');
@@ -175,6 +175,10 @@ const displayHeader = {
   init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
+
+    this.headerTitle = document.createElement('div');
+    this.headerTitle.classList.add('header__title');
+    this.wrapper.appendChild(this.headerTitle);
 
     this.headerOverlay = document.createElement('div');
     this.headerOverlay.classList.add('header__overlay');

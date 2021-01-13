@@ -17,3 +17,33 @@
   text-align: center;
   width: 3.8rem;
 }
+
+@mixin block-background-overlay {
+  background: url('../../assets/img/block-bg.png') center;
+  height: 96%;
+  mix-blend-mode: overlay;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin title-settings($url, $size: cover) {
+  background: url($url);
+  background-size: $size;
+  width: 150px;
+  height: 62px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -25px; // don't change on rem
+  z-index: 3;
+  filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.8));
+}
+
+@mixin area-border($url) {
+  border: 0.1rem solid transparent;
+  border-image: url($url);
+  border-image-repeat: round;
+  border-image-slice: 72 72 72 72;
+  border-image-width: 4rem;
+}

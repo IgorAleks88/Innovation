@@ -35,3 +35,8 @@
 .js-loading *::after {
   animation-play-state: paused !important;
 }
+
+@font-face {
+  font-family: Caesar;
+  src: url('../../assets/fonts/caesar.otf');
+}

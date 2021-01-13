@@ -1,33 +1,24 @@
 .active-zone {
   @include flex(row, flex-start, flex-end);
-  background: linear-gradient(
-    90deg,
-    rgba(33, 14, 6, 1) 0%,
-    rgba(77, 35, 12, 1) 50%,
-    rgba(33, 14, 6, 1) 100%
-  );
+  background: $tables-bg;
   height: calc(100vh - 44rem); // 44rem = 17rem header + 27rem hand
-  overflow-x: auto;
-  overflow-y: hidden;
   position: relative;
   width: 100%; // 20% for aside
 
+  .active-zone__title {
+    @include title-settings('../../assets/img/title-active-zone.png');
+  }
+
   .active-zone__overlay {
-    background: url('../../assets/img/block-bg.png') center;
-    height: 96%;
-    mix-blend-mode: overlay;
-    position: absolute;
+    @include block-background-overlay;
     top: 1.5rem;
+    transform: none;
     width: 100%;
   }
 
   .active-zone__cards {
     @include flex(row, flex-start, flex-end);
-    border: 0.1rem solid transparent;
-    border-image: url('../../assets/img/border-center.png');
-    border-image-repeat: round;
-    border-image-slice: 72 72 72 72;
-    border-image-width: 4rem;
+    @include area-border('../../assets/img/border-center.png');
     flex-wrap: nowrap;
     height: 100%;
     overflow: auto;

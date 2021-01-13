@@ -1,42 +1,34 @@
 .header {
   @include flex(row, space-around, center);
-  background: linear-gradient(
-    90deg,
-    rgba(33, 14, 6, 1) 0%,
-    rgba(77, 35, 12, 1) 50%,
-    rgba(33, 14, 6, 1) 100%
-  );
-
+  background: $tables-bg;
   height: 17rem;
   width: calc(100vw - 37rem);
+  position: relative;
+
+  .header__title {
+    @include title-settings('../../assets/img/title-header.png');
+  }
 
   .header__overlay {
-    background: url('../../assets/img/block-bg.png') center;
-    height: 96%;
-    mix-blend-mode: overlay;
-    position: absolute;
-    top: 1.5rem;
+    @include block-background-overlay;
     width: 100%;
   }
 
   .header__table {
-    border: 0.1rem solid transparent;
-    border-image: url('../../assets/img/border-top.png');
-    border-image-repeat: round;
-    border-image-slice: 72 72 72 72;
-    border-image-width: 4rem;
+    @include area-border('../../assets/img/border-top.png');
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
   }
 }
 
 .player-container {
   @include flex(column, space-around, center);
   border: solid 0.1rem #000;
-  height: 10rem;
+  height: 14rem;
   width: 23.5rem;
 }
 
@@ -50,6 +42,7 @@
     height: 100%;
     text-align: center;
     width: 40%;
+    /* background: url('../../assets/img/player-container/player-title.png');*/
   }
 }
 

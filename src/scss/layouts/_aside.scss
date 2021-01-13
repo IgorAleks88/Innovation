@@ -1,11 +1,6 @@
 .aside {
   @include flex(column, flex-start, center);
-  background: linear-gradient(
-    90deg,
-    rgba(33, 14, 6, 1) 0%,
-    rgba(77, 35, 12, 1) 50%,
-    rgba(33, 14, 6, 1) 100%
-  );
+  background: $tables-bg;
 
   height: 100vh;
   position: absolute;
@@ -14,23 +9,18 @@
   width: 37rem;
 
   .aside__overlay {
-    background: url('../../assets/img/block-bg.png') center;
-    height: 96%;
-    mix-blend-mode: overlay;
-    position: absolute;
-    width: 96%;
+    @include block-background-overlay;
     margin: 0;
+    top: 0;
+    width: 90%;
+    transform: none;
   }
 
   .aside__top {
     height: 17rem;
     width: 100%;
     position: absolute;
-    border: 0.1rem solid transparent;
-    border-image: url('../../assets/img/border-aside-top.png');
-    border-image-repeat: round;
-    border-image-slice: 72 72 72 72;
-    border-image-width: 4rem;
+    @include area-border('../../assets/img/border-aside-top.png');
     margin: 0;
   }
 
@@ -38,11 +28,7 @@
     width: 100%;
     height: calc(100vh - 44rem); // 44rem = 17rem header + 27rem hand
     position: absolute;
-    border: 0.1rem solid transparent;
-    border-image: url('../../assets/img/border-aside-center.png');
-    border-image-repeat: round;
-    border-image-slice: 72 72 72 72;
-    border-image-width: 4rem;
+    @include area-border('../../assets/img/border-aside-center.png');
     margin: 0;
     top: 17rem; //17rem header
   }
@@ -51,11 +37,7 @@
     height: 27rem;
     width: 100%;
     position: absolute;
-    border: 0.1rem solid transparent;
-    border-image: url('../../assets/img/border-aside-bottom.png');
-    border-image-repeat: round;
-    border-image-slice: 72 72 72 72;
-    border-image-width: 4rem;
+    @include area-border('../../assets/img/border-aside-bottom.png');
     margin: 0;
     top: calc(100% - 27rem); //27rem hand
   }

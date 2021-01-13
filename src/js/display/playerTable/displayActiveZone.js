@@ -4,6 +4,9 @@ const displayActiveZone = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('active-zone');
 
+    this.activeZoneTitle = document.createElement('div');
+    this.activeZoneTitle.classList.add('active-zone__title');
+
     this.cardsBlock = document.createElement('div');
     this.cardsBlock.classList.add('active-zone__cards');
 
@@ -20,6 +23,7 @@ const displayActiveZone = {
       this.cardsBlock.append(stack);
     }
 
+    this.wrapper.append(this.activeZoneTitle);
     this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);
     return this.wrapper;
