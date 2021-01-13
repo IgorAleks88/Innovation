@@ -32,7 +32,7 @@ b {
       border-radius: 5rem;
       display: flex;
       font-size: 3rem;
-      font-weight: 70rem;
+      font-weight: 700; // font-weight does not use REM units
       height: 6rem;
       justify-content: center;
       margin-left: -1rem;
@@ -46,7 +46,7 @@ b {
     .card-header__title {
       color: #fff;
       font-size: 1.6rem;
-      font-weight: 60rem;
+      font-weight: 600; // font-weight does not use REM units
       padding: 0.5rem;
       text-align: right;
       text-shadow: 0.1rem 0.1rem #000;
@@ -57,7 +57,7 @@ b {
 
   .card__card-main {
     color: #fff;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     height: calc(100% - 3rem);
     line-height: 1.3;
     margin-left: calc(100% - 22.7rem);
