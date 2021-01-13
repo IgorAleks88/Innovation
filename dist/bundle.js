@@ -331,6 +331,22 @@ var Game = /*#__PURE__*/function () {
   }
 
   _createClass(Game, [{
+    key: "init",
+    value: function init() {
+      var _this2 = this;
+
+      var cardElements = document.querySelectorAll('.card');
+      cardElements.forEach(function (elem) {
+        if (_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
+          elem.onclick = _this2.playCard;
+        }
+      });
+      var activeDeckElements = document.querySelectorAll('.age-deck--active');
+      activeDeckElements.forEach(function (elem) {
+        elem.onclick = _this2.takeCard;
+      });
+    }
+  }, {
     key: "initGameState",
     value: function initGameState(players, arrOfCards) {
       arrOfCards.forEach(function (e) {
@@ -393,22 +409,22 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "newTurn",
     value: function newTurn() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.setCurrentPlayer();
       (0,_display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__.default)(this.currentPlayer.name);
       this.turnPoints = 100; // timeout to display modal
 
       setTimeout(function () {
-        _this2.removeActiveDeck();
+        _this3.removeActiveDeck();
 
-        _this2.setActiveDeck(_this2.currentPlayer);
+        _this3.setActiveDeck(_this3.currentPlayer);
 
-        _this2.currentPlayer.renderHand();
+        _this3.currentPlayer.renderHand();
 
-        _this2.currentPlayer.renderActiveZone();
+        _this3.currentPlayer.renderActiveZone();
 
-        _this2.updateInfoTable();
+        _this3.updateInfoTable();
       }, 450);
     } // use this after each action
 
@@ -447,18 +463,18 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "setActiveDeck",
     value: function setActiveDeck(currentPlayer) {
-      var _this3 = this;
+      var _this4 = this;
 
       Object.keys(this.gameField.ageDecks).forEach(function (ageDeckKey) {
         if (ageDeckKey === "age".concat(currentPlayer.currentAge)) {
           // store active deck dom element
-          _this3.currentDeck.domElement = _this3.gameUI.ageDecks["age".concat(currentPlayer.currentAge)]; // store active deck cards array
+          _this4.currentDeck.domElement = _this4.gameUI.ageDecks["age".concat(currentPlayer.currentAge)]; // store active deck cards array
 
-          _this3.currentDeck.cardsArray = _this3.gameField.ageDecks[ageDeckKey]; //! Change current players currentAge if needed deck empty to go for the next deck
+          _this4.currentDeck.cardsArray = _this4.gameField.ageDecks[ageDeckKey]; //! Change current players currentAge if needed deck empty to go for the next deck
           //! Need recalcualte current age after each action, done by players method setCurrentAge
 
-          if (_this3.currentDeck.cardsArray.length === 0) {
-            _this3.currentPlayer.currentAge += 1;
+          if (_this4.currentDeck.cardsArray.length === 0) {
+            _this4.currentPlayer.currentAge += 1;
           }
         }
       }); // set style and event listener of active deck when all calculations finished
@@ -496,14 +512,6 @@ var Game = /*#__PURE__*/function () {
         const cardElement = getCard.frontSide(cardObject);
         cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
         renderCard.toHand(cardElement); */
-      this.currentPlayer.setCurrentAge();
-      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer);
-      this.takeCardNew(e);
-      this.actionDone();
-    }
-  }, {
-    key: "takeCardNew",
-    value: function takeCardNew(e) {
       var sourceDeck = e.target.id;
 
       if (sourceDeck === 'cloneCurrentDeck') {
@@ -516,16 +524,27 @@ var Game = /*#__PURE__*/function () {
       var movingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(movingCardInnovation, this.arrOfCards);
       var movingCardElement = (0,_utility_getCardElement__WEBPACK_IMPORTED_MODULE_5__.default)(movingCardObj);
       movingCardElement.onclick = this.playCard.bind(this);
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toHand(movingCardElement); // console.log(gameState.currentPlayer.hand);
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toHand(movingCardElement); // gameState.currentPlayer.setCurrentAge();
+
+      this.updateGameState();
+      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer);
+      this.actionDone();
     }
   }, {
     key: "playCard",
     value: function playCard(e) {
       var playingCardInnovation = e.target.closest('.card').dataset.innovation;
+      var playingCardElement = e.target.closest('.card');
+      playingCardElement.onclick = null;
       var playIndex = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.indexOf(playingCardInnovation);
       _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.splice(playIndex, 1);
       var playingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(playingCardInnovation, this.arrOfCards);
-      console.log(playingCardObj);
+      var targetDeckArray = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.activeDecks[playingCardObj.color].cards;
+      targetDeckArray.push(playingCardInnovation);
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints -= 1;
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toActive(playingCardElement);
+      this.updateGameState();
+      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer);
     } // update info table in aside, use after each action done in newTurn method
 
   }, {
@@ -554,6 +573,8 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "updateGameState",
     value: function updateGameState() {
+      var _this5 = this;
+
       // update resources for each player
       _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
         player.tree = 0;
@@ -567,7 +588,7 @@ var Game = /*#__PURE__*/function () {
 
           if (currentStack.cards.length > 0) {
             var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation);
+            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation, _this5.arrOfCards);
             highestCard.resourses.forEach(function (e) {
               player[e.resourceName] += 1;
             });
@@ -576,18 +597,30 @@ var Game = /*#__PURE__*/function () {
       }); // update currentAge for each player
 
       _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+        player.currentAge = 1;
         Object.keys(player.activeDecks).forEach(function (stack) {
           var currentStack = player.activeDecks[stack];
 
           if (currentStack.cards.length > 0) {
             var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation);
+            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation, _this5.arrOfCards);
 
             if (highestCard.age > player.currentAge) {
               player.currentAge = highestCard.age;
             }
           }
         });
+      }); // update currentDeck for each player
+
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+        for (var i = player.currentAge; i < 11; i += 1) {
+          var deck = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks["age".concat(i)];
+
+          if (deck.length > 0) {
+            player.currentDeck = "age".concat(i);
+            break;
+          }
+        }
       });
     }
   }]);
@@ -998,6 +1031,7 @@ var Player = /*#__PURE__*/function () {
     value: function setCurrentAge() {
       var _this2 = this;
 
+      // console.log(this);
       Object.keys(this.activeStacks).forEach(function (stack) {
         _this2.activeStacks[stack].cards.forEach(function (card) {
           if (+card.age > _this2.currentAge) {
@@ -1143,7 +1177,13 @@ var gameState = {
         shift: 'top' //! test
 
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   },
   player1: {
     name: null,
@@ -1172,7 +1212,13 @@ var gameState = {
         cards: [],
         shift: null
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   },
   player2: {
     name: null,
@@ -1201,7 +1247,13 @@ var gameState = {
         cards: [],
         shift: null
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   },
   player3: {
     name: null,
@@ -1230,7 +1282,13 @@ var gameState = {
         cards: [],
         shift: null
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameState);
@@ -2030,11 +2088,11 @@ var displayHeader = {
   changePlayerStats: function changePlayerStats(player) {
     var playerId = "player".concat(player.id);
     this[playerId].hand.textContent = player.hand.length;
-    this[playerId].red.textContent = player.activeStacks.red.cards.length;
-    this[playerId].green.textContent = player.activeStacks.green.cards.length;
-    this[playerId].blue.textContent = player.activeStacks.blue.cards.length;
-    this[playerId].purple.textContent = player.activeStacks.purple.cards.length;
-    this[playerId].yellow.textContent = player.activeStacks.yellow.cards.length;
+    this[playerId].red.textContent = player.activeDecks.red.cards.length;
+    this[playerId].green.textContent = player.activeDecks.green.cards.length;
+    this[playerId].blue.textContent = player.activeDecks.blue.cards.length;
+    this[playerId].purple.textContent = player.activeDecks.purple.cards.length;
+    this[playerId].yellow.textContent = player.activeDecks.yellow.cards.length;
     this[playerId].tree.textContent = player.tree;
     this[playerId].tower.textContent = player.tower;
     this[playerId].crown.textContent = player.crown;

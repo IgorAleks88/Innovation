@@ -86,6 +86,7 @@ export default class Player {
   // calculate and set current age, iterates througth each stack
   //! Runs from Game each time when card taken
   setCurrentAge() {
+    // console.log(this);
     Object.keys(this.activeStacks).forEach((stack) => {
       this.activeStacks[stack].cards.forEach((card) => {
         if (+card.age > this.currentAge) {

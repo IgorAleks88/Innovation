@@ -45,6 +45,12 @@ const gameState = {
         shift: 'top', //! test
       },
     },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0,
   },
   player1: {
     name: null,
@@ -74,6 +80,12 @@ const gameState = {
         shift: null,
       },
     },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0,
   },
   player2: {
     name: null,
@@ -103,6 +115,12 @@ const gameState = {
         shift: null,
       },
     },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0,
   },
   player3: {
     name: null,
@@ -132,6 +150,12 @@ const gameState = {
         shift: null,
       },
     },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0,
   },
 };
 
