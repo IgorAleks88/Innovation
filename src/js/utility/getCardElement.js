@@ -24,15 +24,15 @@ export default function getCardElement(cardObj) {
     card.dogma.forEach((item) => {
       const divDogma = document.createElement('div');
       divDogma.classList.add('card__dogma');
-      divDogma.setAttribute('data-dogmatype', item.dogmaType);
+      divDogma.setAttribute('data-type', item.type);
 
       const icon = document.createElement('i');
-      icon.classList.add(item.dogmaIcon[0], item.dogmaIcon[1], 'card__icon', `card__icon-color--${item.dogmaColor}`);
+      icon.classList.add(item.icon[0], item.icon[1], 'card__icon', `card__icon-color--${item.color}`);
       divDogma.appendChild(icon);
 
       const dogma = document.createElement('span');
       dogma.classList.add('dogma__effect');
-      dogma.innerHTML = item.dogmaEffect;
+      dogma.innerHTML = item.effect;
       divDogma.appendChild(dogma);
 
       divMain.appendChild(divDogma);
@@ -66,9 +66,9 @@ export default function getCardElement(cardObj) {
     agePos.textContent = card.age;
 
     card.resourses.forEach((res) => {
-      const pos = divCard.querySelector(`.card__${res.resoursePosition}`);
-      pos.classList.add(`${res.resourseType[0]}`, `${res.resourseType[1]}`,
-        `card__icon-color--${res.resourseColor}`, `card__icon-border--${card.color}`);
+      const pos = divCard.querySelector(`.card__${res.position}`);
+      pos.classList.add(`${res.type[0]}`, `${res.type[1]}`,
+        `card__icon-color--${res.color}`, `card__icon-border--${card.color}`);
     });
   }
 
