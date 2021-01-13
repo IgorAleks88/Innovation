@@ -30,7 +30,9 @@ document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_
 
 (0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__.default)(); // add event listeners and animations to aside buttons
 
-(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)();
+(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); //! Added for testing! Uncomment next 2 lines and comment line 12 with Intro.init()
+// import initHotSeatGame from './utility/initHotSeatGame';
+// initHotSeatGame('Player1', 'Player2');
 
 /***/ }),
 
@@ -272,8 +274,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
 /* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
 /* harmony import */ var _utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utility/getCardObject */ "./src/js/utility/getCardObject.js");
-/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
-/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
+/* harmony import */ var _utility_getCardElement__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utility/getCardElement */ "./src/js/utility/getCardElement.js");
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -288,6 +291,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
+
 
 
 
@@ -318,11 +322,33 @@ var Game = /*#__PURE__*/function () {
       cardsArray: gameField.ageDecks.age1
     };
     this.turnPoints = 0;
-    this.initGameState(players, arrOfCards);
-    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.initPlayerNames(players);
+    this.arrOfCards = arrOfCards;
+    this.initGameState(players, this.arrOfCards);
+    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.initPlayerNames(players); // test
+
+    /* this.testCardObj = getCardObject('колесо', arrOfCards);
+    console.log(this.testCardObj);
+    this.testCardDOM = getCardElement(this.testCardObj);
+    console.log(this.testCardDOM); */
   }
 
   _createClass(Game, [{
+    key: "init",
+    value: function init() {
+      var _this2 = this;
+
+      var cardElements = document.querySelectorAll('.card');
+      cardElements.forEach(function (elem) {
+        if (_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
+          elem.onclick = _this2.playCard;
+        }
+      });
+      var activeDeckElements = document.querySelectorAll('.age-deck--active');
+      activeDeckElements.forEach(function (elem) {
+        elem.onclick = _this2.takeCard;
+      });
+    }
+  }, {
     key: "initGameState",
     value: function initGameState(players, arrOfCards) {
       arrOfCards.forEach(function (e) {
@@ -385,22 +411,22 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "newTurn",
     value: function newTurn() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.setCurrentPlayer();
       (0,_display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__.default)(this.currentPlayer.name);
       this.turnPoints = 100; // timeout to display modal
 
       setTimeout(function () {
-        _this2.removeActiveDeck();
+        _this3.removeActiveDeck();
 
-        _this2.setActiveDeck(_this2.currentPlayer);
+        _this3.setActiveDeck(_this3.currentPlayer);
 
-        _this2.currentPlayer.renderHand();
+        _this3.currentPlayer.renderHand();
 
-        _this2.currentPlayer.renderActiveZone();
+        _this3.currentPlayer.renderActiveZone();
 
-        _this2.updateInfoTable();
+        _this3.updateInfoTable();
       }, 450);
     } // use this after each action
 
@@ -439,18 +465,18 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "setActiveDeck",
     value: function setActiveDeck(currentPlayer) {
-      var _this3 = this;
+      var _this4 = this;
 
       Object.keys(this.gameField.ageDecks).forEach(function (ageDeckKey) {
         if (ageDeckKey === "age".concat(currentPlayer.currentAge)) {
           // store active deck dom element
-          _this3.currentDeck.domElement = _this3.gameUI.ageDecks["age".concat(currentPlayer.currentAge)]; // store active deck cards array
+          _this4.currentDeck.domElement = _this4.gameUI.ageDecks["age".concat(currentPlayer.currentAge)]; // store active deck cards array
 
-          _this3.currentDeck.cardsArray = _this3.gameField.ageDecks[ageDeckKey]; //! Change current players currentAge if needed deck empty to go for the next deck
+          _this4.currentDeck.cardsArray = _this4.gameField.ageDecks[ageDeckKey]; //! Change current players currentAge if needed deck empty to go for the next deck
           //! Need recalcualte current age after each action, done by players method setCurrentAge
 
-          if (_this3.currentDeck.cardsArray.length === 0) {
-            _this3.currentPlayer.currentAge += 1;
+          if (_this4.currentDeck.cardsArray.length === 0) {
+            _this4.currentPlayer.currentAge += 1;
           }
         }
       }); // set style and event listener of active deck when all calculations finished
@@ -482,22 +508,45 @@ var Game = /*#__PURE__*/function () {
 
   }, {
     key: "takeCard",
-    value: function takeCard() {
-      var _this4 = this;
-
-      var cardObject = this.currentDeck.cardsArray.pop();
+    value: function takeCard(e) {
+      /* const cardObject = this.currentDeck.cardsArray.pop();
       this.currentPlayer.hand.push(cardObject);
-      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_6__.default.frontSide(cardObject);
+        const cardElement = getCard.frontSide(cardObject);
+        cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
+        renderCard.toHand(cardElement); */
+      var sourceDeck = e.target.id;
 
-      cardElement.onclick = function () {
-        _this4.currentPlayer.playCard(cardObject, cardElement);
-      }; //! TEMP
+      if (sourceDeck === 'cloneCurrentDeck') {
+        sourceDeck = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.currentDeck;
+      }
 
+      var movingCardInnovation = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks[sourceDeck].pop();
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.push(movingCardInnovation);
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints -= 1;
+      var movingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(movingCardInnovation, this.arrOfCards);
+      var movingCardElement = (0,_utility_getCardElement__WEBPACK_IMPORTED_MODULE_5__.default)(movingCardObj);
+      movingCardElement.onclick = this.playCard.bind(this);
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toHand(movingCardElement); // gameState.currentPlayer.setCurrentAge();
 
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_5__.default.toHand(cardElement);
-      this.currentPlayer.setCurrentAge();
-      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(this.currentPlayer);
+      this.updateGameState();
+      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer);
       this.actionDone();
+    }
+  }, {
+    key: "playCard",
+    value: function playCard(e) {
+      var playingCardInnovation = e.target.closest('.card').dataset.innovation;
+      var playingCardElement = e.target.closest('.card');
+      playingCardElement.onclick = null;
+      var playIndex = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.indexOf(playingCardInnovation);
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.splice(playIndex, 1);
+      var playingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(playingCardInnovation, this.arrOfCards);
+      var targetDeckArray = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.activeDecks[playingCardObj.color].cards;
+      targetDeckArray.push(playingCardInnovation);
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints -= 1;
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toActive(playingCardElement);
+      this.updateGameState();
+      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer);
     } // update info table in aside, use after each action done in newTurn method
 
   }, {
@@ -526,6 +575,8 @@ var Game = /*#__PURE__*/function () {
   }, {
     key: "updateGameState",
     value: function updateGameState() {
+      var _this5 = this;
+
       // update resources for each player
       _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
         player.tree = 0;
@@ -539,7 +590,7 @@ var Game = /*#__PURE__*/function () {
 
           if (currentStack.cards.length > 0) {
             var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation);
+            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation, _this5.arrOfCards);
             highestCard.resourses.forEach(function (e) {
               player[e.resourceName] += 1;
             });
@@ -548,18 +599,30 @@ var Game = /*#__PURE__*/function () {
       }); // update currentAge for each player
 
       _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+        player.currentAge = 1;
         Object.keys(player.activeDecks).forEach(function (stack) {
           var currentStack = player.activeDecks[stack];
 
           if (currentStack.cards.length > 0) {
             var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation);
+            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation, _this5.arrOfCards);
 
             if (highestCard.age > player.currentAge) {
               player.currentAge = highestCard.age;
             }
           }
         });
+      }); // update currentDeck for each player
+
+      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+        for (var i = player.currentAge; i < 11; i += 1) {
+          var deck = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks["age".concat(i)];
+
+          if (deck.length > 0) {
+            player.currentDeck = "age".concat(i);
+            break;
+          }
+        }
       });
     }
   }]);
@@ -772,79 +835,62 @@ var GameUI = /*#__PURE__*/function () {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ Intro
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _mainMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mainMenu */ "./src/js/components/mainMenu.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+var intro = {
+  init: function init() {
+    var divIntro = document.createElement('div');
+    divIntro.classList.add('intro');
+    var introContainer = document.createElement('div');
+    introContainer.classList.add('intro__container');
+    var introTop = document.createElement('div');
+    introTop.classList.add('intro__top'); // svg title letters - I n n o v a t i o n
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+    var introCenter = document.createElement('div');
+    introCenter.classList.add('intro__center');
+    introCenter.innerHTML = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\nwidth=\"500px\" height=\"120px\" viewBox=\"0 0 500 120\" enable-background=\"new 0 0 500 120\" xml:space=\"preserve\">\n<path class=\"letter-1\" d=\"M27.346,80.317c3.604,1.819,7.755,0.485,7.755,2.67c0,0.728-0.656,1.334-2.075,1.334c-0.983,0-6.117-0.606-15.292-0.606\nS3.536,84.321,2.553,84.321c-1.42,0-2.184-0.606-2.184-1.334c0-2.185,4.259-0.851,7.863-2.67c3.386-1.698,3.932-4.49,3.932-9.829\nv-54.61c0-5.218-0.546-8.01-3.604-9.587C5.721,4.835,0.369,5.685,0.369,3.985c0-0.728,1.857-1.213,3.167-1.213\nc1.202,0,5.898,0.485,14.199,0.485c8.628,0,13.544-0.485,14.417-0.485c1.201,0,2.949,0.364,2.949,1.092\nc0,1.457-3.604,0.971-7.208,2.063s-4.478,4.125-4.478,9.951v54.61C23.415,75.949,24.07,78.739,27.346,80.317z\"/>\n<path class=\"letter-2\" d=\"M49.627,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.075-1.183-5.242-0.354-5.242-1.892c0-1.064,1.638-1.3,4.26-1.892\nc5.789-1.3,9.065-3.191,10.157-3.191c2.075,0,1.856,3.31,2.512,11.585c4.26-7.447,10.157-11.231,18.021-11.231\nc10.375,0,16.165,5.674,16.165,15.724v27.546c0,3.901,0.109,5.439,2.622,6.74c2.839,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.546,1.064-1.639,1.064c-1.419,0-5.133-0.709-11.031-0.709c-5.898,0-9.502,0.709-10.922,0.709\nc-1.092,0-1.748-0.473-1.748-1.3c0-1.655,2.512-1.064,5.243-2.364c2.512-1.183,2.622-2.839,2.622-6.74V47.994\nc0-8.394-3.386-12.532-10.267-12.532c-7.427,0-13.762,7.094-13.762,17.024v22.345c0,3.901,0.109,5.439,2.621,6.74\nc2.84,1.419,5.243,0.709,5.243,2.6c0,0.592-0.655,1.064-1.748,1.064c-1.42,0-5.024-0.709-10.922-0.709\nc-5.898,0-9.611,0.709-11.031,0.709c-1.092,0-1.638-0.473-1.638-1.3c0-1.655,2.512-1.064,5.242-2.364\nc2.512-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<path class=\"letter-3\" d=\"M116.135,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.076-1.183-5.243-0.354-5.243-1.892c0-1.064,1.638-1.3,4.26-1.892\nc5.789-1.3,9.065-3.191,10.157-3.191c2.076,0,1.856,3.31,2.512,11.585c4.26-7.447,10.157-11.231,18.021-11.231\nc10.376,0,16.165,5.674,16.165,15.724v62.068c0,3.901,0.109,5.439,2.622,6.74c2.839,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.546,1.064-1.639,1.064c-1.42,0-5.134-0.709-11.032-0.709s-9.501,0.709-10.921,0.709c-1.092,0-1.748-0.473-1.748-1.3\nc0-1.655,2.512-1.064,5.243-2.364c2.512-1.183,2.622-2.839,2.622-6.74V47.994c0-8.394-3.386-12.532-10.267-12.532\nc-7.427,0-13.762,7.094-13.762,17.024v22.345c0,3.901,0.11,5.439,2.621,6.74c2.84,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.655,1.064-1.748,1.064c-1.419,0-5.024-0.709-10.922-0.709s-9.611,0.709-11.032,0.709c-1.092,0-1.638-0.473-1.638-1.3\nc0-1.655,2.513-1.064,5.243-2.364c2.512-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<path class=\"letter-4\" d=\"M189.871,31.561c6.881,0,12.779,2.72,17.584,7.803c5.025,5.438,7.864,12.532,7.864,19.153c0,7.33-2.731,14.423-7.646,19.861\nc-5.133,5.677-10.813,8.275-18.131,8.275c-15.073,0-26.322-11.467-26.322-27.545C163.22,43.383,175.016,31.561,189.871,31.561z\n  M188.996,84.171c10.267,0,15.728-8.631,15.728-25.417c0-16.197-6.007-24.946-15.728-24.946c-8.737,0-15.181,9.339-15.181,25.418\nC173.815,75.305,179.385,84.171,188.996,84.171z\"/>\n<path class=\"letter-5\" d=\"M254.752,48.939c0-5.218-6.116-3.761-6.116-5.825c0-0.85,0.437-1.092,1.638-1.092c1.53,0,3.715,0.486,6.443,0.486\nc2.841,0,4.807-0.364,6.008-0.364c1.311,0,1.967,0.364,1.967,1.092c0,1.214-1.748,0.971-3.277,2.427\nc-1.747,1.699-3.387,5.583-5.68,11.892l-12.125,26.524c-0.438,1.214-0.983,1.699-1.857,1.699c-1.748,0-1.857-1.821-3.167-5.34\nl-20.852-51.993c-1.201-3.034-2.402-4.976-3.386-5.461c-3.058-1.456-4.697-0.849-4.697-2.548c0-0.85,0.656-1.092,1.857-1.092\nc2.075,0,5.679,0.485,11.031,0.485c4.37,0,7.209-0.364,8.52-0.364c1.529,0,2.293,0.243,2.293,1.092c0,1.335-1.856,0.971-4.15,1.578\nc-1.529,0.364-2.403,1.457-2.403,3.156c0,1.456,6.434,15.95,8.291,20.683l10.267,26.333\nC252.346,52.285,254.752,52.217,254.752,48.939z\"/>\n<path class=\"letter-6\" d=\"M269.073,82.822c-6.989,0-11.14-4.368-11.14-11.043c0-10.316,9.938-15.655,30.146-23.786v-9.587\nc0-6.433-3.276-9.466-10.486-9.466c-5.461,0-8.956,2.184-9.393,5.825c-0.547,3.883-0.982,6.311-4.696,6.311\nc-2.293,0-3.823-1.82-3.823-4.49c0-5.34,6.553-10.073,18.896-10.073c12.779,0,18.786,4.369,18.786,13.956v30.825\nc0,4.246,1.311,6.553,3.605,6.553c2.074,0,3.385-2.307,4.477-2.307c0.654,0,0.983,0.364,0.983,1.093c0,2.063-3.933,6.31-8.847,6.31\nc-5.134,0-8.848-3.276-9.83-8.494C282.509,79.91,275.845,82.822,269.073,82.822z M268.091,69.23c0,5.581,2.839,8.979,7.318,8.979\nc5.68,0,12.67-5.097,12.67-10.557V50.663C274.534,56.488,268.091,61.706,268.091,69.23z\"/>\n<path class=\"letter-7\" d=\"M315.265,36.43c-1.421,0-2.076-0.349-2.076-1.047c0-1.163,3.277-2.327,7.319-6.981c4.478-5.12,5.132-8.726,6.333-8.726\nc0.765,0,0.983,0.465,0.983,1.629V32.94h10.049c2.185,0,3.167,0.116,3.167,1.746c0,1.28-0.982,1.744-3.275,1.744h-9.831v35.022\nc0,7.098,1.966,10.471,6.99,10.471c5.134,0,6.444-5.584,8.192-5.584c0.655,0,1.31,0.698,1.31,1.628\nc0,2.909-5.024,7.446-13.106,7.446c-9.829,0-12.67-4.537-12.67-14.543V36.43H315.265z\"/>\n<path class=\"letter-8\" d=\"M352.395,36.349c-2.402-0.931-5.461,0.117-5.461-1.397c0-1.28,1.528-1.164,4.479-1.862\nc6.772-1.514,10.485-3.608,11.469-3.608c0.873,0,1.201,0.583,1.201,1.746v41.436c0,3.839,0.109,5.47,2.622,6.634\nc2.838,1.396,5.241,0.699,5.241,2.56c0,0.582-0.655,1.048-1.748,1.048c-1.31,0-4.913-0.699-10.921-0.699s-9.722,0.699-11.032,0.699\nc-1.092,0-1.638-0.466-1.638-1.048c0-1.86,2.402-1.163,5.242-2.56c2.402-1.164,2.621-2.677,2.621-6.634V41.004\nC354.47,38.211,354.142,37.047,352.395,36.349z M358.185-0.314c3.057,0,5.569,2.677,5.569,6.052c0,3.259-2.403,5.936-5.569,5.936\nc-3.168,0-5.68-2.677-5.68-5.936C352.505,2.363,355.017-0.314,358.185-0.314z\"/>\n<path class=\"letter-9\" d=\"M406.231,31.561c6.881,0,12.779,2.72,17.585,7.803c5.023,5.438,7.864,12.532,7.864,19.153c0,7.33-2.731,14.423-7.646,19.861\nc-5.133,5.677-10.813,8.275-18.131,8.275c-15.072,0-26.321-11.467-26.321-27.545C379.582,43.383,391.378,31.561,406.231,31.561z\n  M405.358,84.171c10.267,0,15.727-8.631,15.727-25.417c0-16.197-6.007-24.946-15.727-24.946c-8.738,0-15.182,9.339-15.182,25.418\nC390.177,75.305,395.747,84.171,405.358,84.171z\"/>\n<path class=\"letter-10\" d=\"M449.253,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.075-1.183-5.243-0.354-5.243-1.892c0-1.064,1.64-1.3,4.261-1.892\nc5.788-1.3,9.064-3.191,10.156-3.191c2.076,0,1.856,3.31,2.513,11.585c4.26-7.447,10.158-11.231,18.021-11.231\nc10.378,0,16.166,5.674,16.166,15.724v27.546c0,3.901,0.108,5.439,2.621,6.74c2.84,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.547,1.064-1.639,1.064c-1.421,0-5.133-0.709-11.03-0.709c-5.898,0-9.503,0.709-10.923,0.709\nc-1.093,0-1.747-0.473-1.747-1.3c0-1.655,2.511-1.064,5.242-2.364c2.512-1.183,2.621-2.839,2.621-6.74V47.994\nc0-8.394-3.386-12.532-10.266-12.532c-7.428,0-13.764,7.094-13.764,17.024v22.345c0,3.901,0.109,5.439,2.621,6.74\nc2.841,1.419,5.244,0.709,5.244,2.6c0,0.592-0.656,1.064-1.748,1.064c-1.421,0-5.025-0.709-10.922-0.709\nc-5.898,0-9.611,0.709-11.031,0.709c-1.093,0-1.64-0.473-1.64-1.3c0-1.655,2.513-1.064,5.243-2.364\nc2.513-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<defs>\n    <filter id=\"mySVGfilter\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n        <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"5\"/>\n    </filter>\n</defs>\n</svg>";
+    var introCenterTitle = document.createElement('div');
+    introCenterTitle.classList.add('center__title');
+    introCenter.appendChild(introCenterTitle);
+    var introBottom = document.createElement('div');
+    introBottom.classList.add('intro__bottom');
+    var introBottomLamps = document.createElement('div');
+    introBottomLamps.classList.add('bottom__lamp');
 
-
-
-var Intro = /*#__PURE__*/function () {
-  function Intro() {
-    _classCallCheck(this, Intro);
-  }
-
-  _createClass(Intro, null, [{
-    key: "init",
-    value: function init() {
-      var divIntro = document.createElement('div');
-      divIntro.classList.add('intro');
-      var introContainer = document.createElement('div');
-      introContainer.classList.add('intro__container');
-      var introTop = document.createElement('div');
-      introTop.classList.add('intro__top'); // svg title letters - I n n o v a t i o n
-
-      var introCenter = document.createElement('div');
-      introCenter.classList.add('intro__center');
-      introCenter.innerHTML = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\nwidth=\"500px\" height=\"120px\" viewBox=\"0 0 500 120\" enable-background=\"new 0 0 500 120\" xml:space=\"preserve\">\n<path class=\"letter-1\" d=\"M27.346,80.317c3.604,1.819,7.755,0.485,7.755,2.67c0,0.728-0.656,1.334-2.075,1.334c-0.983,0-6.117-0.606-15.292-0.606\nS3.536,84.321,2.553,84.321c-1.42,0-2.184-0.606-2.184-1.334c0-2.185,4.259-0.851,7.863-2.67c3.386-1.698,3.932-4.49,3.932-9.829\nv-54.61c0-5.218-0.546-8.01-3.604-9.587C5.721,4.835,0.369,5.685,0.369,3.985c0-0.728,1.857-1.213,3.167-1.213\nc1.202,0,5.898,0.485,14.199,0.485c8.628,0,13.544-0.485,14.417-0.485c1.201,0,2.949,0.364,2.949,1.092\nc0,1.457-3.604,0.971-7.208,2.063s-4.478,4.125-4.478,9.951v54.61C23.415,75.949,24.07,78.739,27.346,80.317z\"/>\n<path class=\"letter-2\" d=\"M49.627,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.075-1.183-5.242-0.354-5.242-1.892c0-1.064,1.638-1.3,4.26-1.892\nc5.789-1.3,9.065-3.191,10.157-3.191c2.075,0,1.856,3.31,2.512,11.585c4.26-7.447,10.157-11.231,18.021-11.231\nc10.375,0,16.165,5.674,16.165,15.724v27.546c0,3.901,0.109,5.439,2.622,6.74c2.839,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.546,1.064-1.639,1.064c-1.419,0-5.133-0.709-11.031-0.709c-5.898,0-9.502,0.709-10.922,0.709\nc-1.092,0-1.748-0.473-1.748-1.3c0-1.655,2.512-1.064,5.243-2.364c2.512-1.183,2.622-2.839,2.622-6.74V47.994\nc0-8.394-3.386-12.532-10.267-12.532c-7.427,0-13.762,7.094-13.762,17.024v22.345c0,3.901,0.109,5.439,2.621,6.74\nc2.84,1.419,5.243,0.709,5.243,2.6c0,0.592-0.655,1.064-1.748,1.064c-1.42,0-5.024-0.709-10.922-0.709\nc-5.898,0-9.611,0.709-11.031,0.709c-1.092,0-1.638-0.473-1.638-1.3c0-1.655,2.512-1.064,5.242-2.364\nc2.512-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<path class=\"letter-3\" d=\"M116.135,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.076-1.183-5.243-0.354-5.243-1.892c0-1.064,1.638-1.3,4.26-1.892\nc5.789-1.3,9.065-3.191,10.157-3.191c2.076,0,1.856,3.31,2.512,11.585c4.26-7.447,10.157-11.231,18.021-11.231\nc10.376,0,16.165,5.674,16.165,15.724v62.068c0,3.901,0.109,5.439,2.622,6.74c2.839,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.546,1.064-1.639,1.064c-1.42,0-5.134-0.709-11.032-0.709s-9.501,0.709-10.921,0.709c-1.092,0-1.748-0.473-1.748-1.3\nc0-1.655,2.512-1.064,5.243-2.364c2.512-1.183,2.622-2.839,2.622-6.74V47.994c0-8.394-3.386-12.532-10.267-12.532\nc-7.427,0-13.762,7.094-13.762,17.024v22.345c0,3.901,0.11,5.439,2.621,6.74c2.84,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.655,1.064-1.748,1.064c-1.419,0-5.024-0.709-10.922-0.709s-9.611,0.709-11.032,0.709c-1.092,0-1.638-0.473-1.638-1.3\nc0-1.655,2.513-1.064,5.243-2.364c2.512-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<path class=\"letter-4\" d=\"M189.871,31.561c6.881,0,12.779,2.72,17.584,7.803c5.025,5.438,7.864,12.532,7.864,19.153c0,7.33-2.731,14.423-7.646,19.861\nc-5.133,5.677-10.813,8.275-18.131,8.275c-15.073,0-26.322-11.467-26.322-27.545C163.22,43.383,175.016,31.561,189.871,31.561z\n  M188.996,84.171c10.267,0,15.728-8.631,15.728-25.417c0-16.197-6.007-24.946-15.728-24.946c-8.737,0-15.181,9.339-15.181,25.418\nC173.815,75.305,179.385,84.171,188.996,84.171z\"/>\n<path class=\"letter-5\" d=\"M254.752,48.939c0-5.218-6.116-3.761-6.116-5.825c0-0.85,0.437-1.092,1.638-1.092c1.53,0,3.715,0.486,6.443,0.486\nc2.841,0,4.807-0.364,6.008-0.364c1.311,0,1.967,0.364,1.967,1.092c0,1.214-1.748,0.971-3.277,2.427\nc-1.747,1.699-3.387,5.583-5.68,11.892l-12.125,26.524c-0.438,1.214-0.983,1.699-1.857,1.699c-1.748,0-1.857-1.821-3.167-5.34\nl-20.852-51.993c-1.201-3.034-2.402-4.976-3.386-5.461c-3.058-1.456-4.697-0.849-4.697-2.548c0-0.85,0.656-1.092,1.857-1.092\nc2.075,0,5.679,0.485,11.031,0.485c4.37,0,7.209-0.364,8.52-0.364c1.529,0,2.293,0.243,2.293,1.092c0,1.335-1.856,0.971-4.15,1.578\nc-1.529,0.364-2.403,1.457-2.403,3.156c0,1.456,6.434,15.95,8.291,20.683l10.267,26.333\nC252.346,52.285,254.752,52.217,254.752,48.939z\"/>\n<path class=\"letter-6\" d=\"M269.073,82.822c-6.989,0-11.14-4.368-11.14-11.043c0-10.316,9.938-15.655,30.146-23.786v-9.587\nc0-6.433-3.276-9.466-10.486-9.466c-5.461,0-8.956,2.184-9.393,5.825c-0.547,3.883-0.982,6.311-4.696,6.311\nc-2.293,0-3.823-1.82-3.823-4.49c0-5.34,6.553-10.073,18.896-10.073c12.779,0,18.786,4.369,18.786,13.956v30.825\nc0,4.246,1.311,6.553,3.605,6.553c2.074,0,3.385-2.307,4.477-2.307c0.654,0,0.983,0.364,0.983,1.093c0,2.063-3.933,6.31-8.847,6.31\nc-5.134,0-8.848-3.276-9.83-8.494C282.509,79.91,275.845,82.822,269.073,82.822z M268.091,69.23c0,5.581,2.839,8.979,7.318,8.979\nc5.68,0,12.67-5.097,12.67-10.557V50.663C274.534,56.488,268.091,61.706,268.091,69.23z\"/>\n<path class=\"letter-7\" d=\"M315.265,36.43c-1.421,0-2.076-0.349-2.076-1.047c0-1.163,3.277-2.327,7.319-6.981c4.478-5.12,5.132-8.726,6.333-8.726\nc0.765,0,0.983,0.465,0.983,1.629V32.94h10.049c2.185,0,3.167,0.116,3.167,1.746c0,1.28-0.982,1.744-3.275,1.744h-9.831v35.022\nc0,7.098,1.966,10.471,6.99,10.471c5.134,0,6.444-5.584,8.192-5.584c0.655,0,1.31,0.698,1.31,1.628\nc0,2.909-5.024,7.446-13.106,7.446c-9.829,0-12.67-4.537-12.67-14.543V36.43H315.265z\"/>\n<path class=\"letter-8\" d=\"M352.395,36.349c-2.402-0.931-5.461,0.117-5.461-1.397c0-1.28,1.528-1.164,4.479-1.862\nc6.772-1.514,10.485-3.608,11.469-3.608c0.873,0,1.201,0.583,1.201,1.746v41.436c0,3.839,0.109,5.47,2.622,6.634\nc2.838,1.396,5.241,0.699,5.241,2.56c0,0.582-0.655,1.048-1.748,1.048c-1.31,0-4.913-0.699-10.921-0.699s-9.722,0.699-11.032,0.699\nc-1.092,0-1.638-0.466-1.638-1.048c0-1.86,2.402-1.163,5.242-2.56c2.402-1.164,2.621-2.677,2.621-6.634V41.004\nC354.47,38.211,354.142,37.047,352.395,36.349z M358.185-0.314c3.057,0,5.569,2.677,5.569,6.052c0,3.259-2.403,5.936-5.569,5.936\nc-3.168,0-5.68-2.677-5.68-5.936C352.505,2.363,355.017-0.314,358.185-0.314z\"/>\n<path class=\"letter-9\" d=\"M406.231,31.561c6.881,0,12.779,2.72,17.585,7.803c5.023,5.438,7.864,12.532,7.864,19.153c0,7.33-2.731,14.423-7.646,19.861\nc-5.133,5.677-10.813,8.275-18.131,8.275c-15.072,0-26.321-11.467-26.321-27.545C379.582,43.383,391.378,31.561,406.231,31.561z\n  M405.358,84.171c10.267,0,15.727-8.631,15.727-25.417c0-16.197-6.007-24.946-15.727-24.946c-8.738,0-15.182,9.339-15.182,25.418\nC390.177,75.305,395.747,84.171,405.358,84.171z\"/>\n<path class=\"letter-10\" d=\"M449.253,46.458c0-4.611-0.437-6.976-2.621-8.276c-2.075-1.183-5.243-0.354-5.243-1.892c0-1.064,1.64-1.3,4.261-1.892\nc5.788-1.3,9.064-3.191,10.156-3.191c2.076,0,1.856,3.31,2.513,11.585c4.26-7.447,10.158-11.231,18.021-11.231\nc10.378,0,16.166,5.674,16.166,15.724v27.546c0,3.901,0.108,5.439,2.621,6.74c2.84,1.419,5.243,0.709,5.243,2.6\nc0,0.592-0.547,1.064-1.639,1.064c-1.421,0-5.133-0.709-11.03-0.709c-5.898,0-9.503,0.709-10.923,0.709\nc-1.093,0-1.747-0.473-1.747-1.3c0-1.655,2.511-1.064,5.242-2.364c2.512-1.183,2.621-2.839,2.621-6.74V47.994\nc0-8.394-3.386-12.532-10.266-12.532c-7.428,0-13.764,7.094-13.764,17.024v22.345c0,3.901,0.109,5.439,2.621,6.74\nc2.841,1.419,5.244,0.709,5.244,2.6c0,0.592-0.656,1.064-1.748,1.064c-1.421,0-5.025-0.709-10.922-0.709\nc-5.898,0-9.611,0.709-11.031,0.709c-1.093,0-1.64-0.473-1.64-1.3c0-1.655,2.513-1.064,5.243-2.364\nc2.513-1.183,2.621-2.839,2.621-6.74V46.458z\"/>\n<defs>\n    <filter id=\"mySVGfilter\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n        <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"5\"/>\n    </filter>\n</defs>\n</svg>";
-      var introCenterTitle = document.createElement('div');
-      introCenterTitle.classList.add('center__title');
-      introCenter.appendChild(introCenterTitle);
-      var introBottom = document.createElement('div');
-      introBottom.classList.add('intro__bottom');
-      var introBottomLamps = document.createElement('div');
-      introBottomLamps.classList.add('bottom__lamp');
-
-      for (var i = 0; i < 3; i += 1) {
-        var introBottomLamp = document.createElement('div');
-        introBottomLamp.classList.add("bottom__lamp--".concat(i + 1));
-        introBottomLamps.appendChild(introBottomLamp);
-      }
-
-      introBottom.appendChild(introBottomLamps);
-      var introGear = document.createElement('div');
-      introGear.classList.add('intro__gear');
-      var introGear1 = document.createElement('div');
-      introGear1.classList.add('intro__gear1');
-      var introGear2 = document.createElement('div');
-      introGear2.classList.add('intro__gear2');
-      introGear.appendChild(introGear1);
-      introGear.appendChild(introGear2);
-      introContainer.appendChild(introTop);
-      introContainer.appendChild(introCenter);
-      introContainer.appendChild(introBottom);
-      introContainer.appendChild(introGear);
-      divIntro.appendChild(introContainer);
-      document.body.appendChild(divIntro);
-      var img = new Image();
-      img.src = './assets/img/intro/center.png';
-      img.addEventListener('load', function () {
-        introBottom.classList.add('show'); // set up and display main menu
-
-        var menu = new _mainMenu__WEBPACK_IMPORTED_MODULE_0__.default(introTop);
-        menu.render();
-      });
+    for (var i = 0; i < 3; i += 1) {
+      var introBottomLamp = document.createElement('div');
+      introBottomLamp.classList.add("bottom__lamp--".concat(i + 1));
+      introBottomLamps.appendChild(introBottomLamp);
     }
-  }]);
 
-  return Intro;
-}();
+    introBottom.appendChild(introBottomLamps);
+    var introGear = document.createElement('div');
+    introGear.classList.add('intro__gear');
+    var introGear1 = document.createElement('div');
+    introGear1.classList.add('intro__gear1');
+    var introGear2 = document.createElement('div');
+    introGear2.classList.add('intro__gear2');
+    introGear.appendChild(introGear1);
+    introGear.appendChild(introGear2);
+    introContainer.appendChild(introTop);
+    introContainer.appendChild(introCenter);
+    introContainer.appendChild(introBottom);
+    introContainer.appendChild(introGear);
+    divIntro.appendChild(introContainer);
+    document.body.appendChild(divIntro);
+    var img = new Image();
+    img.src = './assets/img/intro/center.png';
+    img.addEventListener('load', function () {
+      introBottom.classList.add('show'); // set up and display main menu
 
-
+      var menu = new _mainMenu__WEBPACK_IMPORTED_MODULE_0__.default(introTop);
+      menu.render();
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (intro);
 
 /***/ }),
 
@@ -970,6 +1016,7 @@ var Player = /*#__PURE__*/function () {
     value: function setCurrentAge() {
       var _this2 = this;
 
+      // console.log(this);
       Object.keys(this.activeStacks).forEach(function (stack) {
         _this2.activeStacks[stack].cards.forEach(function (card) {
           if (+card.age > _this2.currentAge) {
@@ -1089,6 +1136,7 @@ var gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
+    currentDeck: 'age1',
     activeDecks: {
       red: {
         cards: [],
@@ -1114,7 +1162,13 @@ var gameState = {
         shift: 'top' //! test
 
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   },
   player1: {
     name: null,
@@ -1143,7 +1197,13 @@ var gameState = {
         cards: [],
         shift: null
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   },
   player2: {
     name: null,
@@ -1172,7 +1232,13 @@ var gameState = {
         cards: [],
         shift: null
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   },
   player3: {
     name: null,
@@ -1201,7 +1267,13 @@ var gameState = {
         cards: [],
         shift: null
       }
-    }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameState);
@@ -1444,6 +1516,8 @@ var displayActiveZone = {
   init: function init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('active-zone');
+    this.activeZoneTitle = document.createElement('div');
+    this.activeZoneTitle.classList.add('active-zone__title');
     this.cardsBlock = document.createElement('div');
     this.cardsBlock.classList.add('active-zone__cards-block');
     this.cardsBlockWrapper = document.createElement('div');
@@ -1464,11 +1538,9 @@ var displayActiveZone = {
       this.cardsBlockWrapper.append(stack);
     }
 
+    this.wrapper.append(this.activeZoneTitle);
     this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);
-    this.controlsBlock = document.createElement('div');
-    this.controlsBlock.classList.add('active-zone__controls');
-    this.wrapper.append(this.controlsBlock);
     return this.wrapper;
   }
 };
@@ -1491,7 +1563,12 @@ var displayAside = {
   init: function init() {
     // create aside wrapper
     this.wrapper = document.createElement('div');
-    this.wrapper.classList.add('aside'); // append createand blocks to aside wrapper
+    this.wrapper.classList.add('aside'); // append block for style aside backgroung and border
+
+    this.wrapper.append(this.getStyleBlock('overlay'));
+    this.wrapper.append(this.getStyleBlock('top'));
+    this.wrapper.append(this.getStyleBlock('center'));
+    this.wrapper.append(this.getStyleBlock('bottom')); // append createand blocks to aside wrapper
 
     this.wrapper.append(this.getInfoBlock());
     this.wrapper.append(this.getCurrentDeckBlock());
@@ -1506,6 +1583,11 @@ var displayAside = {
     document.body.append(this.leadershipCardsBlock);
     document.body.append(this.specialCardsBlock);
     return this.wrapper;
+  },
+  getStyleBlock: function getStyleBlock(name) {
+    var block = document.createElement('div');
+    block.classList.add("aside__".concat(name));
+    return block;
   },
   getInfoBlock: function getInfoBlock() {
     // create info block
@@ -1787,6 +1869,8 @@ var displayHand = {
   init: function init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('hand');
+    this.handTitle = document.createElement('div');
+    this.handTitle.classList.add('hand__title');
     this.cardsBlock = document.createElement('div');
     this.cardsBlock.classList.add('hand__cards');
     this.cardsBlockOverlay = document.createElement('div');
@@ -1811,6 +1895,7 @@ var displayHand = {
     "\n    <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" \n      xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"\n      x=\"0px\" y=\"0px\" width=\"50px\" height=\"50px\" viewBox=\"0 0 230 213.7\" enable-background=\"new 0 0 230 213.7\"\n      xml:space=\"preserve\">\n\n      <polygon class='hand__controls-svg--triangle' id=\"XMLID_18_\" fill=\"none\" stroke-width=\"7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" points=\"\n      73.5,62.5 148.5,105.8 73.5,149.1 \"/>\n\n      <circle class='hand__controls-svg--circle' id=\"XMLID_17_\" fill=\"none\"  stroke-width=\"7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"  stroke-miterlimit=\"10\" cx=\"106.8\" cy=\"106.8\" r=\"103.3\"/>\n    </svg>\n    ";
     this.controlsBlock.append(this.arrowTop);
     this.controlsBlock.append(this.arrowBottom);
+    this.wrapper.append(this.handTitle);
     this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);
     this.wrapper.append(this.controlsBlock);
@@ -1996,16 +2081,16 @@ var displayHeader = {
     });
     this[player].container.appendChild(recourcesRow);
     this[player].container.classList.add('player-container__hidden');
-    this.wrapper.appendChild(this[player].container);
+    this.headerTable.appendChild(this[player].container);
   },
   changePlayerStats: function changePlayerStats(player) {
     var playerId = "player".concat(player.id);
     this[playerId].hand.textContent = player.hand.length;
-    this[playerId].red.textContent = player.activeStacks.red.cards.length;
-    this[playerId].green.textContent = player.activeStacks.green.cards.length;
-    this[playerId].blue.textContent = player.activeStacks.blue.cards.length;
-    this[playerId].purple.textContent = player.activeStacks.purple.cards.length;
-    this[playerId].yellow.textContent = player.activeStacks.yellow.cards.length;
+    this[playerId].red.textContent = player.activeDecks.red.cards.length;
+    this[playerId].green.textContent = player.activeDecks.green.cards.length;
+    this[playerId].blue.textContent = player.activeDecks.blue.cards.length;
+    this[playerId].purple.textContent = player.activeDecks.purple.cards.length;
+    this[playerId].yellow.textContent = player.activeDecks.yellow.cards.length;
     this[playerId].tree.textContent = player.tree;
     this[playerId].tower.textContent = player.tower;
     this[playerId].crown.textContent = player.crown;
@@ -2023,6 +2108,15 @@ var displayHeader = {
   init: function init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
+    this.headerTitle = document.createElement('div');
+    this.headerTitle.classList.add('header__title');
+    this.wrapper.appendChild(this.headerTitle);
+    this.headerOverlay = document.createElement('div');
+    this.headerOverlay.classList.add('header__overlay');
+    this.wrapper.appendChild(this.headerOverlay);
+    this.headerTable = document.createElement('div');
+    this.headerTable.classList.add('header__table');
+    this.wrapper.appendChild(this.headerTable);
     this.initPlayerStats(0);
     this.initPlayerStats(1);
     this.initPlayerStats(2);
@@ -2077,6 +2171,91 @@ var displayPlayerTable = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayPlayerTable);
+
+/***/ }),
+
+/***/ "./src/js/utility/getCardElement.js":
+/*!******************************************!*\
+  !*** ./src/js/utility/getCardElement.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ getCardElement
+/* harmony export */ });
+function getCardElement(cardObj) {
+  // get card header
+  function getCardHeader(card) {
+    var divHeader = document.createElement('div');
+    divHeader.classList.add('card__card-header', "card__color--".concat(card.color));
+    var posTopLeft = document.createElement('div');
+    posTopLeft.classList.add('card__topLeft');
+    var title = document.createElement('div');
+    title.classList.add('card-header__title');
+    title.textContent = card.innovation;
+    divHeader.appendChild(posTopLeft);
+    divHeader.appendChild(title);
+    return divHeader;
+  } // get card body
+
+
+  function getCardMain(card) {
+    var divMain = document.createElement('div');
+    divMain.classList.add('card__card-main', "card__color--".concat(card.color, "-transparent"));
+    card.dogma.forEach(function (item) {
+      var divDogma = document.createElement('div');
+      divDogma.classList.add('card__dogma');
+      divDogma.setAttribute('data-dogmatype', item.dogmaType);
+      var icon = document.createElement('i');
+      icon.classList.add(item.dogmaIcon[0], item.dogmaIcon[1], 'card__icon', "card__icon-color--".concat(item.dogmaColor));
+      divDogma.appendChild(icon);
+      var dogma = document.createElement('span');
+      dogma.classList.add('dogma__effect');
+      dogma.innerHTML = item.dogmaEffect;
+      divDogma.appendChild(dogma);
+      divMain.appendChild(divDogma);
+    });
+    return divMain;
+  } // get card footer
+
+
+  function getCardFooter() {
+    var divFooter = document.createElement('div');
+    divFooter.classList.add('card__card-footer');
+    var posBottomLeft = document.createElement('div');
+    posBottomLeft.classList.add('card__bottomLeft');
+    divFooter.appendChild(posBottomLeft);
+    var posBottomCenter = document.createElement('div');
+    posBottomCenter.classList.add('card__bottomCenter');
+    divFooter.appendChild(posBottomCenter);
+    var posBottomRight = document.createElement('div');
+    posBottomRight.classList.add('card__bottomRight');
+    divFooter.appendChild(posBottomRight);
+    return divFooter;
+  } // place age number and resourses by card position
+
+
+  function setObjByPosition(divCard, card) {
+    var agePos = divCard.querySelector(".card__".concat(card.agePosition));
+    agePos.classList.add("card__color--".concat(card.color), 'card__age--border');
+    agePos.textContent = card.age;
+    card.resourses.forEach(function (res) {
+      var pos = divCard.querySelector(".card__".concat(res.resoursePosition));
+      pos.classList.add("".concat(res.resourseType[0]), "".concat(res.resourseType[1]), "card__icon-color--".concat(res.resourseColor), "card__icon-border--".concat(card.color));
+    });
+  }
+
+  var divCard = document.createElement('div');
+  divCard.classList.add('card');
+  divCard.style.background = "url(\"".concat(cardObj.cardImg, "\")");
+  divCard.dataset.innovation = cardObj.innovation;
+  divCard.appendChild(getCardHeader(cardObj));
+  divCard.appendChild(getCardMain(cardObj));
+  divCard.appendChild(getCardFooter());
+  setObjByPosition(divCard, cardObj, cardObj.age, cardObj.color);
+  return divCard;
+}
 
 /***/ }),
 

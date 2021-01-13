@@ -160,11 +160,11 @@ const displayHeader = {
     const playerId = `player${player.id}`;
 
     this[playerId].hand.textContent = player.hand.length;
-    this[playerId].red.textContent = player.activeStacks.red.cards.length;
-    this[playerId].green.textContent = player.activeStacks.green.cards.length;
-    this[playerId].blue.textContent = player.activeStacks.blue.cards.length;
-    this[playerId].purple.textContent = player.activeStacks.purple.cards.length;
-    this[playerId].yellow.textContent = player.activeStacks.yellow.cards.length;
+    this[playerId].red.textContent = player.activeDecks.red.cards.length;
+    this[playerId].green.textContent = player.activeDecks.green.cards.length;
+    this[playerId].blue.textContent = player.activeDecks.blue.cards.length;
+    this[playerId].purple.textContent = player.activeDecks.purple.cards.length;
+    this[playerId].yellow.textContent = player.activeDecks.yellow.cards.length;
     this[playerId].tree.textContent = player.tree;
     this[playerId].tower.textContent = player.tower;
     this[playerId].crown.textContent = player.crown;
