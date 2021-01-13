@@ -46,6 +46,9 @@ function getRenderCard() {
 
       switch (targetStack.shift) {
         case 'top':
+          console.log(targetStack.height)
+          console.log(cardHeight)
+          console.log(targetStack.length * cardShiftValue)
           while (targetStack.height < cardHeight + (targetStack.length * cardShiftValue)
             && cardShiftValue !== 10) {
             cardShiftValue -= 10;

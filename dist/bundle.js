@@ -201,6 +201,10 @@ function getRenderCard() {
 
       switch (targetStack.shift) {
         case 'top':
+          console.log(targetStack.height);
+          console.log(cardHeight);
+          console.log(targetStack.length * cardShiftValue);
+
           while (targetStack.height < cardHeight + targetStack.length * cardShiftValue && cardShiftValue !== 10) {
             cardShiftValue -= 10;
           }
@@ -542,9 +546,10 @@ var Game = /*#__PURE__*/function () {
       _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.splice(playIndex, 1);
       var playingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(playingCardInnovation, this.arrOfCards);
       var targetDeckArray = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.activeDecks[playingCardObj.color].cards;
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toActive(playingCardElement); //! before targetDeckArray.push(playingCardInnovation);
+
       targetDeckArray.push(playingCardInnovation);
       _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints -= 1;
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toActive(playingCardElement);
       this.updateGameState();
       _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer);
     } // update info table in aside, use after each action done in newTurn method

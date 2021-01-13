@@ -224,9 +224,9 @@ export default class Game {
     gameState.currentPlayer.hand.splice(playIndex, 1);
     const playingCardObj = getCardObject(playingCardInnovation, this.arrOfCards);
     const targetDeckArray = gameState.currentPlayer.activeDecks[playingCardObj.color].cards;
+    renderCard.toActive(playingCardElement); //! before targetDeckArray.push(playingCardInnovation);
     targetDeckArray.push(playingCardInnovation);
     gameState.currentPlayer.actionPoints -= 1;
-    renderCard.toActive(playingCardElement);
     this.updateGameState();
     header.changePlayerStats(gameState.currentPlayer);
   }

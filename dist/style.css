@@ -1286,7 +1286,7 @@ input[type='text'] {
   background: linear-gradient(90deg, #210e06 0%, #4d230c 50%, #210e06 100%);
   height: calc(100vh - 44rem);
   position: relative;
-  width: 100%; }
+  width: calc(100vw - 36.3rem); }
 
 .active-zone__title {
   background: url(./assets/img/title-active-zone.png);
@@ -1324,9 +1324,9 @@ input[type='text'] {
   flex-wrap: nowrap;
   height: 100%;
   overflow: auto;
-  padding: 0 1.5rem 0 0.7rem;
+  padding: 0 0 0 0.7rem;
   scroll-behavior: smooth;
-  width: calc(100% - 5rem);
+  width: 100%;
   z-index: 2; }
 
 .active-zone__cards-wrapper {
@@ -1335,7 +1335,7 @@ input[type='text'] {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  height: calc(100vh - 44.5rem);
+  height: calc(100vh - 43.5rem);
   margin-left: 1rem;
   overflow-x: auto;
   overflow-y: hidden;
@@ -1348,7 +1348,7 @@ input[type='text'] {
   flex-direction: column;
   justify-content: flex-start;
   flex-shrink: 0;
-  height: calc(100vh - 46rem);
+  height: calc(100vh - 46.7rem);
   position: relative;
   width: 32rem; }
   .active-zone__stack--empty {
@@ -1358,6 +1358,7 @@ input[type='text'] {
     bottom: 0;
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
     cursor: pointer;
+    margin-bottom: 0.3rem;
     transition: all 0.2s linear; }
 
 .hand {
