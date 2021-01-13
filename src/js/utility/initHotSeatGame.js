@@ -7,7 +7,7 @@ import GameUI from '../components/GameUI';
 // import setChat from './setChat';
 import shuffle from './shuffle';
 import getCardObject from './getCardObject';
-
+import CreateCardComponent from './createCartComponent';
 import gameState from '../components/gameState';
 
 export default function initHotSeatGame(playerNames) {
