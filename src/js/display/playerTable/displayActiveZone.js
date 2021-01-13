@@ -4,8 +4,16 @@ const displayActiveZone = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('active-zone');
 
+    this.activeZoneTitle = document.createElement('div');
+    this.activeZoneTitle.classList.add('active-zone__title');
+
     this.cardsBlock = document.createElement('div');
-    this.cardsBlock.classList.add('active-zone__cards');
+    this.cardsBlock.classList.add('active-zone__cards-block');
+
+    this.cardsBlockWrapper = document.createElement('div');
+    this.cardsBlockWrapper.classList.add('active-zone__cards-wrapper');
+
+    this.cardsBlock.append(this.cardsBlockWrapper);
 
     this.cardsBlockOverlay = document.createElement('div');
     this.cardsBlockOverlay.classList.add('active-zone__overlay');
@@ -16,17 +24,14 @@ const displayActiveZone = {
     for (let i = 0; i < stacksNames.length; i += 1) {
       const stack = document.createElement('div');
       stack.classList.add('active-zone__stack');
+      stack.classList.add('active-zone__stack--empty');
       stack.id = stacksNames[i]; // id stackName for each stack
-      this.cardsBlock.append(stack);
+      this.cardsBlockWrapper.append(stack);
     }
 
+    this.wrapper.append(this.activeZoneTitle);
     this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);
-
-    this.controlsBlock = document.createElement('div');
-    this.controlsBlock.classList.add('active-zone__controls');
-
-    this.wrapper.append(this.controlsBlock);
     return this.wrapper;
   },
 };

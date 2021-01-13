@@ -15,8 +15,7 @@ body {
   height: auto;
   width: 100vw; }
   body ::-webkit-scrollbar {
-    width: 0.5rem; }
-  body ::-webkit-scrollbar {
+    height: 1rem;
     width: 0.5rem; }
   body ::-webkit-scrollbar-track {
     background: #e7e7e7; }
@@ -103,7 +102,7 @@ b {
     display: flex;
     height: 3rem;
     position: relative;
-    z-index: 2; }
+    z-index: 0; }
     .card .card__card-header .card__topLeft {
       align-items: center;
       background: #fff;
@@ -353,22 +352,22 @@ b {
 label {
   color: wheat; }
 
-input[type="text"] {
+input[type='text'] {
   display: block;
-  padding-left: 25px;
-  margin: 5px auto; }
-  input[type="text"]:valid {
-    border: green solid 3px;
+  margin: 5px auto;
+  padding-left: 25px; }
+  input[type='text']:valid {
     background-image: url(./assets/icons/succeess.svg.png);
-    background-size: 20px;
+    background-position: left;
     background-repeat: no-repeat;
-    background-position: left; }
-  input[type="text"]:invalid {
-    border: red solid 3px;
+    background-size: 20px;
+    border: #008800 solid 3px; }
+  input[type='text']:invalid {
     background-image: url(./assets/icons/unnamed.png);
-    background-size: 20px;
+    background-position: left;
     background-repeat: no-repeat;
-    background-position: left; }
+    background-size: 20px;
+    border: red solid 3px; }
 
 .hide {
   display: none; }
@@ -414,7 +413,8 @@ input[type="text"] {
       .intro .intro__container .intro__center .center__title {
         height: 120px;
         width: 500px;
-        animation: show-title 0.5s linear 10s forwards, close-title 3.5s ease-in-out 11s forwards;
+        animation: show-title 0.5s linear 10s forwards,
+ close-title 3.5s ease-in-out 11s forwards;
         background: url(./assets/img/intro/title.svg) center no-repeat;
         opacity: 0;
         position: absolute; }
@@ -429,43 +429,53 @@ input[type="text"] {
   100% {
     opacity: 1; } }
       .intro .intro__container .intro__center .letter-1 {
-        animation: draw-letter 2s ease-in-out forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-2 {
-        animation: draw-letter 2s ease-in-out 1s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 1s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-3 {
-        animation: draw-letter 2s ease-in-out 2s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 2s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-4 {
-        animation: draw-letter 2s ease-in-out 3s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 3s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-5 {
-        animation: draw-letter 2s ease-in-out 4s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 4s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-6 {
-        animation: draw-letter 2s ease-in-out 5s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 5s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-7 {
-        animation: draw-letter 2s ease-in-out 6s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 6s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-8 {
-        animation: draw-letter 2s ease-in-out 7s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 7s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-9 {
-        animation: draw-letter 2s ease-in-out 8s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 8s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
       .intro .intro__container .intro__center .letter-10 {
-        animation: draw-letter 2s ease-in-out 9s forwards, hide-letter 0.5s linear 10s forwards;
+        animation: draw-letter 2s ease-in-out 9s forwards,
+ hide-letter 0.5s linear 10s forwards;
         filter: url("#mySVGfilter");
         opacity: 0; }
 
@@ -1069,7 +1079,8 @@ input[type="text"] {
   flex-direction: column;
   justify-content: flex-start;
   height: 100vh;
-  width: calc( 100% - 37rem); }
+  width: calc(
+ 100% - 37rem); }
 
 .header {
   align-items: center;
@@ -1220,41 +1231,64 @@ input[type="text"] {
   overflow-y: auto;
   position: relative;
   width: 100%; }
-  .active-zone .active-zone__overlay {
-    background: url(./assets/img/block-bg.png);
-    background-size: contain;
-    height: 96%;
-    mix-blend-mode: overlay;
-    position: absolute;
-    top: 1.1rem;
-    width: calc(100% - 6rem); }
-  .active-zone .active-zone__cards {
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    border: 0.1rem solid transparent;
-    border-image: url(./assets/img/border-center.png);
-    border-image-repeat: round;
-    border-image-slice: 47 46 37 46;
-    border-image-width: 2.5rem;
-    flex-wrap: nowrap;
-    height: 100%;
-    overflow: auto;
-    padding: 0 0 0 1rem;
-    scroll-behavior: smooth;
-    width: calc(100% - 5rem);
-    z-index: 2; }
+
+.active-zone__overlay {
+  background: url(./assets/img/block-bg.png);
+  background-size: contain;
+  height: 96%;
+  mix-blend-mode: overlay;
+  position: absolute;
+  top: 1.1rem;
+  width: calc(100% - 6rem); }
+
+.active-zone__cards-block {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  border: 0.1rem solid transparent;
+  border-image: url(./assets/img/border-center.png);
+  border-image-repeat: round;
+  border-image-slice: 47 46 37 46;
+  border-image-width: 2.5rem;
+  flex-wrap: nowrap;
+  height: 100%;
+  overflow: auto;
+  padding: 0 1.5rem 0 0.7rem;
+  scroll-behavior: smooth;
+  width: calc(100% - 5rem);
+  z-index: 2; }
+
+.active-zone__cards-wrapper {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  height: calc(100vh - 44.5rem);
+  margin-left: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  transition: all 0.3s;
+  width: 100%; }
 
 .active-zone__stack {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   flex-shrink: 0;
-  margin: 1rem 1rem 1rem 0;
-  max-height: calc(100vh - 38.5rem);
-  overflow: auto; }
+  height: calc(100vh - 46rem);
+  position: relative;
+  width: 32rem; }
+  .active-zone__stack--empty {
+    height: 0;
+    width: 0; }
+  .active-zone__stack .card {
+    bottom: 0;
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    transition: all 0.2s linear; }
 
 .hand {
   align-items: flex-start;
