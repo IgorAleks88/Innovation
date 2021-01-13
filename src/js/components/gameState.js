@@ -25,15 +25,15 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: 'right', //! test
       },
       green: {
         cards: [],
-        shift: null,
+        shift: 'top', //! test
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: 'left', //! test
       },
       purple: {
         cards: [],
@@ -41,7 +41,7 @@ const gameState = {
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: 'top', //! test
       },
     },
   },
@@ -133,4 +133,5 @@ const gameState = {
     },
   },
 };
+
 export default gameState;

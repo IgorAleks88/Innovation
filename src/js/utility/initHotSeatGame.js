@@ -6,9 +6,6 @@ import parseCards from '../cards/parseCards';
 import GameUI from '../components/GameUI';
 // import setChat from './setChat';
 import shuffle from './shuffle';
-import getCardObject from './getCardObject';
-
-import gameState from '../components/gameState';
 
 export default function initHotSeatGame(playerNames) {
   // contains dom elements
@@ -36,7 +33,6 @@ export default function initHotSeatGame(playerNames) {
   // display first modal without animation
   document.querySelector('.modal').style.opacity = '1';
 
-  console.log(gameState);
   // init chat
   // setChat();
 }
