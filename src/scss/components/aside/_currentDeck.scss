@@ -1,18 +1,32 @@
 .current-deck {
-  @include size(30rem, 23rem);
+  @include size(30rem, 20rem);
   @include flex(column, flex-start, center);
   position: relative;
 }
 
 .current-deck__title {
-  @include size(30rem, 3rem);
-  @include flex(column, center, center);
-  background-color: rgb(255, 255, 0);
+  height: 3rem;
+  width: 20rem;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-radius: 1rem;
   font-size: 2.1rem;
   font-weight: 700;
   margin: 0;
-  text-align: center;
+  text-align: right;
+  background: url('../../assets/img/cards-bg/get-card.png') right no-repeat;
+  z-index: 5;
+  position: absolute;
+  height: 4rem;
+  background-size: contain;
+  top: 2.7rem;
+  left: 10rem;
+  color: #fff;
+  padding-right: 1rem;
+  filter: drop-shadow(2px 4px 6px black);
+  text-shadow: 1px 1px #000;
 }
 
 .current-deck__cards {
@@ -20,6 +34,7 @@
   @include size(30rem, 20rem);
   margin: 0;
   transition: 0.3s linear;
+  filter: drop-shadow(2px 4px 6px black);
 
   &:hover .hover-btn {
     opacity: 1;
