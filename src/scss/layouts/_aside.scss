@@ -1,12 +1,12 @@
 .aside {
   @include flex(column, flex-start, center);
   background: $tables-bg;
-
   height: 100vh;
   position: absolute;
   right: 0;
   top: 0;
   width: 37rem;
+  z-index: 2;
 
   .aside__overlay {
     @include block-background-overlay;

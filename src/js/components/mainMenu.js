@@ -1,9 +1,12 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
 
-const usersInfo = {};
+const users = {};
 
 function validation(userObj) {
-  return userObj.names.every((name) => name.length > 2 && name.length < 11);
+  if (userObj.names.length === userObj.players) {
+    return userObj.names.every((name) => name.length > 2 && name.length < 11);
+  }
+  return false;
 }
 // TODO need some refactor later, move to display folder, use function?
 class Menu {
@@ -49,12 +52,11 @@ class Menu {
         this.createNameInputField(e.target.dataset.players);
       } else if (e.target.className.includes('get-names')) {
         e.preventDefault();
-        this.writeNamesToObject();
-        if (validation(usersInfo) && usersInfo.names.length > 1) {
+        this.addNamesToUsers();
+        if (validation(users)) {
           const intro = this.menu.parentElement.parentElement.parentElement;
           intro.classList.toggle('intro--hide');
-          // initHotSeatGame('Player1', 'Player2');
-          initHotSeatGame(usersInfo.names); //! Hardcoded for 2 players.
+          initHotSeatGame(users.names); //! Hardcoded for 2 players.
           // Should take player names as arguments
         }
       } else if (e.target.className.includes('back')) {
@@ -90,7 +92,7 @@ class Menu {
   }
 
   createNameInputField(numberOfFields) {
-    usersInfo.players = numberOfFields;
+    users.players = +numberOfFields;
     this.menu.innerHTML = /* html */ `
       <form>
         ${this.createInputs(numberOfFields)}
@@ -115,7 +117,7 @@ class Menu {
     return inputHTML;
   }
 
-  writeNamesToObject() {
+  addNamesToUsers() {
     const inputs = this.menu.querySelectorAll('[data-name]');
     const playerNames = [];
     for (let i = 0; i < inputs.length; i += 1) {
@@ -123,10 +125,9 @@ class Menu {
         playerNames.push(inputs[i].value);
       }
     }
-    usersInfo.names = playerNames;
+    users.names = playerNames;
 
     return playerNames;
   }
 }
 export default Menu;
-export { usersInfo };

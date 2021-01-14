@@ -153,7 +153,7 @@ const displayHeader = {
 
     this[player].container.appendChild(recourcesRow);
     this[player].container.classList.add('player-container__hidden');
-    this.headerTable.appendChild(this[player].container);
+    this.headerTableWrapper.appendChild(this[player].container);
   },
 
   changePlayerStats(player) {
@@ -184,7 +184,7 @@ const displayHeader = {
   init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
-    
+
     this.headerTitle = document.createElement('div');
     this.headerTitle.classList.add('header__title');
     this.wrapper.appendChild(this.headerTitle);
@@ -195,6 +195,9 @@ const displayHeader = {
 
     this.headerTable = document.createElement('div');
     this.headerTable.classList.add('header__table');
+    this.headerTableWrapper = document.createElement('div');
+    this.headerTableWrapper.classList.add('header__table__wrapper');
+    this.headerTable.appendChild(this.headerTableWrapper);
     this.wrapper.appendChild(this.headerTable);
 
     this.initPlayerStats(0);
