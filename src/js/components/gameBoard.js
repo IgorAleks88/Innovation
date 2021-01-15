@@ -1,20 +1,20 @@
-import gameState from './NEWgameState';
-import getCardObject from './getCardObject';
-import getCardElement from './getCardElement';
+import gameState from './gameState';
+import getCardObject from '../cards/getCardObject';
+import getCardElement from '../cards/getCardElement';
 import renderCard from '../cards/renderCard';
-import updateGameState from './updateGameState';
-import displayNewTurnModal from './displayNewTurnModal';
+import updateGameState from '../utility/updateGameState';
+import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 
 const gameBoard = {
   display() {
-    // set info block aside =========================================================
+    // display info block aside
     const nameBlock = document.querySelector('.info-table__player-name');
     nameBlock.innerText = gameState.activePlayer.name;
     const actionPointsBlock = document.querySelector('.info-table__action-points');
     actionPointsBlock.innerText = gameState.activePlayer.actionPoints;
 
-    // remove previous active age decks ================================================
+    // remove previous active age deck
     let cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
     if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
     const activeDeck = document.querySelector('.age-deck--active');
@@ -23,14 +23,14 @@ const gameBoard = {
       activeDeck.onclick = '';
     }
 
-    // set avaiable age deck in modal ===============================================
+    // set avaiable age deck in modal block
     while (gameState.ageDecks[`age${gameState.activePlayer.currentAge}`].length === 0) {
       gameState.activePlayer.currentAge += 1;
     }
     const avaiableAgeDeck = document.querySelector(`#age${gameState.activePlayer.currentAge}`);
     avaiableAgeDeck.classList.add('age-deck--active');
 
-    // set avaiable age deck in aside ===============================================
+    // set avaiable age deck in aside
     const prevDeckClone = document.querySelector('#cloneCurrentDeck');
     if (prevDeckClone !== null) prevDeckClone.remove();
     // clone current active deck
@@ -38,11 +38,11 @@ const gameBoard = {
     cloneCurrentDeck.id = 'cloneCurrentDeck';
     cloneCurrentDeck.classList.add('age-deck--active');
     cloneCurrentDeck.classList.remove('xyz-in');
-    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)';
+    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)'; //! change later to `${}`
     // display cloned deck in currentDeck block
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
 
-    // get hand cards of active player ==============================================
+    // get hand cards of active player
     const hand = document.querySelector('.hand__cards');
     hand.innerHTML = '';
     gameState.activePlayer.hand.forEach((cardID) => {
@@ -52,7 +52,7 @@ const gameBoard = {
       hand.append(cardElement);
     });
 
-    // get active cards of active player ============================================
+    // get active cards of active player
     const stacks = document.querySelectorAll('.active-zone__stack');
     stacks.forEach((stackElement) => {
       stackElement.innerHTML = '';

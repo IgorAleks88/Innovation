@@ -1,4 +1,4 @@
-import cardsJSON from '../cards/cards.json';
+import cardsJSON from './cards.json';
 
 const getCardObject = {
   all() {

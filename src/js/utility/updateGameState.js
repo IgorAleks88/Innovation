@@ -1,4 +1,4 @@
-import getCardObject from './getCardObject';
+import getCardObject from '../cards/getCardObject';
 
 export default function updateGameState(gameState) {
   // update resources for each player

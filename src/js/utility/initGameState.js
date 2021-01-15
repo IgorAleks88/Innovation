@@ -1,5 +1,5 @@
-import gameState from './NEWgameState';
-import getCardObject from './getCardObject';
+import gameState from '../components/gameState';
+import getCardObject from '../cards/getCardObject';
 import shuffleArr from './shuffleArr';
 
 export default function initGameState(usersInfo) {

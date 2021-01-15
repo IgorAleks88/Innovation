@@ -26,19 +26,19 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'right', //! test
+        shift: 'top', //! test
       },
       green: {
         cards: [],
-        shift: 'top', //! test
+        shift: 'right', //! test
       },
       blue: {
         cards: [],
-        shift: 'left', //! test
+        shift: null, //! test
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: 'left', //! test
       },
       yellow: {
         cards: [],
@@ -61,15 +61,15 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: 'left', //! test
       },
       green: {
         cards: [],
-        shift: null,
+        shift: 'top', //! test
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: 'right', //! test
       },
       purple: {
         cards: [],

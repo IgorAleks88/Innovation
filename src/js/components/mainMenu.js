@@ -1,6 +1,5 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
-import NEWinitHotSeatGame from '../NEW/NEWinitHotSeatGame';
-import displayNewTurnModal from '../NEW/displayNewTurnModal';
+import displayNewTurnModal from '../display/displayNewTurnModal';
 
 const users = {};
 
@@ -10,7 +9,7 @@ function validation(userObj) {
   }
   return false;
 }
-// TODO need some refactor later, move to display folder, use function?
+
 class Menu {
   constructor(parent) {
     this.parent = parent;
@@ -58,10 +57,9 @@ class Menu {
         if (validation(users)) {
           const intro = this.menu.parentElement.parentElement.parentElement;
           displayNewTurnModal(users.names[0]);
-          NEWinitHotSeatGame(users);
+          initHotSeatGame(users);
           setTimeout(() => {
             intro.classList.toggle('intro--hide');
-            // initHotSeatGame(usersInfo.names);
           }, 500);
         }
       } else if (e.target.className.includes('back')) {

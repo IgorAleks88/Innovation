@@ -7,8 +7,6 @@ export default function setChat() {
   const messageInput = parent.querySelector('.chat-log__input');
   const players = document.querySelectorAll('.head-row__name');
 
-  const userName = prompt('What is your name?');
-
   function appendMessage(message) {
     const messageElement = document.createElement('div');
     messageElement.innerText = message;
@@ -20,7 +18,8 @@ export default function setChat() {
   }
 
   appendMessage('You joined');
-  socket.emit('new-user', userName);
+  // socket.emit('new-user', userName); //! not defined variable here
+  socket.emit('new-user', 'testString'); //! remove this later
 
   socket.on('chat-message', (data) => {
     appendMessage(`${data.name}: ${data.message}`);

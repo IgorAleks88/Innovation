@@ -27,13 +27,13 @@
 .leadership-cards__card {
   @include flex(column, center, center);
   @include size(14.5rem, 20rem);
-  position: relative;
   background-image: url('/assets/img/lead-title.png');
   background-position: center;
   background-repeat: no-repeat;
 
   background-size: cover;
   font-size: 10rem;
+  position: relative;
 
   .extra-cards__leadership-title {
     bottom: 2.6rem;

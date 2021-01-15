@@ -1,4 +1,4 @@
-const NEWgameState = {
+const gameState = {
   ageDecks: {
     age1: [],
     age2: [],
@@ -26,7 +26,7 @@ const NEWgameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'top', //! test
+        shift: 'right', //! test
       },
       green: {
         cards: [],
@@ -34,7 +34,7 @@ const NEWgameState = {
       },
       blue: {
         cards: [],
-        shift: 'top', //! test
+        shift: 'left', //! test
       },
       purple: {
         cards: [],
@@ -61,15 +61,15 @@ const NEWgameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'top', //! test
+        shift: null,
       },
       green: {
         cards: [],
-        shift: 'top', //! test
+        shift: null,
       },
       blue: {
         cards: [],
-        shift: 'top', //! test
+        shift: null,
       },
       purple: {
         cards: [],
@@ -159,4 +159,4 @@ const NEWgameState = {
   },
 };
 
-export default NEWgameState;
+export default gameState;

@@ -1,7 +1,7 @@
-import getCard from '../cards/getCard';
-import renderCard from '../cards/renderCard';
-import header from '../display/playerTable/displayHeader';
-import gameState from './gameState';
+// import getCard from '../cards/getCard';
+// import renderCard from '../cards/renderCard';
+// import header from '../display/playerTable/displayHeader';
+// import gameState from '../components/gameState';
 
 /*
 * store all player cards objects (hand/table/lead/influence)

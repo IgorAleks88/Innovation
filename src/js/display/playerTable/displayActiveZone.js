@@ -19,13 +19,12 @@ const displayActiveZone = {
     this.cardsBlockOverlay.classList.add('active-zone__overlay');
 
     // create players active stacks
-    // !Stack names are the color fields of cards object
     const stacksNames = ['blue', 'red', 'green', 'purple', 'yellow'];
     for (let i = 0; i < stacksNames.length; i += 1) {
       const stack = document.createElement('div');
       stack.classList.add('active-zone__stack');
       stack.classList.add('active-zone__stack--empty');
-      stack.id = stacksNames[i]; // id stackName for each stack
+      stack.id = stacksNames[i];
       this.cardsBlockWrapper.append(stack);
     }
 

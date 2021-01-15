@@ -13,9 +13,9 @@
 // import getCardObject from '../OLD/getCardObject';
 // import getCardElement from '../utility/getCardElement';
 
-//! ! TEST
-import renderCard from '../cards/renderCard';
-import getCard from '../cards/getCard';
+// //! ! TEST
+// import renderCard from '../cards/renderCard';
+// import getCard from '../cards/getCard';
 
 export default class Game {
   constructor(gameUI, gameField, players, arrOfCards) {

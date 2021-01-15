@@ -2,459 +2,40 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/js/NEW/NEWgameState.js":
-/*!************************************!*\
-  !*** ./src/js/NEW/NEWgameState.js ***!
-  \************************************/
+/***/ "./src/js/app.js":
+/*!***********************!*\
+  !*** ./src/js/app.js ***!
+  \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-var NEWgameState = {
-  ageDecks: {
-    age1: [],
-    age2: [],
-    age3: [],
-    age4: [],
-    age5: [],
-    age6: [],
-    age7: [],
-    age8: [],
-    age9: [],
-    age10: []
-  },
-  leadershipDeck: [],
-  specialDeck: [],
-  players: [],
-  currentPlayer: null,
-  activePlayer: null,
-  player0: {
-    name: null,
-    id: 0,
-    actionPoints: 0,
-    hand: [],
-    currentAge: 1,
-    currentDeck: 'age1',
-    activeDecks: {
-      red: {
-        cards: [],
-        shift: 'top' //! test
+/* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/style.scss */ "./src/scss/style.scss");
+/* harmony import */ var _animxyz_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @animxyz/core */ "./node_modules/@animxyz/core/dist/animxyz.css");
+/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
+/* harmony import */ var _display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display/playerTable/displayPlayerTable */ "./src/js/display/playerTable/displayPlayerTable.js");
+/* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
+/* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
+// import styles
 
-      },
-      green: {
-        cards: [],
-        shift: 'top' //! test
+ // import js modules
 
-      },
-      blue: {
-        cards: [],
-        shift: 'top' //! test
 
-      },
-      purple: {
-        cards: [],
-        shift: null
-      },
-      yellow: {
-        cards: [],
-        shift: 'top' //! test
 
-      }
-    },
-    tree: 0,
-    tower: 0,
-    crown: 0,
-    bulb: 0,
-    factory: 0,
-    clock: 0
-  },
-  player1: {
-    name: null,
-    id: 1,
-    actionPoints: 0,
-    hand: [],
-    currentAge: 1,
-    activeDecks: {
-      red: {
-        cards: [],
-        shift: 'top' //! test
 
-      },
-      green: {
-        cards: [],
-        shift: 'top' //! test
+ // display intro & menu
 
-      },
-      blue: {
-        cards: [],
-        shift: 'top' //! test
+_components_Intro__WEBPACK_IMPORTED_MODULE_2__.default.init(); // load and display base game UI
 
-      },
-      purple: {
-        cards: [],
-        shift: null
-      },
-      yellow: {
-        cards: [],
-        shift: null
-      }
-    },
-    tree: 0,
-    tower: 0,
-    crown: 0,
-    bulb: 0,
-    factory: 0,
-    clock: 0
-  },
-  player2: {
-    name: null,
-    id: 2,
-    actionPoints: 0,
-    hand: [],
-    currentAge: 1,
-    activeDecks: {
-      red: {
-        cards: [],
-        shift: null
-      },
-      green: {
-        cards: [],
-        shift: null
-      },
-      blue: {
-        cards: [],
-        shift: null
-      },
-      purple: {
-        cards: [],
-        shift: null
-      },
-      yellow: {
-        cards: [],
-        shift: null
-      }
-    },
-    tree: 0,
-    tower: 0,
-    crown: 0,
-    bulb: 0,
-    factory: 0,
-    clock: 0
-  },
-  player3: {
-    name: null,
-    id: 3,
-    actionPoints: 0,
-    hand: [],
-    currentAge: 1,
-    activeDecks: {
-      red: {
-        cards: [],
-        shift: null
-      },
-      green: {
-        cards: [],
-        shift: null
-      },
-      blue: {
-        cards: [],
-        shift: null
-      },
-      purple: {
-        cards: [],
-        shift: null
-      },
-      yellow: {
-        cards: [],
-        shift: null
-      }
-    },
-    tree: 0,
-    tower: 0,
-    crown: 0,
-    bulb: 0,
-    factory: 0,
-    clock: 0
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NEWgameState);
+document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_3__.default.init());
+(0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_4__.default)();
+(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_5__.default)();
 
 /***/ }),
 
-/***/ "./src/js/NEW/NEWinitHotSeatGame.js":
-/*!******************************************!*\
-  !*** ./src/js/NEW/NEWinitHotSeatGame.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ initHotSeatGame
-/* harmony export */ });
-/* harmony import */ var _initGameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./initGameState */ "./src/js/NEW/initGameState.js");
-/* harmony import */ var _gameBoard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gameBoard */ "./src/js/NEW/gameBoard.js");
-/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
-
-
-
-function initHotSeatGame(usersInfo) {
-  (0,_initGameState__WEBPACK_IMPORTED_MODULE_0__.default)(usersInfo);
-  _gameBoard__WEBPACK_IMPORTED_MODULE_1__.default.display();
-  _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__.default.initPlayerNames(usersInfo.names);
-  _gameBoard__WEBPACK_IMPORTED_MODULE_1__.default.init();
-}
-
-/***/ }),
-
-/***/ "./src/js/NEW/displayNewTurnModal.js":
-/*!*******************************************!*\
-  !*** ./src/js/NEW/displayNewTurnModal.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ displayModal
-/* harmony export */ });
-function displayModal(playerName) {
-  var modalBg = document.createElement('div');
-  modalBg.classList.add('modal');
-  modalBg.classList.add('modal--hidden');
-  var modalBlock = document.createElement('div');
-  modalBlock.classList.add('modal__block');
-  var modalText = document.createElement('div');
-  modalText.classList.add('modal__text');
-  modalText.innerText = "\u0421\u0435\u0439\u0447\u0430\u0441 \u0445\u043E\u0434 \u0438\u0433\u0440\u043E\u043A\u0430 ".concat(playerName);
-  var modalBtn = document.createElement('button');
-  modalBtn.classList.add('modal__btn');
-  modalBtn.innerText = 'Начать ход!';
-  modalBtn.addEventListener('click', function () {
-    modalBg.style = '';
-    modalBg.classList.toggle('modal--hidden');
-    setTimeout(function () {
-      modalBg.remove();
-    }, 500);
-  });
-  modalBlock.append(modalText, modalBtn);
-  modalBg.append(modalBlock);
-  document.body.prepend(modalBg);
-  setTimeout(function () {
-    modalBg.classList.toggle('modal--hidden');
-  }, 0);
-}
-
-/***/ }),
-
-/***/ "./src/js/NEW/gameBoard.js":
-/*!*********************************!*\
-  !*** ./src/js/NEW/gameBoard.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _NEWgameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NEWgameState */ "./src/js/NEW/NEWgameState.js");
-/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getCardObject */ "./src/js/NEW/getCardObject.js");
-/* harmony import */ var _getCardElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getCardElement */ "./src/js/NEW/getCardElement.js");
-/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
-/* harmony import */ var _updateGameState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./updateGameState */ "./src/js/NEW/updateGameState.js");
-/* harmony import */ var _displayNewTurnModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./displayNewTurnModal */ "./src/js/NEW/displayNewTurnModal.js");
-/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
-
-
-
-
-
-
-
-var gameBoard = {
-  display: function display() {
-    var _this = this;
-
-    // set info block aside =========================================================
-    var nameBlock = document.querySelector('.info-table__player-name');
-    nameBlock.innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.name;
-    var actionPointsBlock = document.querySelector('.info-table__action-points');
-    actionPointsBlock.innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.actionPoints; // remove previous active age decks ================================================
-
-    var cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
-    if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
-    var activeDeck = document.querySelector('.age-deck--active');
-
-    if (activeDeck !== null) {
-      activeDeck.classList.remove('age-deck--active');
-      activeDeck.onclick = '';
-    } // set avaiable age deck in modal ===============================================
-
-
-    while (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks["age".concat(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge)].length === 0) {
-      _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge += 1;
-    }
-
-    var avaiableAgeDeck = document.querySelector("#age".concat(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge));
-    avaiableAgeDeck.classList.add('age-deck--active'); // set avaiable age deck in aside ===============================================
-
-    var prevDeckClone = document.querySelector('#cloneCurrentDeck');
-    if (prevDeckClone !== null) prevDeckClone.remove(); // clone current active deck
-
-    cloneCurrentDeck = avaiableAgeDeck.cloneNode();
-    cloneCurrentDeck.id = 'cloneCurrentDeck';
-    cloneCurrentDeck.classList.add('age-deck--active');
-    cloneCurrentDeck.classList.remove('xyz-in');
-    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)'; // display cloned deck in currentDeck block
-
-    document.querySelector('.current-deck__cards').append(cloneCurrentDeck); // get hand cards of active player ==============================================
-
-    var hand = document.querySelector('.hand__cards');
-    hand.innerHTML = '';
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.hand.forEach(function (cardID) {
-      var cardObject = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(cardID);
-      var cardElement = (0,_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(cardObject);
-      cardElement.onclick = _this.playCard;
-      hand.append(cardElement);
-    }); // get active cards of active player ============================================
-
-    var stacks = document.querySelectorAll('.active-zone__stack');
-    stacks.forEach(function (stackElement) {
-      stackElement.innerHTML = '';
-      stackElement.classList.add('active-zone__stack--empty');
-      Object.keys(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks).forEach(function (activeDeckName) {
-        if (activeDeckName === stackElement.id) {
-          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[activeDeckName].cards.forEach(function (card) {
-            var cardObj = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(card);
-            var cardElement = (0,_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(cardObj);
-
-            cardElement.onclick = function () {
-              //! TODO
-              console.log('DOGMA! :)');
-            };
-
-            _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toActive(cardElement, _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
-            cardElement.classList.remove('xyz-in');
-          });
-        }
-      });
-    });
-  },
-  update: function update() {
-    if (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints === 0) {
-      this.displayNextTurnBtn();
-    }
-
-    (0,_updateGameState__WEBPACK_IMPORTED_MODULE_4__.default)(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
-    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_6__.default.changePlayerStats(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer);
-    document.querySelector('.info-table__player-name').innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name;
-    document.querySelector('.info-table__action-points').innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints;
-  },
-  init: function init() {
-    var _this2 = this;
-
-    var cardElements = document.querySelectorAll('.card');
-    cardElements.forEach(function (elem) {
-      if (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
-        elem.onclick = _this2.playCard;
-      }
-    });
-    var activeDeckElements = document.querySelectorAll('.age-deck--active');
-    activeDeckElements.forEach(function (elem) {
-      elem.onclick = _this2.takeCard;
-    });
-  },
-  takeCard: function takeCard(e) {
-    var sourceDeck = e.target.id;
-
-    if (sourceDeck === 'cloneCurrentDeck') {
-      sourceDeck = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.currentDeck;
-    }
-
-    var movingCardInnovation = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks[sourceDeck].pop();
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.push(movingCardInnovation);
-    var movingCardObj = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(movingCardInnovation);
-    var movingCardElement = (0,_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(movingCardObj);
-    movingCardElement.onclick = gameBoard.playCard;
-    _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toHand(movingCardElement, _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints -= 1;
-    gameBoard.update();
-  },
-  playCard: function playCard(e) {
-    var playingCardInnovation = e.target.closest('.card').dataset.innovation;
-    var playingCardElement = e.target.closest('.card');
-    playingCardElement.onclick = null;
-    var playIndex = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.indexOf(playingCardInnovation);
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.splice(playIndex, 1);
-    var playingCardObj = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(playingCardInnovation);
-    var targetDeckArray = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.activeDecks[playingCardObj.color].cards;
-    targetDeckArray.push(playingCardInnovation);
-
-    playingCardElement.onclick = function () {
-      //! TODO
-      console.log('DOGMA! :)');
-    };
-
-    _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toActive(playingCardElement, _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints -= 1;
-    gameBoard.update();
-  },
-  displayNextTurnBtn: function displayNextTurnBtn() {
-    var nextTurnBtn = document.createElement('div');
-    nextTurnBtn.classList.add('info-table__next-turn-btn');
-    nextTurnBtn.innerText = 'Закончить ход';
-    nextTurnBtn.addEventListener('click', function () {
-      for (var i = 0; i < _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players.length; i += 1) {
-        if (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer === _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[i]) {
-          i += 1;
-          if (i === _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players.length) i = 0;
-          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[i];
-          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer;
-          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints = 2;
-          break;
-        }
-      }
-
-      (0,_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_5__.default)(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name);
-      setTimeout(function () {
-        gameBoard.display();
-        gameBoard.init();
-        var excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
-        excistedNextTurnBtn.remove();
-      }, 500);
-    });
-    var infoTable = document.querySelector('.info-table');
-    this.disableEvents();
-    infoTable.append(nextTurnBtn);
-  },
-  disableEvents: function disableEvents() {
-    var cards = Array.from(document.querySelectorAll('.card'));
-    cards.forEach(function (card) {
-      card.onclick = '';
-      card.style.cursor = 'default';
-      card.style.transform = 'none';
-    });
-    var cardDogms = Array.from(document.querySelectorAll('.card__dogma'));
-    cardDogms.forEach(function (cardDogma) {
-      cardDogma.onclick = '';
-      cardDogma.style.cursor = 'default';
-      cardDogma.style.transform = 'none';
-    });
-    var decks = Array.from(document.querySelectorAll('.age-deck'));
-    decks.forEach(function (deck) {
-      deck.onclick = '';
-      deck.classList.remove('age-deck--active');
-    });
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameBoard);
-
-/***/ }),
-
-/***/ "./src/js/NEW/getCardElement.js":
-/*!**************************************!*\
-  !*** ./src/js/NEW/getCardElement.js ***!
-  \**************************************/
+/***/ "./src/js/cards/getCardElement.js":
+/*!****************************************!*\
+  !*** ./src/js/cards/getCardElement.js ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -536,22 +117,22 @@ function getCardElement(cardObj) {
 
 /***/ }),
 
-/***/ "./src/js/NEW/getCardObject.js":
-/*!*************************************!*\
-  !*** ./src/js/NEW/getCardObject.js ***!
-  \*************************************/
+/***/ "./src/js/cards/getCardObject.js":
+/*!***************************************!*\
+  !*** ./src/js/cards/getCardObject.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
+/* harmony import */ var _cards_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cards.json */ "./src/js/cards/cards.json");
 
 var getCardObject = {
   all: function all() {
     var resultArr = [];
-    _cards_cards_json__WEBPACK_IMPORTED_MODULE_0__.forEach(function (setOfCards) {
+    _cards_json__WEBPACK_IMPORTED_MODULE_0__.forEach(function (setOfCards) {
       setOfCards.cards.forEach(function (card) {
         var cardObject = {};
         Object.assign(cardObject, setOfCards, card);
@@ -564,7 +145,7 @@ var getCardObject = {
   },
   byID: function byID(id) {
     var cardObject = {};
-    _cards_cards_json__WEBPACK_IMPORTED_MODULE_0__.forEach(function (setOfCards) {
+    _cards_json__WEBPACK_IMPORTED_MODULE_0__.forEach(function (setOfCards) {
       setOfCards.cards.forEach(function (card) {
         if (card.innovation === id) {
           Object.assign(cardObject, setOfCards, card);
@@ -576,321 +157,6 @@ var getCardObject = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getCardObject);
-
-/***/ }),
-
-/***/ "./src/js/NEW/initGameState.js":
-/*!*************************************!*\
-  !*** ./src/js/NEW/initGameState.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ initGameState
-/* harmony export */ });
-/* harmony import */ var _NEWgameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NEWgameState */ "./src/js/NEW/NEWgameState.js");
-/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getCardObject */ "./src/js/NEW/getCardObject.js");
-/* harmony import */ var _shuffleArr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shuffleArr */ "./src/js/NEW/shuffleArr.js");
-
-
-
-function initGameState(usersInfo) {
-  // fill age decks
-  var arrOfCardObjects = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.all();
-  arrOfCardObjects.forEach(function (cardObj) {
-    switch (+cardObj.age) {
-      case 1:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age1.push(cardObj.innovation);
-        break;
-
-      case 2:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age2.push(cardObj.innovation);
-        break;
-
-      case 3:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age3.push(cardObj.innovation);
-        break;
-
-      case 4:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age4.push(cardObj.innovation);
-        break;
-
-      case 5:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age5.push(cardObj.innovation);
-        break;
-
-      case 6:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age6.push(cardObj.innovation);
-        break;
-
-      case 7:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age7.push(cardObj.innovation);
-        break;
-
-      case 8:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age8.push(cardObj.innovation);
-        break;
-
-      case 9:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age9.push(cardObj.innovation);
-        break;
-
-      case 10:
-        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age10.push(cardObj.innovation);
-        break;
-
-      default:
-        throw new Error("Wrong number on age field in ".concat(cardObj));
-    }
-  }); // shuffle each age deck & fill leadership deck
-
-  Object.values(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks).forEach(function (ageDeck, i) {
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks["age".concat(i + 1)] = (0,_shuffleArr__WEBPACK_IMPORTED_MODULE_2__.default)(ageDeck);
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.leadershipDeck.push(ageDeck.pop());
-  }); // set up players fields
-
-  for (var i = 0; i < usersInfo.players; i += 1) {
-    var player = "player".concat(i);
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default[player].name = usersInfo.names[i];
-    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players.push(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default[player]);
-  }
-
-  _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
-  _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
-  _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints = 2;
-}
-
-/***/ }),
-
-/***/ "./src/js/NEW/shuffleArr.js":
-/*!**********************************!*\
-  !*** ./src/js/NEW/shuffleArr.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ shuffleArr
-/* harmony export */ });
-function shuffleArr(array) {
-  for (var i = array.length - 1; i > 0; i -= 1) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var _ref = [array[j], array[i]];
-    array[i] = _ref[0];
-    array[j] = _ref[1];
-  }
-
-  return array;
-}
-
-/***/ }),
-
-/***/ "./src/js/NEW/updateGameState.js":
-/*!***************************************!*\
-  !*** ./src/js/NEW/updateGameState.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ updateGameState
-/* harmony export */ });
-/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getCardObject */ "./src/js/NEW/getCardObject.js");
-
-function updateGameState(gameState) {
-  // update resources for each player
-  gameState.players.forEach(function (player) {
-    player.tree = 0;
-    player.tower = 0;
-    player.crown = 0;
-    player.bulb = 0;
-    player.factory = 0;
-    player.clock = 0;
-    Object.keys(player.activeDecks).forEach(function (stack) {
-      var currentStack = player.activeDecks[stack];
-
-      if (currentStack.cards.length > 0) {
-        var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-        var highestCard = _getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(highestCardInnovation);
-        highestCard.resourses.forEach(function (e) {
-          player[e.resourceName] += 1;
-        });
-      }
-    });
-  }); // update currentAge for each player
-
-  gameState.players.forEach(function (player) {
-    player.currentAge = 1;
-    Object.keys(player.activeDecks).forEach(function (stack) {
-      var currentStack = player.activeDecks[stack];
-
-      if (currentStack.cards.length > 0) {
-        var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-        var highestCard = _getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(highestCardInnovation);
-
-        if (highestCard.age > player.currentAge) {
-          player.currentAge = highestCard.age;
-        }
-      }
-    });
-  }); // update currentDeck for each player
-
-  gameState.players.forEach(function (player) {
-    for (var i = player.currentAge; i < 11; i += 1) {
-      var deck = gameState.ageDecks["age".concat(i)];
-
-      if (deck.length > 0) {
-        player.currentDeck = "age".concat(i);
-        break;
-      }
-    }
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/app.js":
-/*!***********************!*\
-  !*** ./src/js/app.js ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/style.scss */ "./src/scss/style.scss");
-/* harmony import */ var _animxyz_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @animxyz/core */ "./node_modules/@animxyz/core/dist/animxyz.css");
-/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
-/* harmony import */ var _display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display/playerTable/displayPlayerTable */ "./src/js/display/playerTable/displayPlayerTable.js");
-/* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
-/* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
-// import styles
-
- // import js modules
-
-
-
-
- // display intro & menu
-
-_components_Intro__WEBPACK_IMPORTED_MODULE_2__.default.init(); // display game UI
-
-document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_3__.default.init()); // add event listeners to hand controls
-
-(0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_4__.default)(); // add event listeners and animations to aside buttons
-
-(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_5__.default)();
-
-/***/ }),
-
-/***/ "./src/js/cards/getCard.js":
-/*!*********************************!*\
-  !*** ./src/js/cards/getCard.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-// take card object and return builded card DOM element
-var getCard = {
-  // get playing card
-  frontSide: function frontSide(cardObj) {
-    var divCard = document.createElement('div');
-    divCard.classList.add('card');
-    divCard.style.background = "url(\"".concat(cardObj.cardImg, "\")");
-    divCard.appendChild(this.getCardHeader(cardObj));
-    divCard.appendChild(this.getCardMain(cardObj));
-    divCard.appendChild(this.getCardFooter());
-    this.setObjByPosition(divCard, cardObj, cardObj.age, cardObj.color);
-    return divCard;
-  },
-  // get card header
-  getCardHeader: function getCardHeader(card) {
-    var divHeader = document.createElement('div');
-    divHeader.classList.add('card__card-header', "card__color--".concat(card.color));
-    var posTopLeft = document.createElement('div');
-    posTopLeft.classList.add('card__topLeft');
-    var title = document.createElement('div');
-    title.classList.add('card-header__title');
-    title.textContent = card.innovation;
-    divHeader.appendChild(posTopLeft);
-    divHeader.appendChild(title);
-    return divHeader;
-  },
-  // get card body
-  getCardMain: function getCardMain(card) {
-    var divMain = document.createElement('div');
-    divMain.classList.add('card__card-main', "card__color--".concat(card.color, "-transparent"));
-    card.dogma.forEach(function (item) {
-      var divDogma = document.createElement('div');
-      divDogma.classList.add('card__dogma');
-      divDogma.setAttribute('data-type', item.type);
-      var icon = document.createElement('i');
-      icon.classList.add(item.icon[0], item.icon[1], 'card__icon', "card__icon-color--".concat(item.color));
-      divDogma.appendChild(icon);
-      var dogma = document.createElement('span');
-      dogma.classList.add('dogma__effect');
-      dogma.innerHTML = item.effect;
-      divDogma.appendChild(dogma);
-      divMain.appendChild(divDogma);
-    });
-    return divMain;
-  },
-  // get card footer
-  getCardFooter: function getCardFooter() {
-    var divFooter = document.createElement('div');
-    divFooter.classList.add('card__card-footer');
-    var posBottomLeft = document.createElement('div');
-    posBottomLeft.classList.add('card__bottomLeft');
-    divFooter.appendChild(posBottomLeft);
-    var posBottomCenter = document.createElement('div');
-    posBottomCenter.classList.add('card__bottomCenter');
-    divFooter.appendChild(posBottomCenter);
-    var posBottomRight = document.createElement('div');
-    posBottomRight.classList.add('card__bottomRight');
-    divFooter.appendChild(posBottomRight);
-    return divFooter;
-  },
-  // place age number and resourses by card position
-  setObjByPosition: function setObjByPosition(divCard, card) {
-    var agePos = divCard.querySelector(".card__".concat(card.agePosition));
-    agePos.classList.add("card__color--".concat(card.color), 'card__age--border');
-    agePos.textContent = card.age;
-    card.resourses.forEach(function (res) {
-      var pos = divCard.querySelector(".card__".concat(res.position));
-      pos.classList.add("".concat(res.type[0]), "".concat(res.type[1]), "card__icon-color--".concat(res.color), "card__icon-border--".concat(card.color));
-    });
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getCard);
-
-/***/ }),
-
-/***/ "./src/js/cards/parseCards.js":
-/*!************************************!*\
-  !*** ./src/js/cards/parseCards.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ parseCards
-/* harmony export */ });
-// get JSON and return array of card objects
-function parseCards(cardsJSON) {
-  var resultArr = [];
-  cardsJSON.forEach(function (setOfCards) {
-    setOfCards.cards.forEach(function (card) {
-      var cardObject = {};
-      Object.assign(cardObject, setOfCards, card);
-      delete cardObject.cards; // remove duplicated field
-
-      resultArr.push(cardObject);
-    });
-  });
-  return resultArr;
-}
 
 /***/ }),
 
@@ -929,7 +195,7 @@ function getRenderCard() {
         if (cardElement.children[0].classList.contains("card__color--".concat(stack.id))) {
           stack.classList.remove('active-zone__stack--empty');
           targetStack.dom = stack;
-          stack.style.width = null;
+          targetStack.dom.style = null;
           targetStack.width = stack.offsetWidth;
           targetStack.height = stack.offsetHeight;
           targetStack.shift = gameState.activePlayer.activeDecks[targetStack.dom.id].shift;
@@ -955,6 +221,8 @@ function getRenderCard() {
           break;
 
         case 'left':
+          console.log('we are in case left');
+
           while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width + targetStack.length * cardShiftValue && cardShiftValue !== 10) {
             cardShiftValue -= 10;
           }
@@ -962,10 +230,10 @@ function getRenderCard() {
           Array.from(targetStack.dom.children).forEach(function (card, i) {
             card.style.right = "".concat(i * cardShiftValue, "px");
           });
-          cardElement.style.right = "".concat(targetStack.length * cardShiftValue, "px");
+          cardElement.style.right = "".concat((targetStack.length - 1) * cardShiftValue, "px");
 
-          if (targetStack.length !== 0) {
-            targetStack.dom.style.width = "".concat(targetStack.width + cardShiftValue * targetStack.length, "px");
+          if (targetStack.length > 1) {
+            targetStack.dom.style.width = "".concat(targetStack.width + cardShiftValue * (targetStack.length - 1), "px");
           }
 
           break;
@@ -978,10 +246,10 @@ function getRenderCard() {
           Array.from(targetStack.dom.children).forEach(function (card, i) {
             card.style.left = "".concat(i * cardShiftValue, "px");
           });
-          cardElement.style.left = "".concat(targetStack.length * cardShiftValue, "px");
+          cardElement.style.left = "".concat((targetStack.length - 1) * cardShiftValue, "px");
 
-          if (targetStack.length !== 0) {
-            targetStack.dom.style.width = "".concat(targetStack.width + cardShiftValue * targetStack.length, "px");
+          if (targetStack.length > 1) {
+            targetStack.dom.style.width = "".concat(targetStack.width + cardShiftValue * (targetStack.length - 1), "px");
           }
 
           break;
@@ -999,569 +267,6 @@ function getRenderCard() {
 
 var renderCard = getRenderCard();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderCard);
-
-/***/ }),
-
-/***/ "./src/js/components/Game.js":
-/*!***********************************!*\
-  !*** ./src/js/components/Game.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ Game
-/* harmony export */ });
-/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
-/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/*
-* all game action happens here
-* take gameUI obj which contains all dom elements
-* take gameField obj which contains all cards avaiable for all players (ages/leadership/special)
-* take players objects which contains all cards avaible for players (hand/table/lead/influence)
-* count avaible actions per turn, reduce on each action
-* when avaible ections ends - turn passed to next player
-*/
-// import header from '../display/playerTable/displayHeader';
-// import displayNewTurnModal from '../display/displayNewTurnModal';
-// import displayNextTurnBtn from '../NEW/displayNextTurnBtn';
-// import gameState from './gameState';
-// import getCardObject from '../OLD/getCardObject';
-// import getCardElement from '../utility/getCardElement';
-//! ! TEST
-
-
-
-var Game = /*#__PURE__*/function () {
-  function Game(gameUI, gameField, players, arrOfCards) {
-    var _this = this;
-
-    _classCallCheck(this, Game);
-
-    // store passed objects
-    this.players = players;
-    this.gameField = gameField;
-    this.gameUI = gameUI; // initialize game field in players objects
-
-    this.players.forEach(function (player) {
-      player.game = _this;
-    }); // set default values
-
-    this.currentPlayer = null;
-    this.currentDeck = {
-      domElement: gameUI.ageDecks.age1,
-      cardsArray: gameField.ageDecks.age1
-    };
-    this.turnPoints = 0;
-    this.arrOfCards = arrOfCards; // this.initGameState(players, this.arrOfCards);
-
-    header.initPlayerNames(players); // test
-
-    /* this.testCardObj = getCardObject('колесо', arrOfCards);
-    console.log(this.testCardObj);
-    this.testCardDOM = getCardElement(this.testCardObj);
-    console.log(this.testCardDOM); */
-  }
-
-  _createClass(Game, [{
-    key: "init",
-    value: function init() {
-      var _this2 = this;
-
-      var cardElements = document.querySelectorAll('.card');
-      cardElements.forEach(function (elem) {
-        if (gameState.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
-          elem.onclick = _this2.playCard;
-        }
-      });
-      var activeDeckElements = document.querySelectorAll('.age-deck--active');
-      activeDeckElements.forEach(function (elem) {
-        elem.onclick = _this2.takeCard;
-      });
-    }
-  }, {
-    key: "initGameState",
-    value: function initGameState(players, arrOfCards) {
-      arrOfCards.forEach(function (e) {
-        switch (+e.age) {
-          case 1:
-            gameState.ageDecks.age1.push(e.innovation);
-            break;
-
-          case 2:
-            gameState.ageDecks.age2.push(e.innovation);
-            break;
-
-          case 3:
-            gameState.ageDecks.age3.push(e.innovation);
-            break;
-
-          case 4:
-            gameState.ageDecks.age4.push(e.innovation);
-            break;
-
-          case 5:
-            gameState.ageDecks.age5.push(e.innovation);
-            break;
-
-          case 6:
-            gameState.ageDecks.age6.push(e.innovation);
-            break;
-
-          case 7:
-            gameState.ageDecks.age7.push(e.innovation);
-            break;
-
-          case 8:
-            gameState.ageDecks.age8.push(e.innovation);
-            break;
-
-          case 9:
-            gameState.ageDecks.age9.push(e.innovation);
-            break;
-
-          case 10:
-            gameState.ageDecks.age10.push(e.innovation);
-            break;
-
-          default:
-            throw new Error("Wrong number on age field in ".concat(e));
-        }
-      });
-
-      for (var i = 0; i < players.length; i += 1) {
-        var player = "player".concat(i);
-        gameState[player].name = players[i].name;
-        gameState.players.push(gameState[player]);
-      }
-
-      gameState.currentPlayer = gameState.players[0];
-      gameState.currentPlayer.actionPoints = 2;
-      gameState.activePlayer = gameState.players[0];
-    }
-  }, {
-    key: "newTurn",
-    value: function newTurn() {
-      var _this3 = this;
-
-      this.setCurrentPlayer();
-      displayNewTurnModal(this.currentPlayer.name);
-      this.turnPoints = 100; // timeout to display modal
-
-      setTimeout(function () {
-        _this3.removeActiveDeck();
-
-        _this3.setActiveDeck(_this3.currentPlayer);
-
-        _this3.currentPlayer.renderHand();
-
-        _this3.currentPlayer.renderActiveZone();
-
-        _this3.updateInfoTable();
-      }, 450);
-    } // use this after each action
-
-  }, {
-    key: "actionDone",
-    value: function actionDone() {
-      this.turnPoints -= 1;
-      this.updateInfoTable();
-      this.removeActiveDeck();
-
-      if (this.turnPoints > 0) {
-        this.setActiveDeck(this.currentPlayer);
-      } else {
-        this.disableHandEvents();
-        displayNextTurnBtn(this.newTurn.bind(this));
-      }
-    } // set current players depends on previous player
-
-  }, {
-    key: "setCurrentPlayer",
-    value: function setCurrentPlayer() {
-      if (this.currentPlayer === null) {
-        this.currentPlayer = this.players[0];
-      } else {
-        for (var i = 0; i < this.players.length; i += 1) {
-          if (this.currentPlayer === this.players[i]) {
-            i += 1;
-            if (i === this.players.length) i = 0;
-            this.currentPlayer = this.players[i];
-            break;
-          }
-        }
-      }
-    } // set active deck for current player
-
-  }, {
-    key: "setActiveDeck",
-    value: function setActiveDeck(currentPlayer) {
-      var _this4 = this;
-
-      Object.keys(this.gameField.ageDecks).forEach(function (ageDeckKey) {
-        if (ageDeckKey === "age".concat(currentPlayer.currentAge)) {
-          // store active deck dom element
-          _this4.currentDeck.domElement = _this4.gameUI.ageDecks["age".concat(currentPlayer.currentAge)]; // store active deck cards array
-
-          _this4.currentDeck.cardsArray = _this4.gameField.ageDecks[ageDeckKey]; //! Change current players currentAge if needed deck empty to go for the next deck
-          //! Need recalcualte current age after each action, done by players method setCurrentAge
-
-          if (_this4.currentDeck.cardsArray.length === 0) {
-            _this4.currentPlayer.currentAge += 1;
-          }
-        }
-      }); // set style and event listener of active deck when all calculations finished
-
-      this.currentDeck.domElement.classList.add('age-deck--active'); //! USED onclick because got bug with AddEvenListener - cant remove listener
-
-      this.currentDeck.domElement.onclick = this.takeCard.bind(this); // update current active deck displayed in aside
-
-      this.updateCurrentDeckBlock();
-    } // remove active deck class and eventlistener
-    //! should use before each setActiveDeck method
-
-  }, {
-    key: "removeActiveDeck",
-    value: function removeActiveDeck() {
-      var cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
-      if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
-      this.currentDeck.domElement.classList.remove('age-deck--active');
-      this.currentDeck.domElement.onclick = '';
-    }
-  }, {
-    key: "disableHandEvents",
-    value: function disableHandEvents() {
-      var cards = Array.from(document.querySelectorAll('.card'));
-      cards.forEach(function (card) {
-        card.onclick = '';
-      });
-    } // get card and render it in hand
-
-  }, {
-    key: "takeCard",
-    value: function takeCard(e) {
-      /* const cardObject = this.currentDeck.cardsArray.pop();
-      this.currentPlayer.hand.push(cardObject);
-        const cardElement = getCard.frontSide(cardObject);
-        cardElement.onclick = () => { this.currentPlayer.playCard(cardObject, cardElement); }; //! TEMP
-        renderCard.toHand(cardElement); */
-      var sourceDeck = e.target.id;
-
-      if (sourceDeck === 'cloneCurrentDeck') {
-        sourceDeck = gameState.currentPlayer.currentDeck;
-      }
-
-      var movingCardInnovation = gameState.ageDecks[sourceDeck].pop();
-      gameState.currentPlayer.hand.push(movingCardInnovation);
-      gameState.currentPlayer.actionPoints -= 1;
-      var movingCardObj = getCardObject(movingCardInnovation, this.arrOfCards);
-      var movingCardElement = getCardElement(movingCardObj);
-      movingCardElement.onclick = this.playCard.bind(this);
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__.default.toHand(movingCardElement); // gameState.currentPlayer.setCurrentAge();
-
-      this.updateGameState();
-      header.changePlayerStats(gameState.currentPlayer);
-      this.actionDone();
-    }
-  }, {
-    key: "playCard",
-    value: function playCard(e) {
-      var playingCardInnovation = e.target.closest('.card').dataset.innovation;
-      var playingCardElement = e.target.closest('.card');
-      playingCardElement.onclick = null;
-      var playIndex = gameState.currentPlayer.hand.indexOf(playingCardInnovation);
-      gameState.currentPlayer.hand.splice(playIndex, 1);
-      var playingCardObj = getCardObject(playingCardInnovation, this.arrOfCards);
-      var targetDeckArray = gameState.currentPlayer.activeDecks[playingCardObj.color].cards;
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__.default.toActive(playingCardElement); //! before targetDeckArray.push(playingCardInnovation);
-
-      targetDeckArray.push(playingCardInnovation);
-      gameState.currentPlayer.actionPoints -= 1;
-      this.updateGameState();
-      header.changePlayerStats(gameState.currentPlayer);
-    } // update info table in aside, use after each action done in newTurn method
-
-  }, {
-    key: "updateInfoTable",
-    value: function updateInfoTable() {
-      this.gameUI.infoTable.name.innerText = this.currentPlayer.name;
-      this.gameUI.infoTable.actionPoints.innerText = this.turnPoints;
-    } // update current active deck displayed in aside, use after each time when setActiveDeck run
-
-  }, {
-    key: "updateCurrentDeckBlock",
-    value: function updateCurrentDeckBlock() {
-      // remove previous active deck if exists
-      var prevDeckClone = document.querySelector('#cloneCurrentDeck');
-      if (prevDeckClone !== null) prevDeckClone.remove(); // clone current active deck
-
-      var cloneCurrentDeck = this.currentDeck.domElement.cloneNode();
-      cloneCurrentDeck.innerText = this.currentDeck.domElement.innerText;
-      cloneCurrentDeck.id = 'cloneCurrentDeck';
-      cloneCurrentDeck.onclick = this.takeCard.bind(this); // remove animation on each update of aside current deck
-
-      cloneCurrentDeck.classList.remove('xyz-in'); // display cloned deck in currentDeck block
-
-      this.gameUI.currentDeck.append(cloneCurrentDeck);
-    }
-  }, {
-    key: "updateGameState",
-    value: function updateGameState() {
-      var _this5 = this;
-
-      // update resources for each player
-      gameState.players.forEach(function (player) {
-        player.tree = 0;
-        player.tower = 0;
-        player.crown = 0;
-        player.bulb = 0;
-        player.factory = 0;
-        player.clock = 0;
-        Object.keys(player.activeDecks).forEach(function (stack) {
-          var currentStack = player.activeDecks[stack];
-
-          if (currentStack.cards.length > 0) {
-            var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = getCardObject(highestCardInnovation, _this5.arrOfCards);
-            highestCard.resourses.forEach(function (e) {
-              player[e.resourceName] += 1;
-            });
-          }
-        });
-      }); // update currentAge for each player
-
-      gameState.players.forEach(function (player) {
-        player.currentAge = 1;
-        Object.keys(player.activeDecks).forEach(function (stack) {
-          var currentStack = player.activeDecks[stack];
-
-          if (currentStack.cards.length > 0) {
-            var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = getCardObject(highestCardInnovation, _this5.arrOfCards);
-
-            if (highestCard.age > player.currentAge) {
-              player.currentAge = highestCard.age;
-            }
-          }
-        });
-      }); // update currentDeck for each player
-
-      gameState.players.forEach(function (player) {
-        for (var i = player.currentAge; i < 11; i += 1) {
-          var deck = gameState.ageDecks["age".concat(i)];
-
-          if (deck.length > 0) {
-            player.currentDeck = "age".concat(i);
-            break;
-          }
-        }
-      });
-    }
-  }]);
-
-  return Game;
-}();
-
-
-
-/***/ }),
-
-/***/ "./src/js/components/GameField.js":
-/*!****************************************!*\
-  !*** ./src/js/components/GameField.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ GameField
-/* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/*
-* take cards objects and sort them to separate decks
-* store all cards avaible for all players (ages/leadership/special)
-* store cards as objects
-* this object passed as argument to Game constructor
-*/
-var GameField = /*#__PURE__*/function () {
-  function GameField(arrOfCardObjects) {
-    _classCallCheck(this, GameField);
-
-    // create empty decks for each age
-    this.ageDecks = {
-      age1: [],
-      age2: [],
-      age3: [],
-      age4: [],
-      age5: [],
-      age6: [],
-      age7: [],
-      age8: [],
-      age9: [],
-      age10: []
-    }; // TODO leadership later
-    // create empty leadership deck
-
-    this.leadershipDeck = []; // TODO special deck later
-    // create empty special deck
-
-    this.specialDeck = []; // fill age decks with card objects
-
-    this.setDeckArrays(arrOfCardObjects);
-  } // TODO add shuffle later
-  // fill deck arays depends on card age field
-
-
-  _createClass(GameField, [{
-    key: "setDeckArrays",
-    value: function setDeckArrays(cardsObj) {
-      var _this = this;
-
-      cardsObj.forEach(function (e) {
-        switch (+e.age) {
-          case 1:
-            _this.ageDecks.age1.push(e);
-
-            break;
-
-          case 2:
-            _this.ageDecks.age2.push(e);
-
-            break;
-
-          case 3:
-            _this.ageDecks.age3.push(e);
-
-            break;
-
-          case 4:
-            _this.ageDecks.age4.push(e);
-
-            break;
-
-          case 5:
-            _this.ageDecks.age5.push(e);
-
-            break;
-
-          case 6:
-            _this.ageDecks.age6.push(e);
-
-            break;
-
-          case 7:
-            _this.ageDecks.age7.push(e);
-
-            break;
-
-          case 8:
-            _this.ageDecks.age8.push(e);
-
-            break;
-
-          case 9:
-            _this.ageDecks.age9.push(e);
-
-            break;
-
-          case 10:
-            _this.ageDecks.age10.push(e);
-
-            break;
-
-          default:
-            throw new Error("Wrong number on age field in ".concat(e));
-        }
-      });
-    }
-  }]);
-
-  return GameField;
-}();
-
-
-
-/***/ }),
-
-/***/ "./src/js/components/GameUI.js":
-/*!*************************************!*\
-  !*** ./src/js/components/GameUI.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ GameUI
-/* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/*
-* store all game UI dom elements
-* this obj passed as argument to Game constructor
-*/
-var GameUI = /*#__PURE__*/function () {
-  function GameUI() {
-    _classCallCheck(this, GameUI);
-
-    this.ageDecks = {};
-    this.getAgeDecks();
-    this.activeStacks = {};
-    this.getActiveStacks();
-    this.infoTable = {};
-    this.getInfoTable();
-    this.currentDeck = document.querySelector('.current-deck__cards');
-    this.hand = document.querySelector('.hand__cards');
-  }
-
-  _createClass(GameUI, [{
-    key: "getAgeDecks",
-    value: function getAgeDecks() {
-      var _this = this;
-
-      var ageDecksElements = Array.from(document.getElementsByClassName('age-deck'));
-      ageDecksElements.forEach(function (ageDeck, i) {
-        _this.ageDecks["age".concat(i + 1)] = ageDecksElements[i];
-      });
-    }
-  }, {
-    key: "getActiveStacks",
-    value: function getActiveStacks() {
-      var _this2 = this;
-
-      var activeStacksElements = Array.from(document.getElementsByClassName('active-zone__stack'));
-      activeStacksElements.forEach(function (activeStack) {
-        _this2.activeStacks[activeStack.id] = activeStack;
-      });
-    }
-  }, {
-    key: "getInfoTable",
-    value: function getInfoTable() {
-      var currentPlayerNameBlock = document.querySelector('.info-table__player-name');
-      this.infoTable.name = currentPlayerNameBlock;
-      var currentPlayerActionPoints = document.querySelector('.info-table__action-points');
-      this.infoTable.actionPoints = currentPlayerActionPoints;
-    }
-  }]);
-
-  return GameUI;
-}();
-
-
 
 /***/ }),
 
@@ -1640,211 +345,208 @@ var intro = {
 
 /***/ }),
 
-/***/ "./src/js/components/Player.js":
-/*!*************************************!*\
-  !*** ./src/js/components/Player.js ***!
-  \*************************************/
+/***/ "./src/js/components/gameBoard.js":
+/*!****************************************!*\
+  !*** ./src/js/components/gameBoard.js ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ Player
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
-/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
-/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
-/* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+/* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
+/* harmony import */ var _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cards/getCardObject */ "./src/js/cards/getCardObject.js");
+/* harmony import */ var _cards_getCardElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cards/getCardElement */ "./src/js/cards/getCardElement.js");
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _utility_updateGameState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utility/updateGameState */ "./src/js/utility/updateGameState.js");
+/* harmony import */ var _display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../display/displayNewTurnModal */ "./src/js/display/displayNewTurnModal.js");
+/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
 
 
 
 
 
-/*
-* store all player cards objects (hand/table/lead/influence)
-* this obj passed as argument to Game constructor
-*/
-
-var Player = /*#__PURE__*/function () {
-  function Player(gameUI, playerName, id) {
-    _classCallCheck(this, Player);
-
-    // store passed values
-    this.name = playerName;
-    this.id = id;
-    this.gameUI = gameUI; // set default values
-
-    this.game = null; //! this field will be set at game object initialization
-
-    this.currentAge = 1;
-    this.hand = []; //! Names of stacks are color field in card objects
-
-    this.activeStacks = {
-      blue: {
-        cards: [],
-        shift: 'right' //! TEST
-
-      },
-      red: {
-        cards: [],
-        shift: 'top' //! TEST
-
-      },
-      green: {
-        cards: [],
-        shift: null //! TEST
-
-      },
-      purple: {
-        cards: [],
-        shift: 'left' //! TEST
-
-      },
-      yellow: {
-        cards: [],
-        shift: 'top' //! TEST
-
-      }
-    }; // Resources
-
-    this.tree = 0;
-    this.tower = 0;
-    this.crown = 0;
-    this.bulb = 0;
-    this.factory = 0;
-    this.clock = 0; // player leadership and influence objects
-    // TODO LATER
-
-    this.ownedLeadership = {
-      domElement: null,
-      // TODO remove
-      cardsArray: []
-    }; // TODO LATER
-
-    this.influence = {
-      domElement: null,
-      // TODO remove
-      cardsArray: []
-    };
-  } // calculate current recourses
 
 
-  _createClass(Player, [{
-    key: "calculateResources",
-    value: function calculateResources() {
-      var _this = this;
+var gameBoard = {
+  display: function display() {
+    var _this = this;
 
-      this.tree = 0;
-      this.tower = 0;
-      this.crown = 0;
-      this.bulb = 0;
-      this.factory = 0;
-      this.clock = 0;
-      Object.keys(this.activeStacks).forEach(function (stack) {
-        var currentStack = _this.activeStacks[stack];
+    // display info block aside
+    var nameBlock = document.querySelector('.info-table__player-name');
+    nameBlock.innerText = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.name;
+    var actionPointsBlock = document.querySelector('.info-table__action-points');
+    actionPointsBlock.innerText = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.actionPoints; // remove previous active age deck
 
-        if (currentStack.cards.length > 0) {
-          var highestCard = currentStack.cards[currentStack.cards.length - 1];
-          highestCard.resourses.forEach(function (e) {
-            _this[e.resourceName] += 1;
+    var cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
+    if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
+    var activeDeck = document.querySelector('.age-deck--active');
+
+    if (activeDeck !== null) {
+      activeDeck.classList.remove('age-deck--active');
+      activeDeck.onclick = '';
+    } // set avaiable age deck in modal block
+
+
+    while (_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks["age".concat(_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge)].length === 0) {
+      _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge += 1;
+    }
+
+    var avaiableAgeDeck = document.querySelector("#age".concat(_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge));
+    avaiableAgeDeck.classList.add('age-deck--active'); // set avaiable age deck in aside
+
+    var prevDeckClone = document.querySelector('#cloneCurrentDeck');
+    if (prevDeckClone !== null) prevDeckClone.remove(); // clone current active deck
+
+    cloneCurrentDeck = avaiableAgeDeck.cloneNode();
+    cloneCurrentDeck.id = 'cloneCurrentDeck';
+    cloneCurrentDeck.classList.add('age-deck--active');
+    cloneCurrentDeck.classList.remove('xyz-in');
+    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)'; //! change later to `${}`
+    // display cloned deck in currentDeck block
+
+    document.querySelector('.current-deck__cards').append(cloneCurrentDeck); // get hand cards of active player
+
+    var hand = document.querySelector('.hand__cards');
+    hand.innerHTML = '';
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.hand.forEach(function (cardID) {
+      var cardObject = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(cardID);
+      var cardElement = (0,_cards_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(cardObject);
+      cardElement.onclick = _this.playCard;
+      hand.append(cardElement);
+    }); // get active cards of active player
+
+    var stacks = document.querySelectorAll('.active-zone__stack');
+    stacks.forEach(function (stackElement) {
+      stackElement.innerHTML = '';
+      stackElement.classList.add('active-zone__stack--empty');
+      Object.keys(_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks).forEach(function (activeDeckName) {
+        if (activeDeckName === stackElement.id) {
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[activeDeckName].cards.forEach(function (card) {
+            var cardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(card);
+            var cardElement = (0,_cards_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(cardObj);
+
+            cardElement.onclick = function () {
+              //! TODO
+              console.log('DOGMA! :)');
+            };
+
+            _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toActive(cardElement, _gameState__WEBPACK_IMPORTED_MODULE_0__.default);
+            cardElement.classList.remove('xyz-in');
           });
         }
       });
-    } // calculate and set current age, iterates througth each stack
-    //! Runs from Game each time when card taken
-
-  }, {
-    key: "setCurrentAge",
-    value: function setCurrentAge() {
-      var _this2 = this;
-
-      // console.log(this);
-      Object.keys(this.activeStacks).forEach(function (stack) {
-        _this2.activeStacks[stack].cards.forEach(function (card) {
-          if (+card.age > _this2.currentAge) {
-            _this2.currentAge = +card.age;
-          }
-        });
-      });
-    } // render last taken card in hand of current player
-
-  }, {
-    key: "renderLastTakenCard",
-    value: function renderLastTakenCard() {
-      var _this3 = this;
-
-      var lastTakenCard = this.hand[this.hand.length - 1];
-      var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(lastTakenCard); // add animation when card render to hand
-
-      cardElement.setAttribute('xyz', 'fade right-3 flip-right rotate-left');
-      cardElement.classList.add('xyz-in');
-
-      cardElement.onclick = function () {
-        _this3.playCard(lastTakenCard, cardElement);
-      };
-
-      this.gameUI.hand.append(cardElement); // remove animation when card rendered
-
-      setTimeout(function () {
-        // cardElement.removeAttribute('xyz');
-        cardElement.classList.remove('xyz-in');
-      }, 450);
-    } // render all cards in hand of current player
-
-  }, {
-    key: "renderHand",
-    value: function renderHand() {
-      var _this4 = this;
-
-      this.gameUI.hand.innerHTML = ''; // clear previous rendered hand
-
-      this.hand.forEach(function (card) {
-        var cardElement = _cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card);
-
-        cardElement.onclick = function () {
-          _this4.playCard(card, cardElement);
-        };
-
-        _this4.gameUI.hand.append(cardElement);
-      });
-    } // render all cards in active zone of current player
-
-  }, {
-    key: "renderActiveZone",
-    value: function renderActiveZone() {
-      var _this5 = this;
-
-      Object.keys(this.activeStacks).forEach(function (stackName) {
-        _this5.gameUI.activeStacks[stackName].innerHTML = ''; // clear previous rendered active zone
-
-        _this5.activeStacks[stackName].cards.forEach(function (card) {
-          _this5.gameUI.activeStacks[stackName].append(_cards_getCard__WEBPACK_IMPORTED_MODULE_0__.default.frontSide(card));
-        });
-      });
-    } // on click event for cards in hand. Play card in stack depends on category
-    // TODO: later this method should add dogma function to each played card
-
-  }, {
-    key: "playCard",
-    value: function playCard(cardObj, cardElement) {
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_1__.default.toActive(cardElement); // test block, emulate adding card to active zone
-
-      var test = cardElement.parentElement.id;
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.activePlayer.activeDecks[test].cards.push(1);
-      this.calculateResources();
-      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__.default.changePlayerStats(this);
-      this.game.actionDone();
+    });
+  },
+  update: function update() {
+    if (_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints === 0) {
+      this.displayNextTurnBtn();
     }
-  }]);
 
-  return Player;
-}();
+    (0,_utility_updateGameState__WEBPACK_IMPORTED_MODULE_4__.default)(_gameState__WEBPACK_IMPORTED_MODULE_0__.default);
+    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_6__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer);
+    document.querySelector('.info-table__player-name').innerText = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name;
+    document.querySelector('.info-table__action-points').innerText = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints;
+  },
+  init: function init() {
+    var _this2 = this;
 
+    var cardElements = document.querySelectorAll('.card');
+    cardElements.forEach(function (elem) {
+      if (_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
+        elem.onclick = _this2.playCard;
+      }
+    });
+    var activeDeckElements = document.querySelectorAll('.age-deck--active');
+    activeDeckElements.forEach(function (elem) {
+      elem.onclick = _this2.takeCard;
+    });
+  },
+  takeCard: function takeCard(e) {
+    var sourceDeck = e.target.id;
 
+    if (sourceDeck === 'cloneCurrentDeck') {
+      sourceDeck = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.currentDeck;
+    }
+
+    var movingCardInnovation = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks[sourceDeck].pop();
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.push(movingCardInnovation);
+    var movingCardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(movingCardInnovation);
+    var movingCardElement = (0,_cards_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(movingCardObj);
+    movingCardElement.onclick = gameBoard.playCard;
+    _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toHand(movingCardElement, _gameState__WEBPACK_IMPORTED_MODULE_0__.default);
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints -= 1;
+    gameBoard.update();
+  },
+  playCard: function playCard(e) {
+    var playingCardInnovation = e.target.closest('.card').dataset.innovation;
+    var playingCardElement = e.target.closest('.card');
+    playingCardElement.onclick = null;
+    var playIndex = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.indexOf(playingCardInnovation);
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.splice(playIndex, 1);
+    var playingCardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(playingCardInnovation);
+    var targetDeckArray = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.activeDecks[playingCardObj.color].cards;
+    targetDeckArray.push(playingCardInnovation);
+
+    playingCardElement.onclick = function () {
+      //! TODO
+      console.log('DOGMA! :)');
+    };
+
+    _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toActive(playingCardElement, _gameState__WEBPACK_IMPORTED_MODULE_0__.default);
+    _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints -= 1;
+    gameBoard.update();
+  },
+  displayNextTurnBtn: function displayNextTurnBtn() {
+    var nextTurnBtn = document.createElement('div');
+    nextTurnBtn.classList.add('info-table__next-turn-btn');
+    nextTurnBtn.innerText = 'Закончить ход';
+    nextTurnBtn.addEventListener('click', function () {
+      for (var i = 0; i < _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players.length; i += 1) {
+        if (_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer === _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players[i]) {
+          i += 1;
+          if (i === _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players.length) i = 0;
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players[i];
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer = _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer;
+          _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints = 2;
+          break;
+        }
+      }
+
+      (0,_display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_5__.default)(_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name);
+      setTimeout(function () {
+        gameBoard.display();
+        gameBoard.init();
+        var excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
+        excistedNextTurnBtn.remove();
+      }, 500);
+    });
+    var infoTable = document.querySelector('.info-table');
+    this.disableEvents();
+    infoTable.append(nextTurnBtn);
+  },
+  disableEvents: function disableEvents() {
+    var cards = Array.from(document.querySelectorAll('.card'));
+    cards.forEach(function (card) {
+      card.onclick = '';
+      card.style.cursor = 'default';
+      card.style.transform = 'none';
+    });
+    var cardDogms = Array.from(document.querySelectorAll('.card__dogma'));
+    cardDogms.forEach(function (cardDogma) {
+      cardDogma.onclick = '';
+      cardDogma.style.cursor = 'default';
+      cardDogma.style.transform = 'none';
+    });
+    var decks = Array.from(document.querySelectorAll('.age-deck'));
+    decks.forEach(function (deck) {
+      deck.onclick = '';
+      deck.classList.remove('age-deck--active');
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameBoard);
 
 /***/ }),
 
@@ -1886,22 +588,23 @@ var gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'right' //! test
+        shift: 'top' //! test
 
       },
       green: {
         cards: [],
-        shift: 'top' //! test
+        shift: 'right' //! test
 
       },
       blue: {
         cards: [],
-        shift: 'left' //! test
+        shift: null //! test
 
       },
       purple: {
         cards: [],
-        shift: null
+        shift: 'left' //! test
+
       },
       yellow: {
         cards: [],
@@ -1925,15 +628,18 @@ var gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null
+        shift: 'left' //! test
+
       },
       green: {
         cards: [],
-        shift: null
+        shift: 'top' //! test
+
       },
       blue: {
         cards: [],
-        shift: null
+        shift: 'right' //! test
+
       },
       purple: {
         cards: [],
@@ -2037,14 +743,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
-/* harmony import */ var _NEW_NEWinitHotSeatGame__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../NEW/NEWinitHotSeatGame */ "./src/js/NEW/NEWinitHotSeatGame.js");
-/* harmony import */ var _NEW_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../NEW/displayNewTurnModal */ "./src/js/NEW/displayNewTurnModal.js");
+/* harmony import */ var _display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayNewTurnModal */ "./src/js/display/displayNewTurnModal.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 
 
 
@@ -2058,8 +762,7 @@ function validation(userObj) {
   }
 
   return false;
-} // TODO need some refactor later, move to display folder, use function?
-
+}
 
 var Menu = /*#__PURE__*/function () {
   function Menu(parent) {
@@ -2106,10 +809,10 @@ var Menu = /*#__PURE__*/function () {
 
           if (validation(users)) {
             var intro = _this.menu.parentElement.parentElement.parentElement;
-            (0,_NEW_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_2__.default)(users.names[0]);
-            (0,_NEW_NEWinitHotSeatGame__WEBPACK_IMPORTED_MODULE_1__.default)(users);
+            (0,_display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__.default)(users.names[0]);
+            (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)(users);
             setTimeout(function () {
-              intro.classList.toggle('intro--hide'); // initHotSeatGame(usersInfo.names);
+              intro.classList.toggle('intro--hide');
             }, 500);
           }
         } else if (e.target.className.includes('back')) {
@@ -2188,6 +891,45 @@ var Menu = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/display/displayNewTurnModal.js":
+/*!***********************************************!*\
+  !*** ./src/js/display/displayNewTurnModal.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ displayModal
+/* harmony export */ });
+function displayModal(playerName) {
+  var modalBg = document.createElement('div');
+  modalBg.classList.add('modal');
+  modalBg.classList.add('modal--hidden');
+  var modalBlock = document.createElement('div');
+  modalBlock.classList.add('modal__block');
+  var modalText = document.createElement('div');
+  modalText.classList.add('modal__text');
+  modalText.innerText = "\u0421\u0435\u0439\u0447\u0430\u0441 \u0445\u043E\u0434 \u0438\u0433\u0440\u043E\u043A\u0430 ".concat(playerName);
+  var modalBtn = document.createElement('button');
+  modalBtn.classList.add('modal__btn');
+  modalBtn.innerText = 'Начать ход!';
+  modalBtn.addEventListener('click', function () {
+    modalBg.style = '';
+    modalBg.classList.toggle('modal--hidden');
+    setTimeout(function () {
+      modalBg.remove();
+    }, 500);
+  });
+  modalBlock.append(modalText, modalBtn);
+  modalBg.append(modalBlock);
+  document.body.prepend(modalBg);
+  setTimeout(function () {
+    modalBg.classList.toggle('modal--hidden');
+  }, 0);
+}
+
+/***/ }),
+
 /***/ "./src/js/display/playerTable/displayActiveZone.js":
 /*!*********************************************************!*\
   !*** ./src/js/display/playerTable/displayActiveZone.js ***!
@@ -2212,7 +954,6 @@ var displayActiveZone = {
     this.cardsBlock.append(this.cardsBlockWrapper);
     this.cardsBlockOverlay = document.createElement('div');
     this.cardsBlockOverlay.classList.add('active-zone__overlay'); // create players active stacks
-    // !Stack names are the color fields of cards object
 
     var stacksNames = ['blue', 'red', 'green', 'purple', 'yellow'];
 
@@ -2220,8 +961,7 @@ var displayActiveZone = {
       var stack = document.createElement('div');
       stack.classList.add('active-zone__stack');
       stack.classList.add('active-zone__stack--empty');
-      stack.id = stacksNames[i]; // id stackName for each stack
-
+      stack.id = stacksNames[i];
       this.cardsBlockWrapper.append(stack);
     }
 
@@ -2421,7 +1161,7 @@ var displayAside = {
     for (var i = 0; i < agesNumber; i += 1) {
       var deck = document.createElement('div');
       deck.classList.add('age-deck');
-      deck.id = "age".concat(i + 1); // id age1-10 for each deck
+      deck.id = "age".concat(i + 1);
 
       if (i < 9) {
         deck.style.backgroundImage = "url(./assets/img/cards-bg/age-0".concat(i + 1, ".jpg)");
@@ -2870,6 +1610,90 @@ var displayPlayerTable = {
 
 /***/ }),
 
+/***/ "./src/js/utility/initGameState.js":
+/*!*****************************************!*\
+  !*** ./src/js/utility/initGameState.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ initGameState
+/* harmony export */ });
+/* harmony import */ var _components_gameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/gameState */ "./src/js/components/gameState.js");
+/* harmony import */ var _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cards/getCardObject */ "./src/js/cards/getCardObject.js");
+/* harmony import */ var _shuffleArr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shuffleArr */ "./src/js/utility/shuffleArr.js");
+
+
+
+function initGameState(usersInfo) {
+  // fill age decks
+  var arrOfCardObjects = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.all();
+  arrOfCardObjects.forEach(function (cardObj) {
+    switch (+cardObj.age) {
+      case 1:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age1.push(cardObj.innovation);
+        break;
+
+      case 2:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age2.push(cardObj.innovation);
+        break;
+
+      case 3:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age3.push(cardObj.innovation);
+        break;
+
+      case 4:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age4.push(cardObj.innovation);
+        break;
+
+      case 5:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age5.push(cardObj.innovation);
+        break;
+
+      case 6:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age6.push(cardObj.innovation);
+        break;
+
+      case 7:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age7.push(cardObj.innovation);
+        break;
+
+      case 8:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age8.push(cardObj.innovation);
+        break;
+
+      case 9:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age9.push(cardObj.innovation);
+        break;
+
+      case 10:
+        _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age10.push(cardObj.innovation);
+        break;
+
+      default:
+        throw new Error("Wrong number on age field in ".concat(cardObj));
+    }
+  }); // shuffle each age deck & fill leadership deck
+
+  Object.values(_components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks).forEach(function (ageDeck, i) {
+    _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks["age".concat(i + 1)] = (0,_shuffleArr__WEBPACK_IMPORTED_MODULE_2__.default)(ageDeck);
+    _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.leadershipDeck.push(ageDeck.pop());
+  }); // set up players fields
+
+  for (var i = 0; i < usersInfo.players; i += 1) {
+    var player = "player".concat(i);
+    _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default[player].name = usersInfo.names[i];
+    _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.players.push(_components_gameState__WEBPACK_IMPORTED_MODULE_0__.default[player]);
+  }
+
+  _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer = _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
+  _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer = _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
+  _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints = 2;
+}
+
+/***/ }),
+
 /***/ "./src/js/utility/initHotSeatGame.js":
 /*!*******************************************!*\
   !*** ./src/js/utility/initHotSeatGame.js ***!
@@ -2880,44 +1704,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ initHotSeatGame
 /* harmony export */ });
-/* harmony import */ var _components_GameField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/GameField */ "./src/js/components/GameField.js");
-/* harmony import */ var _components_Player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Player */ "./src/js/components/Player.js");
-/* harmony import */ var _components_Game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Game */ "./src/js/components/Game.js");
-/* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
-/* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
-/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
-/* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
+/* harmony import */ var _initGameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./initGameState */ "./src/js/utility/initGameState.js");
+/* harmony import */ var _components_gameBoard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/gameBoard */ "./src/js/components/gameBoard.js");
+/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
 
 
 
-
- // import setChat from './setChat';
-
-
-
-function initHotSeatGame(playerNames) {
-  // contains dom elements
-  var gameUI = new _components_GameUI__WEBPACK_IMPORTED_MODULE_4__.default(); // contains sorted card objects
-
-  var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_3__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_6__); // shuffle arr of cards objects
-
-  (0,_shuffle__WEBPACK_IMPORTED_MODULE_5__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
-
-  var gameField = new _components_GameField__WEBPACK_IMPORTED_MODULE_0__.default(arrOfCards); // contains players properties and cards
-
-  var players = [];
-
-  for (var i = 0; i < playerNames.length; i += 1) {
-    var player = new _components_Player__WEBPACK_IMPORTED_MODULE_1__.default(gameUI, playerNames[i], i + 1);
-    players.push(player);
-  } // work with all main objects
-
-
-  var game = new _components_Game__WEBPACK_IMPORTED_MODULE_2__.default(gameUI, gameField, players, arrOfCards);
-  game.newTurn(); // display first modal without animation
-
-  document.querySelector('.modal').style.opacity = '1'; // init chat
-  // setChat();
+function initHotSeatGame(usersInfo) {
+  (0,_initGameState__WEBPACK_IMPORTED_MODULE_0__.default)(usersInfo);
+  _components_gameBoard__WEBPACK_IMPORTED_MODULE_1__.default.display();
+  _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__.default.initPlayerNames(usersInfo.names);
+  _components_gameBoard__WEBPACK_IMPORTED_MODULE_1__.default.init();
 }
 
 /***/ }),
@@ -3080,23 +1877,89 @@ function setGameControls() {
 
 /***/ }),
 
-/***/ "./src/js/utility/shuffle.js":
-/*!***********************************!*\
-  !*** ./src/js/utility/shuffle.js ***!
-  \***********************************/
+/***/ "./src/js/utility/shuffleArr.js":
+/*!**************************************!*\
+  !*** ./src/js/utility/shuffleArr.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ shuffle
+/* harmony export */   "default": () => /* binding */ shuffleArr
 /* harmony export */ });
-function shuffle(array) {
+function shuffleArr(array) {
   for (var i = array.length - 1; i > 0; i -= 1) {
     var j = Math.floor(Math.random() * (i + 1));
     var _ref = [array[j], array[i]];
     array[i] = _ref[0];
     array[j] = _ref[1];
   }
+
+  return array;
+}
+
+/***/ }),
+
+/***/ "./src/js/utility/updateGameState.js":
+/*!*******************************************!*\
+  !*** ./src/js/utility/updateGameState.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ updateGameState
+/* harmony export */ });
+/* harmony import */ var _cards_getCardObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards/getCardObject */ "./src/js/cards/getCardObject.js");
+
+function updateGameState(gameState) {
+  // update resources for each player
+  gameState.players.forEach(function (player) {
+    player.tree = 0;
+    player.tower = 0;
+    player.crown = 0;
+    player.bulb = 0;
+    player.factory = 0;
+    player.clock = 0;
+    Object.keys(player.activeDecks).forEach(function (stack) {
+      var currentStack = player.activeDecks[stack];
+
+      if (currentStack.cards.length > 0) {
+        var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+        var highestCard = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(highestCardInnovation);
+        highestCard.resourses.forEach(function (e) {
+          player[e.resourceName] += 1;
+        });
+      }
+    });
+  }); // update currentAge for each player
+
+  gameState.players.forEach(function (player) {
+    player.currentAge = 1;
+    Object.keys(player.activeDecks).forEach(function (stack) {
+      var currentStack = player.activeDecks[stack];
+
+      if (currentStack.cards.length > 0) {
+        var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+        var highestCard = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(highestCardInnovation);
+
+        if (highestCard.age > player.currentAge) {
+          player.currentAge = highestCard.age;
+        }
+      }
+    });
+  }); // update currentDeck for each player
+
+  gameState.players.forEach(function (player) {
+    for (var i = player.currentAge; i < 11; i += 1) {
+      var deck = gameState.ageDecks["age".concat(i)];
+
+      if (deck.length > 0) {
+        player.currentDeck = "age".concat(i);
+        break;
+      }
+    }
+  });
 }
 
 /***/ }),
