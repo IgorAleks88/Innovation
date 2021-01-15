@@ -1020,11 +1020,14 @@ input[type='text'] {
   justify-content: center;
   height: 20rem;
   width: 14.5rem;
-  background-image: url(./assets/img/test1.png);
+  position: relative;
+  background-image: url(./assets/img/lead-title.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   font-size: 10rem; }
+  .leadership-cards__card .extra-cards__leadership-title {
+    bottom: 2.6rem; }
 
 .special-cards {
   align-items: center;
