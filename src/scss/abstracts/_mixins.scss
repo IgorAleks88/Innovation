@@ -16,6 +16,8 @@
   height: 2.2rem;
   text-align: center;
   width: 3.8rem;
+  border-radius: 0.4rem;
+  transition: all 0.5s;
 }
 
 @mixin block-background-overlay {

@@ -18,21 +18,24 @@ body {
   font-size: 2rem;
   height: auto;
   width: 100vw;
+  font-family: 'Fira Sans Condensed';
 
   ::-webkit-scrollbar {
-    height: 1rem;
+    height: 0.5rem;
     width: 0.5rem;
   }
 
   ::-webkit-scrollbar-track {
-    background: #e7e7e7;
+    background: #ffa468;
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(77, 35, 12, 1);
+    background: rgb(119, 38, 3);
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgb(61, 25, 10);
+    background: rgb(218, 127, 8);
   }
 }
