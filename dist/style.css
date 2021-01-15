@@ -577,16 +577,15 @@ input[type='text'] {
   font-size: 5rem;
   margin: 0.5rem;
   text-align: center; }
-
-.age-deck--active {
-  box-shadow: 0 0 1.3rem 1rem #fcb103;
-  cursor: pointer;
-  filter: brightness(1);
-  transition: all 0.2s linear; }
-  .age-deck--active:hover {
-    transform: scale(1.02); }
-  .current-deck__cards .age-deck--active {
-    box-shadow: none; }
+  .age-deck--active {
+    box-shadow: 0 0 1.3rem 1rem #fcb103;
+    cursor: pointer;
+    filter: brightness(1);
+    transition: all 0.2s linear; }
+    .age-deck--active:hover {
+      transform: scale(1.02); }
+    .current-deck__cards .age-deck--active {
+      box-shadow: none; }
 
 .close-modal-btn {
   height: 5rem;

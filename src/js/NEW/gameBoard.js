@@ -35,10 +35,10 @@ const gameBoard = {
     if (prevDeckClone !== null) prevDeckClone.remove();
     // clone current active deck
     cloneCurrentDeck = avaiableAgeDeck.cloneNode();
-    cloneCurrentDeck.innerText = avaiableAgeDeck.innerText;
     cloneCurrentDeck.id = 'cloneCurrentDeck';
     cloneCurrentDeck.classList.add('age-deck--active');
     cloneCurrentDeck.classList.remove('xyz-in');
+    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)';
     // display cloned deck in currentDeck block
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
 

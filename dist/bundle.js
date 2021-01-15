@@ -302,10 +302,10 @@ var gameBoard = {
     if (prevDeckClone !== null) prevDeckClone.remove(); // clone current active deck
 
     cloneCurrentDeck = avaiableAgeDeck.cloneNode();
-    cloneCurrentDeck.innerText = avaiableAgeDeck.innerText;
     cloneCurrentDeck.id = 'cloneCurrentDeck';
     cloneCurrentDeck.classList.add('age-deck--active');
-    cloneCurrentDeck.classList.remove('xyz-in'); // display cloned deck in currentDeck block
+    cloneCurrentDeck.classList.remove('xyz-in');
+    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)'; // display cloned deck in currentDeck block
 
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck); // get hand cards of active player ==============================================
 
@@ -2422,8 +2422,6 @@ var displayAside = {
       var deck = document.createElement('div');
       deck.classList.add('age-deck');
       deck.id = "age".concat(i + 1); // id age1-10 for each deck
-
-      deck.innerText = "".concat(i + 1, " Age"); // TODO remove later
 
       if (i < 9) {
         deck.style.backgroundImage = "url(./assets/img/cards-bg/age-0".concat(i + 1, ".jpg)");
