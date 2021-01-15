@@ -2,10 +2,13 @@ import initHotSeatGame from '../utility/initHotSeatGame';
 import NEWinitHotSeatGame from '../NEW/NEWinitHotSeatGame';
 import displayNewTurnModal from '../NEW/displayNewTurnModal';
 
-const usersInfo = {};
+const users = {};
 
 function validation(userObj) {
-  return userObj.names.every((name) => name.length > 2 && name.length < 11);
+  if (userObj.names.length === userObj.players) {
+    return userObj.names.every((name) => name.length > 2 && name.length < 11);
+  }
+  return false;
 }
 // TODO need some refactor later, move to display folder, use function?
 class Menu {
@@ -51,11 +54,11 @@ class Menu {
         this.createNameInputField(e.target.dataset.players);
       } else if (e.target.className.includes('get-names')) {
         e.preventDefault();
-        this.writeNamesToObject();
-        if (validation(usersInfo) && usersInfo.names.length > 1) {
+        this.addNamesToUsers();
+        if (validation(users)) {
           const intro = this.menu.parentElement.parentElement.parentElement;
-          displayNewTurnModal(usersInfo.names[0]);
-          NEWinitHotSeatGame(usersInfo);
+          displayNewTurnModal(users.names[0]);
+          NEWinitHotSeatGame(users);
           setTimeout(() => {
             intro.classList.toggle('intro--hide');
             // initHotSeatGame(usersInfo.names);
@@ -94,7 +97,7 @@ class Menu {
   }
 
   createNameInputField(numberOfFields) {
-    usersInfo.players = numberOfFields;
+    users.players = +numberOfFields;
     this.menu.innerHTML = /* html */ `
       <form>
         ${this.createInputs(numberOfFields)}
@@ -119,7 +122,7 @@ class Menu {
     return inputHTML;
   }
 
-  writeNamesToObject() {
+  addNamesToUsers() {
     const inputs = this.menu.querySelectorAll('[data-name]');
     const playerNames = [];
     for (let i = 0; i < inputs.length; i += 1) {
@@ -127,10 +130,9 @@ class Menu {
         playerNames.push(inputs[i].value);
       }
     }
-    usersInfo.names = playerNames;
+    users.names = playerNames;
 
     return playerNames;
   }
 }
 export default Menu;
-export { usersInfo };

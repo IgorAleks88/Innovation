@@ -2034,8 +2034,7 @@ var gameState = {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__,
-/* harmony export */   "usersInfo": () => /* binding */ usersInfo
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
 /* harmony import */ var _NEW_NEWinitHotSeatGame__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../NEW/NEWinitHotSeatGame */ "./src/js/NEW/NEWinitHotSeatGame.js");
@@ -2049,12 +2048,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var usersInfo = {};
+var users = {};
 
 function validation(userObj) {
-  return userObj.names.every(function (name) {
-    return name.length > 2 && name.length < 11;
-  });
+  if (userObj.names.length === userObj.players) {
+    return userObj.names.every(function (name) {
+      return name.length > 2 && name.length < 11;
+    });
+  }
+
+  return false;
 } // TODO need some refactor later, move to display folder, use function?
 
 
@@ -2099,12 +2102,12 @@ var Menu = /*#__PURE__*/function () {
         } else if (e.target.className.includes('get-names')) {
           e.preventDefault();
 
-          _this.writeNamesToObject();
+          _this.addNamesToUsers();
 
-          if (validation(usersInfo) && usersInfo.names.length > 1) {
+          if (validation(users)) {
             var intro = _this.menu.parentElement.parentElement.parentElement;
-            (0,_NEW_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_2__.default)(usersInfo.names[0]);
-            (0,_NEW_NEWinitHotSeatGame__WEBPACK_IMPORTED_MODULE_1__.default)(usersInfo);
+            (0,_NEW_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_2__.default)(users.names[0]);
+            (0,_NEW_NEWinitHotSeatGame__WEBPACK_IMPORTED_MODULE_1__.default)(users);
             setTimeout(function () {
               intro.classList.toggle('intro--hide'); // initHotSeatGame(usersInfo.names);
             }, 500);
@@ -2143,7 +2146,7 @@ var Menu = /*#__PURE__*/function () {
   }, {
     key: "createNameInputField",
     value: function createNameInputField(numberOfFields) {
-      usersInfo.players = numberOfFields;
+      users.players = +numberOfFields;
       this.menu.innerHTML =
       /* html */
       "\n      <form>\n        ".concat(this.createInputs(numberOfFields), "\n        <button class=\"menu__link get-names\" type=\"submit\">\u041F\u0440\u0438\u043D\u044F\u0442\u044C</button>\n      </form>\n      ").concat(this.createMenuItem('Главное меню', 'back'), "\n    ");
@@ -2162,8 +2165,8 @@ var Menu = /*#__PURE__*/function () {
       return inputHTML;
     }
   }, {
-    key: "writeNamesToObject",
-    value: function writeNamesToObject() {
+    key: "addNamesToUsers",
+    value: function addNamesToUsers() {
       var inputs = this.menu.querySelectorAll('[data-name]');
       var playerNames = [];
 
@@ -2173,7 +2176,7 @@ var Menu = /*#__PURE__*/function () {
         }
       }
 
-      usersInfo.names = playerNames;
+      users.names = playerNames;
       return playerNames;
     }
   }]);
@@ -2182,7 +2185,6 @@ var Menu = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Menu);
-
 
 /***/ }),
 
@@ -2337,7 +2339,7 @@ var displayAside = {
     specialCards.classList.add('extra-cards__special-block');
     var specialCardsTitle = document.createElement('div');
     specialCardsTitle.classList.add('extra-cards__special-title');
-    specialCardsTitle.innerText = 'Специальные';
+    specialCardsTitle.innerText = '5 карт';
     var specialCardsCards = document.createElement('div');
     specialCardsCards.classList.add('extra-cards__special-cards'); // create hover button for special cards block
 
@@ -2356,7 +2358,7 @@ var displayAside = {
     leadershipCards.classList.add('extra-cards__leadership-block');
     var leadershipCardsTitle = document.createElement('div');
     leadershipCardsTitle.classList.add('extra-cards__leadership-title');
-    leadershipCardsTitle.innerText = 'Лидерство';
+    leadershipCardsTitle.innerText = 'Век 1';
     var leadershipCardsCards = document.createElement('div');
     leadershipCardsCards.classList.add('extra-cards__leadership-cards'); // create hover button for leadership cards block
 
@@ -2766,7 +2768,7 @@ var displayHeader = {
     });
     this[player].container.appendChild(recourcesRow);
     this[player].container.classList.add('player-container__hidden');
-    this.headerTable.appendChild(this[player].container);
+    this.headerTableWrapper.appendChild(this[player].container);
   },
   changePlayerStats: function changePlayerStats(player) {
     var playerId = "player".concat(player.id);
@@ -2801,6 +2803,9 @@ var displayHeader = {
     this.wrapper.appendChild(this.headerOverlay);
     this.headerTable = document.createElement('div');
     this.headerTable.classList.add('header__table');
+    this.headerTableWrapper = document.createElement('div');
+    this.headerTableWrapper.classList.add('header__table__wrapper');
+    this.headerTable.appendChild(this.headerTableWrapper);
     this.wrapper.appendChild(this.headerTable);
     this.initPlayerStats(0);
     this.initPlayerStats(1);

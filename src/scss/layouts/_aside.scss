@@ -1,12 +1,13 @@
 .aside {
   @include flex(column, flex-start, center);
   background: $tables-bg;
-
   height: 100vh;
   position: absolute;
   right: 0;
   top: 0;
   width: 37rem;
+  z-index: 10;
+  padding-top: 2rem;
 
   .aside__overlay {
     @include block-background-overlay;
@@ -22,6 +23,7 @@
     position: absolute;
     @include area-border('../../assets/img/border-aside-top.png');
     margin: 0;
+    top: 0;
   }
 
   .aside__center {
@@ -43,7 +45,7 @@
   }
 
   > div {
-    margin: 0.5rem 1rem;
+    margin: 1rem 1rem;
 
     &:first-child {
       margin-top: 2rem;

@@ -115,7 +115,7 @@ const displayAside = {
 
     const specialCardsTitle = document.createElement('div');
     specialCardsTitle.classList.add('extra-cards__special-title');
-    specialCardsTitle.innerText = 'Специальные';
+    specialCardsTitle.innerText = '5 карт';
 
     const specialCardsCards = document.createElement('div');
     specialCardsCards.classList.add('extra-cards__special-cards');
@@ -139,7 +139,7 @@ const displayAside = {
 
     const leadershipCardsTitle = document.createElement('div');
     leadershipCardsTitle.classList.add('extra-cards__leadership-title');
-    leadershipCardsTitle.innerText = 'Лидерство';
+    leadershipCardsTitle.innerText = 'Век 1';
 
     const leadershipCardsCards = document.createElement('div');
     leadershipCardsCards.classList.add('extra-cards__leadership-cards');
