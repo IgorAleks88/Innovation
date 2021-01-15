@@ -1,5 +1,3 @@
-import gameState from '../components/gameState';
-
 function getRenderCard() {
   let hand = null;
   let activeStacks = null;
@@ -20,7 +18,7 @@ function getRenderCard() {
       hand.append(cardElement);
     },
 
-    toActive(cardElement) {
+    toActive(cardElement, gameState) {
       if (hand === null || activeStacks === null) this.initObject();
 
       // get properties of target stack to calcualte later
@@ -46,9 +44,6 @@ function getRenderCard() {
 
       switch (targetStack.shift) {
         case 'top':
-          console.log(targetStack.height)
-          console.log(cardHeight)
-          console.log(targetStack.length * cardShiftValue)
           while (targetStack.height < cardHeight + (targetStack.length * cardShiftValue)
             && cardShiftValue !== 10) {
             cardShiftValue -= 10;
@@ -56,7 +51,7 @@ function getRenderCard() {
           Array.from(targetStack.dom.children).forEach((card, i) => {
             card.style.bottom = `${i * cardShiftValue}px`;
           });
-          cardElement.style.bottom = `${targetStack.length * cardShiftValue}px`;
+          if (targetStack.length !== 1) cardElement.style.bottom = `${(targetStack.length - 1) * cardShiftValue}px`;
           break;
 
         case 'left':

@@ -6,12 +6,12 @@
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
-import header from '../display/playerTable/displayHeader';
-import displayNewTurnModal from '../display/displayNewTurnModal';
-import displayNextTurnBtn from '../display/displayNextTurnBtn';
-import gameState from './gameState';
-import getCardObject from '../utility/getCardObject';
-import getCardElement from '../utility/getCardElement';
+// import header from '../display/playerTable/displayHeader';
+// import displayNewTurnModal from '../display/displayNewTurnModal';
+// import displayNextTurnBtn from '../NEW/displayNextTurnBtn';
+// import gameState from './gameState';
+// import getCardObject from '../OLD/getCardObject';
+// import getCardElement from '../utility/getCardElement';
 
 //! ! TEST
 import renderCard from '../cards/renderCard';
@@ -37,7 +37,7 @@ export default class Game {
     };
     this.turnPoints = 0;
     this.arrOfCards = arrOfCards;
-    this.initGameState(players, this.arrOfCards);
+    // this.initGameState(players, this.arrOfCards);
     header.initPlayerNames(players);
     // test
     /* this.testCardObj = getCardObject('колесо', arrOfCards);

@@ -154,7 +154,7 @@ b {
         cursor: pointer; }
       .card .card__card-main .card__dogma .dogma__effect {
         align-self: center; }
-    .card .card__card-main .card__dogma[data-dogmatype='corporate'] .card__icon::before {
+    .card .card__card-main .card__dogma[data-type='corporate'] .card__icon::before {
       align-items: center;
       background-image: url(./assets/img/cards-bg/corporate.png);
       background-size: 3rem 3rem;
@@ -162,7 +162,7 @@ b {
       height: 3rem;
       justify-content: center;
       width: 3rem; }
-    .card .card__card-main .card__dogma[data-dogmatype='aggressive'] .card__icon::before {
+    .card .card__card-main .card__dogma[data-type='aggressive'] .card__icon::before {
       align-items: center;
       background-image: url(./assets/img/cards-bg/aggressive.png);
       background-size: 3rem 3rem;
@@ -284,6 +284,9 @@ b {
   transform: translate(-50%, -50%);
   width: 100%;
   z-index: 5; }
+
+.menu__skip {
+  z-index: 15; }
 
 .menu__used {
   animation: show-menu 0.5s linear 0s forwards !important; }
@@ -476,6 +479,8 @@ input[type='text'] {
 @keyframes hide-letter {
   100% {
     opacity: 0; } }
+    .intro .intro__container .intro__skip {
+      background: none; }
   .intro .intro__bottom.show {
     height: 592px;
     width: 690px;
@@ -522,7 +527,7 @@ input[type='text'] {
     filter: invert(78%) sepia(13%) saturate(6863%) hue-rotate(90deg) brightness(104%) contrast(104%); } }
 
 .menu {
-  animation: show-menu 0.5s linear 1s forwards; }
+  animation: show-menu 0.5s linear 14s forwards; }
 
 @keyframes show-menu {
   100% {
@@ -1118,7 +1123,8 @@ input[type='text'] {
   justify-content: space-around;
   border: solid 0.1rem #000;
   height: 14rem;
-  width: 23.5rem; }
+  width: 23.5rem;
+  background-color: #9e9e9e; }
   .player-container__hidden {
     display: none; }
 

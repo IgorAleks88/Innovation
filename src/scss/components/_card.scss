@@ -95,7 +95,7 @@ b {
       }
     }
 
-    .card__dogma[data-dogmatype='corporate'] {
+    .card__dogma[data-type='corporate'] {
       .card__icon::before {
         align-items: center;
         background-image: url('../../assets/img/cards-bg/corporate.png');
@@ -107,7 +107,7 @@ b {
       }
     }
 
-    .card__dogma[data-dogmatype='aggressive'] {
+    .card__dogma[data-type='aggressive'] {
       .card__icon::before {
         align-items: center;
         background-image: url('../../assets/img/cards-bg/aggressive.png');

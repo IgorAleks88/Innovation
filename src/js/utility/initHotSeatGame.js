@@ -1,11 +1,16 @@
 import GameField from '../components/GameField';
 import Player from '../components/Player';
 import Game from '../components/Game';
-import cardsJSON from '../cards/cards.json';
+
 import parseCards from '../cards/parseCards';
 import GameUI from '../components/GameUI';
 // import setChat from './setChat';
 import shuffle from './shuffle';
+
+
+import cardsJSON from '../cards/cards.json';
+
+
 
 export default function initHotSeatGame(playerNames) {
   // contains dom elements

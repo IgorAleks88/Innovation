@@ -1,4 +1,6 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
+import NEWinitHotSeatGame from '../NEW/NEWinitHotSeatGame';
+import displayNewTurnModal from '../NEW/displayNewTurnModal';
 
 const usersInfo = {};
 
@@ -52,10 +54,12 @@ class Menu {
         this.writeNamesToObject();
         if (validation(usersInfo) && usersInfo.names.length > 1) {
           const intro = this.menu.parentElement.parentElement.parentElement;
-          intro.classList.toggle('intro--hide');
-          // initHotSeatGame('Player1', 'Player2');
-          initHotSeatGame(usersInfo.names); //! Hardcoded for 2 players.
-          // Should take player names as arguments
+          displayNewTurnModal(usersInfo.names[0]);
+          NEWinitHotSeatGame(usersInfo);
+          setTimeout(() => {
+            intro.classList.toggle('intro--hide');
+            // initHotSeatGame(usersInfo.names);
+          }, 500);
         }
       } else if (e.target.className.includes('back')) {
         this.menu.remove();

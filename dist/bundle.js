@@ -2,6 +2,754 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/NEW/NEWgameState.js":
+/*!************************************!*\
+  !*** ./src/js/NEW/NEWgameState.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+var NEWgameState = {
+  ageDecks: {
+    age1: [],
+    age2: [],
+    age3: [],
+    age4: [],
+    age5: [],
+    age6: [],
+    age7: [],
+    age8: [],
+    age9: [],
+    age10: []
+  },
+  leadershipDeck: [],
+  specialDeck: [],
+  players: [],
+  currentPlayer: null,
+  activePlayer: null,
+  player0: {
+    name: null,
+    id: 0,
+    actionPoints: 0,
+    hand: [],
+    currentAge: 1,
+    currentDeck: 'age1',
+    activeDecks: {
+      red: {
+        cards: [],
+        shift: 'top' //! test
+
+      },
+      green: {
+        cards: [],
+        shift: 'top' //! test
+
+      },
+      blue: {
+        cards: [],
+        shift: 'top' //! test
+
+      },
+      purple: {
+        cards: [],
+        shift: null
+      },
+      yellow: {
+        cards: [],
+        shift: 'top' //! test
+
+      }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
+  },
+  player1: {
+    name: null,
+    id: 1,
+    actionPoints: 0,
+    hand: [],
+    currentAge: 1,
+    activeDecks: {
+      red: {
+        cards: [],
+        shift: 'top' //! test
+
+      },
+      green: {
+        cards: [],
+        shift: 'top' //! test
+
+      },
+      blue: {
+        cards: [],
+        shift: 'top' //! test
+
+      },
+      purple: {
+        cards: [],
+        shift: null
+      },
+      yellow: {
+        cards: [],
+        shift: null
+      }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
+  },
+  player2: {
+    name: null,
+    id: 2,
+    actionPoints: 0,
+    hand: [],
+    currentAge: 1,
+    activeDecks: {
+      red: {
+        cards: [],
+        shift: null
+      },
+      green: {
+        cards: [],
+        shift: null
+      },
+      blue: {
+        cards: [],
+        shift: null
+      },
+      purple: {
+        cards: [],
+        shift: null
+      },
+      yellow: {
+        cards: [],
+        shift: null
+      }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
+  },
+  player3: {
+    name: null,
+    id: 3,
+    actionPoints: 0,
+    hand: [],
+    currentAge: 1,
+    activeDecks: {
+      red: {
+        cards: [],
+        shift: null
+      },
+      green: {
+        cards: [],
+        shift: null
+      },
+      blue: {
+        cards: [],
+        shift: null
+      },
+      purple: {
+        cards: [],
+        shift: null
+      },
+      yellow: {
+        cards: [],
+        shift: null
+      }
+    },
+    tree: 0,
+    tower: 0,
+    crown: 0,
+    bulb: 0,
+    factory: 0,
+    clock: 0
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NEWgameState);
+
+/***/ }),
+
+/***/ "./src/js/NEW/NEWinitHotSeatGame.js":
+/*!******************************************!*\
+  !*** ./src/js/NEW/NEWinitHotSeatGame.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ initHotSeatGame
+/* harmony export */ });
+/* harmony import */ var _initGameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./initGameState */ "./src/js/NEW/initGameState.js");
+/* harmony import */ var _gameBoard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gameBoard */ "./src/js/NEW/gameBoard.js");
+/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
+
+
+
+function initHotSeatGame(usersInfo) {
+  (0,_initGameState__WEBPACK_IMPORTED_MODULE_0__.default)(usersInfo);
+  _gameBoard__WEBPACK_IMPORTED_MODULE_1__.default.display();
+  _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_2__.default.initPlayerNames(usersInfo.names);
+  _gameBoard__WEBPACK_IMPORTED_MODULE_1__.default.init();
+}
+
+/***/ }),
+
+/***/ "./src/js/NEW/displayNewTurnModal.js":
+/*!*******************************************!*\
+  !*** ./src/js/NEW/displayNewTurnModal.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ displayModal
+/* harmony export */ });
+function displayModal(playerName) {
+  var modalBg = document.createElement('div');
+  modalBg.classList.add('modal');
+  modalBg.classList.add('modal--hidden');
+  var modalBlock = document.createElement('div');
+  modalBlock.classList.add('modal__block');
+  var modalText = document.createElement('div');
+  modalText.classList.add('modal__text');
+  modalText.innerText = "\u0421\u0435\u0439\u0447\u0430\u0441 \u0445\u043E\u0434 \u0438\u0433\u0440\u043E\u043A\u0430 ".concat(playerName);
+  var modalBtn = document.createElement('button');
+  modalBtn.classList.add('modal__btn');
+  modalBtn.innerText = 'Начать ход!';
+  modalBtn.addEventListener('click', function () {
+    modalBg.style = '';
+    modalBg.classList.toggle('modal--hidden');
+    setTimeout(function () {
+      modalBg.remove();
+    }, 500);
+  });
+  modalBlock.append(modalText, modalBtn);
+  modalBg.append(modalBlock);
+  document.body.prepend(modalBg);
+  setTimeout(function () {
+    modalBg.classList.toggle('modal--hidden');
+  }, 0);
+}
+
+/***/ }),
+
+/***/ "./src/js/NEW/gameBoard.js":
+/*!*********************************!*\
+  !*** ./src/js/NEW/gameBoard.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _NEWgameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NEWgameState */ "./src/js/NEW/NEWgameState.js");
+/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getCardObject */ "./src/js/NEW/getCardObject.js");
+/* harmony import */ var _getCardElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getCardElement */ "./src/js/NEW/getCardElement.js");
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _updateGameState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./updateGameState */ "./src/js/NEW/updateGameState.js");
+/* harmony import */ var _displayNewTurnModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./displayNewTurnModal */ "./src/js/NEW/displayNewTurnModal.js");
+/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
+
+
+
+
+
+
+
+var gameBoard = {
+  display: function display() {
+    var _this = this;
+
+    // set info block aside =========================================================
+    var nameBlock = document.querySelector('.info-table__player-name');
+    nameBlock.innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.name;
+    var actionPointsBlock = document.querySelector('.info-table__action-points');
+    actionPointsBlock.innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.actionPoints; // remove previous active age decks ================================================
+
+    var cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
+    if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
+    var activeDeck = document.querySelector('.age-deck--active');
+
+    if (activeDeck !== null) {
+      activeDeck.classList.remove('age-deck--active');
+      activeDeck.onclick = '';
+    } // set avaiable age deck in modal ===============================================
+
+
+    while (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks["age".concat(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge)].length === 0) {
+      _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge += 1;
+    }
+
+    var avaiableAgeDeck = document.querySelector("#age".concat(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.currentAge));
+    avaiableAgeDeck.classList.add('age-deck--active'); // set avaiable age deck in aside ===============================================
+
+    var prevDeckClone = document.querySelector('#cloneCurrentDeck');
+    if (prevDeckClone !== null) prevDeckClone.remove(); // clone current active deck
+
+    cloneCurrentDeck = avaiableAgeDeck.cloneNode();
+    cloneCurrentDeck.innerText = avaiableAgeDeck.innerText;
+    cloneCurrentDeck.id = 'cloneCurrentDeck';
+    cloneCurrentDeck.classList.add('age-deck--active');
+    cloneCurrentDeck.classList.remove('xyz-in'); // display cloned deck in currentDeck block
+
+    document.querySelector('.current-deck__cards').append(cloneCurrentDeck); // get hand cards of active player ==============================================
+
+    var hand = document.querySelector('.hand__cards');
+    hand.innerHTML = '';
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.hand.forEach(function (cardID) {
+      var cardObject = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(cardID);
+      var cardElement = (0,_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(cardObject);
+      cardElement.onclick = _this.playCard;
+      hand.append(cardElement);
+    }); // get active cards of active player ============================================
+
+    var stacks = document.querySelectorAll('.active-zone__stack');
+    stacks.forEach(function (stackElement) {
+      stackElement.innerHTML = '';
+      stackElement.classList.add('active-zone__stack--empty');
+      Object.keys(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks).forEach(function (activeDeckName) {
+        if (activeDeckName === stackElement.id) {
+          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[activeDeckName].cards.forEach(function (card) {
+            var cardObj = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(card);
+            var cardElement = (0,_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(cardObj);
+
+            cardElement.onclick = function () {
+              //! TODO
+              console.log('DOGMA! :)');
+            };
+
+            _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toActive(cardElement, _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
+            cardElement.classList.remove('xyz-in');
+          });
+        }
+      });
+    });
+  },
+  update: function update() {
+    if (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints === 0) {
+      this.displayNextTurnBtn();
+    }
+
+    (0,_updateGameState__WEBPACK_IMPORTED_MODULE_4__.default)(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
+    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_6__.default.changePlayerStats(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer);
+    document.querySelector('.info-table__player-name').innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name;
+    document.querySelector('.info-table__action-points').innerText = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints;
+  },
+  init: function init() {
+    var _this2 = this;
+
+    var cardElements = document.querySelectorAll('.card');
+    cardElements.forEach(function (elem) {
+      if (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
+        elem.onclick = _this2.playCard;
+      }
+    });
+    var activeDeckElements = document.querySelectorAll('.age-deck--active');
+    activeDeckElements.forEach(function (elem) {
+      elem.onclick = _this2.takeCard;
+    });
+  },
+  takeCard: function takeCard(e) {
+    var sourceDeck = e.target.id;
+
+    if (sourceDeck === 'cloneCurrentDeck') {
+      sourceDeck = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.currentDeck;
+    }
+
+    var movingCardInnovation = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks[sourceDeck].pop();
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.push(movingCardInnovation);
+    var movingCardObj = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(movingCardInnovation);
+    var movingCardElement = (0,_getCardElement__WEBPACK_IMPORTED_MODULE_2__.default)(movingCardObj);
+    movingCardElement.onclick = gameBoard.playCard;
+    _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toHand(movingCardElement, _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints -= 1;
+    gameBoard.update();
+  },
+  playCard: function playCard(e) {
+    var playingCardInnovation = e.target.closest('.card').dataset.innovation;
+    var playingCardElement = e.target.closest('.card');
+    playingCardElement.onclick = null;
+    var playIndex = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.indexOf(playingCardInnovation);
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.hand.splice(playIndex, 1);
+    var playingCardObj = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(playingCardInnovation);
+    var targetDeckArray = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.activeDecks[playingCardObj.color].cards;
+    targetDeckArray.push(playingCardInnovation);
+
+    playingCardElement.onclick = function () {
+      //! TODO
+      console.log('DOGMA! :)');
+    };
+
+    _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toActive(playingCardElement, _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default);
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints -= 1;
+    gameBoard.update();
+  },
+  displayNextTurnBtn: function displayNextTurnBtn() {
+    var nextTurnBtn = document.createElement('div');
+    nextTurnBtn.classList.add('info-table__next-turn-btn');
+    nextTurnBtn.innerText = 'Закончить ход';
+    nextTurnBtn.addEventListener('click', function () {
+      for (var i = 0; i < _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players.length; i += 1) {
+        if (_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer === _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[i]) {
+          i += 1;
+          if (i === _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players.length) i = 0;
+          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[i];
+          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer;
+          _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints = 2;
+          break;
+        }
+      }
+
+      (0,_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_5__.default)(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name);
+      setTimeout(function () {
+        gameBoard.display();
+        gameBoard.init();
+        var excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
+        excistedNextTurnBtn.remove();
+      }, 500);
+    });
+    var infoTable = document.querySelector('.info-table');
+    this.disableEvents();
+    infoTable.append(nextTurnBtn);
+  },
+  disableEvents: function disableEvents() {
+    var cards = Array.from(document.querySelectorAll('.card'));
+    cards.forEach(function (card) {
+      card.onclick = '';
+      card.style.cursor = 'default';
+      card.style.transform = 'none';
+    });
+    var cardDogms = Array.from(document.querySelectorAll('.card__dogma'));
+    cardDogms.forEach(function (cardDogma) {
+      cardDogma.onclick = '';
+      cardDogma.style.cursor = 'default';
+      cardDogma.style.transform = 'none';
+    });
+    var decks = Array.from(document.querySelectorAll('.age-deck'));
+    decks.forEach(function (deck) {
+      deck.onclick = '';
+      deck.classList.remove('age-deck--active');
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameBoard);
+
+/***/ }),
+
+/***/ "./src/js/NEW/getCardElement.js":
+/*!**************************************!*\
+  !*** ./src/js/NEW/getCardElement.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ getCardElement
+/* harmony export */ });
+function getCardElement(cardObj) {
+  // get card header
+  function getCardHeader(card) {
+    var divHeader = document.createElement('div');
+    divHeader.classList.add('card__card-header', "card__color--".concat(card.color));
+    var posTopLeft = document.createElement('div');
+    posTopLeft.classList.add('card__topLeft');
+    var title = document.createElement('div');
+    title.classList.add('card-header__title');
+    title.textContent = card.innovation;
+    divHeader.appendChild(posTopLeft);
+    divHeader.appendChild(title);
+    return divHeader;
+  } // get card body
+
+
+  function getCardMain(card) {
+    var divMain = document.createElement('div');
+    divMain.classList.add('card__card-main', "card__color--".concat(card.color, "-transparent"));
+    card.dogma.forEach(function (item) {
+      var divDogma = document.createElement('div');
+      divDogma.classList.add('card__dogma');
+      divDogma.setAttribute('data-type', item.type);
+      var icon = document.createElement('i');
+      icon.classList.add(item.icon[0], item.icon[1], 'card__icon', "card__icon-color--".concat(item.color));
+      divDogma.appendChild(icon);
+      var dogma = document.createElement('span');
+      dogma.classList.add('dogma__effect');
+      dogma.innerHTML = item.effect;
+      divDogma.appendChild(dogma);
+      divMain.appendChild(divDogma);
+    });
+    return divMain;
+  } // get card footer
+
+
+  function getCardFooter() {
+    var divFooter = document.createElement('div');
+    divFooter.classList.add('card__card-footer');
+    var posBottomLeft = document.createElement('div');
+    posBottomLeft.classList.add('card__bottomLeft');
+    divFooter.appendChild(posBottomLeft);
+    var posBottomCenter = document.createElement('div');
+    posBottomCenter.classList.add('card__bottomCenter');
+    divFooter.appendChild(posBottomCenter);
+    var posBottomRight = document.createElement('div');
+    posBottomRight.classList.add('card__bottomRight');
+    divFooter.appendChild(posBottomRight);
+    return divFooter;
+  } // place age number and resourses by card position
+
+
+  function setObjByPosition(divCard, card) {
+    var agePos = divCard.querySelector(".card__".concat(card.agePosition));
+    agePos.classList.add("card__color--".concat(card.color), 'card__age--border');
+    agePos.textContent = card.age;
+    card.resourses.forEach(function (res) {
+      var pos = divCard.querySelector(".card__".concat(res.position));
+      pos.classList.add("".concat(res.type[0]), "".concat(res.type[1]), "card__icon-color--".concat(res.color), "card__icon-border--".concat(card.color));
+    });
+  }
+
+  var divCard = document.createElement('div');
+  divCard.classList.add('card');
+  divCard.style.background = "url(\"".concat(cardObj.cardImg, "\")");
+  divCard.dataset.innovation = cardObj.innovation;
+  divCard.appendChild(getCardHeader(cardObj));
+  divCard.appendChild(getCardMain(cardObj));
+  divCard.appendChild(getCardFooter());
+  setObjByPosition(divCard, cardObj, cardObj.age, cardObj.color);
+  return divCard;
+}
+
+/***/ }),
+
+/***/ "./src/js/NEW/getCardObject.js":
+/*!*************************************!*\
+  !*** ./src/js/NEW/getCardObject.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
+
+var getCardObject = {
+  all: function all() {
+    var resultArr = [];
+    _cards_cards_json__WEBPACK_IMPORTED_MODULE_0__.forEach(function (setOfCards) {
+      setOfCards.cards.forEach(function (card) {
+        var cardObject = {};
+        Object.assign(cardObject, setOfCards, card);
+        delete cardObject.cards; // remove duplicated field
+
+        resultArr.push(cardObject);
+      });
+    });
+    return resultArr;
+  },
+  byID: function byID(id) {
+    var cardObject = {};
+    _cards_cards_json__WEBPACK_IMPORTED_MODULE_0__.forEach(function (setOfCards) {
+      setOfCards.cards.forEach(function (card) {
+        if (card.innovation === id) {
+          Object.assign(cardObject, setOfCards, card);
+          delete cardObject.cards; // remove duplicated field
+        }
+      });
+    });
+    return cardObject;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getCardObject);
+
+/***/ }),
+
+/***/ "./src/js/NEW/initGameState.js":
+/*!*************************************!*\
+  !*** ./src/js/NEW/initGameState.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ initGameState
+/* harmony export */ });
+/* harmony import */ var _NEWgameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NEWgameState */ "./src/js/NEW/NEWgameState.js");
+/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getCardObject */ "./src/js/NEW/getCardObject.js");
+/* harmony import */ var _shuffleArr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shuffleArr */ "./src/js/NEW/shuffleArr.js");
+
+
+
+function initGameState(usersInfo) {
+  // fill age decks
+  var arrOfCardObjects = _getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.all();
+  arrOfCardObjects.forEach(function (cardObj) {
+    switch (+cardObj.age) {
+      case 1:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age1.push(cardObj.innovation);
+        break;
+
+      case 2:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age2.push(cardObj.innovation);
+        break;
+
+      case 3:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age3.push(cardObj.innovation);
+        break;
+
+      case 4:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age4.push(cardObj.innovation);
+        break;
+
+      case 5:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age5.push(cardObj.innovation);
+        break;
+
+      case 6:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age6.push(cardObj.innovation);
+        break;
+
+      case 7:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age7.push(cardObj.innovation);
+        break;
+
+      case 8:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age8.push(cardObj.innovation);
+        break;
+
+      case 9:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age9.push(cardObj.innovation);
+        break;
+
+      case 10:
+        _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks.age10.push(cardObj.innovation);
+        break;
+
+      default:
+        throw new Error("Wrong number on age field in ".concat(cardObj));
+    }
+  }); // shuffle each age deck & fill leadership deck
+
+  Object.values(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks).forEach(function (ageDeck, i) {
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.ageDecks["age".concat(i + 1)] = (0,_shuffleArr__WEBPACK_IMPORTED_MODULE_2__.default)(ageDeck);
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.leadershipDeck.push(ageDeck.pop());
+  }); // set up players fields
+
+  for (var i = 0; i < usersInfo.players; i += 1) {
+    var player = "player".concat(i);
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default[player].name = usersInfo.names[i];
+    _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players.push(_NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default[player]);
+  }
+
+  _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
+  _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer = _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.players[0];
+  _NEWgameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints = 2;
+}
+
+/***/ }),
+
+/***/ "./src/js/NEW/shuffleArr.js":
+/*!**********************************!*\
+  !*** ./src/js/NEW/shuffleArr.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ shuffleArr
+/* harmony export */ });
+function shuffleArr(array) {
+  for (var i = array.length - 1; i > 0; i -= 1) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [array[j], array[i]];
+    array[i] = _ref[0];
+    array[j] = _ref[1];
+  }
+
+  return array;
+}
+
+/***/ }),
+
+/***/ "./src/js/NEW/updateGameState.js":
+/*!***************************************!*\
+  !*** ./src/js/NEW/updateGameState.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ updateGameState
+/* harmony export */ });
+/* harmony import */ var _getCardObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getCardObject */ "./src/js/NEW/getCardObject.js");
+
+function updateGameState(gameState) {
+  // update resources for each player
+  gameState.players.forEach(function (player) {
+    player.tree = 0;
+    player.tower = 0;
+    player.crown = 0;
+    player.bulb = 0;
+    player.factory = 0;
+    player.clock = 0;
+    Object.keys(player.activeDecks).forEach(function (stack) {
+      var currentStack = player.activeDecks[stack];
+
+      if (currentStack.cards.length > 0) {
+        var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+        var highestCard = _getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(highestCardInnovation);
+        highestCard.resourses.forEach(function (e) {
+          player[e.resourceName] += 1;
+        });
+      }
+    });
+  }); // update currentAge for each player
+
+  gameState.players.forEach(function (player) {
+    player.currentAge = 1;
+    Object.keys(player.activeDecks).forEach(function (stack) {
+      var currentStack = player.activeDecks[stack];
+
+      if (currentStack.cards.length > 0) {
+        var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
+        var highestCard = _getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(highestCardInnovation);
+
+        if (highestCard.age > player.currentAge) {
+          player.currentAge = highestCard.age;
+        }
+      }
+    });
+  }); // update currentDeck for each player
+
+  gameState.players.forEach(function (player) {
+    for (var i = player.currentAge; i < 11; i += 1) {
+      var deck = gameState.ageDecks["age".concat(i)];
+
+      if (deck.length > 0) {
+        player.currentDeck = "age".concat(i);
+        break;
+      }
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./src/js/app.js":
 /*!***********************!*\
   !*** ./src/js/app.js ***!
@@ -11,10 +759,10 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/style.scss */ "./src/scss/style.scss");
 /* harmony import */ var _animxyz_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @animxyz/core */ "./node_modules/@animxyz/core/dist/animxyz.css");
-/* harmony import */ var _display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display/playerTable/displayPlayerTable */ "./src/js/display/playerTable/displayPlayerTable.js");
-/* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
-/* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
-/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
+/* harmony import */ var _components_Intro__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Intro */ "./src/js/components/Intro.js");
+/* harmony import */ var _display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display/playerTable/displayPlayerTable */ "./src/js/display/playerTable/displayPlayerTable.js");
+/* harmony import */ var _utility_setHandControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utility/setHandControls */ "./src/js/utility/setHandControls.js");
+/* harmony import */ var _utility_setAsideControls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utility/setAsideControls */ "./src/js/utility/setAsideControls.js");
 // import styles
 
  // import js modules
@@ -24,15 +772,13 @@ __webpack_require__.r(__webpack_exports__);
 
  // display intro & menu
 
-_components_Intro__WEBPACK_IMPORTED_MODULE_5__.default.init(); // display game UI
+_components_Intro__WEBPACK_IMPORTED_MODULE_2__.default.init(); // display game UI
 
-document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_2__.default.init()); // add event listeners to hand controls
+document.body.prepend(_display_playerTable_displayPlayerTable__WEBPACK_IMPORTED_MODULE_3__.default.init()); // add event listeners to hand controls
 
-(0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_3__.default)(); // add event listeners and animations to aside buttons
+(0,_utility_setHandControls__WEBPACK_IMPORTED_MODULE_4__.default)(); // add event listeners and animations to aside buttons
 
-(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_4__.default)(); //! Added for testing! Uncomment next 2 lines and comment line 12 with Intro.init()
-// import initHotSeatGame from './utility/initHotSeatGame';
-// initHotSeatGame('Player1', 'Player2');
+(0,_utility_setAsideControls__WEBPACK_IMPORTED_MODULE_5__.default)();
 
 /***/ }),
 
@@ -79,13 +825,13 @@ var getCard = {
     card.dogma.forEach(function (item) {
       var divDogma = document.createElement('div');
       divDogma.classList.add('card__dogma');
-      divDogma.setAttribute('data-dogmatype', item.dogmaType);
+      divDogma.setAttribute('data-type', item.type);
       var icon = document.createElement('i');
-      icon.classList.add(item.dogmaIcon[0], item.dogmaIcon[1], 'card__icon', "card__icon-color--".concat(item.dogmaColor));
+      icon.classList.add(item.icon[0], item.icon[1], 'card__icon', "card__icon-color--".concat(item.color));
       divDogma.appendChild(icon);
       var dogma = document.createElement('span');
       dogma.classList.add('dogma__effect');
-      dogma.innerHTML = item.dogmaEffect;
+      dogma.innerHTML = item.effect;
       divDogma.appendChild(dogma);
       divMain.appendChild(divDogma);
     });
@@ -112,8 +858,8 @@ var getCard = {
     agePos.classList.add("card__color--".concat(card.color), 'card__age--border');
     agePos.textContent = card.age;
     card.resourses.forEach(function (res) {
-      var pos = divCard.querySelector(".card__".concat(res.resoursePosition));
-      pos.classList.add("".concat(res.resourseType[0]), "".concat(res.resourseType[1]), "card__icon-color--".concat(res.resourseColor), "card__icon-border--".concat(card.color));
+      var pos = divCard.querySelector(".card__".concat(res.position));
+      pos.classList.add("".concat(res.type[0]), "".concat(res.type[1]), "card__icon-color--".concat(res.color), "card__icon-border--".concat(card.color));
     });
   }
 };
@@ -158,9 +904,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _components_gameState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/gameState */ "./src/js/components/gameState.js");
-
-
 function getRenderCard() {
   var hand = null;
   var activeStacks = null;
@@ -178,7 +921,7 @@ function getRenderCard() {
       }, 450);
       hand.append(cardElement);
     },
-    toActive: function toActive(cardElement) {
+    toActive: function toActive(cardElement, gameState) {
       if (hand === null || activeStacks === null) this.initObject(); // get properties of target stack to calcualte later
 
       var targetStack = {};
@@ -189,8 +932,8 @@ function getRenderCard() {
           stack.style.width = null;
           targetStack.width = stack.offsetWidth;
           targetStack.height = stack.offsetHeight;
-          targetStack.shift = _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[targetStack.dom.id].shift;
-          targetStack.length = _components_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[targetStack.dom.id].cards.length;
+          targetStack.shift = gameState.activePlayer.activeDecks[targetStack.dom.id].shift;
+          targetStack.length = gameState.activePlayer.activeDecks[targetStack.dom.id].cards.length;
         }
       });
       cardElement.style.position = 'absolute';
@@ -201,10 +944,6 @@ function getRenderCard() {
 
       switch (targetStack.shift) {
         case 'top':
-          console.log(targetStack.height);
-          console.log(cardHeight);
-          console.log(targetStack.length * cardShiftValue);
-
           while (targetStack.height < cardHeight + targetStack.length * cardShiftValue && cardShiftValue !== 10) {
             cardShiftValue -= 10;
           }
@@ -212,7 +951,7 @@ function getRenderCard() {
           Array.from(targetStack.dom.children).forEach(function (card, i) {
             card.style.bottom = "".concat(i * cardShiftValue, "px");
           });
-          cardElement.style.bottom = "".concat(targetStack.length * cardShiftValue, "px");
+          if (targetStack.length !== 1) cardElement.style.bottom = "".concat((targetStack.length - 1) * cardShiftValue, "px");
           break;
 
         case 'left':
@@ -273,14 +1012,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ Game
 /* harmony export */ });
-/* harmony import */ var _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../display/playerTable/displayHeader */ "./src/js/display/playerTable/displayHeader.js");
-/* harmony import */ var _display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display/displayNewTurnModal */ "./src/js/display/displayNewTurnModal.js");
-/* harmony import */ var _display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../display/displayNextTurnBtn */ "./src/js/display/displayNextTurnBtn.js");
-/* harmony import */ var _gameState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameState */ "./src/js/components/gameState.js");
-/* harmony import */ var _utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utility/getCardObject */ "./src/js/utility/getCardObject.js");
-/* harmony import */ var _utility_getCardElement__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utility/getCardElement */ "./src/js/utility/getCardElement.js");
-/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
-/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
+/* harmony import */ var _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cards/renderCard */ "./src/js/cards/renderCard.js");
+/* harmony import */ var _cards_getCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cards/getCard */ "./src/js/cards/getCard.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -295,13 +1028,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
-
-
-
-
-
- //! ! TEST
-
+// import header from '../display/playerTable/displayHeader';
+// import displayNewTurnModal from '../display/displayNewTurnModal';
+// import displayNextTurnBtn from '../NEW/displayNextTurnBtn';
+// import gameState from './gameState';
+// import getCardObject from '../OLD/getCardObject';
+// import getCardElement from '../utility/getCardElement';
+//! ! TEST
 
 
 
@@ -326,9 +1059,9 @@ var Game = /*#__PURE__*/function () {
       cardsArray: gameField.ageDecks.age1
     };
     this.turnPoints = 0;
-    this.arrOfCards = arrOfCards;
-    this.initGameState(players, this.arrOfCards);
-    _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.initPlayerNames(players); // test
+    this.arrOfCards = arrOfCards; // this.initGameState(players, this.arrOfCards);
+
+    header.initPlayerNames(players); // test
 
     /* this.testCardObj = getCardObject('колесо', arrOfCards);
     console.log(this.testCardObj);
@@ -343,7 +1076,7 @@ var Game = /*#__PURE__*/function () {
 
       var cardElements = document.querySelectorAll('.card');
       cardElements.forEach(function (elem) {
-        if (_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
+        if (gameState.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
           elem.onclick = _this2.playCard;
         }
       });
@@ -358,43 +1091,43 @@ var Game = /*#__PURE__*/function () {
       arrOfCards.forEach(function (e) {
         switch (+e.age) {
           case 1:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age1.push(e.innovation);
+            gameState.ageDecks.age1.push(e.innovation);
             break;
 
           case 2:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age2.push(e.innovation);
+            gameState.ageDecks.age2.push(e.innovation);
             break;
 
           case 3:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age3.push(e.innovation);
+            gameState.ageDecks.age3.push(e.innovation);
             break;
 
           case 4:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age4.push(e.innovation);
+            gameState.ageDecks.age4.push(e.innovation);
             break;
 
           case 5:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age5.push(e.innovation);
+            gameState.ageDecks.age5.push(e.innovation);
             break;
 
           case 6:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age6.push(e.innovation);
+            gameState.ageDecks.age6.push(e.innovation);
             break;
 
           case 7:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age7.push(e.innovation);
+            gameState.ageDecks.age7.push(e.innovation);
             break;
 
           case 8:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age8.push(e.innovation);
+            gameState.ageDecks.age8.push(e.innovation);
             break;
 
           case 9:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age9.push(e.innovation);
+            gameState.ageDecks.age9.push(e.innovation);
             break;
 
           case 10:
-            _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks.age10.push(e.innovation);
+            gameState.ageDecks.age10.push(e.innovation);
             break;
 
           default:
@@ -404,13 +1137,13 @@ var Game = /*#__PURE__*/function () {
 
       for (var i = 0; i < players.length; i += 1) {
         var player = "player".concat(i);
-        _gameState__WEBPACK_IMPORTED_MODULE_3__.default[player].name = players[i].name;
-        _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.push(_gameState__WEBPACK_IMPORTED_MODULE_3__.default[player]);
+        gameState[player].name = players[i].name;
+        gameState.players.push(gameState[player]);
       }
 
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players[0];
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints = 2;
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.activePlayer = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players[0];
+      gameState.currentPlayer = gameState.players[0];
+      gameState.currentPlayer.actionPoints = 2;
+      gameState.activePlayer = gameState.players[0];
     }
   }, {
     key: "newTurn",
@@ -418,7 +1151,7 @@ var Game = /*#__PURE__*/function () {
       var _this3 = this;
 
       this.setCurrentPlayer();
-      (0,_display_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_1__.default)(this.currentPlayer.name);
+      displayNewTurnModal(this.currentPlayer.name);
       this.turnPoints = 100; // timeout to display modal
 
       setTimeout(function () {
@@ -445,7 +1178,7 @@ var Game = /*#__PURE__*/function () {
         this.setActiveDeck(this.currentPlayer);
       } else {
         this.disableHandEvents();
-        (0,_display_displayNextTurnBtn__WEBPACK_IMPORTED_MODULE_2__.default)(this.newTurn.bind(this));
+        displayNextTurnBtn(this.newTurn.bind(this));
       }
     } // set current players depends on previous player
 
@@ -521,19 +1254,19 @@ var Game = /*#__PURE__*/function () {
       var sourceDeck = e.target.id;
 
       if (sourceDeck === 'cloneCurrentDeck') {
-        sourceDeck = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.currentDeck;
+        sourceDeck = gameState.currentPlayer.currentDeck;
       }
 
-      var movingCardInnovation = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks[sourceDeck].pop();
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.push(movingCardInnovation);
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints -= 1;
-      var movingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(movingCardInnovation, this.arrOfCards);
-      var movingCardElement = (0,_utility_getCardElement__WEBPACK_IMPORTED_MODULE_5__.default)(movingCardObj);
+      var movingCardInnovation = gameState.ageDecks[sourceDeck].pop();
+      gameState.currentPlayer.hand.push(movingCardInnovation);
+      gameState.currentPlayer.actionPoints -= 1;
+      var movingCardObj = getCardObject(movingCardInnovation, this.arrOfCards);
+      var movingCardElement = getCardElement(movingCardObj);
       movingCardElement.onclick = this.playCard.bind(this);
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toHand(movingCardElement); // gameState.currentPlayer.setCurrentAge();
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__.default.toHand(movingCardElement); // gameState.currentPlayer.setCurrentAge();
 
       this.updateGameState();
-      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer);
+      header.changePlayerStats(gameState.currentPlayer);
       this.actionDone();
     }
   }, {
@@ -542,16 +1275,16 @@ var Game = /*#__PURE__*/function () {
       var playingCardInnovation = e.target.closest('.card').dataset.innovation;
       var playingCardElement = e.target.closest('.card');
       playingCardElement.onclick = null;
-      var playIndex = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.indexOf(playingCardInnovation);
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.hand.splice(playIndex, 1);
-      var playingCardObj = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(playingCardInnovation, this.arrOfCards);
-      var targetDeckArray = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.activeDecks[playingCardObj.color].cards;
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_6__.default.toActive(playingCardElement); //! before targetDeckArray.push(playingCardInnovation);
+      var playIndex = gameState.currentPlayer.hand.indexOf(playingCardInnovation);
+      gameState.currentPlayer.hand.splice(playIndex, 1);
+      var playingCardObj = getCardObject(playingCardInnovation, this.arrOfCards);
+      var targetDeckArray = gameState.currentPlayer.activeDecks[playingCardObj.color].cards;
+      _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__.default.toActive(playingCardElement); //! before targetDeckArray.push(playingCardInnovation);
 
       targetDeckArray.push(playingCardInnovation);
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer.actionPoints -= 1;
+      gameState.currentPlayer.actionPoints -= 1;
       this.updateGameState();
-      _display_playerTable_displayHeader__WEBPACK_IMPORTED_MODULE_0__.default.changePlayerStats(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.currentPlayer);
+      header.changePlayerStats(gameState.currentPlayer);
     } // update info table in aside, use after each action done in newTurn method
 
   }, {
@@ -583,7 +1316,7 @@ var Game = /*#__PURE__*/function () {
       var _this5 = this;
 
       // update resources for each player
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+      gameState.players.forEach(function (player) {
         player.tree = 0;
         player.tower = 0;
         player.crown = 0;
@@ -595,7 +1328,7 @@ var Game = /*#__PURE__*/function () {
 
           if (currentStack.cards.length > 0) {
             var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation, _this5.arrOfCards);
+            var highestCard = getCardObject(highestCardInnovation, _this5.arrOfCards);
             highestCard.resourses.forEach(function (e) {
               player[e.resourceName] += 1;
             });
@@ -603,14 +1336,14 @@ var Game = /*#__PURE__*/function () {
         });
       }); // update currentAge for each player
 
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+      gameState.players.forEach(function (player) {
         player.currentAge = 1;
         Object.keys(player.activeDecks).forEach(function (stack) {
           var currentStack = player.activeDecks[stack];
 
           if (currentStack.cards.length > 0) {
             var highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
-            var highestCard = (0,_utility_getCardObject__WEBPACK_IMPORTED_MODULE_4__.default)(highestCardInnovation, _this5.arrOfCards);
+            var highestCard = getCardObject(highestCardInnovation, _this5.arrOfCards);
 
             if (highestCard.age > player.currentAge) {
               player.currentAge = highestCard.age;
@@ -619,9 +1352,9 @@ var Game = /*#__PURE__*/function () {
         });
       }); // update currentDeck for each player
 
-      _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players.forEach(function (player) {
+      gameState.players.forEach(function (player) {
         for (var i = player.currentAge; i < 11; i += 1) {
-          var deck = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks["age".concat(i)];
+          var deck = gameState.ageDecks["age".concat(i)];
 
           if (deck.length > 0) {
             player.currentDeck = "age".concat(i);
@@ -892,6 +1625,14 @@ var intro = {
 
       var menu = new _mainMenu__WEBPACK_IMPORTED_MODULE_0__.default(introTop);
       menu.render();
+    });
+    divIntro.addEventListener('click', function (event) {
+      var menu = document.querySelector('.menu');
+
+      if (event.target.closest('.intro') === divIntro) {
+        menu.classList.add('menu__skip');
+        introCenter.classList.add('intro__skip');
+      }
     });
   }
 };
@@ -1297,11 +2038,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "usersInfo": () => /* binding */ usersInfo
 /* harmony export */ });
 /* harmony import */ var _utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/initHotSeatGame */ "./src/js/utility/initHotSeatGame.js");
+/* harmony import */ var _NEW_NEWinitHotSeatGame__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../NEW/NEWinitHotSeatGame */ "./src/js/NEW/NEWinitHotSeatGame.js");
+/* harmony import */ var _NEW_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../NEW/displayNewTurnModal */ "./src/js/NEW/displayNewTurnModal.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 
 var usersInfo = {};
@@ -1356,12 +2101,13 @@ var Menu = /*#__PURE__*/function () {
 
           _this.writeNamesToObject();
 
-          if (validation(usersInfo) && usersInfo.names.length) {
+          if (validation(usersInfo) && usersInfo.names.length > 1) {
             var intro = _this.menu.parentElement.parentElement.parentElement;
-            intro.classList.toggle('intro--hide'); // initHotSeatGame('Player1', 'Player2');
-
-            (0,_utility_initHotSeatGame__WEBPACK_IMPORTED_MODULE_0__.default)(usersInfo.names); //! Hardcoded for 2 players.
-            // Should take player names as arguments
+            (0,_NEW_displayNewTurnModal__WEBPACK_IMPORTED_MODULE_2__.default)(usersInfo.names[0]);
+            (0,_NEW_NEWinitHotSeatGame__WEBPACK_IMPORTED_MODULE_1__.default)(usersInfo);
+            setTimeout(function () {
+              intro.classList.toggle('intro--hide'); // initHotSeatGame(usersInfo.names);
+            }, 500);
           }
         } else if (e.target.className.includes('back')) {
           _this.menu.remove();
@@ -1437,72 +2183,6 @@ var Menu = /*#__PURE__*/function () {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Menu);
 
-
-/***/ }),
-
-/***/ "./src/js/display/displayNewTurnModal.js":
-/*!***********************************************!*\
-  !*** ./src/js/display/displayNewTurnModal.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ displayModal
-/* harmony export */ });
-function displayModal(playerName) {
-  var modalBg = document.createElement('div');
-  modalBg.classList.add('modal');
-  modalBg.classList.add('modal--hidden');
-  var modalBlock = document.createElement('div');
-  modalBlock.classList.add('modal__block');
-  var modalText = document.createElement('div');
-  modalText.classList.add('modal__text');
-  modalText.innerText = "\u0421\u0435\u0439\u0447\u0430\u0441 \u0445\u043E\u0434 \u0438\u0433\u0440\u043E\u043A\u0430 ".concat(playerName);
-  var modalBtn = document.createElement('button');
-  modalBtn.classList.add('modal__btn');
-  modalBtn.innerText = 'Начать ход!';
-  modalBtn.addEventListener('click', function () {
-    modalBg.style = '';
-    modalBg.classList.toggle('modal--hidden');
-    setTimeout(function () {
-      modalBg.remove();
-    }, 500);
-  });
-  modalBlock.append(modalText, modalBtn);
-  modalBg.append(modalBlock);
-  document.body.prepend(modalBg);
-  setTimeout(function () {
-    modalBg.classList.toggle('modal--hidden');
-  }, 0);
-}
-
-/***/ }),
-
-/***/ "./src/js/display/displayNextTurnBtn.js":
-/*!**********************************************!*\
-  !*** ./src/js/display/displayNextTurnBtn.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ displayNextTurnBtn
-/* harmony export */ });
-function displayNextTurnBtn(newTurnFunction) {
-  var nextTurnBtn = document.createElement('div');
-  nextTurnBtn.classList.add('info-table__next-turn-btn');
-  nextTurnBtn.innerText = 'Закончить ход';
-  nextTurnBtn.addEventListener('click', function () {
-    newTurnFunction();
-    setTimeout(function () {
-      var excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
-      excistedNextTurnBtn.remove();
-    }, 500);
-  });
-  var infoTable = document.querySelector('.info-table');
-  infoTable.append(nextTurnBtn);
-}
 
 /***/ }),
 
@@ -2106,7 +2786,7 @@ var displayHeader = {
   initPlayerNames: function initPlayerNames(players) {
     for (var i = 0; i < players.length; i += 1) {
       var currentPlayer = "player".concat(i);
-      this[currentPlayer].name.textContent = players[i].name;
+      this[currentPlayer].name.textContent = players[i];
       this[currentPlayer].container.classList.remove('player-container__hidden');
     }
   },
@@ -2179,116 +2859,6 @@ var displayPlayerTable = {
 
 /***/ }),
 
-/***/ "./src/js/utility/getCardElement.js":
-/*!******************************************!*\
-  !*** ./src/js/utility/getCardElement.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ getCardElement
-/* harmony export */ });
-function getCardElement(cardObj) {
-  // get card header
-  function getCardHeader(card) {
-    var divHeader = document.createElement('div');
-    divHeader.classList.add('card__card-header', "card__color--".concat(card.color));
-    var posTopLeft = document.createElement('div');
-    posTopLeft.classList.add('card__topLeft');
-    var title = document.createElement('div');
-    title.classList.add('card-header__title');
-    title.textContent = card.innovation;
-    divHeader.appendChild(posTopLeft);
-    divHeader.appendChild(title);
-    return divHeader;
-  } // get card body
-
-
-  function getCardMain(card) {
-    var divMain = document.createElement('div');
-    divMain.classList.add('card__card-main', "card__color--".concat(card.color, "-transparent"));
-    card.dogma.forEach(function (item) {
-      var divDogma = document.createElement('div');
-      divDogma.classList.add('card__dogma');
-      divDogma.setAttribute('data-dogmatype', item.dogmaType);
-      var icon = document.createElement('i');
-      icon.classList.add(item.dogmaIcon[0], item.dogmaIcon[1], 'card__icon', "card__icon-color--".concat(item.dogmaColor));
-      divDogma.appendChild(icon);
-      var dogma = document.createElement('span');
-      dogma.classList.add('dogma__effect');
-      dogma.innerHTML = item.dogmaEffect;
-      divDogma.appendChild(dogma);
-      divMain.appendChild(divDogma);
-    });
-    return divMain;
-  } // get card footer
-
-
-  function getCardFooter() {
-    var divFooter = document.createElement('div');
-    divFooter.classList.add('card__card-footer');
-    var posBottomLeft = document.createElement('div');
-    posBottomLeft.classList.add('card__bottomLeft');
-    divFooter.appendChild(posBottomLeft);
-    var posBottomCenter = document.createElement('div');
-    posBottomCenter.classList.add('card__bottomCenter');
-    divFooter.appendChild(posBottomCenter);
-    var posBottomRight = document.createElement('div');
-    posBottomRight.classList.add('card__bottomRight');
-    divFooter.appendChild(posBottomRight);
-    return divFooter;
-  } // place age number and resourses by card position
-
-
-  function setObjByPosition(divCard, card) {
-    var agePos = divCard.querySelector(".card__".concat(card.agePosition));
-    agePos.classList.add("card__color--".concat(card.color), 'card__age--border');
-    agePos.textContent = card.age;
-    card.resourses.forEach(function (res) {
-      var pos = divCard.querySelector(".card__".concat(res.resoursePosition));
-      pos.classList.add("".concat(res.resourseType[0]), "".concat(res.resourseType[1]), "card__icon-color--".concat(res.resourseColor), "card__icon-border--".concat(card.color));
-    });
-  }
-
-  var divCard = document.createElement('div');
-  divCard.classList.add('card');
-  divCard.style.background = "url(\"".concat(cardObj.cardImg, "\")");
-  divCard.dataset.innovation = cardObj.innovation;
-  divCard.appendChild(getCardHeader(cardObj));
-  divCard.appendChild(getCardMain(cardObj));
-  divCard.appendChild(getCardFooter());
-  setObjByPosition(divCard, cardObj, cardObj.age, cardObj.color);
-  return divCard;
-}
-
-/***/ }),
-
-/***/ "./src/js/utility/getCardObject.js":
-/*!*****************************************!*\
-  !*** ./src/js/utility/getCardObject.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* binding */ getCardObject
-/* harmony export */ });
-function getCardObject(id, arr) {
-  var result = {};
-
-  for (var i = 0; i < arr.length; i += 1) {
-    if (arr[i].innovation === id) {
-      result = arr[i];
-      break;
-    }
-  }
-
-  return result;
-}
-
-/***/ }),
-
 /***/ "./src/js/utility/initHotSeatGame.js":
 /*!*******************************************!*\
   !*** ./src/js/utility/initHotSeatGame.js ***!
@@ -2302,11 +2872,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_GameField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/GameField */ "./src/js/components/GameField.js");
 /* harmony import */ var _components_Player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Player */ "./src/js/components/Player.js");
 /* harmony import */ var _components_Game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Game */ "./src/js/components/Game.js");
-/* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
-/* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
-/* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
-/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
-
+/* harmony import */ var _cards_parseCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cards/parseCards */ "./src/js/cards/parseCards.js");
+/* harmony import */ var _components_GameUI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/GameUI */ "./src/js/components/GameUI.js");
+/* harmony import */ var _shuffle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./shuffle */ "./src/js/utility/shuffle.js");
+/* harmony import */ var _cards_cards_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cards/cards.json */ "./src/js/cards/cards.json");
 
 
 
@@ -2314,13 +2883,14 @@ __webpack_require__.r(__webpack_exports__);
  // import setChat from './setChat';
 
 
+
 function initHotSeatGame(playerNames) {
   // contains dom elements
-  var gameUI = new _components_GameUI__WEBPACK_IMPORTED_MODULE_5__.default(); // contains sorted card objects
+  var gameUI = new _components_GameUI__WEBPACK_IMPORTED_MODULE_4__.default(); // contains sorted card objects
 
-  var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_4__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_3__); // shuffle arr of cards objects
+  var arrOfCards = (0,_cards_parseCards__WEBPACK_IMPORTED_MODULE_3__.default)(_cards_cards_json__WEBPACK_IMPORTED_MODULE_6__); // shuffle arr of cards objects
 
-  (0,_shuffle__WEBPACK_IMPORTED_MODULE_6__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
+  (0,_shuffle__WEBPACK_IMPORTED_MODULE_5__.default)(arrOfCards); // create gameField which contains all cards avaiable for players
 
   var gameField = new _components_GameField__WEBPACK_IMPORTED_MODULE_0__.default(arrOfCards); // contains players properties and cards
 
@@ -2550,7 +3120,7 @@ __webpack_require__.r(__webpack_exports__);
   \*********************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse("[{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"гончарное дело\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"}]},{\"innovation\":\"инструменты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\",\"resourceName\":\"bulb\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\",\"resourceName\":\"bulb\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"письменность\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>2</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\",\"resourceName\":\"bulb\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\",\"resourceName\":\"bulb\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"кузнечное дело\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"лук и стрелы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\",\"resourceName\":\"bulb\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"вёсла\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> переместите с руки в мою зону влияния карту, которая приносит <i class='fas fa-crown resourse__icon card__icon-color--yellow'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span> !\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Если</b> по предыдущей догме не перемещена ни одна карта, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"колесо\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"одежда\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"}]},{\"innovation\":\"парус\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и сырайте</b> <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"города\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"свод законов\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"}]},{\"innovation\":\"мистицизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если у вас в игре есть стопка того же цвета, сыграйте взятую карту и возьмите <span class = 'age__number'>1</span>. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"каменная кладка\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"скотоводство\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\",\"resourceName\":\"crown\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"земледелие\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> карту с руки. Если сделали это, возьмите и зачтите карту, уровень которой на 1 выше, чем у переработанной.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\",\"resourceName\":\"tree\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"календарь\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"математика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"дороги\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"укрепления\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"деньги\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"картография\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"монотеизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"философия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"каналы\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"виноделие\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"перевод\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"алхимия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"оптика\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"осадные машины\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"компас\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"бумага\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"университеты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"феодализм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"медицина\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"механизмы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"печатный станок\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"эксперименты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"колонии\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"порох\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"изобретения\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"навигация\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"реформация\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"коммерция\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"анатомия\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"перспектива\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"физика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"химия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"добыча угля\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"пиратство\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"банковское дело\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"гуманизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"научные общества\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"астрономия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"паровая машина\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"статистика\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"атомная теория\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"энциклопедия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"фабрики\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"станки\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"метрическая система\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"систематика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"республика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"равноправие\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"вакцинация\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"консервы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"газеты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"теория эволюции\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"автомобиль\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"динамит\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"велосипед\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"электричество\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"железные дороги\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"уличное освещение\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"холодильники\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"канализация\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"теория относительности\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"ракеты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"транспорт\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"авиация\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"корпорации\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"радиовещание\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"научный метод\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"коммунизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"антибиотики\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"небоскрёбы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"генетика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"компьютеры\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"фотоэлементы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"ядерная реакция\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"спутники\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"сотрудничество\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"коммуникации\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"специализация\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"пригороды\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"экология\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"биотехнологии\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]},{\"innovation\":\"виртуальность\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"dogmaIcon\":[\"fas\",\"fa-lightbulb\"],\"dogmaColor\":\"purple\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"нанотехнологии\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"робототехника\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-lightbulb\"],\"resourseColor\":\"purple\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"бытовые роботы\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"базы данных\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"},{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"dogmaIcon\":[\"fab\",\"fa-pagelines\"],\"dogmaColor\":\"green\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"искусственный интеллект\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"aggressive\",\"dogmaEffect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"интернет\",\"agePosition\":\"topLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"dogmaIcon\":[\"fas\",\"fa-crown\"],\"dogmaColor\":\"yellow\"}],\"resourses\":[{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-pagelines\"],\"resourseColor\":\"green\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"стволовые клетки\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomCenter\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]},{\"innovation\":\"глобализация\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"dogmaType\":\"corporate\",\"dogmaEffect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"dogmaIcon\":[\"fab\",\"fa-fort-awesome\"],\"dogmaColor\":\"grey\"}],\"resourses\":[{\"resoursePosition\":\"topLeft\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"},{\"resoursePosition\":\"bottomLeft\",\"resourseType\":[\"fas\",\"fa-crown\"],\"resourseColor\":\"yellow\"},{\"resoursePosition\":\"bottomRight\",\"resourseType\":[\"fab\",\"fa-fort-awesome\"],\"resourseColor\":\"grey\"}]}]}]");
+module.exports = JSON.parse("[{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"гончарное дело\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"}]},{\"innovation\":\"инструменты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\",\"resourceName\":\"bulb\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\",\"resourceName\":\"bulb\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"письменность\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>2</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\",\"resourceName\":\"bulb\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\",\"resourceName\":\"bulb\"},{\"position\":\"bottomRight\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"кузнечное дело\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"лук и стрелы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\",\"resourceName\":\"bulb\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"вёсла\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> переместите с руки в мою зону влияния карту, которая приносит <i class='fas fa-crown resourse__icon card__icon-color--yellow'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span> !\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"type\":\"corporate\",\"effect\":\"<b>Если</b> по предыдущей догме не перемещена ни одна карта, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"колесо\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"одежда\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"}]},{\"innovation\":\"парус\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и сырайте</b> <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"города\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"свод законов\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"}]},{\"innovation\":\"мистицизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если у вас в игре есть стопка того же цвета, сыграйте взятую карту и возьмите <span class = 'age__number'>1</span>. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]}]},{\"age\":1,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"каменная кладка\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"скотоводство\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\",\"resourceName\":\"crown\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\",\"resourceName\":\"tower\"}]},{\"innovation\":\"земледелие\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> карту с руки. Если сделали это, возьмите и зачтите карту, уровень которой на 1 выше, чем у переработанной.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\",\"resourceName\":\"tree\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"календарь\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"математика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"дороги\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"укрепления\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"деньги\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"картография\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"монотеизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"философия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":2,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"каналы\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"виноделие\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"перевод\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"алхимия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"оптика\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"осадные машины\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"компас\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"бумага\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"университеты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"феодализм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":3,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"медицина\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"механизмы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"печатный станок\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"эксперименты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"колонии\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"порох\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"изобретения\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"навигация\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"реформация\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"коммерция\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":4,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"анатомия\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"перспектива\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"физика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"химия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"добыча угля\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"пиратство\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"банковское дело\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"гуманизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"научные общества\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"астрономия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":5,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"паровая машина\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"статистика\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"атомная теория\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"энциклопедия\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"фабрики\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"станки\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"метрическая система\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"систематика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"республика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"равноправие\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":6,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"вакцинация\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"консервы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"газеты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"теория эволюции\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"автомобиль\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"динамит\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"велосипед\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"электричество\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"железные дороги\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"уличное освещение\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":7,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"холодильники\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"канализация\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"теория относительности\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"ракеты\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"транспорт\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"авиация\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"корпорации\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"радиовещание\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"научный метод\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"коммунизм\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":8,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"антибиотики\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"небоскрёбы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"генетика\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"компьютеры\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"фотоэлементы\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"ядерная реакция\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"спутники\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"сотрудничество\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"коммуникации\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"специализация\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":9,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"пригороды\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"экология\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"blue\",\"cards\":[{\"innovation\":\"биотехнологии\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> <span class = 'age__number'>1</span>\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]},{\"innovation\":\"виртуальность\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"type\":\"corporate\",\"effect\":\"<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>\",\"icon\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"red\",\"cards\":[{\"innovation\":\"нанотехнологии\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"робототехника\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-lightbulb\"],\"color\":\"purple\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"green\",\"cards\":[{\"innovation\":\"бытовые роботы\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Возьмите</b> две <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"базы данных\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"type\":\"corporate\",\"effect\":\"<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников\",\"icon\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"purple\",\"cards\":[{\"innovation\":\"искусственный интеллект\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"aggressive\",\"effect\":\"<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"интернет\",\"agePosition\":\"topLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.\",\"icon\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"}],\"resourses\":[{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomCenter\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-pagelines\"],\"color\":\"green\"}]}]},{\"age\":10,\"cardImg\":\"./assets/img/cards-bg/age-01.jpg\",\"color\":\"yellow\",\"cards\":[{\"innovation\":\"стволовые клетки\",\"agePosition\":\"bottomLeft\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \\\"Строительстве\\\".\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomCenter\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]},{\"innovation\":\"глобализация\",\"agePosition\":\"bottomCenter\",\"dogma\":[{\"type\":\"corporate\",\"effect\":\"<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.\",\"icon\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}],\"resourses\":[{\"position\":\"topLeft\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"},{\"position\":\"bottomLeft\",\"type\":[\"fas\",\"fa-crown\"],\"color\":\"yellow\"},{\"position\":\"bottomRight\",\"type\":[\"fab\",\"fa-fort-awesome\"],\"color\":\"grey\"}]}]}]");
 
 /***/ })
 
