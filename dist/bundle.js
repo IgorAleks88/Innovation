@@ -466,9 +466,10 @@ var gameBoard = {
     activeDeckElements.forEach(function (elem) {
       elem.onclick = _this2.takeCard;
     });
-    this.updateHeaderCurrent();
+    this.setHeaderCurrent();
   },
   takeCard: function takeCard(e) {
+    e.target.onclick = null;
     var sourceDeck = e.target.id;
 
     if (sourceDeck === 'cloneCurrentDeck') {
@@ -483,6 +484,11 @@ var gameBoard = {
     _cards_renderCard__WEBPACK_IMPORTED_MODULE_3__.default.toHand(movingCardElement, _gameState__WEBPACK_IMPORTED_MODULE_0__.default);
     _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints -= 1;
     gameBoard.update();
+    setTimeout(function () {
+      if (_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.actionPoints !== 0) {
+        e.target.onclick = gameBoard.takeCard;
+      }
+    }, 250);
   },
   playCard: function playCard(e) {
     var playingCardInnovation = e.target.closest('.card').dataset.innovation;
@@ -532,14 +538,14 @@ var gameBoard = {
     this.disableEvents();
     infoTable.append(nextTurnBtn);
   },
-  updateHeaderCurrent: function updateHeaderCurrent() {
+  setHeaderCurrent: function setHeaderCurrent() {
     Array.from(document.querySelectorAll('.head-row__name')).forEach(function (headerName) {
       headerName.parentElement.parentElement.classList.remove('player-container--active');
 
       if (headerName.innerText === _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name) {
         setTimeout(function () {
           headerName.parentElement.parentElement.classList.add('player-container--active');
-        }, 500);
+        }, 250);
       }
     });
   },

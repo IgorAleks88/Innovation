@@ -97,10 +97,11 @@ const gameBoard = {
     activeDeckElements.forEach((elem) => {
       elem.onclick = this.takeCard;
     });
-    this.updateHeaderCurrent();
+    this.setHeaderCurrent();
   },
 
   takeCard(e) {
+    e.target.onclick = null;
     let sourceDeck = e.target.id;
     if (sourceDeck === 'cloneCurrentDeck') { sourceDeck = gameState.currentPlayer.currentDeck; }
 
@@ -114,6 +115,11 @@ const gameBoard = {
     gameState.currentPlayer.actionPoints -= 1;
 
     gameBoard.update();
+    setTimeout(() => {
+      if (gameState.currentPlayer.actionPoints !== 0) {
+        e.target.onclick = gameBoard.takeCard;
+      }
+    }, 250);
   },
 
   playCard(e) {
@@ -168,13 +174,13 @@ const gameBoard = {
     infoTable.append(nextTurnBtn);
   },
 
-  updateHeaderCurrent() {
+  setHeaderCurrent() {
     Array.from(document.querySelectorAll('.head-row__name')).forEach((headerName) => {
       headerName.parentElement.parentElement.classList.remove('player-container--active');
       if (headerName.innerText === gameState.currentPlayer.name) {
         setTimeout(() => {
           headerName.parentElement.parentElement.classList.add('player-container--active');
-        }, 500);
+        }, 250);
       }
     });
   },
