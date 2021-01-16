@@ -57,6 +57,7 @@ const gameBoard = {
     stacks.forEach((stackElement) => {
       stackElement.innerHTML = '';
       stackElement.classList.add('active-zone__stack--empty');
+      stackElement.style = null;
       Object.keys(gameState.activePlayer.activeDecks).forEach((activeDeckName) => {
         if (activeDeckName === stackElement.id) {
           gameState.activePlayer.activeDecks[activeDeckName].cards.forEach((card) => {

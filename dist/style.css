@@ -1424,7 +1424,8 @@ input[type='text'] {
   top: -25px;
   transform: translateX(-50%);
   width: 150px;
-  z-index: 3; }
+  z-index: 3;
+  z-index: 15; }
 
 .active-zone__overlay {
   background: url(./assets/img/block-bg.png) center;
@@ -1453,7 +1454,7 @@ input[type='text'] {
   padding: 0 0 0 0.7rem;
   scroll-behavior: smooth;
   width: 100%;
-  z-index: 2; }
+  z-index: 11; }
 
 .active-zone__cards-wrapper {
   align-items: flex-end;
@@ -1509,7 +1510,8 @@ input[type='text'] {
     top: -25px;
     transform: translateX(-50%);
     width: 150px;
-    z-index: 3; }
+    z-index: 3;
+    z-index: 15; }
 
 .hand__overlay {
   background: url(./assets/img/block-bg.png) center;
@@ -1533,7 +1535,6 @@ input[type='text'] {
   flex-wrap: wrap;
   height: 100%;
   overflow: hidden;
-  padding: 0 0 0 1rem;
   scroll-behavior: smooth;
   width: calc(100% - 5rem);
   z-index: 2; }

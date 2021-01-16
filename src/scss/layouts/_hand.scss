@@ -12,6 +12,7 @@
 
   .hand__title {
     @include title-settings('../../assets/img/title-hand.png');
+    z-index: 15;
   }
 }
 
@@ -26,7 +27,6 @@
   flex-wrap: wrap;
   height: 100%;
   overflow: hidden;
-  padding: 0 0 0 1rem;
   scroll-behavior: smooth;
   width: calc(100% - 5rem);
   z-index: 2;

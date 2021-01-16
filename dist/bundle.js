@@ -424,6 +424,7 @@ var gameBoard = {
     stacks.forEach(function (stackElement) {
       stackElement.innerHTML = '';
       stackElement.classList.add('active-zone__stack--empty');
+      stackElement.style = null;
       Object.keys(_gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks).forEach(function (activeDeckName) {
         if (activeDeckName === stackElement.id) {
           _gameState__WEBPACK_IMPORTED_MODULE_0__.default.activePlayer.activeDecks[activeDeckName].cards.forEach(function (card) {
