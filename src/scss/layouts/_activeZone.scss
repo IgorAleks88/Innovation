@@ -8,8 +8,8 @@
 
 .active-zone__title {
   @include title-settings('../../assets/img/title-active-zone.png');
-  z-index: 15;
   transform: translate(-52%);
+  z-index: 15;
 }
 
 .active-zone__overlay {

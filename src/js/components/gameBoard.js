@@ -38,7 +38,11 @@ const gameBoard = {
     cloneCurrentDeck.id = 'cloneCurrentDeck';
     cloneCurrentDeck.classList.add('age-deck--active');
     cloneCurrentDeck.classList.remove('xyz-in');
-    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)'; //! change later to `${}`
+    if (gameState.activePlayer.currentAge !== 10) {
+      cloneCurrentDeck.style.backgroundImage = `url(/assets/img/cards-bg/age-0${gameState.activePlayer.currentAge}-title.png)`;
+    } else {
+      cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-10-title.png)';
+    }
     // display cloned deck in currentDeck block
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
 
@@ -101,6 +105,8 @@ const gameBoard = {
   },
 
   takeCard(e) {
+    const ageDecksBlock = document.querySelector('.age-decks');
+    ageDecksBlock.classList.add('age-decks--hidden');
     e.target.onclick = null;
     let sourceDeck = e.target.id;
     if (sourceDeck === 'cloneCurrentDeck') { sourceDeck = gameState.currentPlayer.currentDeck; }
