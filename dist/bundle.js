@@ -958,7 +958,7 @@ var displayActiveZone = {
     this.cardsBlockOverlay = document.createElement('div');
     this.cardsBlockOverlay.classList.add('active-zone__overlay'); // create players active stacks
 
-    var stacksNames = ['blue', 'red', 'green', 'purple', 'yellow'];
+    var stacksNames = ['red', 'green', 'blue', 'purple', 'yellow'];
 
     for (var i = 0; i < stacksNames.length; i += 1) {
       var stack = document.createElement('div');
