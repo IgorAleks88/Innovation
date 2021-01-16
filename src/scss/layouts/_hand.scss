@@ -43,15 +43,15 @@
 }
 
 .hand__controls {
+  @include area-border('../../assets/img/border-hand-control.png');
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: center;
   position: absolute;
   right: -0.05rem;
-  width: 6rem;
+  width: 6.5rem;
   z-index: 1;
-  @include area-border('../../assets/img/border-hand-control.png');
 }
 
 .hand__controls-svg {

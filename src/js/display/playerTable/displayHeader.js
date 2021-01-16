@@ -176,7 +176,7 @@ const displayHeader = {
   initPlayerNames(players) {
     for (let i = 0; i < players.length; i += 1) {
       const currentPlayer = `player${i}`;
-      this[currentPlayer].name.textContent = players[i].name;
+      this[currentPlayer].name.textContent = players[i];
       this[currentPlayer].container.classList.remove('player-container__hidden');
     }
   },

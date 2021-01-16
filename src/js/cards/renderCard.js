@@ -1,5 +1,3 @@
-import gameState from '../components/gameState';
-
 function getRenderCard() {
   let hand = null;
   let activeStacks = null;
@@ -20,7 +18,7 @@ function getRenderCard() {
       hand.append(cardElement);
     },
 
-    toActive(cardElement) {
+    toActive(cardElement, gameState) {
       if (hand === null || activeStacks === null) this.initObject();
 
       // get properties of target stack to calcualte later
@@ -29,7 +27,7 @@ function getRenderCard() {
         if (cardElement.children[0].classList.contains(`card__color--${stack.id}`)) {
           stack.classList.remove('active-zone__stack--empty');
           targetStack.dom = stack;
-          stack.style.width = null;
+          targetStack.dom.style = null;
           targetStack.width = stack.offsetWidth;
           targetStack.height = stack.offsetHeight;
           targetStack.shift = gameState.activePlayer.activeDecks[targetStack.dom.id].shift;
@@ -53,10 +51,11 @@ function getRenderCard() {
           Array.from(targetStack.dom.children).forEach((card, i) => {
             card.style.bottom = `${i * cardShiftValue}px`;
           });
-          cardElement.style.bottom = `${targetStack.length * cardShiftValue}px`;
+          if (targetStack.length !== 1) cardElement.style.bottom = `${(targetStack.length - 1) * cardShiftValue}px`;
           break;
 
         case 'left':
+          console.log('we are in case left');
           while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width
             + (targetStack.length * cardShiftValue)
             && cardShiftValue !== 10) {
@@ -65,9 +64,9 @@ function getRenderCard() {
           Array.from(targetStack.dom.children).forEach((card, i) => {
             card.style.right = `${i * cardShiftValue}px`;
           });
-          cardElement.style.right = `${targetStack.length * cardShiftValue}px`;
-          if (targetStack.length !== 0) {
-            targetStack.dom.style.width = `${targetStack.width + cardShiftValue * targetStack.length}px`;
+          cardElement.style.right = `${(targetStack.length - 1) * cardShiftValue}px`;
+          if (targetStack.length > 1) {
+            targetStack.dom.style.width = `${targetStack.width + cardShiftValue * (targetStack.length - 1)}px`;
           }
           break;
 
@@ -80,9 +79,9 @@ function getRenderCard() {
           Array.from(targetStack.dom.children).forEach((card, i) => {
             card.style.left = `${i * cardShiftValue}px`;
           });
-          cardElement.style.left = `${targetStack.length * cardShiftValue}px`;
-          if (targetStack.length !== 0) {
-            targetStack.dom.style.width = `${targetStack.width + cardShiftValue * targetStack.length}px`;
+          cardElement.style.left = `${(targetStack.length - 1) * cardShiftValue}px`;
+          if (targetStack.length > 1) {
+            targetStack.dom.style.width = `${targetStack.width + cardShiftValue * (targetStack.length - 1)}px`;
           }
           break;
         default:

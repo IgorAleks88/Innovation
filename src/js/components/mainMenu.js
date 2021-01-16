@@ -1,4 +1,5 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
+import displayNewTurnModal from '../display/displayNewTurnModal';
 
 const users = {};
 
@@ -8,7 +9,7 @@ function validation(userObj) {
   }
   return false;
 }
-// TODO need some refactor later, move to display folder, use function?
+
 class Menu {
   constructor(parent) {
     this.parent = parent;
@@ -55,9 +56,11 @@ class Menu {
         this.addNamesToUsers();
         if (validation(users)) {
           const intro = this.menu.parentElement.parentElement.parentElement;
-          intro.classList.toggle('intro--hide');
-          initHotSeatGame(users.names); //! Hardcoded for 2 players.
-          // Should take player names as arguments
+          displayNewTurnModal(users.names[0]);
+          initHotSeatGame(users);
+          setTimeout(() => {
+            intro.classList.toggle('intro--hide');
+          }, 500);
         }
       } else if (e.target.className.includes('back')) {
         this.menu.remove();

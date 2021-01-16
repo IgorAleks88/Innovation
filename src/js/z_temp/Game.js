@@ -6,16 +6,16 @@
 * count avaible actions per turn, reduce on each action
 * when avaible ections ends - turn passed to next player
 */
-import header from '../display/playerTable/displayHeader';
-import displayNewTurnModal from '../display/displayNewTurnModal';
-import displayNextTurnBtn from '../display/displayNextTurnBtn';
-import gameState from './gameState';
-import getCardObject from '../utility/getCardObject';
-import getCardElement from '../utility/getCardElement';
+// import header from '../display/playerTable/displayHeader';
+// import displayNewTurnModal from '../display/displayNewTurnModal';
+// import displayNextTurnBtn from '../NEW/displayNextTurnBtn';
+// import gameState from './gameState';
+// import getCardObject from '../OLD/getCardObject';
+// import getCardElement from '../utility/getCardElement';
 
-//! ! TEST
-import renderCard from '../cards/renderCard';
-import getCard from '../cards/getCard';
+// //! ! TEST
+// import renderCard from '../cards/renderCard';
+// import getCard from '../cards/getCard';
 
 export default class Game {
   constructor(gameUI, gameField, players, arrOfCards) {
@@ -37,7 +37,7 @@ export default class Game {
     };
     this.turnPoints = 0;
     this.arrOfCards = arrOfCards;
-    this.initGameState(players, this.arrOfCards);
+    // this.initGameState(players, this.arrOfCards);
     header.initPlayerNames(players);
     // test
     /* this.testCardObj = getCardObject('колесо', arrOfCards);
@@ -224,9 +224,9 @@ export default class Game {
     gameState.currentPlayer.hand.splice(playIndex, 1);
     const playingCardObj = getCardObject(playingCardInnovation, this.arrOfCards);
     const targetDeckArray = gameState.currentPlayer.activeDecks[playingCardObj.color].cards;
+    renderCard.toActive(playingCardElement); //! before targetDeckArray.push(playingCardInnovation);
     targetDeckArray.push(playingCardInnovation);
     gameState.currentPlayer.actionPoints -= 1;
-    renderCard.toActive(playingCardElement);
     this.updateGameState();
     header.changePlayerStats(gameState.currentPlayer);
   }

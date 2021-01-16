@@ -232,10 +232,12 @@ const displayAside = {
     for (let i = 0; i < agesNumber; i += 1) {
       const deck = document.createElement('div');
       deck.classList.add('age-deck');
-      deck.id = `age${i + 1}`; // id age1-10 for each deck
-      deck.innerText = `${i + 1} Age`; // TODO remove later
-      deck.style.backgroundImage = 'url(./assets/img/cards-bg/age-01.jpg)'; //! use `` age-0${i+1} later
-
+      deck.id = `age${i + 1}`;
+      if (i < 9) {
+        deck.style.backgroundImage = `url(./assets/img/cards-bg/age-0${i + 1}.jpg)`;
+      } else if (i === 9) {
+        deck.style.backgroundImage = 'url(./assets/img/cards-bg/age-10.jpg)';
+      }
       deck.addEventListener('click', () => this.ageDecksBlock.classList.toggle('age-decks--hidden'));
 
       // Animation classes and attributes for cards here
@@ -291,7 +293,13 @@ const displayAside = {
     for (let i = 0; i < numOfLeadershipCards; i += 1) {
       const leadershipCard = document.createElement('div');
       leadershipCard.classList.add('leadership-cards__card');
-      leadershipCard.innerText = `${i + 1}`;
+      // leadershipCard.innerText = `${i + 1}`;
+
+      const leadershipCardsTitle = document.createElement('div');
+      leadershipCardsTitle.classList.add('extra-cards__leadership-title');
+      leadershipCardsTitle.innerText = `Век ${i + 1}`;
+
+      leadershipCard.append(leadershipCardsTitle);
 
       // Animation classes and attributes for cards here
       leadershipCard.classList.add('xyz-in');

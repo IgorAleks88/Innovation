@@ -2,50 +2,50 @@
   @include flex(column, flex-start, center);
   background: $tables-bg;
   height: 100vh;
+  padding-top: 2rem;
   position: absolute;
   right: 0;
   top: 0;
   width: 37rem;
-  z-index: 2;
-  padding-top: 2rem;
+  z-index: 10;
 
   .aside__overlay {
     @include block-background-overlay;
     margin: 0;
     top: 0;
-    width: 90%;
     transform: none;
+    width: 90%;
   }
 
   .aside__top {
-    height: 17rem;
-    width: 100%;
-    position: absolute;
     @include area-border('../../assets/img/border-aside-top.png');
+    height: 17rem;
     margin: 0;
+    position: absolute;
     top: 0;
+    width: 100%;
   }
 
   .aside__center {
-    width: 100%;
-    height: calc(100vh - 44rem); // 44rem = 17rem header + 27rem hand
-    position: absolute;
     @include area-border('../../assets/img/border-aside-center.png');
+    height: calc(100vh - 44rem); // 44rem = 17rem header + 27rem hand
     margin: 0;
+    position: absolute;
     top: 17rem; //17rem header
+    width: 100%;
   }
 
   .aside__bottom {
-    height: 27rem;
-    width: 100%;
-    position: absolute;
     @include area-border('../../assets/img/border-aside-bottom.png');
+    height: 27rem;
     margin: 0;
+    position: absolute;
     top: calc(100% - 27rem); //27rem hand
+    width: 100%;
   }
 
   > div {
-    margin: 1rem 1rem;
+    margin: 1rem;
 
     &:first-child {
       margin-top: 2rem;
