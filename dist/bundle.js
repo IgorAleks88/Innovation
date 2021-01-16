@@ -1802,12 +1802,7 @@ function setGameControls() {
   var fontSize = parseFloat(style);
   var cardsLineHeight = fontSize * 27; // const timeout used because time needed for scroll animation before values updated
 
-  var timeoutTime = 350; // disable scrolling in hand block
-
-  hand.onwheel = function disableScroll() {
-    return false;
-  }; // event activated on each inserted card
-
+  var timeoutTime = 350; // event activated on each inserted card
 
   hand.addEventListener('DOMNodeInserted', function () {
     // scroll to inserted card (or do nothing)
