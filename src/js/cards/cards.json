@@ -2470,35 +2470,46 @@
   },
   {
     "age": 7,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-07.jpg",
     "color": "purple",
     "cards": [
       {
         "innovation": "железные дороги",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
-            "type": "aggressive",
-            "effect": "<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.",
-            "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": "corporate",
+            "effect": "<b>Переработайте</b> все карты с руки, затем возьмите три <span class = 'age__number'>6</span>.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Вы можете сдвинуть</b> вверх любую из своих стопок, сдвинутых вправо.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
             "position": "bottomCenter",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "topLeft",
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           }
         ]
       },
@@ -2508,26 +2519,30 @@
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.",
-            "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "effect": "<b>Вы можете архивировать</b> до трёх карт с руки. Если сделали это, возьмите и зачтите <span class = 'age__number'>7</span> за каждый разный уровень среди архивированых вами карт.",
+            "icon": ["fab", "fa-pagelines"],
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomCenter",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "name": "tree"
           }
         ]
       }
@@ -2535,35 +2550,46 @@
   },
   {
     "age": 7,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-07.jpg",
     "color": "yellow",
     "cards": [
       {
         "innovation": "холодильники",
-        "agePosition": "bottomLeft",
+        "agePosition": "topLeft",
         "dogma": [
           {
+            "type": "aggressive",
+            "effect": "<b>Я требую:</b> переработайте половину карт с руки (округляя вниз)!",
+            "icon": ["fab", "fa-pagelines"],
+            "color": "green",
+            "resource": "tree"
+          },
+          {
             "type": "corporate",
-            "effect": "<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \"Строительстве\".",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Вы можете зачесть</b> карту с руки.",
+            "icon": ["fab", "fa-pagelines"],
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
           {
-            "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomLeft",
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomCenter",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           }
         ]
       },
@@ -2572,27 +2598,31 @@
         "agePosition": "bottomCenter",
         "dogma": [
           {
-            "type": "corporate",
-            "effect": "<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": "aggressive",
+            "effect": "<b>Я требую:</b> обменяйте две старшие карты с руки на младшую карту с моей руки!",
+            "icon": ["fab", "fa-pagelines"],
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
           {
             "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           }
         ]
       }
