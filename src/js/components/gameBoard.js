@@ -97,6 +97,7 @@ const gameBoard = {
     activeDeckElements.forEach((elem) => {
       elem.onclick = this.takeCard;
     });
+    this.updateHeaderCurrent();
   },
 
   takeCard(e) {
@@ -143,6 +144,7 @@ const gameBoard = {
     nextTurnBtn.classList.add('info-table__next-turn-btn');
     nextTurnBtn.innerText = 'Закончить ход';
     nextTurnBtn.addEventListener('click', () => {
+      // change current player
       for (let i = 0; i < gameState.players.length; i += 1) {
         if (gameState.currentPlayer === gameState.players[i]) {
           i += 1;
@@ -164,6 +166,17 @@ const gameBoard = {
     const infoTable = document.querySelector('.info-table');
     this.disableEvents();
     infoTable.append(nextTurnBtn);
+  },
+
+  updateHeaderCurrent() {
+    Array.from(document.querySelectorAll('.head-row__name')).forEach((headerName) => {
+      headerName.parentElement.parentElement.classList.remove('player-container--active');
+      if (headerName.innerText === gameState.currentPlayer.name) {
+        setTimeout(() => {
+          headerName.parentElement.parentElement.classList.add('player-container--active');
+        }, 500);
+      }
+    });
   },
 
   disableEvents() {

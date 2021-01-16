@@ -466,6 +466,7 @@ var gameBoard = {
     activeDeckElements.forEach(function (elem) {
       elem.onclick = _this2.takeCard;
     });
+    this.updateHeaderCurrent();
   },
   takeCard: function takeCard(e) {
     var sourceDeck = e.target.id;
@@ -507,6 +508,7 @@ var gameBoard = {
     nextTurnBtn.classList.add('info-table__next-turn-btn');
     nextTurnBtn.innerText = 'Закончить ход';
     nextTurnBtn.addEventListener('click', function () {
+      // change current player
       for (var i = 0; i < _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players.length; i += 1) {
         if (_gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer === _gameState__WEBPACK_IMPORTED_MODULE_0__.default.players[i]) {
           i += 1;
@@ -529,6 +531,17 @@ var gameBoard = {
     var infoTable = document.querySelector('.info-table');
     this.disableEvents();
     infoTable.append(nextTurnBtn);
+  },
+  updateHeaderCurrent: function updateHeaderCurrent() {
+    Array.from(document.querySelectorAll('.head-row__name')).forEach(function (headerName) {
+      headerName.parentElement.parentElement.classList.remove('player-container--active');
+
+      if (headerName.innerText === _gameState__WEBPACK_IMPORTED_MODULE_0__.default.currentPlayer.name) {
+        setTimeout(function () {
+          headerName.parentElement.parentElement.classList.add('player-container--active');
+        }, 500);
+      }
+    });
   },
   disableEvents: function disableEvents() {
     var cards = Array.from(document.querySelectorAll('.card'));

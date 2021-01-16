@@ -1190,13 +1190,13 @@ input[type='text'] {
       align-items: flex-end;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-around;
       color: #e2e2e2;
       height: 100%;
       margin-left: 2.5rem;
       overflow-x: auto;
       position: relative;
-      width: auto;
+      width: 100%;
       z-index: 2; }
 
 .player-container {
@@ -1213,6 +1213,9 @@ input[type='text'] {
   padding: 1rem; }
   .player-container__hidden {
     display: none; }
+  .player-container--active {
+    border: 0.2rem solid red;
+    filter: brightness(1.5); }
 
 .head-row {
   align-items: center;
@@ -1425,7 +1428,8 @@ input[type='text'] {
   transform: translateX(-50%);
   width: 150px;
   z-index: 3;
-  z-index: 15; }
+  z-index: 15;
+  transform: translate(-52%); }
 
 .active-zone__overlay {
   background: url(./assets/img/block-bg.png) center;
