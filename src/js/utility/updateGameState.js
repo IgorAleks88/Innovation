@@ -15,7 +15,7 @@ export default function updateGameState(gameState) {
         const highestCardInnovation = currentStack.cards[currentStack.cards.length - 1];
         const highestCard = getCardObject.byID(highestCardInnovation);
         highestCard.resourses.forEach((e) => {
-          player[e.resourceName] += 1;
+          player[e.name] += 1;
         });
       }
     });

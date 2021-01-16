@@ -26,19 +26,19 @@
             "position": "bottomLeft",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           }
         ]
       },
@@ -64,19 +64,19 @@
             "position": "bottomLeft",
             "type": ["fas", "fa-lightbulb"],
             "color": "purple",
-            "resourceName": "bulb"
+            "name": "bulb"
           },
           {
             "position": "bottomCenter",
             "type": ["fas", "fa-lightbulb"],
             "color": "purple",
-            "resourceName": "bulb"
+            "name": "bulb"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       },
@@ -96,19 +96,19 @@
             "position": "bottomLeft",
             "type": ["fas", "fa-lightbulb"],
             "color": "purple",
-            "resourceName": "bulb"
+            "name": "bulb"
           },
           {
             "position": "bottomCenter",
             "type": ["fas", "fa-lightbulb"],
             "color": "purple",
-            "resourceName": "bulb"
+            "name": "bulb"
           },
           {
             "position": "bottomRight",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           }
         ]
       }
@@ -135,19 +135,19 @@
             "position": "topLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       },
@@ -167,19 +167,19 @@
             "position": "topLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomLeft",
             "type": ["fas", "fa-lightbulb"],
             "color": "purple",
-            "resourceName": "bulb"
+            "name": "bulb"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       },
@@ -205,19 +205,19 @@
             "position": "topLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomLeft",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       }
@@ -244,19 +244,19 @@
             "position": "bottomLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       },
@@ -282,19 +282,19 @@
             "position": "bottomLeft",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           }
         ]
       },
@@ -314,19 +314,19 @@
             "position": "topLeft",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomLeft",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           }
         ]
       }
@@ -353,19 +353,19 @@
             "position": "bottomLeft",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomCenter",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       },
@@ -385,19 +385,19 @@
             "position": "bottomLeft",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomCenter",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           }
         ]
       },
@@ -417,19 +417,19 @@
             "position": "bottomLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       }
@@ -456,19 +456,19 @@
             "position": "topLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       },
@@ -488,19 +488,19 @@
             "position": "topLeft",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           },
           {
             "position": "bottomLeft",
             "type": ["fas", "fa-crown"],
             "color": "yellow",
-            "resourceName": "crown"
+            "name": "crown"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
             "color": "grey",
-            "resourceName": "tower"
+            "name": "tower"
           }
         ]
       },
@@ -520,19 +520,19 @@
             "position": "bottomLeft",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-pagelines"],
             "color": "green",
-            "resourceName": "tree"
+            "name": "tree"
           }
         ]
       }
@@ -3286,76 +3286,86 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "blue",
     "cards": [
       {
         "innovation": "биотехнологии",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "effect": "<b>Переместите</b> в свою зону влияния активную карту любого соперника, которая приносит <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i>.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
           },
           {
             "type": "corporate",
-            "effect": "<b>Возьмите</b> <span class = 'age__number'>1</span>",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "effect": "<bЕсли</b> карты хотя бы одного игрока приносят меньше 3 <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i> <b>единственный игрок</b>, чьи карты приносят больше всего <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i> <b>выигрывает</b>.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
             "position": "bottomCenter",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "position": "topLeft",
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           }
         ]
       },
       {
         "innovation": "виртуальность",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>",
-            "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "effect": "<b>Возьмите и зачтите</b> <span class = 'age__number'>10</span>",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
           },
           {
             "type": "corporate",
-            "effect": "<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>",
-            "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "effect": "<b>Возьмите</b> две <span class = 'age__number'>10</span> и сыграйте их по очереди, затем единолично выполните кооперативные догмы со второй сыгранной карты.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
             "position": "bottomCenter",
-            "type": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "topLeft",
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           }
         ]
       }
@@ -3363,64 +3373,72 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "red",
     "cards": [
       {
         "innovation": "нанотехнологии",
-        "agePosition": "bottomCenter",
+        "agePosition": "topLeft",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Вы можете переработать</b> карту с руки. Если переработали <span class = 'age__number'>10</span>, возьмите <span class = 'age__number'>10</span> за каждый разный уровень среди карт в вашей хоне влияния.",
+            "icon": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
           {
-            "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomLeft",
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
-            "position": "bottomLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomCenter",
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           }
         ]
       },
       {
         "innovation": "робототехника",
-        "agePosition": "bottomCenter",
+        "agePosition": "topLeft",
         "dogma": [
           {
-            "type": "aggressive",
-            "effect": "<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": "corporate",
+            "effect": "<b>Зачтите</b> активную зелёную карту. Возьмите и сыграйте <span class = 'age__number'>10</span>, затем единолично выполните кооперативные догмы с сыгранной карты.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
           }
         ],
         "resourses": [
           {
-            "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomLeft",
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
-            "position": "bottomLeft",
-            "type": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "position": "bottomCenter",
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           }
         ]
       }
@@ -3428,7 +3446,7 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "green",
     "cards": [
       {
@@ -3437,26 +3455,37 @@
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Возьмите</b> две <span class = 'age__number'>1</span>.",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Единолично выполните</b> кооперативные догмы с другой своей активной карты.",
+            "icon": ["fas", "fa-crown"],
+            "color": "yellow",
+            "resource": "crown"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Если</b> у вас больше карт лидертва, чем у любого соперника, вы выграли.",
+            "icon": ["fas", "fa-crown"],
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
           {
-            "position": "bottomLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomLeft",            
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           },
           {
-            "position": "bottomCenter",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomCenter",            
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomRight",           
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           }
         ]
       },
@@ -3465,33 +3494,31 @@
         "agePosition": "topLeft",
         "dogma": [
           {
-            "type": "corporate",
-            "effect": "<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
-          },
-          {
-            "type": "corporate",
-            "effect": "<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "type": "aggressive",
+            "effect": "<b>Я требую:</b> переработайте половину карт из зоны влияния (округляя вверх)!",
+            "icon":["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
           }
         ],
         "resourses": [
           {
-            "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "position": "bottomLeft",            
+ 	          "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
-            "position": "bottomCenter",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "position": "bottomCenter",            
+ 	          "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "position": "bottomRight",            
+ 	          "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           }
         ]
       }
@@ -3499,35 +3526,46 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "purple",
     "cards": [
       {
         "innovation": "искусственный интеллект",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
-            "type": "aggressive",
-            "effect": "<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.",
-            "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": "corporate",
+            "effect": "<b>Возьмите и зачтите</b> <span class = 'age__number'>10</span>.",
+            "icon": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "resource": "bulb"
+          },
+          {
+            "type": "corporate",
+            "effect": "Если у любых игроков активны Робототехника и Виртуальность, единственный игрок с найменьшим влиянием выигрывает.",
+            "icon": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
-            "position": "bottomCenter",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "position": "bottomCenter",        
+ 	          "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "topLeft",            
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           }
         ]
       },
@@ -3537,26 +3575,44 @@
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.",
-            "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "effect": "<b>Вы можете сдвинуть</b> зелёную стопку вверх.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Возьмите и зачтите</b> <span class = 'age__number'>10</span>.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Возьмите и сыграйте</b> <span class = 'age__number'>10</span> за каждые 2 <i class='far fa-clock resourse__icon card__icon-color--blue'></i>, которые приносят ваши карты.",
+            "icon": ["far", "fa-clock"],
+            "color": "blue",
+            "resource": "clock"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
             "position": "bottomCenter",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["far", "fa-clock"],
+            "color": "blue",
+            "name": "clock"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           }
         ]
       }
@@ -3564,64 +3620,79 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "yellow",
     "cards": [
       {
         "innovation": "стволовые клетки",
-        "agePosition": "bottomLeft",
+        "agePosition": "topLeft",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \"Строительстве\".",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Вы можете зачесть</b> все карты с руки.",
+            "icon": ["fab", "fa-pagelines"],
+            "color": "green",
+             "resource": "tree"
           }
         ],
         "resourses": [
           {
-            "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomLeft",
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomCenter",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           }
         ]
       },
       {
         "innovation": "глобализация",
-        "agePosition": "bottomCenter",
+        "agePosition": "topLeft",
         "dogma": [
           {
+            "type": "aggressive",
+            "effect": "<b>Я требую:</b> переработайте активную карту, которая приносит <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i>",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
+          },
+          {
             "type": "corporate",
-            "effect": "<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Возьмите и зачтите</b> <span class = 'age__number'>6</span>. Если нет игрока чьи карты приносят больше <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i> чем <i class='fas fa-industry resourse__icon card__icon-color--red'></i>, единственный игрок с найбольшим влиянием выигрывает.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
           }
         ],
         "resourses": [
           {
-            "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomCenter",
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           }
         ]
       }
