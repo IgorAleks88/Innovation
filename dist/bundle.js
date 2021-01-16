@@ -61,6 +61,8 @@ function getCardElement(cardObj) {
   function getCardMain(card) {
     var divMain = document.createElement('div');
     divMain.classList.add('card__card-main', "card__color--".concat(card.color, "-transparent"));
+    var divDogmsBlock = document.createElement('div');
+    divDogmsBlock.classList.add('card__dogms-block');
     card.dogma.forEach(function (item) {
       var divDogma = document.createElement('div');
       divDogma.classList.add('card__dogma');
@@ -72,8 +74,9 @@ function getCardElement(cardObj) {
       dogma.classList.add('dogma__effect');
       dogma.innerHTML = item.effect;
       divDogma.appendChild(dogma);
-      divMain.appendChild(divDogma);
+      divDogmsBlock.appendChild(divDogma);
     });
+    divMain.appendChild(divDogmsBlock);
     return divMain;
   } // get card footer
 

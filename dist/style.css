@@ -82,6 +82,54 @@ fieldset {
   margin: 0;
   padding: 0; }
 
+.card__dogms-block {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 11.5rem;
+  overflow: auto; }
+  .card__color--yellow-transparent .card__dogms-block::-webkit-scrollbar-track {
+    background: #fff568;
+    border-radius: 10px; }
+  .card__color--yellow-transparent .card__dogms-block::-webkit-scrollbar-thumb {
+    background: #ffe600;
+    border-radius: 10px; }
+  .card__color--yellow-transparent .card__dogms-block::-webkit-scrollbar-thumb:hover {
+    background: #ffc400; }
+  .card__color--red-transparent .card__dogms-block::-webkit-scrollbar-track {
+    background: #f58989;
+    border-radius: 10px; }
+  .card__color--red-transparent .card__dogms-block::-webkit-scrollbar-thumb {
+    background: #fd392b;
+    border-radius: 10px; }
+  .card__color--red-transparent .card__dogms-block::-webkit-scrollbar-thumb:hover {
+    background: #fa270b; }
+  .card__color--blue-transparent .card__dogms-block::-webkit-scrollbar-track {
+    background: #8f8dfd;
+    border-radius: 10px; }
+  .card__color--blue-transparent .card__dogms-block::-webkit-scrollbar-thumb {
+    background: #5134f1;
+    border-radius: 10px; }
+  .card__color--blue-transparent .card__dogms-block::-webkit-scrollbar-thumb:hover {
+    background: #4014b8; }
+  .card__color--purple-transparent .card__dogms-block::-webkit-scrollbar-track {
+    background: #e074fc;
+    border-radius: 10px; }
+  .card__color--purple-transparent .card__dogms-block::-webkit-scrollbar-thumb {
+    background: #e92ae9;
+    border-radius: 10px; }
+  .card__color--purple-transparent .card__dogms-block::-webkit-scrollbar-thumb:hover {
+    background: #f30cc1; }
+  .card__color--green-transparent .card__dogms-block::-webkit-scrollbar-track {
+    background: #80ff86;
+    border-radius: 10px; }
+  .card__color--green-transparent .card__dogms-block::-webkit-scrollbar-thumb {
+    background: #00a116;
+    border-radius: 10px; }
+  .card__color--green-transparent .card__dogms-block::-webkit-scrollbar-thumb:hover {
+    background: #3bff44; }
+
 .example_cards {
   display: flex;
   flex-wrap: wrap; }
@@ -152,6 +200,7 @@ b {
       font-size: 1.2rem;
       margin-right: 0.5rem; }
     .card .card__card-main .card__dogma {
+      margin-top: 0.2rem;
       display: flex; }
       .card .card__card-main .card__dogma:hover {
         cursor: pointer; }
