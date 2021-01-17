@@ -5,6 +5,7 @@ import renderCard from '../cards/renderCard';
 import updateGameState from '../utility/updateGameState';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
+import getDogm from '../utility/getDogm';
 
 const gameBoard = {
   display() {
@@ -67,9 +68,6 @@ const gameBoard = {
           gameState.activePlayer.activeDecks[activeDeckName].cards.forEach((card) => {
             const cardObj = getCardObject.byID(card);
             const cardElement = getCardElement(cardObj);
-            cardElement.onclick = () => { //! TODO
-              console.log('DOGMA! :)');
-            };
             renderCard.toActive(cardElement);
             cardElement.classList.remove('xyz-in');
           });
@@ -79,15 +77,31 @@ const gameBoard = {
   },
 
   init() {
+    // set hand events
     const cardElements = document.querySelectorAll('.card');
     cardElements.forEach((elem) => {
       if (gameState.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
         elem.onclick = this.playCard;
       }
     });
-    const activeDeckElements = document.querySelectorAll('.age-deck--active');
-    activeDeckElements.forEach((elem) => {
+    // set age decks events
+    const ageDeckElements = document.querySelectorAll('.age-deck--active');
+    ageDeckElements.forEach((elem) => {
       elem.onclick = this.takeCard;
+    });
+    // set active zone events
+    const activeZoneStacks = document.querySelectorAll('.active-zone__stack');
+    activeZoneStacks.forEach((stack) => {
+      const stackLength = stack.childNodes.length;
+      if (stackLength >= 1) {
+        const stackTopCardElement = stack.childNodes[stackLength - 1];
+        stackTopCardElement.onclick = () => {
+          const dogmaFunction = getDogm(gameState.currentPlayer
+            .activeDecks[stackTopCardElement.parentElement.id].cards[stackLength - 1]);
+          dogmaFunction();
+          gameBoard.update();
+        };
+      }
     });
     this.setHeaderCurrent();
   },
@@ -152,7 +166,9 @@ const gameBoard = {
 
     // set dogma function
     cardElement.onclick = () => {
-      console.log('DOGMA! :)');
+      const dogmaFunction = getDogm(cardID);
+      dogmaFunction();
+      gameBoard.update();
     };
     renderCard.toActive(cardElement);
 
