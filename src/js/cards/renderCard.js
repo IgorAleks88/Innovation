@@ -1,3 +1,5 @@
+import gameState from '../components/gameState';
+
 function getRenderCard() {
   let hand = null;
   let activeStacks = null;
@@ -18,9 +20,9 @@ function getRenderCard() {
       hand.append(cardElement);
     },
 
-    toActive(cardElement, gameState) {
+    toActive(cardElement) {
       if (hand === null || activeStacks === null) this.initObject();
-
+      console.log(gameState);
       // get properties of target stack to calcualte later
       const targetStack = {};
       activeStacks.forEach((stack) => {

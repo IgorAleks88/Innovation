@@ -70,7 +70,7 @@ const gameBoard = {
             cardElement.onclick = () => { //! TODO
               console.log('DOGMA! :)');
             };
-            renderCard.toActive(cardElement, gameState);
+            renderCard.toActive(cardElement);
             cardElement.classList.remove('xyz-in');
           });
         }
@@ -116,7 +116,7 @@ const gameBoard = {
     const movingCardObj = getCardObject.byID(movingCardInnovation);
     const movingCardElement = getCardElement(movingCardObj);
     movingCardElement.onclick = gameBoard.playCard;
-    renderCard.toHand(movingCardElement, gameState);
+    renderCard.toHand(movingCardElement);
 
     gameState.currentPlayer.actionPoints -= 1;
 
@@ -144,7 +144,7 @@ const gameBoard = {
     playingCardElement.onclick = () => { //! TODO
       console.log('DOGMA! :)');
     };
-    renderCard.toActive(playingCardElement, gameState);
+    renderCard.toActive(playingCardElement);
 
     gameState.currentPlayer.actionPoints -= 1;
 
