@@ -22,7 +22,6 @@ function getRenderCard() {
 
     toActive(cardElement) {
       if (hand === null || activeStacks === null) this.initObject();
-      console.log(gameState);
       // get properties of target stack to calcualte later
       const targetStack = {};
       activeStacks.forEach((stack) => {
