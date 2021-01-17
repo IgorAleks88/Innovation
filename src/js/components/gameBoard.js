@@ -79,6 +79,8 @@ const gameBoard = {
   },
 
   update() {
+    gameState.currentPlayer.actionPoints -= 1;
+
     if (gameState.currentPlayer.actionPoints === 0) {
       this.displayNextTurnBtn();
     }
@@ -105,22 +107,30 @@ const gameBoard = {
   },
 
   takeCard(e) {
+    // protection of multiple clicks
+    e.target.onclick = null;
+
+    // hide age decks modal block after card taken
     const ageDecksBlock = document.querySelector('.age-decks');
     ageDecksBlock.classList.add('age-decks--hidden');
-    e.target.onclick = null;
-    let sourceDeck = e.target.id;
-    if (sourceDeck === 'cloneCurrentDeck') { sourceDeck = gameState.currentPlayer.currentDeck; }
 
-    const movingCardInnovation = gameState.ageDecks[sourceDeck].pop();
-    gameState.currentPlayer.hand.push(movingCardInnovation);
-    const movingCardObj = getCardObject.byID(movingCardInnovation);
-    const movingCardElement = getCardElement(movingCardObj);
+    // get age deck form which card was taken to use in next block
+    let ageDeck = e.target.id;
+    if (ageDeck === 'cloneCurrentDeck') { ageDeck = gameState.currentPlayer.currentDeck; }
+
+    // change gameState
+    const cardID = gameState.ageDecks[ageDeck].pop();
+    gameState.currentPlayer.hand.push(cardID);
+
+    // get card DOM element and render it to hand
+    const cardObj = getCardObject.byID(cardID);
+    const movingCardElement = getCardElement(cardObj);
     movingCardElement.onclick = gameBoard.playCard;
     renderCard.toHand(movingCardElement);
 
-    gameState.currentPlayer.actionPoints -= 1;
-
     gameBoard.update();
+
+    // protection of multiple clicks
     setTimeout(() => {
       if (gameState.currentPlayer.actionPoints !== 0) {
         e.target.onclick = gameBoard.takeCard;
