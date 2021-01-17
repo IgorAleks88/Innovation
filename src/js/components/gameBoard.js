@@ -78,20 +78,6 @@ const gameBoard = {
     });
   },
 
-  update() {
-    gameState.currentPlayer.actionPoints -= 1;
-
-    if (gameState.currentPlayer.actionPoints === 0) {
-      this.displayNextTurnBtn();
-    }
-
-    updateGameState(gameState);
-    header.changePlayerStats(gameState.currentPlayer);
-
-    document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
-    document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
-  },
-
   init() {
     const cardElements = document.querySelectorAll('.card');
     cardElements.forEach((elem) => {
@@ -104,6 +90,20 @@ const gameBoard = {
       elem.onclick = this.takeCard;
     });
     this.setHeaderCurrent();
+  },
+
+  update() {
+    gameState.currentPlayer.actionPoints -= 1;
+
+    if (gameState.currentPlayer.actionPoints === 0) {
+      this.displayNextTurnBtn();
+    }
+
+    updateGameState(gameState);
+    header.changePlayerStats(gameState.currentPlayer);
+
+    document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
+    document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
   },
 
   takeCard(e) {
@@ -139,24 +139,22 @@ const gameBoard = {
   },
 
   playCard(e) {
-    const playingCardInnovation = e.target.closest('.card').dataset.innovation;
-    const playingCardElement = e.target.closest('.card');
-    playingCardElement.onclick = null;
+    // get current card
+    const cardID = e.target.closest('.card').dataset.innovation;
+    const cardElement = e.target.closest('.card');
+    const cardObj = getCardObject.byID(cardID);
 
-    const playIndex = gameState.currentPlayer.hand.indexOf(playingCardInnovation);
-    gameState.currentPlayer.hand.splice(playIndex, 1);
+    // change gameState
+    const cardIndex = gameState.currentPlayer.hand.indexOf(cardID);
+    gameState.currentPlayer.hand.splice(cardIndex, 1);
+    const targetStack = gameState.currentPlayer.activeDecks[cardObj.color].cards;
+    targetStack.push(cardID);
 
-    const playingCardObj = getCardObject.byID(playingCardInnovation);
-
-    const targetDeckArray = gameState.currentPlayer.activeDecks[playingCardObj.color].cards;
-
-    targetDeckArray.push(playingCardInnovation);
-    playingCardElement.onclick = () => { //! TODO
+    // set dogma function
+    cardElement.onclick = () => {
       console.log('DOGMA! :)');
     };
-    renderCard.toActive(playingCardElement);
-
-    gameState.currentPlayer.actionPoints -= 1;
+    renderCard.toActive(cardElement);
 
     gameBoard.update();
   },

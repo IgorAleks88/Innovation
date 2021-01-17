@@ -56,7 +56,6 @@ function getRenderCard() {
           break;
 
         case 'left':
-          console.log('we are in case left');
           while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width
             + (targetStack.length * cardShiftValue)
             && cardShiftValue !== 10) {
