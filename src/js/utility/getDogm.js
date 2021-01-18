@@ -3,15 +3,29 @@ import getCardObject from '../cards/getCardObject';
 import getCardElement from '../cards/getCardElement';
 import renderCard from '../cards/renderCard';
 
-function getPlayersCorporate() { // TODO
-  console.log('set corporate dogm');
-  const resArr = [];
-  resArr.push(gameState.players[0]); //! test
-  resArr.push(gameState.players[1]); //! test
-  return resArr; //! test
+function getDogmResource(dogmIcon) {
+  let dogmResource = null;
+  if (dogmIcon === 'fa-fort-awesome') dogmResource = 'tower';
+  else if (dogmIcon === 'fa-pagelines') dogmResource = 'tree';
+  else if (dogmIcon === 'fa-crown') dogmResource = 'crown';
+  else if (dogmIcon === 'fa-lightbulb') dogmResource = 'bulb';
+  // else if (dogmIcon === 'fa-fort-awesome') dogmResource = 'tower'; // TODO add factories
+  // else if (dogmIcon === 'fa-fort-awesome') dogmResource = 'tower'; // TODO add clock
+  return dogmResource;
 }
 
-function getPlayersAggressive() { // TODO
+function getPlayersCorporate(cardObj) { // TODO
+  console.log('set corporate dogm');
+  const affectedPlayersArr = [];
+  const dogmIcon = cardObj.dogma.icon[1];
+  const dogmResource = getDogmResource(dogmIcon);
+
+  affectedPlayersArr.push(gameState.players[0]); //! test
+  affectedPlayersArr.push(gameState.players[1]); //! test
+  return affectedPlayersArr;
+}
+
+function getPlayersAggressive(cardObj) { // TODO
   console.log('set aggressive dogm');
   const resArr = [];
   resArr.push(gameState.currentPlayer); //! test
@@ -19,11 +33,11 @@ function getPlayersAggressive() { // TODO
 }
 
 function getAffectedPlayers(cardID) {
-  const cardObj = getCardObject.byID(cardID)
+  const cardObj = getCardObject.byID(cardID);
   if (cardObj.dogma[0].type === 'corporate') {
-    gameState.dogmPlayers = getPlayersCorporate();
+    gameState.dogmPlayers = getPlayersCorporate(cardObj);
   } else {
-    gameState.dogmPlayers = getPlayersAggressive();
+    gameState.dogmPlayers = getPlayersAggressive(cardObj);
   }
 }
 
