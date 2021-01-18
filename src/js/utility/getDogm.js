@@ -14,33 +14,32 @@ function getDogmResource(dogmIcon) {
   return dogmResource;
 }
 
-function getPlayersCorporate(cardObj) {
-  console.log('set corporate dogm');
+function getAffectedPlayers(cardID) {
+  const cardObj = getCardObject.byID(cardID);
   const affectedPlayersArr = [];
   const dogmIcon = cardObj.dogma[0].icon[1];
   const dogmResource = getDogmResource(dogmIcon);
 
-  gameState.players.forEach((player) => {
-    if (player[dogmResource] >= gameState.currentPlayer[dogmResource]) {
-      affectedPlayersArr.push(player);
-    }
-  });
-  return affectedPlayersArr;
-}
-
-function getPlayersAggressive(cardObj) { // TODO
-  console.log('set aggressive dogm');
-  const resArr = [];
-  resArr.push(gameState.currentPlayer); //! test
-  return resArr; //! test
-}
-
-function getAffectedPlayers(cardID) {
-  const cardObj = getCardObject.byID(cardID);
   if (cardObj.dogma[0].type === 'corporate') {
-    gameState.dogmPlayers = getPlayersCorporate(cardObj);
+    console.log(`set corporate dogm on ${cardObj.innovation}`); //! remove
+    gameState.players.forEach((player) => {
+      if (player[dogmResource] >= gameState.currentPlayer[dogmResource]) {
+        affectedPlayersArr.push(player);
+      }
+    });
+    console.log('players affected by this dogm are:'); //! remove
+    console.log(affectedPlayersArr); //! remove
+    gameState.dogmPlayers = affectedPlayersArr;
   } else {
-    gameState.dogmPlayers = getPlayersAggressive(cardObj);
+    console.log(`set aggresive dogm on ${cardObj.innovation}`); //! remove
+    console.log('AGGRESIVE DOGM IS UNDER CONSTRUCTION');
+    gameState.players.forEach((player) => {
+      if (player[dogmResource] < gameState.currentPlayer[dogmResource]
+        && player !== gameState.currentPlayer) {
+        affectedPlayersArr.push(player);
+      }
+      gameState.dogmPlayers = affectedPlayersArr;
+    });
   }
 }
 
@@ -65,11 +64,11 @@ export default function getDogm(cardID) {
     dogmFunc = () => {
       gameState.dogmPlayers.forEach((player) => {
         takeCard(2, 'age1', player);
-        console.log(`сработала догма колесо, добавила 2 карты игроку ${player.name}`); //! remove
+        console.log(`сработала догма колесо, дала 2 карты 1 века игроку ${player.name}`); //! remove
       });
       if (gameState.dogmPlayers.length > 1) {
         takeCard(1, `age${gameState.currentPlayer.currentAge}`, gameState.currentPlayer);
-        console.log(`за выполнение кооперативной догмы 1 карту взял ${gameState.currentPlayer.name}`); //! remove
+        console.log(`за выполнение кооперативной догмы другими игроками одну карту взял ${gameState.currentPlayer.name}`); //! remove
       }
     };
   } else {
