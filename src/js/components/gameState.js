@@ -16,6 +16,7 @@ const gameState = {
   players: [],
   currentPlayer: null,
   activePlayer: null,
+  dogmPlayers: null,
   player0: {
     name: null,
     id: 0,

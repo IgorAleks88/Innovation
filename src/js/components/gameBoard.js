@@ -95,9 +95,9 @@ const gameBoard = {
       const stackLength = stack.childNodes.length;
       if (stackLength >= 1) {
         const stackTopCardElement = stack.childNodes[stackLength - 1];
+        const dogmaFunction = getDogm(gameState.currentPlayer
+          .activeDecks[stackTopCardElement.parentElement.id].cards[stackLength - 1]);
         stackTopCardElement.onclick = () => {
-          const dogmaFunction = getDogm(gameState.currentPlayer
-            .activeDecks[stackTopCardElement.parentElement.id].cards[stackLength - 1]);
           dogmaFunction();
           gameBoard.update();
         };
@@ -165,8 +165,8 @@ const gameBoard = {
     targetStack.push(cardID);
 
     // set dogma function
+    const dogmaFunction = getDogm(cardID);
     cardElement.onclick = () => {
-      const dogmaFunction = getDogm(cardID);
       dogmaFunction();
       gameBoard.update();
     };
