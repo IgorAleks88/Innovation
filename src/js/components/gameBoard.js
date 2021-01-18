@@ -38,7 +38,11 @@ const gameBoard = {
     cloneCurrentDeck.id = 'cloneCurrentDeck';
     cloneCurrentDeck.classList.add('age-deck--active');
     cloneCurrentDeck.classList.remove('xyz-in');
-    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)'; //! change later to `${}`
+    if (gameState.activePlayer.currentAge !== 10) {
+      cloneCurrentDeck.style.backgroundImage = `url(/assets/img/cards-bg/age-0${gameState.activePlayer.currentAge}-title.png)`;
+    } else {
+      cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-10-title.png)';
+    }
     // display cloned deck in currentDeck block
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
 
@@ -57,6 +61,7 @@ const gameBoard = {
     stacks.forEach((stackElement) => {
       stackElement.innerHTML = '';
       stackElement.classList.add('active-zone__stack--empty');
+      stackElement.style = null;
       Object.keys(gameState.activePlayer.activeDecks).forEach((activeDeckName) => {
         if (activeDeckName === stackElement.id) {
           gameState.activePlayer.activeDecks[activeDeckName].cards.forEach((card) => {
@@ -96,9 +101,13 @@ const gameBoard = {
     activeDeckElements.forEach((elem) => {
       elem.onclick = this.takeCard;
     });
+    this.setHeaderCurrent();
   },
 
   takeCard(e) {
+    const ageDecksBlock = document.querySelector('.age-decks');
+    ageDecksBlock.classList.add('age-decks--hidden');
+    e.target.onclick = null;
     let sourceDeck = e.target.id;
     if (sourceDeck === 'cloneCurrentDeck') { sourceDeck = gameState.currentPlayer.currentDeck; }
 
@@ -112,6 +121,11 @@ const gameBoard = {
     gameState.currentPlayer.actionPoints -= 1;
 
     gameBoard.update();
+    setTimeout(() => {
+      if (gameState.currentPlayer.actionPoints !== 0) {
+        e.target.onclick = gameBoard.takeCard;
+      }
+    }, 250);
   },
 
   playCard(e) {
@@ -142,6 +156,7 @@ const gameBoard = {
     nextTurnBtn.classList.add('info-table__next-turn-btn');
     nextTurnBtn.innerText = 'Закончить ход';
     nextTurnBtn.addEventListener('click', () => {
+      // change current player
       for (let i = 0; i < gameState.players.length; i += 1) {
         if (gameState.currentPlayer === gameState.players[i]) {
           i += 1;
@@ -163,6 +178,17 @@ const gameBoard = {
     const infoTable = document.querySelector('.info-table');
     this.disableEvents();
     infoTable.append(nextTurnBtn);
+  },
+
+  setHeaderCurrent() {
+    Array.from(document.querySelectorAll('.head-row__name')).forEach((headerName) => {
+      headerName.parentElement.parentElement.classList.remove('player-container--active');
+      if (headerName.innerText === gameState.currentPlayer.name) {
+        setTimeout(() => {
+          headerName.parentElement.parentElement.classList.add('player-container--active');
+        }, 250);
+      }
+    });
   },
 
   disableEvents() {

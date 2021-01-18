@@ -6,6 +6,12 @@ export default function displayModal(playerName) {
   const modalBlock = document.createElement('div');
   modalBlock.classList.add('modal__block');
 
+  const modalOverlay = document.createElement('div');
+  modalOverlay.classList.add('modal__overlay');
+
+  const modalWrapper = document.createElement('div');
+  modalWrapper.classList.add('modal__wrapper');
+
   const modalText = document.createElement('div');
   modalText.classList.add('modal__text');
   modalText.innerText = `Сейчас ход игрока ${playerName}`;
@@ -21,7 +27,8 @@ export default function displayModal(playerName) {
     }, 500);
   });
 
-  modalBlock.append(modalText, modalBtn);
+  modalWrapper.append(modalText, modalBtn);
+  modalBlock.append(modalOverlay, modalWrapper);
   modalBg.append(modalBlock);
 
   document.body.prepend(modalBg);

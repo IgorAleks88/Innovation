@@ -21,6 +21,9 @@ export default function getCardElement(cardObj) {
     const divMain = document.createElement('div');
     divMain.classList.add('card__card-main', `card__color--${card.color}-transparent`);
 
+    const divDogmsBlock = document.createElement('div');
+    divDogmsBlock.classList.add('card__dogms-block');
+
     card.dogma.forEach((item) => {
       const divDogma = document.createElement('div');
       divDogma.classList.add('card__dogma');
@@ -35,8 +38,10 @@ export default function getCardElement(cardObj) {
       dogma.innerHTML = item.effect;
       divDogma.appendChild(dogma);
 
-      divMain.appendChild(divDogma);
+      divDogmsBlock.appendChild(divDogma);
     });
+
+    divMain.appendChild(divDogmsBlock);
 
     return divMain;
   }

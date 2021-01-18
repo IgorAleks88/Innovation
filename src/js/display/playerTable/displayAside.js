@@ -234,11 +234,10 @@ const displayAside = {
       deck.classList.add('age-deck');
       deck.id = `age${i + 1}`;
       if (i < 9) {
-        deck.style.backgroundImage = `url(./assets/img/cards-bg/age-0${i + 1}.jpg)`;
+        deck.style.backgroundImage = `url(./assets/img/cards-bg/age-0${i + 1}-title.png)`;
       } else if (i === 9) {
-        deck.style.backgroundImage = 'url(./assets/img/cards-bg/age-10.jpg)';
+        deck.style.backgroundImage = 'url(./assets/img/cards-bg/age-10-title.png)';
       }
-      deck.addEventListener('click', () => this.ageDecksBlock.classList.toggle('age-decks--hidden'));
 
       // Animation classes and attributes for cards here
       deck.classList.add('xyz-in');
