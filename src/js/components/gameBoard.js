@@ -166,8 +166,8 @@ const gameBoard = {
 
     // set dogma function
     cardElement.onclick = () => {
-      dogmas[cardID](cardObj);
       gameBoard.update();
+      dogmas[cardID](cardObj);
     };
     renderCard.toActive(cardElement);
 
