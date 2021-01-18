@@ -1,3 +1,5 @@
+import gameState from '../components/gameState';
+
 function getRenderCard() {
   let hand = null;
   let activeStacks = null;
@@ -18,9 +20,8 @@ function getRenderCard() {
       hand.append(cardElement);
     },
 
-    toActive(cardElement, gameState) {
+    toActive(cardElement) {
       if (hand === null || activeStacks === null) this.initObject();
-
       // get properties of target stack to calcualte later
       const targetStack = {};
       activeStacks.forEach((stack) => {
@@ -55,7 +56,6 @@ function getRenderCard() {
           break;
 
         case 'left':
-          console.log('we are in case left');
           while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width
             + (targetStack.length * cardShiftValue)
             && cardShiftValue !== 10) {

@@ -2736,6 +2736,7 @@
   {
     "age": 7,
     "cardImg": "./assets/img/cards-bg/age-07.jpg",
+
     "color": "green",
     "cards": [
       {
@@ -3614,7 +3615,7 @@
   },
   {
     "age": 9,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-09jpg",
     "color": "purple",
     "cards": [
       {
