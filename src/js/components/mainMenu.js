@@ -3,9 +3,9 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 
 const users = {};
 
-function validation(userObj) {
+function isValidate(userObj) {
   if (userObj.names.length === userObj.players) {
-    return userObj.names.every((name) => name.length > 2 && name.length < 11);
+    return userObj.names.every((name) => name.length > 2 && name.length < 8);
   }
   return false;
 }
@@ -52,9 +52,9 @@ class Menu {
       } else if (e.target.dataset.players) {
         this.createNameInputField(e.target.dataset.players);
       } else if (e.target.className.includes('get-names')) {
-        e.preventDefault();
         this.addNamesToUsers();
-        if (validation(users)) {
+        if (isValidate(users)) {
+          e.preventDefault();
           const intro = this.menu.parentElement.parentElement.parentElement;
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
@@ -112,7 +112,7 @@ class Menu {
       inputHTML.push(
         /* html */ `
         <label for="plaeyr${i}">Введити имя игрока № ${i}</label>
-        <input type="text" id="player${i}" name="name" data-name="" pattern="[a-zA-Zа-яА-Я0-9_]{3,10}" title="Введите от 3 до 10 символов" required>
+        <input type="text" id="player${i}" name="name" data-name="" pattern="[a-zA-Zа-яА-Я0-9_]{3,7}" title="Введите от 3 до 7 символов" required>
       `,
       );
     }
