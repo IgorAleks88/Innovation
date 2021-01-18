@@ -114,7 +114,7 @@ const gameBoard = {
     }
 
     updateGameState(gameState);
-    header.changePlayerStats(gameState.currentPlayer);
+    gameState.players.forEach((player) => header.changePlayerStats(player));
 
     document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
     document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;

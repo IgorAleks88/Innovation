@@ -56,5 +56,5 @@ export default function initGameState(usersInfo) {
   }
   gameState.currentPlayer = gameState.players[0];
   gameState.activePlayer = gameState.players[0];
-  gameState.currentPlayer.actionPoints = 15; // test
+  gameState.currentPlayer.actionPoints = 2; // test
 }
