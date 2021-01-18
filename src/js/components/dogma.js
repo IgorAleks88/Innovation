@@ -35,10 +35,23 @@ function takeCard(cardsNum, ageNum, playerID) {
   }
 }
 
+function playCard(cardID, playerID) {
+  const cardIndex = gameState.players[playerID].hand.indexOf(cardID);
+  gameState.players[playerID].hand.splice(cardIndex, 1);
+  const cardObj = getCardObject.byID(cardID);
+  const cardElement = getCardElement(cardObj);
+  const targetStack = gameState.players[playerID].activeDecks[cardObj.color].cards;
+  targetStack.push(cardID);
+  if (gameState.players[playerID] === gameState.currentPlayer) {
+    cardElement.onclick = () => dogmas['письменность'](cardObj); //! change later
+    renderCard.toActive(cardElement);
+  }
+}
+
 function corporateBonus(arrOfId) {
   if (arrOfId.length > 1) {
     takeCard(1, gameState.currentPlayer.currentAge, gameState.currentPlayer.id);
-  };
+  }
 }
 
 const dogmas = {
@@ -53,6 +66,14 @@ const dogmas = {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       takeCard(2, 1, id);
+    });
+    corporateBonus(arrOfId);
+  },
+  парус: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      takeCard(1, 1, id);
+      playCard(gameState.players[id].hand[gameState.players[id].hand.length - 1], id);
     });
     corporateBonus(arrOfId);
   },
