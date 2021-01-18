@@ -18,6 +18,49 @@ export default function updateGameState(gameState) {
           player[e.name] += 1;
         });
       }
+      // calculate shift
+      if (currentStack.cards.length > 1) {
+        // calculate top shift
+        if (currentStack.shift === 'top') {
+          const arrOfPositions = ['bottomLeft', 'bottomCenter', 'bottomRight'];
+          for (let i = 0; i <= currentStack.cards.length - 2; i += 1) {
+            const currentCardInnovation = currentStack.cards[i];
+            const currentCardObj = getCardObject.byID(currentCardInnovation);
+            currentCardObj.resourses.forEach((e) => {
+              if (arrOfPositions.indexOf(e.position) > -1) {
+                player[e.name] += 1;
+              }
+            });
+          }
+        }
+
+        // calculate left shift
+        if (currentStack.shift === 'left') {
+          for (let i = 0; i <= currentStack.cards.length - 2; i += 1) {
+            const currentCardInnovation = currentStack.cards[i];
+            const currentCardObj = getCardObject.byID(currentCardInnovation);
+            currentCardObj.resourses.forEach((e) => {
+              if (e.position === 'bottomRight') {
+                player[e.name] += 1;
+              }
+            });
+          }
+        }
+
+        // calculate right shift
+        if (currentStack.shift === 'right') {
+          const arrOfPositions = ['bottomLeft', 'topLeft'];
+          for (let i = 0; i <= currentStack.cards.length - 2; i += 1) {
+            const currentCardInnovation = currentStack.cards[i];
+            const currentCardObj = getCardObject.byID(currentCardInnovation);
+            currentCardObj.resourses.forEach((e) => {
+              if (arrOfPositions.indexOf(e.position) > -1) {
+                player[e.name] += 1;
+              }
+            });
+          }
+        }
+      }
     });
   });
 

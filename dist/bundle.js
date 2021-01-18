@@ -1956,6 +1956,58 @@ function updateGameState(gameState) {
         highestCard.resourses.forEach(function (e) {
           player[e.name] += 1;
         });
+      } // calculate shift
+
+
+      if (currentStack.cards.length > 1) {
+        // calculate top shift
+        if (currentStack.shift === 'top') {
+          (function () {
+            var arrOfPositions = ['bottomLeft', 'bottomCenter', 'bottomRight'];
+
+            for (var i = 0; i <= currentStack.cards.length - 2; i += 1) {
+              var currentCardInnovation = currentStack.cards[i];
+              var currentCardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(currentCardInnovation);
+              currentCardObj.resourses.forEach(function (e) {
+                if (arrOfPositions.indexOf(e.position) > -1) {
+                  player[e.name] += 1;
+                }
+              });
+            }
+          })();
+        } // calculate left shift
+
+
+        if (currentStack.shift === 'left') {
+          for (var i = 0; i <= currentStack.cards.length - 2; i += 1) {
+            var currentCardInnovation = currentStack.cards[i];
+            var currentCardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(currentCardInnovation);
+            currentCardObj.resourses.forEach(function (e) {
+              if (e.position === 'bottomRight') {
+                player[e.name] += 1;
+              }
+            });
+          }
+        } // calculate right shift
+
+
+        if (currentStack.shift === 'right') {
+          (function () {
+            var arrOfPositions = ['bottomLeft', 'topLeft'];
+
+            for (var _i = 0; _i <= currentStack.cards.length - 2; _i += 1) {
+              var _currentCardInnovation = currentStack.cards[_i];
+
+              var _currentCardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_0__.default.byID(_currentCardInnovation);
+
+              _currentCardObj.resourses.forEach(function (e) {
+                if (arrOfPositions.indexOf(e.position) > -1) {
+                  player[e.name] += 1;
+                }
+              });
+            }
+          })();
+        }
       }
     });
   }); // update currentAge for each player
