@@ -910,7 +910,7 @@
   },
   {
     "age": 3,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-03.jpg",
     "color": "blue",
     "cards": [
       {
@@ -993,7 +993,7 @@
   },
   {
     "age": 3,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-03.jpg",
     "color": "red",
     "cards": [
       {
@@ -1067,7 +1067,7 @@
   },
   {
     "age": 3,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-03.jpg",
     "color": "green",
     "cards": [
       {
@@ -1144,7 +1144,7 @@
   },
   {
     "age": 3,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-03.jpg",
     "color": "purple",
     "cards": [
       {
@@ -1221,7 +1221,7 @@
   },
   {
     "age": 3,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-03.jpg",
     "color": "yellow",
     "cards": [
       {
@@ -1297,7 +1297,7 @@
   },
   {
     "age": 4,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-04.jpg",
     "color": "blue",
     "cards": [
       {
@@ -1377,7 +1377,7 @@
   },
   {
     "age": 4,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-04.jpg",
     "color": "red",
     "cards": [
       {
@@ -1442,7 +1442,7 @@
   },
   {
     "age": 4,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-04.jpg",
     "color": "green",
     "cards": [
       {
@@ -1513,7 +1513,7 @@
   },
   {
     "age": 4,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-04.jpg",
     "color": "purple",
     "cards": [
       {
@@ -1578,7 +1578,7 @@
   },
   {
     "age": 4,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-04.jpg",
     "color": "yellow",
     "cards": [
       {
@@ -1643,7 +1643,7 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "blue",
     "cards": [
       {
@@ -1720,7 +1720,7 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "red",
     "cards": [
       {
@@ -1785,7 +1785,7 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "green",
     "cards": [
       {
@@ -1856,7 +1856,7 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "purple",
     "cards": [
       {
@@ -1921,7 +1921,7 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "yellow",
     "cards": [
       {
@@ -1986,7 +1986,7 @@
   },
   {
     "age": 6,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-06.jpg",
     "color": "blue",
     "cards": [
       {
@@ -2063,7 +2063,7 @@
   },
   {
     "age": 6,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-06.jpg",
     "color": "red",
     "cards": [
       {
@@ -2128,7 +2128,7 @@
   },
   {
     "age": 6,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-06.jpg",
     "color": "green",
     "cards": [
       {
@@ -2199,7 +2199,7 @@
   },
   {
     "age": 6,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-06.jpg",
     "color": "purple",
     "cards": [
       {
@@ -2264,7 +2264,7 @@
   },
   {
     "age": 6,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-06.jpg",
     "color": "yellow",
     "cards": [
       {
@@ -2329,7 +2329,7 @@
   },
   {
     "age": 7,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-07jpg",
     "color": "blue",
     "cards": [
       {
@@ -2406,7 +2406,7 @@
   },
   {
     "age": 7,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-07jpg",
     "color": "red",
     "cards": [
       {
@@ -2471,7 +2471,7 @@
   },
   {
     "age": 7,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-07jpg",
     "color": "green",
     "cards": [
       {
@@ -2542,7 +2542,7 @@
   },
   {
     "age": 7,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-07jpg",
     "color": "purple",
     "cards": [
       {
@@ -2607,7 +2607,7 @@
   },
   {
     "age": 7,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-07jpg",
     "color": "yellow",
     "cards": [
       {
@@ -2672,7 +2672,7 @@
   },
   {
     "age": 8,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-08jpg",
     "color": "blue",
     "cards": [
       {
@@ -2749,7 +2749,7 @@
   },
   {
     "age": 8,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-08jpg",
     "color": "red",
     "cards": [
       {
@@ -2814,7 +2814,7 @@
   },
   {
     "age": 8,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-08jpg",
     "color": "green",
     "cards": [
       {
@@ -2885,7 +2885,7 @@
   },
   {
     "age": 8,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-08jpg",
     "color": "purple",
     "cards": [
       {
@@ -2950,7 +2950,7 @@
   },
   {
     "age": 8,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-08jpg",
     "color": "yellow",
     "cards": [
       {
@@ -3015,7 +3015,7 @@
   },
   {
     "age": 9,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-09jpg",
     "color": "blue",
     "cards": [
       {
@@ -3092,7 +3092,7 @@
   },
   {
     "age": 9,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-09jpg",
     "color": "red",
     "cards": [
       {
@@ -3157,7 +3157,7 @@
   },
   {
     "age": 9,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-09jpg",
     "color": "green",
     "cards": [
       {
@@ -3228,7 +3228,7 @@
   },
   {
     "age": 9,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-09jpg",
     "color": "purple",
     "cards": [
       {
@@ -3293,7 +3293,7 @@
   },
   {
     "age": 9,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-09jpg",
     "color": "yellow",
     "cards": [
       {
@@ -3358,7 +3358,7 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "blue",
     "cards": [
       {
@@ -3435,7 +3435,7 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "red",
     "cards": [
       {
@@ -3500,7 +3500,7 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "green",
     "cards": [
       {
@@ -3571,7 +3571,7 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "purple",
     "cards": [
       {
@@ -3636,7 +3636,7 @@
   },
   {
     "age": 10,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-10.jpg",
     "color": "yellow",
     "cards": [
       {

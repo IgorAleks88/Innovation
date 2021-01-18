@@ -5,6 +5,7 @@ import renderCard from '../cards/renderCard';
 import updateGameState from '../utility/updateGameState';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
+import getDogm from '../utility/getDogm';
 
 const gameBoard = {
   display() {
@@ -67,10 +68,7 @@ const gameBoard = {
           gameState.activePlayer.activeDecks[activeDeckName].cards.forEach((card) => {
             const cardObj = getCardObject.byID(card);
             const cardElement = getCardElement(cardObj);
-            cardElement.onclick = () => { //! TODO
-              console.log('DOGMA! :)');
-            };
-            renderCard.toActive(cardElement, gameState);
+            renderCard.toActive(cardElement);
             cardElement.classList.remove('xyz-in');
           });
         }
@@ -78,7 +76,39 @@ const gameBoard = {
     });
   },
 
+  init() {
+    // set hand events
+    const cardElements = document.querySelectorAll('.card');
+    cardElements.forEach((elem) => {
+      if (gameState.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
+        elem.onclick = this.playCard;
+      }
+    });
+    // set age decks events
+    const ageDeckElements = document.querySelectorAll('.age-deck--active');
+    ageDeckElements.forEach((elem) => {
+      elem.onclick = this.takeCard;
+    });
+    // set active zone events
+    const activeZoneStacks = document.querySelectorAll('.active-zone__stack');
+    activeZoneStacks.forEach((stack) => {
+      const stackLength = stack.childNodes.length;
+      if (stackLength >= 1) {
+        const stackTopCardElement = stack.childNodes[stackLength - 1];
+        stackTopCardElement.onclick = () => {
+          const dogmaFunction = getDogm(gameState.currentPlayer
+            .activeDecks[stackTopCardElement.parentElement.id].cards[stackLength - 1]);
+          dogmaFunction();
+          gameBoard.update();
+        };
+      }
+    });
+    this.setHeaderCurrent();
+  },
+
   update() {
+    gameState.currentPlayer.actionPoints -= 1;
+
     if (gameState.currentPlayer.actionPoints === 0) {
       this.displayNextTurnBtn();
     }
@@ -90,37 +120,31 @@ const gameBoard = {
     document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
   },
 
-  init() {
-    const cardElements = document.querySelectorAll('.card');
-    cardElements.forEach((elem) => {
-      if (gameState.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
-        elem.onclick = this.playCard;
-      }
-    });
-    const activeDeckElements = document.querySelectorAll('.age-deck--active');
-    activeDeckElements.forEach((elem) => {
-      elem.onclick = this.takeCard;
-    });
-    this.setHeaderCurrent();
-  },
-
   takeCard(e) {
+    // protection of multiple clicks
+    e.target.onclick = null;
+
+    // hide age decks modal block after card taken
     const ageDecksBlock = document.querySelector('.age-decks');
     ageDecksBlock.classList.add('age-decks--hidden');
-    e.target.onclick = null;
-    let sourceDeck = e.target.id;
-    if (sourceDeck === 'cloneCurrentDeck') { sourceDeck = gameState.currentPlayer.currentDeck; }
 
-    const movingCardInnovation = gameState.ageDecks[sourceDeck].pop();
-    gameState.currentPlayer.hand.push(movingCardInnovation);
-    const movingCardObj = getCardObject.byID(movingCardInnovation);
-    const movingCardElement = getCardElement(movingCardObj);
+    // get age deck form which card was taken to use in next block
+    let ageDeck = e.target.id;
+    if (ageDeck === 'cloneCurrentDeck') { ageDeck = gameState.currentPlayer.currentDeck; }
+
+    // change gameState
+    const cardID = gameState.ageDecks[ageDeck].pop();
+    gameState.currentPlayer.hand.push(cardID);
+
+    // get card DOM element and render it to hand
+    const cardObj = getCardObject.byID(cardID);
+    const movingCardElement = getCardElement(cardObj);
     movingCardElement.onclick = gameBoard.playCard;
-    renderCard.toHand(movingCardElement, gameState);
-
-    gameState.currentPlayer.actionPoints -= 1;
+    renderCard.toHand(movingCardElement);
 
     gameBoard.update();
+
+    // protection of multiple clicks
     setTimeout(() => {
       if (gameState.currentPlayer.actionPoints !== 0) {
         e.target.onclick = gameBoard.takeCard;
@@ -129,24 +153,24 @@ const gameBoard = {
   },
 
   playCard(e) {
-    const playingCardInnovation = e.target.closest('.card').dataset.innovation;
-    const playingCardElement = e.target.closest('.card');
-    playingCardElement.onclick = null;
+    // get current card
+    const cardID = e.target.closest('.card').dataset.innovation;
+    const cardElement = e.target.closest('.card');
+    const cardObj = getCardObject.byID(cardID);
 
-    const playIndex = gameState.currentPlayer.hand.indexOf(playingCardInnovation);
-    gameState.currentPlayer.hand.splice(playIndex, 1);
+    // change gameState
+    const cardIndex = gameState.currentPlayer.hand.indexOf(cardID);
+    gameState.currentPlayer.hand.splice(cardIndex, 1);
+    const targetStack = gameState.currentPlayer.activeDecks[cardObj.color].cards;
+    targetStack.push(cardID);
 
-    const playingCardObj = getCardObject.byID(playingCardInnovation);
-
-    const targetDeckArray = gameState.currentPlayer.activeDecks[playingCardObj.color].cards;
-
-    targetDeckArray.push(playingCardInnovation);
-    playingCardElement.onclick = () => { //! TODO
-      console.log('DOGMA! :)');
+    // set dogma function
+    cardElement.onclick = () => {
+      const dogmaFunction = getDogm(cardID);
+      dogmaFunction();
+      gameBoard.update();
     };
-    renderCard.toActive(playingCardElement, gameState);
-
-    gameState.currentPlayer.actionPoints -= 1;
+    renderCard.toActive(cardElement);
 
     gameBoard.update();
   },
