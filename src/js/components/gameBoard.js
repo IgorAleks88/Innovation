@@ -95,9 +95,9 @@ const gameBoard = {
       const stackLength = stack.childNodes.length;
       if (stackLength >= 1) {
         const stackTopCardElement = stack.childNodes[stackLength - 1];
+        const dogmaFunction = getDogm(gameState.currentPlayer
+          .activeDecks[stackTopCardElement.parentElement.id].cards[stackLength - 1]);
         stackTopCardElement.onclick = () => {
-          const dogmaFunction = getDogm(gameState.currentPlayer
-            .activeDecks[stackTopCardElement.parentElement.id].cards[stackLength - 1]);
           dogmaFunction();
           gameBoard.update();
         };
@@ -114,7 +114,9 @@ const gameBoard = {
     }
 
     updateGameState(gameState);
-    header.changePlayerStats(gameState.currentPlayer);
+    gameState.players.forEach((player) => {
+      header.changePlayerStats(player);
+    });
 
     document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
     document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
@@ -163,16 +165,23 @@ const gameBoard = {
     gameState.currentPlayer.hand.splice(cardIndex, 1);
     const targetStack = gameState.currentPlayer.activeDecks[cardObj.color].cards;
     targetStack.push(cardID);
+    gameBoard.update();
 
     // set dogma function
+    const dogmaFunction = getDogm(cardID);
     cardElement.onclick = () => {
-      const dogmaFunction = getDogm(cardID);
       dogmaFunction();
       gameBoard.update();
     };
+
     renderCard.toActive(cardElement);
 
-    gameBoard.update();
+    // remove event from previous active card
+    const stackElement = cardElement.parentElement;
+    const stackCardsElements = Array.from(stackElement.childNodes);
+    if (stackCardsElements[stackCardsElements.length - 2] !== undefined) {
+      stackCardsElements[stackCardsElements.length - 2].onclick = null;
+    }
   },
 
   displayNextTurnBtn() {
