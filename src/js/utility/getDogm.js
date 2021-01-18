@@ -2,6 +2,7 @@ import gameState from '../components/gameState';
 import getCardObject from '../cards/getCardObject';
 import getCardElement from '../cards/getCardElement';
 import renderCard from '../cards/renderCard';
+import gameBoard from '../components/gameBoard';
 
 function getDogmResource(dogmIcon) {
   let dogmResource = null;
@@ -51,6 +52,7 @@ function takeCard(num, age, player) {
     if (player === gameState.currentPlayer) {
       const cardObj = getCardObject.byID(cardID);
       const cardElement = getCardElement(cardObj);
+      cardElement.onclick = gameBoard.playCard;
       renderCard.toHand(cardElement);
     }
   }
