@@ -5,7 +5,7 @@ import renderCard from '../cards/renderCard';
 import updateGameState from '../utility/updateGameState';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
-import getDogm from '../utility/getDogm';
+import dogmas from './dogma';
 
 const gameBoard = {
   display() {
@@ -95,10 +95,10 @@ const gameBoard = {
       const stackLength = stack.childNodes.length;
       if (stackLength >= 1) {
         const stackTopCardElement = stack.childNodes[stackLength - 1];
-        const dogmaFunction = getDogm(gameState.currentPlayer
-          .activeDecks[stackTopCardElement.parentElement.id].cards[stackLength - 1]);
         stackTopCardElement.onclick = () => {
-          dogmaFunction();
+          const cardID = stackTopCardElement.dataset.innovation;
+          const cardObj = getCardObject.byID(cardID);
+          dogmas[cardID](cardObj);
           gameBoard.update();
         };
       }
@@ -114,9 +114,7 @@ const gameBoard = {
     }
 
     updateGameState(gameState);
-    gameState.players.forEach((player) => {
-      header.changePlayerStats(player);
-    });
+    header.changePlayerStats(gameState.currentPlayer);
 
     document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
     document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
@@ -139,7 +137,7 @@ const gameBoard = {
     gameState.currentPlayer.hand.push(cardID);
 
     // get card DOM element and render it to hand
-    const cardObj = getCardObject.byID(cardID);
+    const cardObj = getCardObject.byID('письменность');
     const movingCardElement = getCardElement(cardObj);
     movingCardElement.onclick = gameBoard.playCard;
     renderCard.toHand(movingCardElement);
@@ -165,23 +163,15 @@ const gameBoard = {
     gameState.currentPlayer.hand.splice(cardIndex, 1);
     const targetStack = gameState.currentPlayer.activeDecks[cardObj.color].cards;
     targetStack.push(cardID);
-    gameBoard.update();
 
     // set dogma function
-    const dogmaFunction = getDogm(cardID);
     cardElement.onclick = () => {
-      dogmaFunction();
+      dogmas[cardID](cardObj);
       gameBoard.update();
     };
-
     renderCard.toActive(cardElement);
 
-    // remove event from previous active card
-    const stackElement = cardElement.parentElement;
-    const stackCardsElements = Array.from(stackElement.childNodes);
-    if (stackCardsElements[stackCardsElements.length - 2] !== undefined) {
-      stackCardsElements[stackCardsElements.length - 2].onclick = null;
-    }
+    gameBoard.update();
   },
 
   displayNextTurnBtn() {

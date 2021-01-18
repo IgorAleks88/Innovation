@@ -112,7 +112,7 @@ class Menu {
       inputHTML.push(
         /* html */ `
         <label for="plaeyr${i}">Введити имя игрока № ${i}</label>
-        <input type="text" id="player${i}" name="name" data-name="" pattern="[a-zA-Zа-яА-Я0-9_]{3,7}" title="Введите от 3 до 7 символов" required>
+        <input type="text" id="player${i}" value="player${i}" name="name" data-name="" pattern="[a-zA-Zа-яА-Я0-9_]{3,7}" title="Введите от 3 до 7 символов" required>
       `,
       );
     }
