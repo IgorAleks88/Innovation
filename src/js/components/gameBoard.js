@@ -165,6 +165,7 @@ const gameBoard = {
     gameState.currentPlayer.hand.splice(cardIndex, 1);
     const targetStack = gameState.currentPlayer.activeDecks[cardObj.color].cards;
     targetStack.push(cardID);
+    gameBoard.update();
 
     // set dogma function
     const dogmaFunction = getDogm(cardID);
@@ -172,9 +173,15 @@ const gameBoard = {
       dogmaFunction();
       gameBoard.update();
     };
+
     renderCard.toActive(cardElement);
 
-    gameBoard.update();
+    // remove event from previous active card
+    const stackElement = cardElement.parentElement;
+    const stackCardsElements = Array.from(stackElement.childNodes);
+    if (stackCardsElements[stackCardsElements.length - 2] !== undefined) {
+      stackCardsElements[stackCardsElements.length - 2].onclick = null;
+    }
   },
 
   displayNextTurnBtn() {

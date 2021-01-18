@@ -14,14 +14,17 @@ function getDogmResource(dogmIcon) {
   return dogmResource;
 }
 
-function getPlayersCorporate(cardObj) { // TODO
+function getPlayersCorporate(cardObj) {
   console.log('set corporate dogm');
   const affectedPlayersArr = [];
-  const dogmIcon = cardObj.dogma.icon[1];
+  const dogmIcon = cardObj.dogma[0].icon[1];
   const dogmResource = getDogmResource(dogmIcon);
 
-  affectedPlayersArr.push(gameState.players[0]); //! test
-  affectedPlayersArr.push(gameState.players[1]); //! test
+  gameState.players.forEach((player) => {
+    if (player[dogmResource] >= gameState.currentPlayer[dogmResource]) {
+      affectedPlayersArr.push(player);
+    }
+  });
   return affectedPlayersArr;
 }
 
