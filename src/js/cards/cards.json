@@ -1571,76 +1571,79 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "blue",
     "cards": [
       {
         "innovation": "физика",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
-          },
-          {
-            "type": "corporate",
-            "effect": "<b>Возьмите</b> <span class = 'age__number'>1</span>",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "effect": "<b>Возьмите и покажите</b> всем игрокам три <span class = 'age__number'>6</span>. Если все они разного цвета, заберите их на руку. В противной случае переработайте взятые карты, а также все карты с руки.",
+            "icon": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
             "position": "bottomCenter",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "type":["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "position": "topLeft",
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           }
         ]
       },
       {
         "innovation": "химия",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>",
-            "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "effect": "<b>Вы можете сдвинуть</b> синюю стопку вправо.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
           },
           {
             "type": "corporate",
-            "effect": "<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>",
-            "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "effect": "<b>Возьмите и зачтите</b> карту, уровень которой на 1 выше, чем у вашей старшей активной карты. Затем переработайте карту из зоны влияния.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
             "type": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "name": "bulb"
           },
           {
             "position": "bottomCenter",
-            "type": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "topLeft",
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           }
         ]
       }
@@ -1648,64 +1651,93 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "red",
     "cards": [
       {
         "innovation": "добыча угля",
-        "agePosition": "bottomCenter",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Возьмите и архивируйте</b> <span class = 'age__number'>5</span>.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Вы можете сдвинуть</b> красную стопку вправо.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Вы можете зачесть</b> активную карту. Если сделали это, зачтите еще и лежащую под ней карту.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
           }
         ],
         "resourses": [
           {
             "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
             "position": "bottomLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomCenter",
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           }
         ]
       },
       {
         "innovation": "пиратство",
-        "agePosition": "bottomCenter",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "aggressive",
-            "effect": "<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Я требую:</b> переместите две карты уровня <span class = 'age__number'>4</span> или ниже из своей зоны влияния в мою!",
+            "icon": ["fas", "fa-crown"],
+            "color": "yellow",
+            "resource": "crown"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Если</b> по предыдущей догме перемещена хотя бы одна карта, зачтите свою младшую активную карту, которая приносит <i class='fas fa-crown resourse__icon card__icon-color--yellow'></i>.",
+            "icon": ["fas", "fa-crown"],
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
           {
             "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           },
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomCenter",
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           }
         ]
       }
@@ -1713,70 +1745,79 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "green",
     "cards": [
       {
         "innovation": "банковское дело",
-        "agePosition": "topLeft",
+        "agePosition": "bottomCenter",
         "dogma": [
           {
+            "type": "aggressive",
+            "effect": "<b>Я требую:</b> переместите мне в игру активную не зелёную карту, которая приносит <i class='fas fa-industry resourse__icon card__icon-color--red'></i>! Если сделали это, возьмите и зачтите <span class = 'age__number'>5</span>!",
+            "icon": ["fas", "fa-crown"],
+            "color": "yellow",
+            "resource": "crown"
+          },
+          {
             "type": "corporate",
-            "effect": "<b>Возьмите</b> две <span class = 'age__number'>1</span>.",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Вы можете сдвинуть</b> зелёную стопку вправо.",
+            "icon": ["fas", "fa-crown"],
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           },
           {
-            "position": "bottomCenter",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "topLeft",
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           }
         ]
       },
       {
         "innovation": "гуманизм",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
-          },
-          {
-            "type": "corporate",
-            "effect": "<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников",
-            "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "effect": "<b>Вы можете переработать</b> карту с руки. Если сделали это, сдвиньте одну стопку вправо и возьмите карту, уровень которой равен числу карт в этой стопке.",
+            "icon": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomCenter",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "position": "topLeft",
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           }
         ]
       }
@@ -1784,64 +1825,79 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "purple",
     "cards": [
       {
         "innovation": "научные общества",
-        "agePosition": "topLeft",
+        "agePosition": "bottomLeft",
         "dogma": [
           {
             "type": "aggressive",
-            "effect": "<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.",
+            "effect": "<b>Я требую:</b> переместите мне в игру активную но не фиолетовую карту, которая приносит <i class='fas fa-lightbulb resourse__icon card__icon-color--purple'></i>! Если сделали это, возьмите <span class = 'age__number'>5</span>!",
             "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
           {
-            "position": "bottomLeft",
+            "position": "topLeft",
             "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "name": "crown"
           },
           {
             "position": "bottomCenter",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           }
         ]
       },
       {
         "innovation": "астрономия",
-        "agePosition": "topLeft",
+        "agePosition": "bottomRight",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.",
-            "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "effect": "<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>6</span>. Если она зелёная или синяя, возьмите и сыграйте эту догму снова. В противном случае заберите взятую карту на руку..",
+            "icon": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "resource": "bulb"
+          },
+          {
+            "type": "corporate",
+            "effect": "<b>Если</b> у всех ваших не фиолетовых активных карт уровень <span class = 'age__number'>6</span> или выше, добейтесь лидерства в \"Науке\".",
+            "icon": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
             "position": "bottomCenter",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "position": "topLeft",
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           }
         ]
       }
@@ -1849,64 +1905,79 @@
   },
   {
     "age": 5,
-    "cardImg": "./assets/img/cards-bg/age-01.jpg",
+    "cardImg": "./assets/img/cards-bg/age-05.jpg",
     "color": "yellow",
     "cards": [
       {
         "innovation": "паровая машина",
-        "agePosition": "bottomLeft",
+        "agePosition": "topLeft",
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \"Строительстве\".",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Возьмите и архивируйте</b> две <span class = 'age__number'>4</span>, затем зачтите нижнюю жёлтую карту.",
+            "icon": ["fas", "fa-industry"],
+            "color": "red",
+            "resource": "factory"
           }
         ],
         "resourses": [
           {
-            "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomLeft",
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           },
           {
             "position": "bottomCenter",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-crown"],
+            "color": "yellow",
+            "name": "crown"
           },
           {
             "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fas", "fa-industry"],
+            "color": "red",
+            "name": "factory"
           }
         ]
       },
       {
         "innovation": "статистика",
-        "agePosition": "bottomCenter",
+        "agePosition": "bottomRight",
         "dogma": [
           {
+            "type": "aggressive",
+            "effect": "<b>Я требую:</b> переместите старшую карту из зоны влияния себе на руку! Если сделали это и у вас на руке только одно карта, выполните эту догму снова!",
+            "icon": ["fab", "fa-pagelines"],
+            "color": "green",
+            "resource": "tree"
+          },
+          {
             "type": "corporate",
-            "effect": "<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.",
-            "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "effect": "<b>Вы можете сдвинуть</b> жёлтую стопку вправо.",
+            "icon": ["fab", "fa-pagelines"],
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
           {
             "position": "topLeft",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomLeft",
-            "type": ["fas", "fa-crown"],
-            "color": "yellow"
+            "type": ["fas", "fa-lightbulb"],
+            "color": "purple",
+            "name": "bulb"
           },
           {
-            "position": "bottomRight",
-            "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "position": "bottomCenter",
+            "type": ["fab", "fa-pagelines"],
+            "color": "green",
+            "name": "tree"
           }
         ]
       }
