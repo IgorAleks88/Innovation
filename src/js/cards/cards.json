@@ -12,13 +12,15 @@
             "type": "corporate",
             "effect": "<b>Вы можете переработать</b> до трех карт с руки. Если сделали это, возьмите и зачтите карту того уровня, сколько карт переработали.",
             "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "resource": "tree"
           },
           {
             "type": "corporate",
             "effect": "<b>Возьмите</b> <span class = 'age__number'>1</span>",
             "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
@@ -50,13 +52,15 @@
             "type": "corporate",
             "effect": "<b>Вы можете переработать</b> три карты с руки. Если сделали это, возьмите и сыграйте <span class = 'age__number'>3</span>",
             "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "resource": "bulb"
           },
           {
             "type": "corporate",
             "effect": "<b>Вы можете переработать</b> <span class = 'age__number'>3</span> с руки. Если сделали это, возьмите три <span class = 'age__number'>1</span>",
             "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
@@ -88,7 +92,8 @@
             "type": "corporate",
             "effect": "<b>Возьмите</b> <span class = 'age__number'>2</span>",
             "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
@@ -127,7 +132,8 @@
             "type": "corporate",
             "effect": "<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если она приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i>, зачтите ее и выполните эту догму снова. В противном случае заберите ее на руку.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -159,7 +165,8 @@
             "type": "aggressive",
             "effect": "<b>Я требую:</b> возьмите <span class = 'age__number'>1</span> ! Затем переместите старшую карту с руки мне на руку!",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -191,13 +198,15 @@
             "type": "aggressive",
             "effect": "<b>Я требую:</b> переместите с руки в мою зону влияния карту, которая приносит <i class='fas fa-crown resourse__icon card__icon-color--yellow'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span> !",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           },
           {
             "type": "corporate",
             "effect": "<b>Если</b> по предыдущей догме не перемещена ни одна карта, возьмите <span class = 'age__number'>1</span>.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -236,7 +245,8 @@
             "type": "corporate",
             "effect": "<b>Возьмите</b> две <span class = 'age__number'>1</span>.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -268,13 +278,15 @@
             "type": "corporate",
             "effect": "<b>Сыграйте</b> с руки карту, если у вас в игре нет стопки того же цвета.",
             "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "resource": "tree"
           },
           {
             "type": "corporate",
             "effect": "<b>Возьмите и зачтите</b> <span class = 'age__number'>1</span> за каждый цвет, который есть у вас в игре, но отсутствует в игре у всех соперников",
             "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
@@ -306,7 +318,8 @@
             "type": "corporate",
             "effect": "<b>Возьмите и сырайте</b> <span class = 'age__number'>1</span>.",
             "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
@@ -345,7 +358,8 @@
             "type": "aggressive",
             "effect": "<b>Я требую:</b> если ваши карты приносят 4 <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> или больше, переместите мне в игру активную карту, которая приносит <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> ! Если сделали это, возьмите <span class = 'age__number'>1</span>.",
             "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
@@ -377,7 +391,8 @@
             "type": "corporate",
             "effect": "<b>Вы можете архивировать</b> с руки карту любого цвета, который есть у вас в игре. Если сделали это, можете сдвинуть стопку этого цвета влево.",
             "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
@@ -409,7 +424,8 @@
             "type": "corporate",
             "effect": "<b>Возьмите и покажите</b> всем игрокам <span class = 'age__number'>1</span>. Если у вас в игре есть стопка того же цвета, сыграйте взятую карту и возьмите <span class = 'age__number'>1</span>. В противном случае заберите ее на руку.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -448,7 +464,8 @@
             "type": "corporate",
             "effect": "<b>Вы можете сыграть</b> с руки сколько угодно карт, которые приносят <i class='fab fa-fort-awesome resourse__icon card__icon-color--grey'></i> Если сыграли 4 или больше карт, добейтесь лидерства в \"Строительстве\".",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -480,7 +497,8 @@
             "type": "corporate",
             "effect": "<b>Сыграйте</b> младшую карту с руки. Возьмите <span class = 'age__number'>1</span>.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -512,7 +530,8 @@
             "type": "corporate",
             "effect": "<b>Вы можете переработать</b> карту с руки. Если сделали это, возьмите и зачтите карту, уровень которой на 1 выше, чем у переработанной.",
             "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
@@ -553,19 +572,22 @@
             "type": "corporate",
             "effect": "<b>Если</b> у вас в зоне влиния больше карт чем на руке возьмите две <span class = 'age__number'>3</span>.",
             "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
             "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "name": "tree"
           },
           {
             "position": "bottomRight",
@@ -583,14 +605,16 @@
             "type": "corporate",
             "effect": "<b>Вы можете переработать</b> карту с руки. Если сделали это, возьмите и сыграйте карту, уровень которой на 1 выше чем у переработаной.",
             "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
           {
             "position": "bottomLeft",
             "type": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "name": "bulb"
           },
           {
             "position": "bottomCenter",
@@ -601,7 +625,8 @@
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           }
         ]
       }
@@ -620,24 +645,28 @@
             "type": "corporate",
             "effect": "<b>Сыграйте с руки</b>  одну или две карты. Если сыграли две, можете переместить свою активную красную карту в игру любому сопернику, Если сделали это переместите его активную зелёную карту себе в игру.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
           {
             "position": "topLeft",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           },
           {
             "position": "bottomLeft",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           }
         ]
       },
@@ -649,30 +678,35 @@
             "type": "aggressive",
             "effect": "<b>Я требую:</b> переместить две карты с руки мне на руку! Возьмите <span class = 'age__number'>2</span>!",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           },
           {
             "type": "corporate",
             "effect": "<b>Если</b> только у вас в игре есть стопки всех 5 цветов, добейтесь лидерства в \"Военном деле\".",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
           {
             "position": "topLeft",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           },
           {
             "position": "bottomCenter",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           },
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           }
         ]
       }
@@ -691,7 +725,8 @@
             "type": "corporate",
             "effect": "<b>Вы можете переработать</b> сколько угодно карт с руки, Если сделали это возьмите и зачтите <span class = 'age__number'>2</span> за каждый разный уровень среди переработанных вами карт.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -723,13 +758,15 @@
             "type": "aggressive",
             "effect": "<b>Я требую:</b> переместите <span class = 'age__number'>1</span> из своей зоны влияния в мою!",
             "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "resource": "crown"
           },
           {
             "type": "corporate",
             "effect": "<b>Если</b>  по предыдущей догме перемещена хотя бы одна карта, возьмите и зачтите <span class = 'age__number'>1</span>.",
             "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
@@ -768,13 +805,15 @@
             "type": "aggressive",
             "effect": "<b>Я требую:</b> переместите в мою зону влияния активную карту любого цвета которого нет у меня в игре! Если сделали это, возьмите и архивируйте <span class = 'age__number'>1</span>!",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           },
           {
             "type": "aggressive",
             "effect": "Возьмите и архивируйте <span class = 'age__number'>1</span>.",
             "icon": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "resource": "tower"
           }
         ],
         "resourses": [
@@ -806,13 +845,15 @@
             "type": "corporate",
             "effect": "<b>Вы можете сдвинуть</b> одну стопку влево.",
             "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "resource": "bulb"
           },
           {
             "type": "corporate",
             "effect": "<b>Вы можете зачесть</b> карту с руки.",
             "icon": ["fas", "fa-lightbulb"],
-            "color": "purple"
+            "color": "purple",
+            "resource": "bulb"
           }
         ],
         "resourses": [
@@ -851,7 +892,8 @@
             "type": "corporate",
             "effect": "<b>Вы можете обменять</b> все старшие карты с руки на все старшие карты из зоны влияния.",
             "icon": ["fas", "fa-crown"],
-            "color": "yellow"
+            "color": "yellow",
+            "resource": "crown"
           }
         ],
         "resourses": [
@@ -883,7 +925,8 @@
             "type": "corporate",
             "effect": "<b>Возьмите</b> <span class = 'age__number'>2</span> за каждые 2 <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i>, которые приносят ваши карты.",
             "icon": ["fab", "fa-pagelines"],
-            "color": "green"
+            "color": "green",
+            "resource": "tree"
           }
         ],
         "resourses": [
@@ -902,7 +945,8 @@
           {
             "position": "bottomRight",
             "type": ["fab", "fa-fort-awesome"],
-            "color": "grey"
+            "color": "grey",
+            "name": "tower"
           }
         ]
       }
