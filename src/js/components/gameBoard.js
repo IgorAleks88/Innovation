@@ -137,7 +137,7 @@ const gameBoard = {
     gameState.currentPlayer.hand.push(cardID);
 
     // get card DOM element and render it to hand
-    const cardObj = getCardObject.byID('письменность');
+    const cardObj = getCardObject.byID(cardID);
     const movingCardElement = getCardElement(cardObj);
     movingCardElement.onclick = gameBoard.playCard;
     renderCard.toHand(movingCardElement);
@@ -166,8 +166,8 @@ const gameBoard = {
 
     // set dogma function
     cardElement.onclick = () => {
-      gameBoard.update();
       dogmas[cardID](cardObj);
+      gameBoard.update();
     };
     renderCard.toActive(cardElement);
 
