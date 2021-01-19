@@ -26,9 +26,6 @@ export default function setGameControls() {
   // const timeout used because time needed for scroll animation before values updated
   const timeoutTime = 350;
 
-  // disable scrolling in hand block
-  hand.onwheel = function disableScroll() { return false; };
-
   // event activated on each inserted card
   hand.addEventListener('DOMNodeInserted', () => {
     // scroll to inserted card (or do nothing)

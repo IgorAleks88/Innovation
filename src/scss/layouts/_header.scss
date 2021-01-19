@@ -21,13 +21,13 @@
     width: 100%;
 
     &__wrapper {
-      @include flex(row, space-between, flex-end);
+      @include flex(row, space-around, flex-end);
       color: rgb(226, 226, 226);
       height: 100%;
       margin-left: 2.5rem;
       overflow-x: auto;
       position: relative;
-      width: auto;
+      width: 100%;
       z-index: 2;
     }
   }
@@ -46,6 +46,12 @@
 
   &__hidden {
     display: none;
+  }
+
+  &--active {
+    border: 0.2rem solid #ee8823;
+    filter: brightness(1.2);
+    box-shadow: inset 0 0 6px 3px rgba(0, 0, 0, 0.5), 0 0 3px 1px #ee8823;
   }
 }
 

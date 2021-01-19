@@ -16,13 +16,14 @@ const gameState = {
   players: [],
   currentPlayer: null,
   activePlayer: null,
+  dogmPlayers: null,
   player0: {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: [],
+    hand: ['колесо', 'письменность', 'парус'], //! remove
     currentAge: 1,
-    currentDeck: 'age1',
+    currentDeck: 'age1', // test
     activeDecks: {
       red: {
         cards: [],

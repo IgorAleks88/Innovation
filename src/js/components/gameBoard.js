@@ -5,6 +5,7 @@ import renderCard from '../cards/renderCard';
 import updateGameState from '../utility/updateGameState';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
+import dogmas from './dogma';
 
 const gameBoard = {
   display() {
@@ -38,7 +39,11 @@ const gameBoard = {
     cloneCurrentDeck.id = 'cloneCurrentDeck';
     cloneCurrentDeck.classList.add('age-deck--active');
     cloneCurrentDeck.classList.remove('xyz-in');
-    cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-01-title.png)'; //! change later to `${}`
+    if (gameState.activePlayer.currentAge !== 10) {
+      cloneCurrentDeck.style.backgroundImage = `url(/assets/img/cards-bg/age-0${gameState.activePlayer.currentAge}-title.png)`;
+    } else {
+      cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-10-title.png)';
+    }
     // display cloned deck in currentDeck block
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
 
@@ -57,15 +62,13 @@ const gameBoard = {
     stacks.forEach((stackElement) => {
       stackElement.innerHTML = '';
       stackElement.classList.add('active-zone__stack--empty');
+      stackElement.style = null;
       Object.keys(gameState.activePlayer.activeDecks).forEach((activeDeckName) => {
         if (activeDeckName === stackElement.id) {
           gameState.activePlayer.activeDecks[activeDeckName].cards.forEach((card) => {
             const cardObj = getCardObject.byID(card);
             const cardElement = getCardElement(cardObj);
-            cardElement.onclick = () => { //! TODO
-              console.log('DOGMA! :)');
-            };
-            renderCard.toActive(cardElement, gameState);
+            renderCard.toActive(cardElement);
             cardElement.classList.remove('xyz-in');
           });
         }
@@ -73,66 +76,100 @@ const gameBoard = {
     });
   },
 
-  update() {
-    if (gameState.currentPlayer.actionPoints === 0) {
-      this.displayNextTurnBtn();
-    }
-
-    updateGameState(gameState);
-    header.changePlayerStats(gameState.currentPlayer);
-
-    document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
-    document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
-  },
-
   init() {
+    // set hand events
     const cardElements = document.querySelectorAll('.card');
     cardElements.forEach((elem) => {
       if (gameState.currentPlayer.hand.indexOf(elem.dataset.innovation) > -1) {
         elem.onclick = this.playCard;
       }
     });
-    const activeDeckElements = document.querySelectorAll('.age-deck--active');
-    activeDeckElements.forEach((elem) => {
+    // set age decks events
+    const ageDeckElements = document.querySelectorAll('.age-deck--active');
+    ageDeckElements.forEach((elem) => {
       elem.onclick = this.takeCard;
     });
+    // set active zone events
+    const activeZoneStacks = document.querySelectorAll('.active-zone__stack');
+    activeZoneStacks.forEach((stack) => {
+      const stackLength = stack.childNodes.length;
+      if (stackLength >= 1) {
+        const stackTopCardElement = stack.childNodes[stackLength - 1];
+        stackTopCardElement.onclick = () => {
+          const cardID = stackTopCardElement.dataset.innovation;
+          const cardObj = getCardObject.byID(cardID);
+          dogmas[cardID](cardObj);
+          gameBoard.update();
+        };
+      }
+    });
+    this.setHeaderCurrent();
+  },
+
+  update() {
+    gameState.currentPlayer.actionPoints -= 1;
+
+    if (gameState.currentPlayer.actionPoints === 0) {
+      this.displayNextTurnBtn();
+    }
+
+    updateGameState(gameState);
+    gameState.players.forEach((player) => header.changePlayerStats(player));
+
+    document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
+    document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
   },
 
   takeCard(e) {
-    let sourceDeck = e.target.id;
-    if (sourceDeck === 'cloneCurrentDeck') { sourceDeck = gameState.currentPlayer.currentDeck; }
+    // protection of multiple clicks
+    e.target.onclick = null;
 
-    const movingCardInnovation = gameState.ageDecks[sourceDeck].pop();
-    gameState.currentPlayer.hand.push(movingCardInnovation);
-    const movingCardObj = getCardObject.byID(movingCardInnovation);
-    const movingCardElement = getCardElement(movingCardObj);
+    // hide age decks modal block after card taken
+    const ageDecksBlock = document.querySelector('.age-decks');
+    ageDecksBlock.classList.add('age-decks--hidden');
+
+    // get age deck form which card was taken to use in next block
+    let ageDeck = e.target.id;
+    if (ageDeck === 'cloneCurrentDeck') { ageDeck = gameState.currentPlayer.currentDeck; }
+
+    // change gameState
+    const cardID = gameState.ageDecks[ageDeck].pop();
+    gameState.currentPlayer.hand.push(cardID);
+
+    // get card DOM element and render it to hand
+    const cardObj = getCardObject.byID(cardID);
+    const movingCardElement = getCardElement(cardObj);
     movingCardElement.onclick = gameBoard.playCard;
-    renderCard.toHand(movingCardElement, gameState);
-
-    gameState.currentPlayer.actionPoints -= 1;
+    renderCard.toHand(movingCardElement);
 
     gameBoard.update();
+
+    // protection of multiple clicks
+    setTimeout(() => {
+      if (gameState.currentPlayer.actionPoints !== 0) {
+        e.target.onclick = gameBoard.takeCard;
+      }
+    }, 250);
   },
 
   playCard(e) {
-    const playingCardInnovation = e.target.closest('.card').dataset.innovation;
-    const playingCardElement = e.target.closest('.card');
-    playingCardElement.onclick = null;
+    // get current card
+    const cardID = e.target.closest('.card').dataset.innovation;
+    const cardElement = e.target.closest('.card');
+    const cardObj = getCardObject.byID(cardID);
 
-    const playIndex = gameState.currentPlayer.hand.indexOf(playingCardInnovation);
-    gameState.currentPlayer.hand.splice(playIndex, 1);
+    // change gameState
+    const cardIndex = gameState.currentPlayer.hand.indexOf(cardID);
+    gameState.currentPlayer.hand.splice(cardIndex, 1);
+    const targetStack = gameState.currentPlayer.activeDecks[cardObj.color].cards;
+    targetStack.push(cardID);
 
-    const playingCardObj = getCardObject.byID(playingCardInnovation);
-
-    const targetDeckArray = gameState.currentPlayer.activeDecks[playingCardObj.color].cards;
-
-    targetDeckArray.push(playingCardInnovation);
-    playingCardElement.onclick = () => { //! TODO
-      console.log('DOGMA! :)');
+    // set dogma function
+    cardElement.onclick = () => {
+      dogmas[cardID](cardObj);
+      gameBoard.update();
     };
-    renderCard.toActive(playingCardElement, gameState);
-
-    gameState.currentPlayer.actionPoints -= 1;
+    renderCard.toActive(cardElement);
 
     gameBoard.update();
   },
@@ -142,6 +179,7 @@ const gameBoard = {
     nextTurnBtn.classList.add('info-table__next-turn-btn');
     nextTurnBtn.innerText = 'Закончить ход';
     nextTurnBtn.addEventListener('click', () => {
+      // change current player
       for (let i = 0; i < gameState.players.length; i += 1) {
         if (gameState.currentPlayer === gameState.players[i]) {
           i += 1;
@@ -163,6 +201,17 @@ const gameBoard = {
     const infoTable = document.querySelector('.info-table');
     this.disableEvents();
     infoTable.append(nextTurnBtn);
+  },
+
+  setHeaderCurrent() {
+    Array.from(document.querySelectorAll('.head-row__name')).forEach((headerName) => {
+      headerName.parentElement.parentElement.classList.remove('player-container--active');
+      if (headerName.innerText === gameState.currentPlayer.name) {
+        setTimeout(() => {
+          headerName.parentElement.parentElement.classList.add('player-container--active');
+        }, 250);
+      }
+    });
   },
 
   disableEvents() {
