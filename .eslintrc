@@ -11,6 +11,8 @@
       "linebreak-style": "off",
       "class-methods-use-this": "off",
       "prefer-rest-params": "off",
-      "prefer-default-export": "off"
+      "prefer-default-export": "off",
+      "import/no-cycle": "off",
+      "no-use-before-define": "off"
     }
 }

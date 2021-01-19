@@ -98,7 +98,8 @@ const gameBoard = {
         stackTopCardElement.onclick = () => {
           const cardID = stackTopCardElement.dataset.innovation;
           const cardObj = getCardObject.byID(cardID);
-          dogmas[cardID](cardObj);
+          const joinWords = cardID.split(' ').join('');
+          dogmas[joinWords](cardObj);
           gameBoard.update();
         };
       }
@@ -166,7 +167,8 @@ const gameBoard = {
 
     // set dogma function
     cardElement.onclick = () => {
-      dogmas[cardID](cardObj);
+      const joinWords = cardID.split(' ').join('');
+      dogmas[joinWords](cardObj);
       gameBoard.update();
     };
     renderCard.toActive(cardElement);
