@@ -9,10 +9,12 @@
   text-align: center;
 
   &--active {
-    box-shadow: 0 0 1.3rem 1rem rgba(252, 177, 3, 1);
+    box-shadow: 0 0 1rem 0.5rem rgba(252, 177, 3, 1) inset;
     cursor: pointer;
     filter: brightness(1);
     transition: all 0.2s linear;
+    transform: scale(1.2);
+    z-index: 2;
 
     &:hover {
       transform: scale(1.02);
