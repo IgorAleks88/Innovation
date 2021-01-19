@@ -4,6 +4,8 @@ import getCardObject from '../cards/getCardObject';
 import gameState from './gameState';
 import gameBoard from './gameBoard';
 
+const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
+
 function getAffectedPlayers(cardObj) {
   const res = cardObj.dogma[0].resource;
   let idPlayers;
@@ -58,10 +60,11 @@ function recycle(playerID, arrCardID) {
     const indexCard = gameState.players[playerID].hand.indexOf(arrCardID[id]);
     const cardID = gameState.players[playerID].hand[indexCard];
 
-    gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
+    if (!cardID) return;
+
     gameState.players[playerID].hand.splice(indexCard, 1);
   }
-  console.log(gameState);
+  gameBoard.display();
 }
 
 function corporateBonus(arrOfId) {
@@ -110,15 +113,29 @@ const dogmas = {
   },
   инструменты: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
-    const arr = [];
-    for (let i = 0; i < 3; i += 1) {
-      arr.push(prompt('Назовите карту', ''));
-    }
-    console.log(arr);
-    const playerCards = ['письменность', 'парус', 'письменость'];
-    arrOfId.forEach((id) => {
-      recycle(id, arr);
+    let cardID = [];
+    const actions = () => arrOfId.forEach((id) => {
+      recycle(id, cardID);
+
+      if (cardID.length >= 3) {
+        const lastCardInHand = gameState.players[id].hand[gameState.players[id].hand.length - 1];
+        takeCard(1, 3, id, false);
+        playCard(lastCardInHand, id);
+      }
     });
+    for (let i = 0; i < 3; i += 1) {
+      cardID.push(prompt('Назовите карту', ''));
+    }
+
+    cardID = cardID.filter((item) => item !== null && item.length > 1);
+    actions();
+
+    cardID = [];
+
+    do {
+      cardID[0] = prompt('Назовите карту 3 века', '');
+    } while (!isAge(cardID[0], 3) && cardID[0] !== null);
+    if (cardID.length >= 1 && cardID[0] !== undefined) actions();
 
     corporateBonus(arrOfId);
   },
