@@ -21,7 +21,11 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
+<<<<<<< HEAD
     hand: [],
+=======
+    hand: ['колесо', 'письменность', 'парус', 'инструменты'], //! remove
+>>>>>>> 2d0a432... feat: add recycle function
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
