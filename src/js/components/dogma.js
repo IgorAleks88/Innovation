@@ -48,6 +48,20 @@ function playCard(cardID, playerID) {
   }
 }
 
+function recycle(playerID, arrCardID) {
+  const cardObjs = {};
+  for (let id = 0; id < arrCardID.length; id += 1) {
+    cardObjs[arrCardID[id]] = getCardObject.byID(arrCardID[id]).age;
+
+    const indexCard = gameState.players[playerID].hand.indexOf(arrCardID[id]);
+    const cardID = gameState.players[playerID].hand[indexCard];
+
+    gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
+    gameState.players[playerID].hand.splice(indexCard, 1);
+  }
+  console.log(gameState);
+}
+
 function corporateBonus(arrOfId) {
   if (arrOfId.length > 1) {
     takeCard(1, gameState.currentPlayer.currentAge, gameState.currentPlayer.id);
@@ -84,15 +98,29 @@ const dogmas = {
       try {
         const lowCard = cardsFromHand.sort((a, b) => b.age - a.age).pop().innovation;
         playCard(lowCard, id);
-        takeCard(1, 1, id);
       } catch (error) {
         console.error(`Ошибка, скорее всего в руке нет карт: ${error.message}`);
       }
+      takeCard(1, 1, id);
     });
     corporateBonus(arrOfId);
   },
   гончарноедело: (cardObj) => {
     console.log(cardObj.innovation);
+  },
+  инструменты: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    const arr = [];
+    for (let i = 0; i < 3; i += 1) {
+      arr.push(prompt('Назовите карту', ''));
+    }
+    console.log(arr);
+    const playerCards = ['письменность', 'парус', 'письменость'];
+    arrOfId.forEach((id) => {
+      recycle(id, arr);
+    });
+
+    corporateBonus(arrOfId);
   },
 };
 
