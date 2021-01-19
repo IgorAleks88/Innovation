@@ -393,6 +393,8 @@ function getAffectedPlayers(cardObj) {
 }
 
 function takeCard(cardsNum, ageNum, playerID) {
+  var render = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
   while (cardsNum > 0) {
     if (_gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks["age".concat(ageNum)].length === 0) ageNum += 1;
     var cardID = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.ageDecks["age".concat(ageNum)].pop();
@@ -403,7 +405,7 @@ function takeCard(cardsNum, ageNum, playerID) {
       var cardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_2__.default.byID(cardID);
       var cardElement = (0,_cards_getCardElement__WEBPACK_IMPORTED_MODULE_1__.default)(cardObj);
       cardElement.onclick = _gameBoard__WEBPACK_IMPORTED_MODULE_4__.default.playCard;
-      _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__.default.toHand(cardElement);
+      if (render) _cards_renderCard__WEBPACK_IMPORTED_MODULE_0__.default.toHand(cardElement);
     }
   }
 }
@@ -413,6 +415,8 @@ function playCard(cardID, playerID) {
   _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players[playerID].hand.splice(cardIndex, 1);
   var cardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_2__.default.byID(cardID);
   var cardElement = (0,_cards_getCardElement__WEBPACK_IMPORTED_MODULE_1__.default)(cardObj);
+  var renderedCard = document.querySelector("[data-innovation='".concat(cardID, "']"));
+  if (renderedCard !== null) renderedCard.remove();
   var targetStack = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players[playerID].activeDecks[cardObj.color].cards;
   targetStack.push(cardID);
 
@@ -450,10 +454,31 @@ var dogmas = {
   парус: function _(cardObj) {
     var arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach(function (id) {
-      takeCard(1, 1, id);
+      takeCard(1, 1, id, false);
       playCard(_gameState__WEBPACK_IMPORTED_MODULE_3__.default.players[id].hand[_gameState__WEBPACK_IMPORTED_MODULE_3__.default.players[id].hand.length - 1], id);
     });
     corporateBonus(arrOfId);
+  },
+  скотоводство: function _(cardObj) {
+    var arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach(function (id) {
+      var cardsFromHand = _gameState__WEBPACK_IMPORTED_MODULE_3__.default.players[id].hand.map(function (card) {
+        return _cards_getCardObject__WEBPACK_IMPORTED_MODULE_2__.default.byID(card);
+      });
+
+      if (cardsFromHand.length >= 1) {
+        var lowCard = cardsFromHand.sort(function (a, b) {
+          return b.age - a.age;
+        }).pop().innovation;
+        playCard(lowCard, id);
+      }
+
+      takeCard(1, 1, id);
+    });
+    corporateBonus(arrOfId);
+  },
+  гончарноедело: function _(cardObj) {
+    console.log(cardObj.innovation);
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dogmas);
@@ -582,7 +607,8 @@ var gameBoard = {
         stackTopCardElement.onclick = function () {
           var cardID = stackTopCardElement.dataset.innovation;
           var cardObj = _cards_getCardObject__WEBPACK_IMPORTED_MODULE_1__.default.byID(cardID);
-          _dogma__WEBPACK_IMPORTED_MODULE_7__.default[cardID](cardObj);
+          var joinWords = cardID.split(' ').join('');
+          _dogma__WEBPACK_IMPORTED_MODULE_7__.default[joinWords](cardObj);
           gameBoard.update();
         };
       }
@@ -644,7 +670,8 @@ var gameBoard = {
     targetStack.push(cardID); // set dogma function
 
     cardElement.onclick = function () {
-      _dogma__WEBPACK_IMPORTED_MODULE_7__.default[cardID](cardObj);
+      var joinWords = cardID.split(' ').join('');
+      _dogma__WEBPACK_IMPORTED_MODULE_7__.default[joinWords](cardObj);
       gameBoard.update();
     };
 
@@ -748,7 +775,7 @@ var gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['колесо', 'письменность', 'парус'],
+    hand: ['колесо', 'скотоводство', 'парус'],
     //! remove
     currentAge: 1,
     currentDeck: 'age1',
