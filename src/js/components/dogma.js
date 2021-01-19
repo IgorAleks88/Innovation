@@ -40,6 +40,8 @@ function playCard(cardID, playerID) {
   gameState.players[playerID].hand.splice(cardIndex, 1);
   const cardObj = getCardObject.byID(cardID);
   const cardElement = getCardElement(cardObj);
+  const renderedCard = document.querySelector(`[data-innovation='${cardID}']`);
+  if (renderedCard !== null) renderedCard.remove();
   const targetStack = gameState.players[playerID].activeDecks[cardObj.color].cards;
   targetStack.push(cardID);
   if (gameState.players[playerID] === gameState.currentPlayer) {
@@ -81,13 +83,11 @@ const dogmas = {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       const cardsFromHand = gameState.players[id].hand.map((card) => getCardObject.byID(card));
-      try {
+      if (cardsFromHand.length >= 1) {
         const lowCard = cardsFromHand.sort((a, b) => b.age - a.age).pop().innovation;
         playCard(lowCard, id);
-        takeCard(1, 1, id);
-      } catch (error) {
-        console.error(`Ошибка, скорее всего в руке нет карт: ${error.message}`);
       }
+      takeCard(1, 1, id);
     });
     corporateBonus(arrOfId);
   },
