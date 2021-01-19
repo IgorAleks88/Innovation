@@ -20,7 +20,7 @@ function getAffectedPlayers(cardObj) {
   return idPlayers;
 }
 
-function takeCard(cardsNum, ageNum, playerID) {
+function takeCard(cardsNum, ageNum, playerID, render = true) {
   while (cardsNum > 0) {
     if (gameState.ageDecks[`age${ageNum}`].length === 0) ageNum += 1;
     const cardID = gameState.ageDecks[`age${ageNum}`].pop();
@@ -30,7 +30,7 @@ function takeCard(cardsNum, ageNum, playerID) {
       const cardObj = getCardObject.byID(cardID);
       const cardElement = getCardElement(cardObj);
       cardElement.onclick = gameBoard.playCard;
-      renderCard.toHand(cardElement);
+      if (render) renderCard.toHand(cardElement);
     }
   }
 }
@@ -72,7 +72,7 @@ const dogmas = {
   парус: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
-      takeCard(1, 1, id);
+      takeCard(1, 1, id, false);
       playCard(gameState.players[id].hand[gameState.players[id].hand.length - 1], id);
     });
     corporateBonus(arrOfId);
