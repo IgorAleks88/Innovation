@@ -20,7 +20,7 @@ function getAffectedPlayers(cardObj) {
   return idPlayers;
 }
 
-function takeCard(cardsNum, ageNum, playerID) {
+function takeCard(cardsNum, ageNum, playerID, render = true) {
   while (cardsNum > 0) {
     if (gameState.ageDecks[`age${ageNum}`].length === 0) ageNum += 1;
     const cardID = gameState.ageDecks[`age${ageNum}`].pop();
@@ -30,7 +30,7 @@ function takeCard(cardsNum, ageNum, playerID) {
       const cardObj = getCardObject.byID(cardID);
       const cardElement = getCardElement(cardObj);
       cardElement.onclick = gameBoard.playCard;
-      renderCard.toHand(cardElement);
+      if (render) renderCard.toHand(cardElement);
     }
   }
 }
@@ -40,6 +40,8 @@ function playCard(cardID, playerID) {
   gameState.players[playerID].hand.splice(cardIndex, 1);
   const cardObj = getCardObject.byID(cardID);
   const cardElement = getCardElement(cardObj);
+  const renderedCard = document.querySelector(`[data-innovation='${cardID}']`);
+  if (renderedCard !== null) renderedCard.remove();
   const targetStack = gameState.players[playerID].activeDecks[cardObj.color].cards;
   targetStack.push(cardID);
   if (gameState.players[playerID] === gameState.currentPlayer) {
@@ -72,10 +74,25 @@ const dogmas = {
   парус: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
-      takeCard(1, 1, id);
+      takeCard(1, 1, id, false);
       playCard(gameState.players[id].hand[gameState.players[id].hand.length - 1], id);
     });
     corporateBonus(arrOfId);
+  },
+  скотоводство: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const cardsFromHand = gameState.players[id].hand.map((card) => getCardObject.byID(card));
+      if (cardsFromHand.length >= 1) {
+        const lowCard = cardsFromHand.sort((a, b) => b.age - a.age).pop().innovation;
+        playCard(lowCard, id);
+      }
+      takeCard(1, 1, id);
+    });
+    corporateBonus(arrOfId);
+  },
+  гончарноедело: (cardObj) => {
+    console.log(cardObj.innovation);
   },
 };
 
