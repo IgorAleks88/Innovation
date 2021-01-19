@@ -316,7 +316,7 @@
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Возьмите и сырайте</b> <span class = 'age__number'>1</span>.",
+            "effect": "<b>Возьмите и сыграйте</b> <span class = 'age__number'>1</span>.",
             "icon": ["fas", "fa-crown"],
             "color": "yellow",
             "resource": "crown"

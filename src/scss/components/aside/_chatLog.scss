@@ -62,6 +62,8 @@
   border-bottom-left-radius: 0.8rem;
   border-bottom-right-radius: 0.8rem;
   box-shadow: 0.3rem -0.1rem 0.4rem 0.1rem rgba(46, 1, 1, 0.6);
+  color: wheat;
+  font-weight: 100;
 }
 
 .chat-log__tab :checked ~ .chat-log__tab-content {
