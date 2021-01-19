@@ -77,6 +77,23 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
+  скотоводство: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const cardsFromHand = gameState.players[id].hand.map((card) => getCardObject.byID(card));
+      try {
+        const lowCard = cardsFromHand.sort((a, b) => b.age - a.age).pop().innovation;
+        playCard(lowCard, id);
+        takeCard(1, 1, id);
+      } catch (error) {
+        console.error(`Ошибка, скорее всего в руке нет карт: ${error.message}`);
+      }
+    });
+    corporateBonus(arrOfId);
+  },
+  гончарноедело: (cardObj) => {
+    console.log(cardObj.innovation);
+  },
 };
 
 export default dogmas;
