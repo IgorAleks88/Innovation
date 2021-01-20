@@ -141,6 +141,33 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
+  мистицизм: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const actualAge = getActualDeck(1);
+      const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+      const currentPlayerName = gameState[`player${id}`].name;
+      const currentCard = getCardObject.byID(cardID);
+      console.log(`${currentPlayerName} взял ${cardID} ${currentCard.color}`);
+      if (gameState.players[id].activeDecks[currentCard.color].cards.length > 0) {
+        gameState.players[id].activeDecks[currentCard.color].cards.push(cardID);
+        if (id === gameState.currentPlayer.id) {
+          const cardElement = getCardElement(currentCard);
+          renderCard.toActive(cardElement);
+          if (dogmas[currentCard.innovation]) {
+            cardElement.onclick = () => dogmas[currentCard.innovation](cardObj);
+          }
+        }
+      } else {
+        gameState.players[id].hand.push(cardID);
+        if (id === gameState.currentPlayer.id) {
+          const cardElement = getCardElement(currentCard);
+          renderCard.toHand(cardElement);
+          cardElement.onclick = gameBoard.playCard;
+        }
+      }
+    });
+  },
 };
 
 export default dogmas;
