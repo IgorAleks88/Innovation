@@ -24,8 +24,14 @@ function getAffectedPlayers(cardObj) {
 
 function takeCard(cardsNum, ageNum, playerID, render = true) {
   while (cardsNum > 0) {
-    if (gameState.ageDecks[`age${ageNum}`].length === 0) ageNum += 1;
-    const cardID = gameState.ageDecks[`age${ageNum}`].pop();
+    let actualAge = ageNum;
+    for (let i = ageNum; i < 11; i += 1) {
+      if (gameState.ageDecks[`age${i}`].length > 0) {
+        actualAge = i;
+        break;
+      }
+    }
+    const cardID = gameState.ageDecks[`age${actualAge}`].pop();
     gameState.players[playerID].hand.push(cardID);
     cardsNum -= 1;
     if (gameState.players[playerID] === gameState.currentPlayer) {
