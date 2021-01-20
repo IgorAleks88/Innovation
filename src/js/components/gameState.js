@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['колесо', 'скотоводство', 'парус'], //! remove
+    hand: ['кузнечное дело'], //! remove
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
@@ -45,6 +45,10 @@ const gameState = {
         cards: [],
         shift: 'top', //! test
       },
+    },
+    influence: {
+      points: 0,
+      cards: [],
     },
     tree: 0,
     tower: 0,
@@ -81,6 +85,10 @@ const gameState = {
         shift: null,
       },
     },
+    influence: {
+      points: 0,
+      cards: [],
+    },
     tree: 0,
     tower: 0,
     crown: 0,
@@ -116,6 +124,10 @@ const gameState = {
         shift: null,
       },
     },
+    influence: {
+      points: 0,
+      cards: [],
+    },
     tree: 0,
     tower: 0,
     crown: 0,
@@ -150,6 +162,10 @@ const gameState = {
         cards: [],
         shift: null,
       },
+    },
+    influence: {
+      points: 0,
+      cards: [],
     },
     tree: 0,
     tower: 0,
