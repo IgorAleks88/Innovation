@@ -4,6 +4,16 @@ import getCardObject from '../cards/getCardObject';
 import gameState from './gameState';
 import gameBoard from './gameBoard';
 
+function moveCardToHand(card, id) {
+  gameState.players[id].hand.push(card);
+  if (id === gameState.currentPlayer.id) {
+    const currentCard = getCardObject.byID(card);
+    const cardElement = getCardElement(currentCard);
+    renderCard.toHand(cardElement);
+    cardElement.onclick = gameBoard.playCard;
+  }
+}
+
 function getActualDeck(startAge) {
   let actualAge = -1;
   for (let i = startAge; i < 11; i += 1) {
@@ -130,12 +140,7 @@ const dogmas = {
         if (repeat) {
           gameState.players[id].influence.cards.push(cardID);
         } else {
-          gameState.players[id].hand.push(cardID);
-          if (id === gameState.currentPlayer.id) {
-            const cardElement = getCardElement(currentCard);
-            renderCard.toHand(cardElement);
-            cardElement.onclick = gameBoard.playCard;
-          }
+          moveCardToHand(cardID, id);
         }
       } while (repeat);
     });
@@ -159,12 +164,7 @@ const dogmas = {
           }
         }
       } else {
-        gameState.players[id].hand.push(cardID);
-        if (id === gameState.currentPlayer.id) {
-          const cardElement = getCardElement(currentCard);
-          renderCard.toHand(cardElement);
-          cardElement.onclick = gameBoard.playCard;
-        }
+        moveCardToHand(cardID, id);
       }
     });
   },
