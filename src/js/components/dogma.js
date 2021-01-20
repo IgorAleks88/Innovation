@@ -118,7 +118,6 @@ const dogmas = {
 
   кузнечноедело: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
-    // console.log(`догма подействует на ${arrOfId}`);
     arrOfId.forEach((id) => {
       let repeat = true;
       do {
@@ -132,9 +131,15 @@ const dogmas = {
           gameState.players[id].influence.cards.push(cardID);
         } else {
           gameState.players[id].hand.push(cardID);
+          if (id === gameState.currentPlayer.id) {
+            const cardElement = getCardElement(currentCard);
+            renderCard.toHand(cardElement);
+            cardElement.onclick = gameBoard.playCard;
+          }
         }
       } while (repeat);
     });
+    corporateBonus(arrOfId);
   },
 };
 
