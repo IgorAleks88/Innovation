@@ -167,6 +167,7 @@ const dogmas = {
         moveCardToHand(cardID, id);
       }
     });
+    corporateBonus(arrOfId);
   },
 };
 
