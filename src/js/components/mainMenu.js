@@ -29,10 +29,10 @@ class Menu {
     this.menu.classList.add('menu');
     this.menu.innerHTML = `
     ${this.createMenuItem('Новая игра', 'start')}
-    ${this.createMenuItem('Продолжить')}
-    ${this.createMenuItem('Сохранить игру')}
+    ${this.createMenuItem('Продолжить', 'continue disabled')}
+    ${this.createMenuItem('Сохранить игру', 'save disabled')}
     ${this.createMenuItem('Правила игры', 'rules')}
-    ${this.createMenuItem('Обзор игры')}
+    ${this.createMenuItem('Обзор игры', 'review')}
     `;
 
     this.parent.append(this.menu);
@@ -42,7 +42,7 @@ class Menu {
       if (e.target.tagName !== 'A' && e.target.tagName !== 'SPAN' && e.target !== this.menu.querySelector('button')) {
         return;
       }
-
+      const intro = this.menu.parentElement.parentElement.parentElement;
       if (e.target.className.includes('start')) {
         this.createChoosePlayersItems();
       } else if (e.target.className.includes('rules')) {
@@ -55,7 +55,6 @@ class Menu {
         this.addNamesToUsers();
         if (isValidate(users)) {
           e.preventDefault();
-          const intro = this.menu.parentElement.parentElement.parentElement;
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
           setTimeout(() => {
@@ -66,6 +65,8 @@ class Menu {
         this.menu.remove();
         this.render();
         this.menu.classList.add('menu__used');
+      } else if (e.target.className.includes('continue')) {
+        intro.classList.toggle('intro--hide');
       }
     });
   }
@@ -111,7 +112,7 @@ class Menu {
     for (let i = 1; i <= num; i += 1) {
       inputHTML.push(
         /* html */ `
-        <label for="plaeyr${i}">Введити имя игрока № ${i}</label>
+        <label for="plaeyr${i}">Введите имя игрока № ${i}</label>
         <input type="text" id="player${i}" value="player${i}" name="name" data-name="" pattern="[a-zA-Zа-яА-Я0-9_]{3,7}" title="Введите от 3 до 7 символов" required>
       `,
       );
