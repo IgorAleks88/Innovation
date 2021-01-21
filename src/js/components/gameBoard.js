@@ -174,6 +174,7 @@ const gameBoard = {
       dogmas[joinWords](cardObj);
       gameBoard.update();
     };
+    cardElement.classList.remove('active');
     renderCard.toActive(cardElement);
 
     gameBoard.update();
