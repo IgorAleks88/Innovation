@@ -96,6 +96,7 @@ function recycle(playerID, arrCardID) {
     gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
     gameState.players[playerID].hand.splice(indexCard, 1);
   }
+  gameBoard.display();
 }
 
 function corporateBonus(arrOfId) {
