@@ -28,6 +28,26 @@ const displayActiveZone = {
       this.cardsBlockWrapper.append(stack);
     }
 
+    // add menu slide icon
+    this.menuIcon = document.createElement('div');
+    this.menuIcon.classList.add('active-zone__menu-icon');
+    this.menuButton = document.createElement('div');
+    this.menuButton.classList.add('menu-icon__menu-button');
+    this.menuArrow = document.createElement('div');
+    this.menuArrow.classList.add('menu-icon__open-arrow');
+    this.menuIcon.append(this.menuButton, this.menuArrow);
+    this.menuIcon.addEventListener('click', () => {
+      const back = document.querySelector('.menu__link.back');
+      if (back !== null) back.click();
+      const menuItems = document.querySelectorAll('.menu__link');
+      menuItems.forEach((i) => {
+        i.classList.remove('disabled');
+      });
+      const intro = document.querySelector('.intro');
+      intro.classList.toggle('intro--hide');
+    });
+    this.wrapper.append(this.menuIcon);
+
     this.wrapper.append(this.activeZoneTitle);
     this.wrapper.append(this.cardsBlockOverlay);
     this.wrapper.append(this.cardsBlock);

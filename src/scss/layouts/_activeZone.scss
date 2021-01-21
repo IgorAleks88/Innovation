@@ -63,3 +63,42 @@
     transition: all 0.2s linear;
   }
 }
+
+.active-zone__menu-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
+  @include flex;
+  left: -3.5rem;
+  filter: drop-shadow(-1px 0px 8px rgb(5, 213, 228));
+  transition: all 0.5s linear;
+
+  &:hover {
+    transition: all 0.5s linear;
+    filter: none;
+    left: 0;
+    cursor: pointer;
+
+    .menu-icon__open-arrow {
+      transform: rotate(180deg);
+      transition: transform 0.5s linear;
+    }
+  }
+
+  .menu-icon__menu-button {
+    background: url('../../assets/img/menu-table.png') no-repeat center;
+    background-size: contain;
+    height: 20rem;
+    width: 6rem;
+  }
+
+  .menu-icon__open-arrow {
+    background: url('../../assets/img/open-arrow.png') no-repeat center;
+    background-size: contain;
+    height: 3.2rem;
+    width: 3rem;
+    margin-left: -1.5rem;
+    transition: transform 0.5s linear;
+  }
+}
