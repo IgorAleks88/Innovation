@@ -3,6 +3,7 @@ import getCardElement from '../cards/getCardElement';
 import getCardObject from '../cards/getCardObject';
 import gameState from './gameState';
 import gameBoard from './gameBoard';
+import header from '../display/playerTable/displayHeader';
 
 function getAffectedPlayers(cardObj) {
   const res = cardObj.dogma[0].resource;
@@ -17,6 +18,16 @@ function getAffectedPlayers(cardObj) {
         return pl;
       }).map((player) => player.id);
   }
+
+  // set current player to [0] index of affected players
+  let currentPlayer = null;
+  idPlayers.forEach((playerID, i) => {
+    if (playerID === gameState.currentPlayer) {
+      currentPlayer = idPlayers.splice(i, 1);
+    }
+  });
+  if (currentPlayer !== null) idPlayers.unshift(currentPlayer);
+
   return idPlayers;
 }
 
@@ -26,7 +37,7 @@ function takeCard(cardsNum, ageNum, playerID, render = true) {
     const cardID = gameState.ageDecks[`age${ageNum}`].pop();
     gameState.players[playerID].hand.push(cardID);
     cardsNum -= 1;
-    if (gameState.players[playerID] === gameState.currentPlayer) {
+    if (gameState.players[playerID] === gameState.activePlayer) {
       const cardObj = getCardObject.byID(cardID);
       const cardElement = getCardElement(cardObj);
       cardElement.onclick = gameBoard.playCard;
@@ -56,6 +67,78 @@ function corporateBonus(arrOfId) {
   }
 }
 
+const getManualDogma = function closureWrapper() {
+  // store current action points
+  gameState.storedActionPoints = gameState.activePlayer.actionPoints;
+  let soloCorporate = false;
+  if (gameState.affectedPlayers.length === 1
+    && gameState.affectedPlayers[0] === gameState.currentPlayer.id) {
+    soloCorporate = true;
+  }
+  let corporateCard = false;
+
+  function setManualDogma(listener, getCardsID, count) {
+    // change active players while find one with not null affected cards array
+    let arrOfCardsID = null;
+    do {
+      gameState.activePlayer = gameState.players[gameState.affectedPlayers.pop()];
+      arrOfCardsID = getCardsID();
+    } while (arrOfCardsID.length === 0 && gameState.affectedPlayers.length >= 1);
+
+    if (arrOfCardsID.length > 0) {
+      if (gameState.activePlayer !== gameState.currentPlayer) {
+        gameState.activePlayer.actionPoints = count + 1;
+        corporateCard = true;
+      } else if (soloCorporate) {
+        gameState.activePlayer.actionPoints = gameState.storedActionPoints + count;
+      } else {
+        gameState.activePlayer.actionPoints = gameState.storedActionPoints + count - 1;
+      }
+
+      alert(`Дейтсвие игрока ${gameState.activePlayer.name}`);
+      gameBoard.display();
+      gameBoard.setHeaderCurrent();
+      arrOfCardsID.forEach((cardID) => {
+        document.querySelector(`[data-innovation='${cardID}']`).onclick = (e) => {
+          listener(e);
+          if (gameState.activePlayer.actionPoints - 1 <= 0) {
+            Array.from(document.querySelectorAll('.active')).forEach((elem) => {
+              elem.classList.remove('active');
+            });
+            if (gameState.activePlayer === gameState.currentPlayer
+              && gameState.activePlayer.actionPoints !== 0) {
+              gameBoard.init();
+              if (corporateCard) {
+                takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
+                header.changePlayerStats(gameState.currentPlayer);
+              }
+            }
+          }
+        };
+        document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
+      });
+      document.querySelector('.info-table').onclick = () => {
+        if (gameState.activePlayer.actionPoints === 0) {
+          const nextActionBtn = document.querySelector('.info-table__next-turn-btn');
+          if (nextActionBtn !== null) nextActionBtn.remove();
+          if (gameState.activePlayer.actionPoints === 0 && gameState.affectedPlayers.length !== 0) {
+            setManualDogma(listener, getCardsID, count);
+          } else if (gameState.affectedPlayers.length === 0) {
+            gameState.activePlayer = gameState.currentPlayer;
+            gameBoard.display();
+            gameBoard.init();
+          }
+        }
+      };
+    } else {
+      alert('Догму нельзя использовать!');
+      gameState.activePlayer.actionPoints += 1;
+    }
+  }
+
+  return setManualDogma;
+};
+
 const dogmas = {
   письменность: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
@@ -80,16 +163,26 @@ const dogmas = {
     corporateBonus(arrOfId);
   },
   скотоводство: (cardObj) => {
-    const arrOfId = getAffectedPlayers(cardObj);
-    arrOfId.forEach((id) => {
-      const cardsFromHand = gameState.players[id].hand.map((card) => getCardObject.byID(card));
-      if (cardsFromHand.length >= 1) {
-        const lowCard = cardsFromHand.sort((a, b) => b.age - a.age).pop().innovation;
-        playCard(lowCard, id);
-      }
-      takeCard(1, 1, id);
-    });
-    corporateBonus(arrOfId);
+    // get affected players
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    // function which get affected cards of active player
+    // return empty arr if any properties dont match!
+    function getAffectedCards() {
+      const cardsFromHand = [];
+      gameState.activePlayer.hand.forEach((cardID) => {
+        cardsFromHand.push(getCardObject.byID(cardID));
+      });
+      const lowerCards = cardsFromHand.sort((a, b) => b.age - a.age).filter((card, i, arr) => {
+        return card.age === arr[arr.length - 1].age;
+      });
+      const lowerCardsID = lowerCards.map((cardObj) => cardObj.innovation);
+      return lowerCardsID;
+    }
+    function listener(e) {
+      takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
+      gameBoard.playCard(e);
+    }
+    getManualDogma()(listener, getAffectedCards, 1);
   },
   гончарноедело: (cardObj) => {
     console.log(cardObj.innovation);
