@@ -206,7 +206,7 @@ const dogmas = {
       const lowerCards = cardsFromHand.sort((a, b) => b.age - a.age).filter((card, i, arr) => {
         return card.age === arr[arr.length - 1].age;
       });
-      const lowerCardsID = lowerCards.map((cardObj) => cardObj.innovation);
+      const lowerCardsID = lowerCards.map((cardObject) => cardObject.innovation);
       return lowerCardsID;
     }
     function listener(e) {
