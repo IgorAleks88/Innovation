@@ -1,5 +1,7 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
 import displayNewTurnModal from '../display/displayNewTurnModal';
+import gameBoard from './gameBoard';
+import gameState from './gameState';
 
 const users = {};
 
@@ -29,7 +31,8 @@ class Menu {
     this.menu.classList.add('menu');
     this.menu.innerHTML = `
     ${this.createMenuItem('Новая игра', 'start')}
-    ${this.createMenuItem('Продолжить', 'continue disabled')}
+    ${this.createMenuItem('Продолжить', 'continue')}
+    ${this.createMenuItem('Загрузить', 'load')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
     ${this.createMenuItem('Правила игры', 'rules')}
     ${this.createMenuItem('Обзор игры', 'review')}
@@ -67,6 +70,15 @@ class Menu {
         this.menu.classList.add('menu__used');
       } else if (e.target.className.includes('continue')) {
         intro.classList.toggle('intro--hide');
+      } else if (e.target.className.includes('load')) {
+        const loadedGameState = JSON.parse(localStorage.getItem('innovation'));
+        Object.entries(loadedGameState).forEach(([key, value]) => { gameState[key] = value; });
+        displayNewTurnModal(loadedGameState.currentPlayer.name);
+        gameBoard.display();
+        gameBoard.init();
+        console.log(gameState);
+      } else if (e.target.className.includes('save')) {
+        localStorage.setItem('innovation', JSON.stringify(gameState));
       }
     });
   }
