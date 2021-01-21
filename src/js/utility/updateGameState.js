@@ -87,4 +87,13 @@ export default function updateGameState(gameState) {
       }
     }
   });
+
+  // update influence points for each player
+  gameState.players.forEach((player) => {
+    player.influence.points = 0;
+    player.influence.cards.forEach((card) => {
+      const cardObject = getCardObject.byID(card);
+      player.influence.points += cardObject.age;
+    });
+  });
 }
