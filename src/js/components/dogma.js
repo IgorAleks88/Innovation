@@ -5,6 +5,26 @@ import gameState from './gameState';
 import gameBoard from './gameBoard';
 
 const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
+function getActualDeck(startAge) {
+  let actualAge = -1;
+  for (let i = startAge; i < 11; i += 1) {
+    if (gameState.ageDecks[`age${i}`].length > 0) {
+      actualAge = i;
+      break;
+    }
+  }
+  return actualAge;
+}
+
+function isHaveResource(cardObj, res) {
+  let result = false;
+  cardObj.resourses.forEach((item) => {
+    if (item.name === res) {
+      result = true;
+    }
+  });
+  return result;
+}
 
 function getAffectedPlayers(cardObj) {
   const res = cardObj.dogma[0].resource;
@@ -24,13 +44,7 @@ function getAffectedPlayers(cardObj) {
 
 function takeCard(cardsNum, ageNum, playerID, render = true) {
   while (cardsNum > 0) {
-    let actualAge = ageNum;
-    for (let i = ageNum; i < 11; i += 1) {
-      if (gameState.ageDecks[`age${i}`].length > 0) {
-        actualAge = i;
-        break;
-      }
-    }
+    const actualAge = getActualDeck(ageNum);
     const cardID = gameState.ageDecks[`age${actualAge}`].pop();
     gameState.players[playerID].hand.push(cardID);
     cardsNum -= 1;
@@ -144,6 +158,27 @@ const dogmas = {
     if (cardID.length >= 1 && cardID[0] !== undefined) actions();
 
     corporateBonus(arrOfId);
+  },
+
+  кузнечноедело: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    // console.log(`догма подействует на ${arrOfId}`);
+    arrOfId.forEach((id) => {
+      let repeat = true;
+      do {
+        const actualAge = getActualDeck(1);
+        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+        const currentPlayerName = gameState[`player${id}`].name;
+        console.log(`${currentPlayerName} взял ${cardID}`);
+        const currentCard = getCardObject.byID(cardID);
+        repeat = isHaveResource(currentCard, 'tower');
+        if (repeat) {
+          gameState.players[id].influence.cards.push(cardID);
+        } else {
+          gameState.players[id].hand.push(cardID);
+        }
+      } while (repeat);
+    });
   },
 };
 

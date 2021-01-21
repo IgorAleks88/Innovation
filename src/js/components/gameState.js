@@ -46,6 +46,10 @@ const gameState = {
         shift: 'top', //! test
       },
     },
+    influence: {
+      points: 0,
+      cards: [],
+    },
     tree: 0,
     tower: 0,
     crown: 0,
@@ -80,6 +84,10 @@ const gameState = {
         cards: [],
         shift: null,
       },
+    },
+    influence: {
+      points: 0,
+      cards: [],
     },
     tree: 0,
     tower: 0,
@@ -116,6 +124,10 @@ const gameState = {
         shift: null,
       },
     },
+    influence: {
+      points: 0,
+      cards: [],
+    },
     tree: 0,
     tower: 0,
     crown: 0,
@@ -150,6 +162,10 @@ const gameState = {
         cards: [],
         shift: null,
       },
+    },
+    influence: {
+      points: 0,
+      cards: [],
     },
     tree: 0,
     tower: 0,

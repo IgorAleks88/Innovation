@@ -171,6 +171,7 @@ const displayHeader = {
     this[playerId].bulb.textContent = player.bulb;
     this[playerId].factory.textContent = player.factory;
     this[playerId].clock.textContent = player.clock;
+    this[playerId].influence.textContent = player.influence.points;
   },
 
   initPlayerNames(players) {
