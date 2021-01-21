@@ -1,3 +1,6 @@
+import getSpecCardObject from '../../specCards/getSpecCardObject';
+import getSpecCardElement from '../../specCards/getSpecCardElement';
+
 const displayAside = {
   wrapper: null,
   init() {
@@ -345,9 +348,9 @@ const displayAside = {
 
     // create special cards
     const numOfSpecialCards = 5;
+    const arrSpecCards = getSpecCardObject.all();
     for (let i = 0; i < numOfSpecialCards; i += 1) {
-      const specialCard = document.createElement('div');
-      specialCard.classList.add('special-cards__card');
+      const specialCard = getSpecCardElement(arrSpecCards[i]);
 
       // Animation classes and attributes for cards here
       specialCard.classList.add('xyz-in');
