@@ -177,6 +177,15 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
+  календарь: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      if (gameState[`player${id}`].influence.cards.length > gameState[`player${id}`].hand.length) {
+        takeCard(2, 3, id);
+      }
+    });
+    corporateBonus(arrOfId);
+  },
 };
 
 export default dogmas;
