@@ -43,6 +43,9 @@ function getAffectedPlayers(cardObj) {
   if (cardObj.dogma[0].type === 'corporate') {
     idPlayers = gameState.players.filter((player) => player[res] >= gameState.currentPlayer[res])
       .map((player) => player.id);
+
+    const currentPlayerID = idPlayers.splice(gameState.currentPlayer.id, 1);
+    idPlayers.push(currentPlayerID);
   } else {
     idPlayers = gameState.players
       .filter((player) => {
@@ -50,7 +53,7 @@ function getAffectedPlayers(cardObj) {
         return pl;
       }).map((player) => player.id);
   }
-  return idPlayers;
+  return idPlayers.flat();
 }
 
 function takeCard(cardsNum, ageNum, playerID, render = true) {
@@ -96,7 +99,7 @@ function recycle(playerID, arrCardID) {
     gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
     gameState.players[playerID].hand.splice(indexCard, 1);
   }
-  gameBoard.display();
+  // gameBoard.display();
 }
 
 function corporateBonus(arrOfId) {
@@ -138,37 +141,6 @@ const dogmas = {
       }
       takeCard(1, 1, id);
     });
-    corporateBonus(arrOfId);
-  },
-  гончарноедело: (cardObj) => {
-    console.log(cardObj.innovation);
-  },
-  инструменты: (cardObj) => {
-    const arrOfId = getAffectedPlayers(cardObj);
-    let cardID = [];
-    const actions = () => arrOfId.forEach((id) => {
-      recycle(id, cardID);
-
-      if (cardID.length >= 3) {
-        const lastCardInHand = gameState.players[id].hand[gameState.players[id].hand.length - 1];
-        takeCard(1, 3, id, false);
-        playCard(lastCardInHand, id);
-      }
-    });
-    for (let i = 0; i < 3; i += 1) {
-      cardID.push(prompt('Назовите карту', ''));
-    }
-
-    cardID = cardID.filter((item) => item !== null && item.length > 1);
-    actions();
-
-    cardID = [];
-
-    do {
-      cardID[0] = prompt('Назовите карту 3 века', '');
-    } while (!isAge(cardID[0], 3) && cardID[0] !== null);
-    if (cardID.length >= 1 && cardID[0] !== undefined) actions();
-
     corporateBonus(arrOfId);
   },
 
@@ -213,6 +185,39 @@ const dogmas = {
         moveCardToHand(cardID, id);
       }
     });
+  },
+  инструменты: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    let cardID = [];
+
+    const actions = () => arrOfId.forEach((id) => {
+      const cardsInHand = document.querySelector('.hand__cards').children;
+      for (let i = 0; i < cardsInHand.length; i += 1) {
+        cardsInHand[i].onclick = (e) => console.log(e.target.closest('.card').dataset.innovation);
+      }
+      recycle(id, cardID);
+
+      if (cardID.length >= 3) {
+        const lastCardInHand = gameState.players[id].hand[gameState.players[id].hand.length - 1];
+        takeCard(1, 3, id, false);
+        playCard(lastCardInHand, id);
+      }
+    });
+    // for (let i = 0; i < 3; i += 1) {
+    //   cardID.push(prompt('Назовите карту', ''));
+    // }
+
+    cardID = cardID.filter((item) => item !== null && item.length > 1);
+    actions();
+
+    cardID = [];
+
+    // do {
+    //   cardID[0] = prompt('Назовите карту 3 века', '');
+    // } while (!isAge(cardID[0], 3) && cardID[0] !== null);
+    if (cardID.length >= 1 && cardID[0] !== undefined) actions();
+
+    corporateBonus(arrOfId);
   },
 };
 
