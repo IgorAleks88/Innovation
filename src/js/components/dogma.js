@@ -200,15 +200,22 @@ const dogmas = {
   пароваямашина: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
-      const actualAge = getActualDeck(4);
-      const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-      const cardObject = getCardObject.byID(cardID);
-      const cardElement = getCardElement(cardObject);
-      const cardColor = cardObject.color;
-      gameState[`player${id}`].activeDecks[cardColor].cards.unshift(cardID);
-      if (gameState.currentPlayer.id === id) {
-        renderCard.archive(cardElement);
+      for (let i = 0; i < 2; i += 1) {
+        const actualAge = getActualDeck(4);
+        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+        const cardObject = getCardObject.byID(cardID);
+        const cardElement = getCardElement(cardObject);
+        const cardColor = cardObject.color;
+        gameState[`player${id}`].activeDecks[cardColor].cards.unshift(cardID);
+        if (gameState.currentPlayer.id === id) {
+          renderCard.archive(cardElement);
+        }
       }
+      const lastYellowCardID = gameState[`player${id}`].activeDecks.yellow.cards.shift();
+      gameState[`player${id}`].influence.cards.push(lastYellowCardID);
+      const lastYellowCardElement = getCardElement(getCardObject.byID(lastYellowCardID));
+      console.log(lastYellowCardElement);
+      renderCard.removeCardFromActive(lastYellowCardElement);
     });
     corporateBonus(arrOfId);
   },

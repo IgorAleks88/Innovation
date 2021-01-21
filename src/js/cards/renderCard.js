@@ -162,6 +162,27 @@ function getRenderCard() {
       targetStack.dom.prepend(cardElement);
       targetStack.dom.scrollIntoView();
     },
+    removeCardFromActive(cardElement) {
+      const targetStack = {};
+      activeStacks.forEach((stack) => {
+        if (cardElement.children[0].classList.contains(`card__color--${stack.id}`)) {
+          stack.classList.remove('active-zone__stack--empty');
+          targetStack.dom = stack;
+          targetStack.dom.style = null;
+          targetStack.width = stack.offsetWidth;
+          targetStack.height = stack.offsetHeight;
+          targetStack.shift = gameState.activePlayer.activeDecks[targetStack.dom.id].shift;
+          targetStack.length = gameState.activePlayer.activeDecks[targetStack.dom.id].cards.length;
+        }
+      });
+      // console.log(cardElement.dataset.innovation);
+      for (let i = 0; i < targetStack.dom.children.length; i += 1) {
+        // console.log(targetStack.dom.children[i].dataset.innovation);
+        if (targetStack.dom.children[i].dataset.innovation === cardElement.dataset.innovation) {
+          targetStack.dom.children[i].remove();
+        }
+      }
+    },
 
   };
   return renderCard;
