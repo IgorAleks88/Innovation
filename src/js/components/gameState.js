@@ -21,11 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-<<<<<<< HEAD
     hand: ['колесо', 'письменность', 'парус', 'инструменты'], //! remove
-=======
-    hand: ['мистицизм'], //! remove
->>>>>>> a2efb27... work commit
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
