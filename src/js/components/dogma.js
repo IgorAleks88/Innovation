@@ -68,7 +68,9 @@ function takeCard(cardsNum, ageNum, playerID, render = true) {
 
 function playCard(cardID, playerID) {
   const cardIndex = gameState.players[playerID].hand.indexOf(cardID);
-  gameState.players[playerID].hand.splice(cardIndex, 1);
+  if (cardIndex > -1) {
+    gameState.players[playerID].hand.splice(cardIndex, 1);
+  }
   const cardObj = getCardObject.byID(cardID);
   const cardElement = getCardElement(cardObj);
   const renderedCard = document.querySelector(`[data-innovation='${cardID}']`);
@@ -183,6 +185,15 @@ const dogmas = {
       if (gameState[`player${id}`].influence.cards.length > gameState[`player${id}`].hand.length) {
         takeCard(2, 3, id);
       }
+    });
+    corporateBonus(arrOfId);
+  },
+  эксперименты: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const actualAge = getActualDeck(5);
+      const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+      playCard(cardID, id);
     });
     corporateBonus(arrOfId);
   },
