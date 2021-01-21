@@ -5,6 +5,7 @@ import gameState from './gameState';
 import gameBoard from './gameBoard';
 
 const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
+
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
   if (id === gameState.currentPlayer.id) {
@@ -92,9 +93,9 @@ function recycle(playerID, arrCardID) {
 
     if (!cardID) return;
 
+    gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
     gameState.players[playerID].hand.splice(indexCard, 1);
   }
-  gameBoard.display();
 }
 
 function corporateBonus(arrOfId) {
@@ -211,7 +212,6 @@ const dogmas = {
         moveCardToHand(cardID, id);
       }
     });
-    corporateBonus(arrOfId);
   },
 };
 
