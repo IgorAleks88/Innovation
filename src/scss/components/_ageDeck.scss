@@ -10,7 +10,7 @@
 
   &--active {
     cursor: pointer;
-    filter: brightness(1.1);
+    filter: brightness(1) drop-shadow(0 0 0.7rem orange);
     transition: all 0.2s linear;
     z-index: 2;
 

@@ -77,7 +77,8 @@ class Menu {
         this.addNamesToUsers();
         e.preventDefault();
         if (isValid(users)) {
-          // displayNewTurnModal(users.names[0]);
+          e.preventDefault();
+          displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
           setTimeout(() => {
             intro.classList.toggle('intro--hide');
