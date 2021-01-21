@@ -167,6 +167,15 @@ const dogmas = {
         moveCardToHand(cardID, id);
       }
     });
+    corporateBonus(arrOfId);
+  },
+  виноделие: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const numberOfCards = Math.trunc(gameState[`player${id}`].tree / 2);
+      takeCard(numberOfCards, 2, id);
+    });
+    corporateBonus(arrOfId);
   },
 };
 
