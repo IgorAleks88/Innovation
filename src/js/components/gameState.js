@@ -21,13 +21,13 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['эксперименты', 'кузнечное дело'], //! remove
+    hand: ['паровая машина', 'кузнечное дело'], //! remove
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
       red: {
         cards: [],
-        shift: 'top', //! test
+        shift: 'right', //! test
       },
       green: {
         cards: [],
@@ -35,15 +35,15 @@ const gameState = {
       },
       blue: {
         cards: [],
-        shift: null, //! test
+        shift: 'right', //! test
       },
       purple: {
         cards: [],
-        shift: 'left', //! test
+        shift: 'right', //! test
       },
       yellow: {
         cards: [],
-        shift: 'top', //! test
+        shift: 'right', //! test
       },
     },
     influence: {
@@ -66,7 +66,7 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'left', //! test
+        shift: 'top', //! test
       },
       green: {
         cards: [],
@@ -74,15 +74,15 @@ const gameState = {
       },
       blue: {
         cards: [],
-        shift: 'right', //! test
+        shift: 'top', //! test
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: 'top',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: 'top',
       },
     },
     influence: {

@@ -197,6 +197,21 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
+  пароваямашина: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const actualAge = getActualDeck(4);
+      const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+      const cardObject = getCardObject.byID(cardID);
+      const cardElement = getCardElement(cardObject);
+      const cardColor = cardObject.color;
+      gameState[`player${id}`].activeDecks[cardColor].cards.unshift(cardID);
+      if (gameState.currentPlayer.id === id) {
+        renderCard.archive(cardElement);
+      }
+    });
+    corporateBonus(arrOfId);
+  },
 };
 
 export default dogmas;
