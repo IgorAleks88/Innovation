@@ -63,13 +63,13 @@ function getAffectedPlayers(cardObj) {
   }
 
   // set current player to [0] index of affected players
-  let currentPlayer = null;
-  idPlayers.forEach((playerID, i) => {
-    if (playerID === gameState.currentPlayer.id) {
-      currentPlayer = idPlayers.splice(i, 1);
-    }
-  });
-  if (currentPlayer !== null) idPlayers.unshift(currentPlayer);
+  // let currentPlayer = null;
+  // idPlayers.forEach((playerID, i) => {
+  //   if (playerID === gameState.currentPlayer.id) {
+  //     currentPlayer = idPlayers.splice(i, 1);
+  //   }
+  // });
+  // if (currentPlayer !== null) idPlayers.unshift(currentPlayer);
 
   return idPlayers;
 }
@@ -121,10 +121,11 @@ const getManualDogma = function closureWrapper() {
   let corporateCard = false;
 
   function setManualDogma(listener, getCardsID, count) {
+    console.log(gameState.affectedPlayers)
     // change active players while find one with not null affected cards array
     let arrOfCardsID = null;
     do {
-      gameState.activePlayer = gameState.players[gameState.affectedPlayers.pop()];
+      gameState.activePlayer = gameState.players[gameState.affectedPlayers.shift()];
       arrOfCardsID = getCardsID();
     } while (arrOfCardsID.length === 0 && gameState.affectedPlayers.length >= 1);
 
