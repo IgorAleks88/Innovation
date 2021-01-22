@@ -61,7 +61,7 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: [],
+    hand: ['алхимия', 'скотоводство', 'кузнечное дело', 'инструменты'],
     currentAge: 1,
     activeDecks: {
       red: {
