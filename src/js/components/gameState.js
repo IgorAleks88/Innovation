@@ -21,7 +21,11 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
+<<<<<<< HEAD
     hand: ['колесо', 'письменность', 'парус', 'инструменты'], //! remove
+=======
+    hand: [], //! remove
+>>>>>>> 45a4b87... fix: gameState links and refactor loadGame
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
