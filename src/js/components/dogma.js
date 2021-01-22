@@ -4,6 +4,7 @@ import getCardObject from '../cards/getCardObject';
 import gameState from './gameState';
 import gameBoard from './gameBoard';
 import header from '../display/playerTable/displayHeader';
+import updateGameState from '../utility/updateGameState';
 
 const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
 
@@ -81,17 +82,6 @@ function getAffectedPlayers(cardObj) {
       }).map((player) => player.id);
   }
 
-  // set current player to [0] index of affected players
-  // let currentPlayer = null;
-  // idPlayers.forEach((playerID, i) => {
-  //   if (playerID === gameState.currentPlayer.id) {
-  //     currentPlayer = idPlayers.splice(i, 1);
-  //   }
-  // });
-  // if (currentPlayer !== null) idPlayers.unshift(currentPlayer);
-
-  // return idPlayers;
-
   return idPlayers.flat();
 }
 
@@ -119,7 +109,7 @@ function playCard(cardID, playerID) {
   if (renderedCard !== null) renderedCard.remove();
   const targetStack = gameState.players[playerID].activeDecks[cardObj.color].cards;
   targetStack.push(cardID);
-  if (gameState.players[playerID] === gameState.currentPlayer) {
+  if (gameState.players[playerID] === gameState.activePlayer) {
     cardElement.onclick = () => dogmas['письменность'](cardObj); //! change later
     renderCard.toActive(cardElement);
   }
@@ -161,11 +151,16 @@ const getManualDogma = function closureWrapper() {
   function setManualDogma(listener, getCardsID, count) {
     // change active players while find one with not null affected cards array
     let arrOfCardsID = null;
+    let counter = 0;
     do {
+      counter += 1;
+      if (gameState.affectedPlayers.length - counter < 0) {
+        counter = 0;
+        soloCorporate = true;
+      }
       gameState.activePlayer = gameState.players[gameState.affectedPlayers.shift()];
       arrOfCardsID = getCardsID();
     } while (arrOfCardsID.length === 0 && gameState.affectedPlayers.length >= 1);
-
     if (arrOfCardsID.length > 0) {
       if (gameState.activePlayer !== gameState.currentPlayer) {
         gameState.activePlayer.actionPoints = count + 1;
@@ -279,40 +274,6 @@ const dogmas = {
     getManualDogma()(listener, getAffectedCards, 1);
   },
 
-  // инструменты: (cardObj) => {
-  //   const arrOfId = getAffectedPlayers(cardObj);
-  //   let cardID = [];
-
-  //   const actions = () => arrOfId.forEach((id) => {
-  //     const cardsInHand = document.querySelector('.hand__cards').children;
-  //     for (let i = 0; i < cardsInHand.length; i += 1) {
-  //       cardsInHand[i].onclick = (e) => console.log(e.target.closest('.card').dataset.innovation);
-  //     }
-  //     recycle(id, cardID);
-
-  //     if (cardID.length >= 3) {
-  //       const lastCardInHand = gameState.players[id].hand[gameState.players[id].hand.length - 1];
-  //       takeCard(1, 3, id, false);
-  //       playCard(lastCardInHand, id);
-  //     }
-  //   });
-  //   // for (let i = 0; i < 3; i += 1) {
-  //   //   cardID.push(prompt('Назовите карту', ''));
-  //   // }
-
-  //   cardID = cardID.filter((item) => item !== null && item.length > 1);
-  //   actions();
-
-  //   cardID = [];
-
-  //   // do {
-  //   //   cardID[0] = prompt('Назовите карту 3 века', '');
-  //   // } while (!isAge(cardID[0], 3) && cardID[0] !== null);
-  //   if (cardID.length >= 1 && cardID[0] !== undefined) actions();
-
-  //   corporateBonus(arrOfId);
-  // },
-
   инструменты: (cardObj) => {
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
@@ -338,20 +299,21 @@ const dogmas = {
         gameState.activePlayer.actionPoints -= 2;
         recycle(gameState.activePlayer.id, [getCardID(e)]);
         takeCard(3, 1, gameState.activePlayer.id);
-        gameState.activePlayer.actionPoints += 1;
-        gameBoard.update();
+        updateGameState(gameState);
         header.changePlayerStats(gameState.activePlayer);
+        gameBoard.display();
       } else {
         recycle(gameState.activePlayer.id, [getCardID(e)]);
         counter += 1;
         if (counter === 3) {
+          counter = 0;
           takeCard(1, 3, gameState.activePlayer.id, false);
           const lastCardInHand = gameState.activePlayer
             .hand[gameState.activePlayer.hand.length - 1];
           playCard(lastCardInHand, gameState.activePlayer.id);
-          gameState.activePlayer.actionPoints += 1;
-          gameBoard.update();
+          updateGameState(gameState);
           header.changePlayerStats(gameState.activePlayer);
+          gameBoard.display();
         }
       }
     }
