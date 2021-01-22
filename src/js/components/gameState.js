@@ -34,7 +34,7 @@ const gameState = {
         shift: 'right', //! test
       },
       blue: {
-        cards: [],
+        cards: ['генетика'],
         shift: 'right', //! test
       },
       purple: {

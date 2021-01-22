@@ -247,6 +247,26 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
+  генетика: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const currentPlayer = gameState[`player${id}`];
+      const currentAge = getActualDeck(10);
+      const currentCard = gameState.ageDecks[`age${currentAge}`].pop();
+      const stackColor = getCardObject.byID(currentCard).color;
+      playCard(currentCard, id);
+      const currentDeck = currentPlayer.activeDecks[stackColor].cards;
+      if (currentDeck.length > 1) {
+        for (let i = 0; i < currentDeck.length - 1; i += 1) {
+          const cardID = currentDeck[i];
+          currentPlayer.influence.cards.push(cardID);
+          renderCard.removeCardFromActive(getCardElement(getCardObject.byID(cardID)));
+        }
+        currentDeck.splice(0, currentDeck.length - 1);
+      }
+    });
+    corporateBonus(arrOfId);
+  },
 };
 
 export default dogmas;
