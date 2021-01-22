@@ -21,17 +21,17 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['скотоводство', 'письменность', 'парус', 'инструменты'], //! remove
+    hand: ['свод законов', 'скотоводство', 'парус', 'инструменты'], //! remove
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
       red: {
         cards: [],
-        shift: 'top', //! test
+        shift: null, //! test
       },
       green: {
         cards: [],
-        shift: 'right', //! test
+        shift: null, //! test
       },
       blue: {
         cards: [],
@@ -39,11 +39,11 @@ const gameState = {
       },
       purple: {
         cards: [],
-        shift: 'left', //! test
+        shift: null, //! test
       },
       yellow: {
         cards: [],
-        shift: 'top', //! test
+        shift: null, //! test
       },
     },
     influence: {

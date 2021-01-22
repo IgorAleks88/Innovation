@@ -273,7 +273,6 @@ const dogmas = {
     }
     getManualDogma()(listener, getAffectedCards, 1);
   },
-
   инструменты: (cardObj) => {
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
@@ -361,6 +360,48 @@ const dogmas = {
       }
     });
     corporateBonus(arrOfId);
+  },
+  сводзаконов: (cardObj) => {
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const notEmptyStacks = Object.keys(gameState.activePlayer.activeDecks).filter((deck) => {
+        return gameState.activePlayer.activeDecks[deck].cards.length !== 0;
+      });
+      return gameState.activePlayer.hand.filter((cardID) => {
+        return notEmptyStacks.includes(getCardObject.byID(cardID).color);
+      });
+    }
+    function listener(e) {
+      const cardID = getCardID(e);
+      const cardObject = getCardObject.byID(cardID);
+      const cardElement = document.querySelector(`[data-innovation="${cardID}"]`);
+
+      gameState.activePlayer.hand.splice(gameState.activePlayer.hand.indexOf(cardID), 1);
+      gameState.activePlayer.activeDecks[cardObject.color].cards.unshift(cardID);
+      renderCard.archive(cardElement);
+      cardElement.classList.remove('active');
+      cardElement.onclick = null;
+      gameBoard.update();
+      Array.from(document.querySelector('.hand__cards').childNodes).forEach((cardElement) => {
+        cardElement.classList.remove('active');
+        cardElement.onclick = null;
+      });
+      const targetStack = document.getElementById(`${cardObject.color}`);
+      targetStack.classList.add('active');
+      if (gameState.activePlayer.activeDecks[cardObject.color].shift !== 'left') {
+        targetStack.onclick = () => {
+          gameState.activePlayer.activeDecks[cardObject.color].shift = 'left';
+          gameBoard.display();
+          gameBoard.init();
+          gameBoard.update();
+          targetStack.onclick = null;
+          targetStack.classList.remove('active');
+        };
+      } else {
+        gameBoard.update();
+      }
+    }
+    getManualDogma()(listener, getAffectedCards, 2);
   },
 };
 
