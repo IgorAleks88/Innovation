@@ -5,6 +5,8 @@ import gameState from './gameState';
 import gameBoard from './gameBoard';
 import header from '../display/playerTable/displayHeader';
 
+const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
+
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
   if (id === gameState.currentPlayer.id) {
@@ -54,6 +56,9 @@ function getAffectedPlayers(cardObj) {
   if (cardObj.dogma[0].type === 'corporate') {
     idPlayers = gameState.players.filter((player) => player[res] >= gameState.currentPlayer[res])
       .map((player) => player.id);
+
+    const currentPlayerID = idPlayers.splice(gameState.currentPlayer.id, 1);
+    idPlayers.push(currentPlayerID);
   } else {
     idPlayers = gameState.players
       .filter((player) => {
@@ -61,17 +66,7 @@ function getAffectedPlayers(cardObj) {
         return pl;
       }).map((player) => player.id);
   }
-
-  // set current player to [0] index of affected players
-  let currentPlayer = null;
-  idPlayers.forEach((playerID, i) => {
-    if (playerID === gameState.currentPlayer.id) {
-      currentPlayer = idPlayers.splice(i, 1);
-    }
-  });
-  if (currentPlayer !== null) idPlayers.unshift(currentPlayer);
-
-  return idPlayers;
+  return idPlayers.flat();
 }
 
 function takeCard(cardsNum, ageNum, playerID, render = true) {
@@ -102,6 +97,22 @@ function playCard(cardID, playerID) {
     cardElement.onclick = () => dogmas['письменность'](cardObj); //! change later
     renderCard.toActive(cardElement);
   }
+}
+
+function recycle(playerID, arrCardID) {
+  const cardObjs = {};
+  for (let id = 0; id < arrCardID.length; id += 1) {
+    cardObjs[arrCardID[id]] = getCardObject.byID(arrCardID[id]).age;
+
+    const indexCard = gameState.players[playerID].hand.indexOf(arrCardID[id]);
+    const cardID = gameState.players[playerID].hand[indexCard];
+
+    if (!cardID) return;
+
+    gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
+    gameState.players[playerID].hand.splice(indexCard, 1);
+  }
+  // gameBoard.display();
 }
 
 function corporateBonus(arrOfId) {
@@ -240,8 +251,81 @@ const dogmas = {
     }
     getManualDogma()(listener, getAffectedCards, 1);
   },
-  гончарноедело: (cardObj) => {
-    console.log(cardObj.innovation);
+
+  кузнечноедело: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      let repeat = true;
+      do {
+        const actualAge = getActualDeck(1);
+        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+        const currentPlayerName = gameState[`player${id}`].name;
+        console.log(`${currentPlayerName} взял ${cardID}`);
+        const currentCard = getCardObject.byID(cardID);
+        repeat = isHaveResource(currentCard, 'tower');
+        if (repeat) {
+          gameState.players[id].influence.cards.push(cardID);
+        } else {
+          moveCardToHand(cardID, id);
+        }
+      } while (repeat);
+    });
+    corporateBonus(arrOfId);
+  },
+  мистицизм: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const actualAge = getActualDeck(1);
+      const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+      const currentPlayerName = gameState[`player${id}`].name;
+      const currentCard = getCardObject.byID(cardID);
+      console.log(`${currentPlayerName} взял ${cardID} ${currentCard.color}`);
+      if (gameState.players[id].activeDecks[currentCard.color].cards.length > 0) {
+        gameState.players[id].activeDecks[currentCard.color].cards.push(cardID);
+        if (id === gameState.currentPlayer.id) {
+          const cardElement = getCardElement(currentCard);
+          renderCard.toActive(cardElement);
+          if (dogmas[currentCard.innovation]) {
+            cardElement.onclick = () => dogmas[currentCard.innovation](cardObj);
+          }
+        }
+      } else {
+        moveCardToHand(cardID, id);
+      }
+    });
+  },
+  инструменты: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    let cardID = [];
+
+    const actions = () => arrOfId.forEach((id) => {
+      const cardsInHand = document.querySelector('.hand__cards').children;
+      for (let i = 0; i < cardsInHand.length; i += 1) {
+        cardsInHand[i].onclick = (e) => console.log(e.target.closest('.card').dataset.innovation);
+      }
+      recycle(id, cardID);
+
+      if (cardID.length >= 3) {
+        const lastCardInHand = gameState.players[id].hand[gameState.players[id].hand.length - 1];
+        takeCard(1, 3, id, false);
+        playCard(lastCardInHand, id);
+      }
+    });
+    // for (let i = 0; i < 3; i += 1) {
+    //   cardID.push(prompt('Назовите карту', ''));
+    // }
+
+    cardID = cardID.filter((item) => item !== null && item.length > 1);
+    actions();
+
+    cardID = [];
+
+    // do {
+    //   cardID[0] = prompt('Назовите карту 3 века', '');
+    // } while (!isAge(cardID[0], 3) && cardID[0] !== null);
+    if (cardID.length >= 1 && cardID[0] !== undefined) actions();
+
+    corporateBonus(arrOfId);
   },
   инструменты: (cardObj) => { // TODO
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
