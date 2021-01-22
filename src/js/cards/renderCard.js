@@ -175,12 +175,58 @@ function getRenderCard() {
           targetStack.length = gameState.activePlayer.activeDecks[targetStack.dom.id].cards.length;
         }
       });
-      // console.log(cardElement.dataset.innovation);
       for (let i = 0; i < targetStack.dom.children.length; i += 1) {
-        // console.log(targetStack.dom.children[i].dataset.innovation);
         if (targetStack.dom.children[i].dataset.innovation === cardElement.dataset.innovation) {
           targetStack.dom.children[i].remove();
         }
+      }
+
+      const cardHeight = cardElement.offsetHeight;
+      let cardShiftValue = 40;
+
+      switch (targetStack.shift) {
+        case 'top':
+          while (targetStack.height < cardHeight + (targetStack.length * cardShiftValue)
+            && cardShiftValue !== 10) {
+            cardShiftValue -= 10;
+          }
+          Array.from(targetStack.dom.children).forEach((card, i) => {
+            card.style.bottom = `${i * cardShiftValue}px`;
+          });
+          if (targetStack.length !== 1) cardElement.style.bottom = `${(targetStack.length - 1) * cardShiftValue}px`;
+          break;
+
+        case 'left':
+          while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width
+            + (targetStack.length * cardShiftValue)
+            && cardShiftValue !== 10) {
+            cardShiftValue -= 10;
+          }
+          Array.from(targetStack.dom.children).forEach((card, i) => {
+            card.style.right = `${i * cardShiftValue}px`;
+          });
+          cardElement.style.right = `${(targetStack.length - 1) * cardShiftValue}px`;
+          if (targetStack.length > 1) {
+            targetStack.dom.style.width = `${targetStack.width + cardShiftValue * (targetStack.length - 1)}px`;
+          }
+          break;
+
+        case 'right':
+          while (targetStack.dom.parentElement.offsetWidth / 2.5 < targetStack.width
+            + (targetStack.length * cardShiftValue)
+            && cardShiftValue !== 10) {
+            cardShiftValue -= 10;
+          }
+          Array.from(targetStack.dom.children).forEach((card, i) => {
+            card.style.left = `${i * cardShiftValue}px`;
+          });
+          cardElement.style.left = `${(targetStack.length - 1) * cardShiftValue}px`;
+          if (targetStack.length > 1) {
+            targetStack.dom.style.width = `${targetStack.width + cardShiftValue * (targetStack.length - 1)}px`;
+          }
+          break;
+        default:
+          break;
       }
     },
 

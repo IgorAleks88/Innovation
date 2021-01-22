@@ -42,8 +42,8 @@ const gameState = {
         shift: 'right', //! test
       },
       yellow: {
-        cards: [],
-        shift: 'right', //! test
+        cards: ['скотоводство', 'земледелие'],
+        shift: 'left', //! test
       },
     },
     influence: {
