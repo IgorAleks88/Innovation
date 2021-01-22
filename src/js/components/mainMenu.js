@@ -1,5 +1,8 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
 import displayNewTurnModal from '../display/displayNewTurnModal';
+import header from '../display/playerTable/displayHeader';
+import gameBoard from './gameBoard';
+import gameState from './gameState';
 
 const users = {};
 
@@ -17,6 +20,35 @@ function showErrorMessage() {
   errorMessgae.classList.add('menu__link', 'error');
   errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
   form.prepend(errorMessgae);
+}
+function transform(state) {
+  const currPlayerID = state.currentPlayer.id;
+  const activePlayerID = state.activePlayer.id;
+  const player0 = state.player0.id;
+  const player1 = state.player1.id;
+  const player2 = state.player2.id;
+  const player3 = state.player3.id;
+
+  state.players.forEach((player) => {
+    if (player.id === currPlayerID) {
+      state.currentPlayer = player;
+    }
+    if (player.id === activePlayerID) {
+      state.activePlayer = player;
+    }
+    if (player.id === player0) {
+      state.player0 = player;
+    }
+    if (player.id === player1) {
+      state.player1 = player;
+    }
+    if (player.id === player2) {
+      state.player2 = player;
+    }
+    if (player.id === player3) {
+      state.player3 = player;
+    }
+  });
 }
 
 class Menu {
@@ -52,6 +84,7 @@ class Menu {
     this.menu.innerHTML = `
     ${this.createMenuItem('Новая игра', 'start')}
     ${this.createMenuItem('Продолжить', 'continue disabled')}
+    ${this.createMenuItem('Загрузить', 'load')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
     ${this.createMenuItem('Правила игры', 'rules')}
     ${this.createMenuItem('Обзор игры', 'review')}
@@ -92,7 +125,20 @@ class Menu {
         this.render();
         this.menu.classList.add('menu__used');
       } else if (e.target.className.includes('continue')) {
+        gameBoard.update();
         intro.classList.toggle('intro--hide');
+        displayNewTurnModal(gameState.currentPlayer.name);
+      } else if (e.target.className.includes('load')) {
+        this.menu.querySelector('.continue').classList.remove('disabled');
+        const loadedGameState = JSON.parse(localStorage.getItem('innovation'));
+        Object.entries(loadedGameState).forEach(([key, value]) => { gameState[key] = value; });
+        transform(gameState);
+        gameBoard.display();
+        const names = loadedGameState.players.map((player) => player.name);
+        header.initPlayerNames(names);
+        gameBoard.init();
+      } else if (e.target.className.includes('save')) {
+        localStorage.setItem('innovation', JSON.stringify(gameState));
       }
     });
   }
