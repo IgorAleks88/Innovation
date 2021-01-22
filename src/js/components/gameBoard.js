@@ -109,8 +109,7 @@ const gameBoard = {
   update() {
     gameState.activePlayer.actionPoints -= 1;
 
-    if (gameState.activePlayer.actionPoints === 0
-      && gameState.currentPlayer === gameState.activePlayer) {
+    if (gameState.currentPlayer.actionPoints < 1) {
       this.displayNextTurnBtn();
     } else if (gameState.activePlayer.actionPoints === 0
       && gameState.currentPlayer !== gameState.activePlayer) {
