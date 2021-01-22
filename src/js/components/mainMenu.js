@@ -3,16 +3,38 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 
 const users = {};
 
-function isValidate(userObj) {
+function isValid(userObj) {
   if (userObj.names.length === userObj.players) {
     return userObj.names.every((name) => name.length > 2 && name.length < 8);
   }
   return false;
 }
 
+function showErrorMessage() {
+  if (document.querySelector('.error')) return;
+  const form = document.querySelector('.form');
+  const errorMessgae = document.createElement('div');
+  errorMessgae.classList.add('menu__link', 'error');
+  errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
+  form.prepend(errorMessgae);
+}
+
 class Menu {
   constructor(parent) {
     this.parent = parent;
+  }
+
+  validateInputs() {
+    const inputs = this.menu.querySelectorAll('input');
+    const values = [...inputs].map((input) => input.value);
+    for (let i = 0; i < inputs.length; i += 1) {
+      const { value } = inputs[i];
+      if (value.length < 3 || value.length > 7 || values.filter((v) => v === value).length > 1) {
+        inputs[i].setCustomValidity('Invalid');
+      } else {
+        inputs[i].setCustomValidity('');
+      }
+    }
   }
 
   createMenuItem(text, ...dopParam) {
@@ -53,13 +75,17 @@ class Menu {
         this.createNameInputField(e.target.dataset.players);
       } else if (e.target.className.includes('get-names')) {
         this.addNamesToUsers();
-        if (isValidate(users)) {
+        e.preventDefault();
+        if (isValid(users)) {
           e.preventDefault();
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
           setTimeout(() => {
             intro.classList.toggle('intro--hide');
           }, 500);
+        } else {
+          this.validateInputs();
+          showErrorMessage();
         }
       } else if (e.target.className.includes('back')) {
         this.menu.remove();
@@ -98,7 +124,7 @@ class Menu {
   createNameInputField(numberOfFields) {
     users.players = +numberOfFields;
     this.menu.innerHTML = /* html */ `
-      <form>
+      <form class="form">
         ${this.createInputs(numberOfFields)}
         <button class="menu__link get-names" type="submit">Принять</button>
       </form>
@@ -118,14 +144,14 @@ class Menu {
       );
     }
 
-    return inputHTML;
+    return inputHTML.join('');
   }
 
   addNamesToUsers() {
     const inputs = this.menu.querySelectorAll('[data-name]');
     const playerNames = [];
     for (let i = 0; i < inputs.length; i += 1) {
-      if (inputs[i].value) {
+      if (inputs[i].value && !playerNames.includes(inputs[i].value)) {
         playerNames.push(inputs[i].value);
       }
     }
