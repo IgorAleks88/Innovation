@@ -26,14 +26,19 @@
 .menu__link {
   color: #53b1e7;
   display: inline-block;
-  font-family: 'Muli', sans-serif;
   font-size: 2.2rem;
   font-weight: 300;
+  font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1;
   padding: 1.4rem 0;
   position: relative;
   text-decoration: none;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .menu__link svg {
@@ -121,4 +126,10 @@ input[type='text'] {
 
 .hide {
   display: none;
+}
+
+.error {
+  display: block;
+  color: red;
+  user-select: none;
 }

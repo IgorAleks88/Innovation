@@ -13,6 +13,8 @@
       "prefer-rest-params": "off",
       "prefer-default-export": "off",
       "import/no-cycle": "off",
-      "no-use-before-define": "off"
+      "no-use-before-define": "off",
+      "wrap-iife": "off",
+      "arrow-body-style": "off"
     }
 }

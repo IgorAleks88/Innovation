@@ -53,7 +53,6 @@ const gameBoard = {
     gameState.activePlayer.hand.forEach((cardID) => {
       const cardObject = getCardObject.byID(cardID);
       const cardElement = getCardElement(cardObject);
-      cardElement.onclick = this.playCard;
       hand.append(cardElement);
     });
 
@@ -108,17 +107,21 @@ const gameBoard = {
   },
 
   update() {
-    gameState.currentPlayer.actionPoints -= 1;
+    gameState.activePlayer.actionPoints -= 1;
 
-    if (gameState.currentPlayer.actionPoints === 0) {
+    if (gameState.activePlayer.actionPoints === 0
+      && gameState.currentPlayer === gameState.activePlayer) {
       this.displayNextTurnBtn();
+    } else if (gameState.activePlayer.actionPoints === 0
+      && gameState.currentPlayer !== gameState.activePlayer) {
+      this.displayFinishActionBtn();
     }
 
     updateGameState(gameState);
     gameState.players.forEach((player) => header.changePlayerStats(player));
 
-    document.querySelector('.info-table__player-name').innerText = gameState.currentPlayer.name;
-    document.querySelector('.info-table__action-points').innerText = gameState.currentPlayer.actionPoints;
+    document.querySelector('.info-table__player-name').innerText = gameState.activePlayer.name;
+    document.querySelector('.info-table__action-points').innerText = gameState.activePlayer.actionPoints;
   },
 
   takeCard(e) {
@@ -131,11 +134,11 @@ const gameBoard = {
 
     // get age deck form which card was taken to use in next block
     let ageDeck = e.target.id;
-    if (ageDeck === 'cloneCurrentDeck') { ageDeck = gameState.currentPlayer.currentDeck; }
+    if (ageDeck === 'cloneCurrentDeck') { ageDeck = gameState.activePlayer.currentDeck; }
 
     // change gameState
     const cardID = gameState.ageDecks[ageDeck].pop();
-    gameState.currentPlayer.hand.push(cardID);
+    gameState.activePlayer.hand.push(cardID);
 
     // get card DOM element and render it to hand
     const cardObj = getCardObject.byID(cardID);
@@ -147,7 +150,7 @@ const gameBoard = {
 
     // protection of multiple clicks
     setTimeout(() => {
-      if (gameState.currentPlayer.actionPoints !== 0) {
+      if (gameState.activePlayer.actionPoints !== 0) {
         e.target.onclick = gameBoard.takeCard;
       }
     }, 250);
@@ -160,9 +163,9 @@ const gameBoard = {
     const cardObj = getCardObject.byID(cardID);
 
     // change gameState
-    const cardIndex = gameState.currentPlayer.hand.indexOf(cardID);
-    gameState.currentPlayer.hand.splice(cardIndex, 1);
-    const targetStack = gameState.currentPlayer.activeDecks[cardObj.color].cards;
+    const cardIndex = gameState.activePlayer.hand.indexOf(cardID);
+    gameState.activePlayer.hand.splice(cardIndex, 1);
+    const targetStack = gameState.activePlayer.activeDecks[cardObj.color].cards;
     targetStack.push(cardID);
 
     // set dogma function
@@ -171,9 +174,19 @@ const gameBoard = {
       dogmas[joinWords](cardObj);
       gameBoard.update();
     };
+    cardElement.classList.remove('active');
     renderCard.toActive(cardElement);
 
     gameBoard.update();
+  },
+
+  displayFinishActionBtn() {
+    const nextTurnBtn = document.createElement('div');
+    nextTurnBtn.classList.add('info-table__next-turn-btn');
+    nextTurnBtn.innerText = 'Завершить действие';
+    const infoTable = document.querySelector('.info-table');
+    this.disableEvents();
+    infoTable.append(nextTurnBtn);
   },
 
   displayNextTurnBtn() {
@@ -197,7 +210,7 @@ const gameBoard = {
         gameBoard.display();
         gameBoard.init();
         const excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
-        excistedNextTurnBtn.remove();
+        if (excistedNextTurnBtn !== null) excistedNextTurnBtn.remove();
       }, 500);
     });
     const infoTable = document.querySelector('.info-table');
@@ -208,7 +221,7 @@ const gameBoard = {
   setHeaderCurrent() {
     Array.from(document.querySelectorAll('.head-row__name')).forEach((headerName) => {
       headerName.parentElement.parentElement.classList.remove('player-container--active');
-      if (headerName.innerText === gameState.currentPlayer.name) {
+      if (headerName.innerText === gameState.activePlayer.name) {
         setTimeout(() => {
           headerName.parentElement.parentElement.classList.add('player-container--active');
         }, 250);
