@@ -13,7 +13,6 @@ function isValid(userObj) {
   return false;
 }
 
-<<<<<<< HEAD
 function showErrorMessage() {
   if (document.querySelector('.error')) return;
   const form = document.querySelector('.form');
@@ -21,7 +20,7 @@ function showErrorMessage() {
   errorMessgae.classList.add('menu__link', 'error');
   errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
   form.prepend(errorMessgae);
-=======
+}
 function transform(state) {
   const currPlayerID = state.currentPlayer.id;
   const activePlayerID = state.activePlayer.id;
@@ -50,7 +49,6 @@ function transform(state) {
       state.player3 = player;
     }
   });
->>>>>>> 45a4b87... fix: gameState links and refactor loadGame
 }
 
 class Menu {

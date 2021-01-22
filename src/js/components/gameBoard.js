@@ -109,12 +109,7 @@ const gameBoard = {
   update() {
     gameState.activePlayer.actionPoints -= 1;
 
-<<<<<<< HEAD
-    if (gameState.activePlayer.actionPoints === 0
-      && gameState.currentPlayer === gameState.activePlayer) {
-=======
     if (gameState.currentPlayer.actionPoints < 1) {
->>>>>>> 45a4b87... fix: gameState links and refactor loadGame
       this.displayNextTurnBtn();
     } else if (gameState.activePlayer.actionPoints === 0
       && gameState.currentPlayer !== gameState.activePlayer) {
