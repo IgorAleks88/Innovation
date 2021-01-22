@@ -13,14 +13,6 @@ function isValid(userObj) {
   return false;
 }
 
-function showErrorMessage() {
-  if (document.querySelector('.error')) return;
-  const form = document.querySelector('.form');
-  const errorMessgae = document.createElement('div');
-  errorMessgae.classList.add('menu__link', 'error');
-  errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
-  form.prepend(errorMessgae);
-}
 function transform(state) {
   const currPlayerID = state.currentPlayer.id;
   const activePlayerID = state.activePlayer.id;
@@ -118,7 +110,7 @@ class Menu {
           }, 500);
         } else {
           this.validateInputs();
-          showErrorMessage();
+          this.showErrorMessage();
         }
       } else if (e.target.className.includes('back')) {
         this.menu.remove();
@@ -204,6 +196,15 @@ class Menu {
     users.names = playerNames;
 
     return playerNames;
+  }
+
+  showErrorMessage() {
+    if (document.querySelector('.error')) return;
+    const form = this.menu.querySelector('.form');
+    const errorMessgae = document.createElement('div');
+    errorMessgae.classList.add('menu__link', 'error');
+    errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
+    form.prepend(errorMessgae);
   }
 }
 export default Menu;
