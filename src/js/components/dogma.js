@@ -29,6 +29,8 @@ function getMaxCard(stack) {
     }
   }
   return result;
+}
+
 // take e as argument!!!
 function getCardAge(e) {
   let cardElement = null;
@@ -308,7 +310,7 @@ const dogmas = {
       }
     });
   },
-  инструменты: (cardObj) => {
+  /* инструменты: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     let cardID = [];
 
@@ -340,7 +342,7 @@ const dogmas = {
     if (cardID.length >= 1 && cardID[0] !== undefined) actions();
 
     corporateBonus(arrOfId);
-  },
+  }, */
   инструменты: (cardObj) => { // TODO
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
@@ -368,49 +370,6 @@ const dogmas = {
     getManualDogma()(listener, getAffectedCards, 3);
   },
 
-  кузнечноедело: (cardObj) => {
-    const arrOfId = getAffectedPlayers(cardObj);
-    arrOfId.forEach((id) => {
-      let repeat = true;
-      do {
-        const actualAge = getActualDeck(1);
-        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-        const currentPlayerName = gameState[`player${id}`].name;
-        console.log(`${currentPlayerName} взял ${cardID}`);
-        const currentCard = getCardObject.byID(cardID);
-        repeat = isHaveResource(currentCard, 'tower');
-        if (repeat) {
-          gameState.players[id].influence.cards.push(cardID);
-        } else {
-          moveCardToHand(cardID, id);
-        }
-      } while (repeat);
-    });
-    corporateBonus(arrOfId);
-  },
-  мистицизм: (cardObj) => {
-    const arrOfId = getAffectedPlayers(cardObj);
-    arrOfId.forEach((id) => {
-      const actualAge = getActualDeck(1);
-      const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-      const currentPlayerName = gameState[`player${id}`].name;
-      const currentCard = getCardObject.byID(cardID);
-      console.log(`${currentPlayerName} взял ${cardID} ${currentCard.color}`);
-      if (gameState.players[id].activeDecks[currentCard.color].cards.length > 0) {
-        gameState.players[id].activeDecks[currentCard.color].cards.push(cardID);
-        if (id === gameState.currentPlayer.id) {
-          const cardElement = getCardElement(currentCard);
-          renderCard.toActive(cardElement);
-          if (dogmas[currentCard.innovation]) {
-            cardElement.onclick = () => dogmas[currentCard.innovation](cardObj);
-          }
-        }
-      } else {
-        moveCardToHand(cardID, id);
-      }
-    });
-    corporateBonus(arrOfId);
-  },
   виноделие: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
