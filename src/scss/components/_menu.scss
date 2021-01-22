@@ -127,3 +127,9 @@ input[type='text'] {
 .hide {
   display: none;
 }
+
+.error {
+  display: block;
+  color: red;
+  user-select: none;
+}

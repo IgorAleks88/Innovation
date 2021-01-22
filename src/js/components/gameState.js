@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['колесо', 'скотоводство', 'инструменты', 'мистицизм'], //! remove
+    hand: ['колесо', 'письменность', 'парус', 'инструменты'], //! remove
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
