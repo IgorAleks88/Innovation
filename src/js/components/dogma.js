@@ -14,6 +14,20 @@ function moveCardToHand(card, id) {
   }
 }
 
+function getMaxCard(stack) {
+  let result = null;
+  if (stack.length > 0) {
+    result = getCardObject.byID(stack[0]);
+    for (let i = 0; i < stack.length; i += 1) {
+      const currentCard = getCardObject.byID(stack[i]);
+      if (result.age < currentCard.age) {
+        result = currentCard;
+      }
+    }
+  }
+  return result;
+}
+
 function getActualDeck(startAge) {
   let actualAge = -1;
   for (let i = startAge; i < 11; i += 1) {
@@ -214,8 +228,22 @@ const dogmas = {
       const lastYellowCardID = gameState[`player${id}`].activeDecks.yellow.cards.shift();
       gameState[`player${id}`].influence.cards.push(lastYellowCardID);
       const lastYellowCardElement = getCardElement(getCardObject.byID(lastYellowCardID));
-      console.log(lastYellowCardElement);
       renderCard.removeCardFromActive(lastYellowCardElement);
+    });
+    corporateBonus(arrOfId);
+  },
+  станки: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      let currentAge = 1;
+      const currentPlayer = gameState[`player${id}`];
+      const maxCard = getMaxCard(currentPlayer.influence.cards);
+      if (maxCard) {
+        currentAge = maxCard.age;
+      }
+      currentAge = getActualDeck(currentAge);
+      const currentCard = gameState.ageDecks[`age${currentAge}`].pop();
+      currentPlayer.influence.cards.push(currentCard);
     });
     corporateBonus(arrOfId);
   },

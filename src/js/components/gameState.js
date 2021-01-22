@@ -26,7 +26,7 @@ const gameState = {
     currentDeck: 'age1', // test
     activeDecks: {
       red: {
-        cards: [],
+        cards: ['станки'],
         shift: 'right', //! test
       },
       green: {
@@ -42,7 +42,7 @@ const gameState = {
         shift: 'right', //! test
       },
       yellow: {
-        cards: ['скотоводство', 'земледелие'],
+        cards: ['консервы', 'скотоводство', 'земледелие'],
         shift: 'left', //! test
       },
     },
