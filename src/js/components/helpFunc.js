@@ -1,4 +1,4 @@
-function modalNextPlayer() {
+function modalMessages() {
   return new Promise((resolve) => {
     const modal = document.createElement('div');
     modal.classList.add('modal__turn-step');
@@ -10,15 +10,18 @@ function modalNextPlayer() {
         <button class="modal__turn-step-btn red">cancel</button>
       </div>
     `;
-    const btn = modal.querySelector('.modal__turn-step-btn');
+    const messages = modal.querySelector('.container__message');
+    const btnWrapper = modal.querySelector('.wrapper__btn');
 
-    btn.addEventListener('click', () => {
+    btnWrapper.addEventListener('click', (e) => {
+      if (e.target === btnWrapper) return;
+      if (e.target.textContent === 'ok' && messages.childElementCount < 1) return;
+      resolve(e.target.textContent);
       modal.remove();
-      resolve();
     });
 
     document.body.append(modal);
   });
 }
 
-export default modalNextPlayer;
+export default modalMessages;

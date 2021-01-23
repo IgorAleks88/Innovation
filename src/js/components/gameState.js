@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['земледелие'], //! remove
+    hand: ['парус'],
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
@@ -42,7 +42,7 @@ const gameState = {
         shift: 'left', //! test
       },
       yellow: {
-        cards: [],
+        cards: ['земледелие'],
         shift: 'top', //! test
       },
     },
@@ -61,7 +61,7 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: ['алхимия', 'скотоводство', 'кузнечное дело'],
+    hand: ['алхимия'],
     currentAge: 1,
     activeDecks: {
       red: {
@@ -120,7 +120,7 @@ const gameState = {
         shift: null,
       },
       yellow: {
-        cards: [],
+        cards: ['земледелие'],
         shift: null,
       },
     },
@@ -139,7 +139,7 @@ const gameState = {
     name: null,
     id: 3,
     actionPoints: 0,
-    hand: [],
+    hand: ['инструменты', 'кузнечное дело'],
     currentAge: 1,
     activeDecks: {
       red: {
@@ -159,7 +159,7 @@ const gameState = {
         shift: null,
       },
       yellow: {
-        cards: [],
+        cards: ['земледелие'],
         shift: null,
       },
     },

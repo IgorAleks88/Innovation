@@ -5,10 +5,8 @@ import getCardObject from '../cards/getCardObject';
 import gameState from './gameState';
 import gameBoard from './gameBoard';
 import header from '../display/playerTable/displayHeader';
-import showModal from './helpFunc';
+import modalMessages from './helpFunc';
 import displayNewTurnModal from '../display/displayNewTurnModal';
-
-const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
 
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
@@ -18,6 +16,20 @@ function moveCardToHand(card, id) {
     renderCard.toHand(cardElement);
     cardElement.onclick = gameBoard.playCard;
   }
+}
+
+function addTextToModal(text) {
+  const messageContainer = document.querySelector('.container__message');
+  const textMessage = document.createElement('div');
+  textMessage.classList.add('text__message');
+  textMessage.textContent = text;
+  messageContainer.append(textMessage);
+}
+
+function passTurn(player) {
+  gameState.currentPlayer = player;
+  gameState.activePlayer = player;
+  gameBoard.display();
 }
 
 // take e as argument!!!
@@ -55,7 +67,7 @@ function isHaveResource(cardObj, res) {
 
 function getAffectedPlayers(cardObj) {
   const res = cardObj.dogma[0].resource;
-  let playerIDs;
+  let playerIDs = [];
   if (cardObj.dogma[0].type === 'corporate') {
     playerIDs = gameState.players.filter((player) => player[res] >= gameState.currentPlayer[res])
       .map((player) => player.id);
@@ -332,15 +344,45 @@ const dogmas = {
   },
   земледелие: async (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
+    const currentPlayer = gameState.currentPlayer;
+    if (currentPlayer.hand.length < 1) {
+      alert('не достаточно карт');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
     for (let i = 0; i < arrOfId.length; i += 1) {
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
-      await displayNewTurnModal(player.name);
-      gameState.currentPlayer = player;
-      gameState.activePlayer = player;
-      gameBoard.display();
-      await showModal(player.name);
+      if (player.hand.length >= 1) {
+        await displayNewTurnModal(player.name);
+        passTurn(player);
+        const cardsInHand = document.querySelector('.hand__cards').children;
+        const arrOftextMessage = [];
+
+        for (let card = 0; card < cardsInHand.length; card += 1) {
+          cardsInHand[card].onclick = (e) => {
+            const text = e.target.closest('.card').dataset.innovation;
+            if (arrOftextMessage.length >= 1 || arrOftextMessage.includes(text)) return;
+            arrOftextMessage.push(text);
+            addTextToModal(text);
+          };
+        }
+        const answer = await modalMessages(player.name);
+        if (answer === 'ok') {
+          recycle(player.id, arrOftextMessage);
+          const ageCardNum = getCardObject.byID(arrOftextMessage[0]).age + 1;
+          takeCard(1, ageCardNum, gameState.currentPlayer.id);
+          gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
+        }
+      }
     }
     corporateBonus(arrOfId);
+    gameBoard.display();
+
+    if (currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
   },
   // инструменты: (cardObj) => { // TODO
   //   gameState.affectedPlayers = getAffectedPlayers(cardObj);

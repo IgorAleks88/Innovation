@@ -1,6 +1,6 @@
 .modal__turn-step {
-  width: 500px;
-  height: 300px;
+  width: 400px;
+  height: 200px;
   display: flex;
   padding-top: 20px;
   font-size: 22px;
@@ -18,7 +18,7 @@
 
 .container__message {
   margin-top: 15px;
-  max-height: 180px;
+  max-height: 160px;
   width: 100%;
   overflow: auto;
 }
@@ -39,8 +39,8 @@
 
 .modal__turn-step-btn, .red {
   margin-top: 20px;
-  width: 200px;
-  height: 50px;
+  width: 150px;
+  height: 40px;
   cursor: pointer;
   background-color: yellowgreen;
 }
