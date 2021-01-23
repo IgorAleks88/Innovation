@@ -43,6 +43,19 @@ function transform(state) {
   });
 }
 
+function loadTheGame() {
+  const loadedGameState = JSON.parse(localStorage.getItem('innovation'));
+  Object.entries(loadedGameState).forEach(([key, value]) => { gameState[key] = value; });
+  transform(gameState);
+  displayNewTurnModal(gameState.currentPlayer.name);
+  gameBoard.display();
+  const names = loadedGameState.players.map((player) => player.name);
+  header.initPlayerNames(names);
+  gameBoard.init();
+  gameState.activePlayer.actionPoints += 1;
+  gameBoard.update();
+}
+
 class Menu {
   constructor(parent) {
     this.parent = parent;
@@ -76,7 +89,7 @@ class Menu {
     this.menu.innerHTML = `
     ${this.createMenuItem('Новая игра', 'start')}
     ${this.createMenuItem('Продолжить', 'continue disabled')}
-    ${this.createMenuItem('Загрузить', 'load')}
+    ${this.createMenuItem('Загрузить игру', 'load')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
     ${this.createMenuItem('Правила игры', 'rules')}
     ${this.createMenuItem('Обзор игры', 'review')}
@@ -99,10 +112,9 @@ class Menu {
       } else if (e.target.dataset.players) {
         this.createNameInputField(e.target.dataset.players);
       } else if (e.target.className.includes('get-names')) {
-        this.addNamesToUsers();
         e.preventDefault();
+        this.addNamesToUsers();
         if (isValid(users)) {
-          e.preventDefault();
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
           setTimeout(() => {
@@ -117,20 +129,13 @@ class Menu {
         this.render();
         this.menu.classList.add('menu__used');
       } else if (e.target.className.includes('continue')) {
-        gameBoard.update();
         intro.classList.toggle('intro--hide');
-        displayNewTurnModal(gameState.currentPlayer.name);
       } else if (e.target.className.includes('load')) {
-        this.menu.querySelector('.continue').classList.remove('disabled');
-        const loadedGameState = JSON.parse(localStorage.getItem('innovation'));
-        Object.entries(loadedGameState).forEach(([key, value]) => { gameState[key] = value; });
-        transform(gameState);
-        gameBoard.display();
-        const names = loadedGameState.players.map((player) => player.name);
-        header.initPlayerNames(names);
-        gameBoard.init();
+        loadTheGame();
+        intro.classList.toggle('intro--hide');
       } else if (e.target.className.includes('save')) {
         localStorage.setItem('innovation', JSON.stringify(gameState));
+        this.showSaveGameModal();
       }
     });
   }
@@ -205,6 +210,16 @@ class Menu {
     errorMessgae.classList.add('menu__link', 'error');
     errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
     form.prepend(errorMessgae);
+  }
+
+  showSaveGameModal() {
+    const modal = document.createElement('div');
+    modal.classList.add('modal__save');
+    modal.innerHTML = /* html */`
+      <div class="save__message">Игра сохранена</div>
+    `;
+    this.menu.append(modal);
+    setTimeout(() => modal.remove(), 1500);
   }
 }
 export default Menu;
