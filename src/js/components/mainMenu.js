@@ -221,5 +221,15 @@ class Menu {
     this.menu.append(modal);
     setTimeout(() => modal.remove(), 1500);
   }
+
+  showErrorMessage() {
+    if (document.querySelector('.error')) return;
+    const form = this.menu.querySelector('.form');
+    const errorMessgae = document.createElement('div');
+    errorMessgae.classList.add('menu__link', 'error');
+    errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
+    form.prepend(errorMessgae);
+  }
 }
+
 export default Menu;
