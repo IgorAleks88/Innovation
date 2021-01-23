@@ -149,6 +149,15 @@ const getManualDogma = function closureWrapper() {
   let corporateCard = false;
 
   function setManualDogma(listener, getCardsID, count) {
+    const lastAffectedPlayer = gameState.affectedPlayers[gameState.affectedPlayers.length - 1];
+    if (lastAffectedPlayer === gameState.currentPlayer.id) {
+      gameState.activePlayer = gameState.players[lastAffectedPlayer];
+      const arrOfAffectedCards = getCardsID();
+      if (arrOfAffectedCards.length === 0) {
+        alert('У вас нет возможности выполнить эту корпоративную догму!');
+        return;
+      }
+    }
     // change active players while find one with not null affected cards array
     let arrOfCardsID = null;
     let counter = 0;
@@ -382,9 +391,9 @@ const dogmas = {
       cardElement.classList.remove('active');
       cardElement.onclick = null;
       gameBoard.update();
-      Array.from(document.querySelector('.hand__cards').childNodes).forEach((cardElement) => {
-        cardElement.classList.remove('active');
-        cardElement.onclick = null;
+      Array.from(document.querySelector('.hand__cards').childNodes).forEach((cardElem) => {
+        cardElem.classList.remove('active');
+        cardElem.onclick = null;
       });
       const targetStack = document.getElementById(`${cardObject.color}`);
       targetStack.classList.add('active');
