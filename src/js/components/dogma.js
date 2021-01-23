@@ -7,6 +7,7 @@ import gameBoard from './gameBoard';
 import header from '../display/playerTable/displayHeader';
 import modalMessages from './helpFunc';
 import displayNewTurnModal from '../display/displayNewTurnModal';
+import updateGameState from '../utility/updateGameState';
 
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
@@ -22,8 +23,13 @@ function addTextToModal(text) {
   const messageContainer = document.querySelector('.container__message');
   const textMessage = document.createElement('div');
   textMessage.classList.add('text__message');
-  textMessage.textContent = text;
+  textMessage.innerHTML = /* html */`${text} <div class="text__icon"><i class="fas fa-trash" aria-hidden="true"></i></div>`;
   messageContainer.append(textMessage);
+
+  const icon = document.querySelector('.text__icon');
+  icon.addEventListener('click', (e) => {
+    e.target.closest('.text__message').remove();
+  });
 }
 
 function passTurn(player) {
@@ -345,6 +351,7 @@ const dogmas = {
   земледелие: async (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     const currentPlayer = gameState.currentPlayer;
+    let bonus = false;
     if (currentPlayer.hand.length < 1) {
       alert('не достаточно карт');
       gameState.currentPlayer.actionPoints += 1;
@@ -355,28 +362,39 @@ const dogmas = {
       if (player.hand.length >= 1) {
         await displayNewTurnModal(player.name);
         passTurn(player);
+        gameBoard.setHeaderCurrent();
         const cardsInHand = document.querySelector('.hand__cards').children;
-        const arrOftextMessage = [];
 
         for (let card = 0; card < cardsInHand.length; card += 1) {
           cardsInHand[card].onclick = (e) => {
             const text = e.target.closest('.card').dataset.innovation;
-            if (arrOftextMessage.length >= 1 || arrOftextMessage.includes(text)) return;
-            arrOftextMessage.push(text);
+            const containerMessage = document.querySelector('.container__message');
+            if (containerMessage.childElementCount >= 1) return;
+            [...cardsInHand].forEach((elem) => elem.classList.remove('player-container--active'));
+            e.target.closest('.card').classList.add('player-container--active');
             addTextToModal(text);
           };
         }
-        const answer = await modalMessages(player.name);
-        if (answer === 'ok') {
-          recycle(player.id, arrOftextMessage);
-          const ageCardNum = getCardObject.byID(arrOftextMessage[0]).age + 1;
+        const answer = await modalMessages(cardObj.dogma[0].effect);
+        if (answer.length !== 0) {
+          recycle(player.id, answer);
+          const ageCardNum = getCardObject.byID(answer[0]).age + 1;
           takeCard(1, ageCardNum, gameState.currentPlayer.id);
           gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
+          updateGameState(gameState);
+          gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+          if (i !== arrOfId.length - 1) {
+            bonus = true;
+          }
         }
       }
     }
-    corporateBonus(arrOfId);
+    if (bonus) {
+      corporateBonus(arrOfId);
+    }
     gameBoard.display();
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
 
     if (currentPlayer.actionPoints > 0) {
       gameBoard.init();
