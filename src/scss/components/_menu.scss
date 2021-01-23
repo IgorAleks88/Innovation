@@ -27,11 +27,10 @@
   color: #53b1e7;
   display: inline-block;
   font-size: 2.2rem;
-  font-weight: 300;
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1;
-  padding: 1.4rem 0;
+  padding: 0.4rem 0;
   position: relative;
   text-decoration: none;
 
@@ -135,8 +134,6 @@ input[type='text'] {
 }
 
 @keyframes message {
-  // from { opacity: 1;}
-  // to {  opacity: 0;}
   from {  background-color: rgba(0, 0, 0, .8);}
   to {  background-color: rgba(0, 0, 0, .1);}
 }

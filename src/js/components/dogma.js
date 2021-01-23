@@ -5,7 +5,7 @@ import getCardObject from '../cards/getCardObject';
 import gameState from './gameState';
 import gameBoard from './gameBoard';
 import header from '../display/playerTable/displayHeader';
-import modalMessages from './helpFunc';
+import dogmaModalMessages from './dogmaModal';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import updateGameState from '../utility/updateGameState';
 
@@ -17,6 +17,19 @@ function moveCardToHand(card, id) {
     renderCard.toHand(cardElement);
     cardElement.onclick = gameBoard.playCard;
   }
+}
+
+function showErrorModal(text) {
+  const audio = new Audio('../../assets/sounds/error_sound_sms.mp3');
+  const wrraper = document.querySelector('.active-zone__cards-wrapper');
+  const modal = document.createElement('div');
+  modal.classList.add('modal__error');
+  modal.innerHTML = /* html */`
+  <div class="error__message">${text}</div>
+  `;
+  wrraper.append(modal);
+  audio.play();
+  setTimeout(() => modal.remove(), 2000);
 }
 
 function addTextToModal(text) {
@@ -315,50 +328,19 @@ const dogmas = {
       }
     });
   },
-  инструменты: (cardObj) => {
-    const arrOfId = getAffectedPlayers(cardObj);
-    let arrCardID = [];
-
-    const actions = () => arrOfId.forEach((id) => {
-      const cardsInHand = document.querySelector('.hand__cards').children;
-      for (let i = 0; i < cardsInHand.length; i += 1) {
-        cardsInHand[i].onclick = (e) => console.log(e.target.closest('.card').dataset.innovation);
-      }
-      recycle(id, arrCardID);
-
-      if (arrCardID.length >= 3) {
-        const lastCardInHand = gameState.players[id].hand[gameState.players[id].hand.length - 1];
-        takeCard(1, 3, id, false);
-        playCard(lastCardInHand, id);
-      }
-    });
-    // for (let i = 0; i < 3; i += 1) {
-    //   cardID.push(prompt('Назовите карту', ''));
-    // }
-
-    arrCardID = arrCardID.filter((item) => item !== null && item.length > 1);
-    actions();
-
-    arrCardID = [];
-
-    // do {
-    //   cardID[0] = prompt('Назовите карту 3 века', '');
-    // } while (!isAge(cardID[0], 3) && cardID[0] !== null);
-    if (arrCardID.length >= 1 && arrCardID[0] !== undefined) actions();
-
-    corporateBonus(arrOfId);
-  },
   земледелие: async (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     const currentPlayer = gameState.currentPlayer;
     let bonus = false;
     if (currentPlayer.hand.length < 1) {
-      alert('не достаточно карт');
+      showErrorModal('Не достаточно карт');
       gameState.currentPlayer.actionPoints += 1;
       return;
     }
+
     for (let i = 0; i < arrOfId.length; i += 1) {
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+
       if (player.hand.length >= 1) {
         await displayNewTurnModal(player.name);
         passTurn(player);
@@ -375,7 +357,9 @@ const dogmas = {
             addTextToModal(text);
           };
         }
-        const answer = await modalMessages(cardObj.dogma[0].effect);
+
+        const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
+
         if (answer.length !== 0) {
           recycle(player.id, answer);
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
@@ -390,9 +374,11 @@ const dogmas = {
         }
       }
     }
+
     if (bonus) {
       corporateBonus(arrOfId);
     }
+
     gameBoard.display();
     gameState.players.forEach((pl) => header.changePlayerStats(pl));
 
@@ -402,32 +388,32 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
-  // инструменты: (cardObj) => { // TODO
-  //   gameState.affectedPlayers = getAffectedPlayers(cardObj);
-  //   function getAffectedCards() {
-  //     const handOfCurrent = gameState.activePlayer.hand;
-  //     let haveThirdAgeCard = false;
-  //     handOfCurrent.forEach((cardID) => {
-  //       if (getCardObject.byID(cardID).age === 3) haveThirdAgeCard = true;
-  //     });
-  //     if (handOfCurrent.length >= 3 || haveThirdAgeCard) {
-  //       if (handOfCurrent.length >= 3) return handOfCurrent;
-  //       const resArr = [];
-  //       handOfCurrent.forEach((cardID) => {
-  //         if (getCardObject(cardID).age === 3) resArr.push(cardID);
-  //       });
-  //       return resArr;
-  //     }
-  //     return [];
-  //   }
-  //   function listener(e) {
-  //     if (getCardAge(e) === 3) {
-  //       gameState.activePlayer.actionPoints -= 2;
-  //     }
-  //     gameBoard.playCard(e);//! change on recycle! Check is update inside recycle!
-  //   }
-  //   getManualDogma()(listener, getAffectedCards, 3);
-  // },
+  инструменты: (cardObj) => { // TODO
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const handOfCurrent = gameState.activePlayer.hand;
+      let haveThirdAgeCard = false;
+      handOfCurrent.forEach((cardID) => {
+        if (getCardObject.byID(cardID).age === 3) haveThirdAgeCard = true;
+      });
+      if (handOfCurrent.length >= 3 || haveThirdAgeCard) {
+        if (handOfCurrent.length >= 3) return handOfCurrent;
+        const resArr = [];
+        handOfCurrent.forEach((cardID) => {
+          if (getCardObject(cardID).age === 3) resArr.push(cardID);
+        });
+        return resArr;
+      }
+      return [];
+    }
+    function listener(e) {
+      if (getCardAge(e) === 3) {
+        gameState.activePlayer.actionPoints -= 2;
+      }
+      gameBoard.playCard(e);//! change on recycle! Check is update inside recycle!
+    }
+    getManualDogma()(listener, getAffectedCards, 3);
+  },
 };
 
 export default dogmas;

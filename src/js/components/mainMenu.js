@@ -5,7 +5,8 @@ import gameBoard from './gameBoard';
 import gameState from './gameState';
 
 const users = {};
-
+const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
+let sound = false;
 function isValid(userObj) {
   if (userObj.names.length === userObj.players) {
     return userObj.names.every((name) => name.length > 2 && name.length < 8);
@@ -93,6 +94,7 @@ class Menu {
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
     ${this.createMenuItem('Правила игры', 'rules')}
     ${this.createMenuItem('Обзор игры', 'review')}
+    ${this.createMenuItem('Включить звук', 'sound')}
     `;
 
     this.parent.append(this.menu);
@@ -136,6 +138,17 @@ class Menu {
       } else if (e.target.className.includes('save')) {
         localStorage.setItem('innovation', JSON.stringify(gameState));
         this.showSaveGameModal();
+      } else if (e.target.className.includes('sound')) {
+        audio.loop = true;
+        sound = !sound;
+        if (sound) {
+          audio.play();
+          e.target.textContent = 'Выключить звук';
+        }
+        if (!sound) {
+          audio.pause();
+          e.target.textContent = 'Включить звук';
+        }
       }
     });
   }
