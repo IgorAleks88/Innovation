@@ -49,6 +49,8 @@ function passTurn(player) {
   gameState.currentPlayer = player;
   gameState.activePlayer = player;
   gameBoard.display();
+}
+
 function getMaxCard(stack) {
   let result = null;
   if (stack.length > 0) {
@@ -62,6 +64,7 @@ function getMaxCard(stack) {
   }
   return result;
 }
+
 function removeCardElement(cardID) {
   const cardElement = document.querySelector(`[data-innovation="${cardID}"]`);
   if (cardElement !== null) cardElement.remove();
@@ -172,8 +175,6 @@ function recycle(playerID, arrCardID) {
 
     gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
     gameState.players[playerID].hand.splice(indexCard, 1);
-    removeCardElement(cardID);
-    gameBoard.update();
   }
 }
 
@@ -318,7 +319,6 @@ const dogmas = {
     }
     getManualDogma()(listener, getAffectedCards, 1);
   },
-
   кузнечноедело: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
@@ -396,7 +396,7 @@ const dogmas = {
         if (answer.length !== 0) {
           recycle(player.id, answer);
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
-          takeCard(1, ageCardNum, gameState.currentPlayer.id);
+          takeCard(1, ageCardNum, gameState.currentPlayer.id, false);
           gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
           updateGameState(gameState);
           gameState.players.forEach((pl) => header.changePlayerStats(pl));
@@ -466,7 +466,6 @@ const dogmas = {
     }
     getManualDogma()(listener, getAffectedCards, 3);
   },
-
   виноделие: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
