@@ -21,29 +21,29 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['скотоводство', 'письменность', 'парус', 'инструменты'], //! remove
+    hand: [],
     currentAge: 1,
-    currentDeck: 'age1', // test
+    currentDeck: 'age1',
     activeDecks: {
       red: {
-        cards: ['станки'],
-        shift: 'right', //! test
+        cards: [],
+        shift: '',
       },
       green: {
         cards: [],
-        shift: 'right', //! test
+        shift: '',
       },
       blue: {
-        cards: ['генетика'],
-        shift: 'right', //! test
+        cards: [],
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: 'right', //! test
+        shift: '',
       },
       yellow: {
-        cards: ['консервы', 'скотоводство', 'земледелие'],
-        shift: 'left', //! test
+        cards: ['земледелие'],
+        shift: '',
       },
     },
     influence: {
@@ -61,28 +61,28 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: ['алхимия', 'одежда', 'вёсла'],
+    hand: [],
     currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
-        shift: 'top', //! test
+        shift: '',
       },
       green: {
         cards: [],
-        shift: 'top', //! test
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: 'top', //! test
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
     },
     influence: {
@@ -120,7 +120,7 @@ const gameState = {
         shift: null,
       },
       yellow: {
-        cards: ['земледелие'],
+        cards: [],
         shift: null,
       },
     },
@@ -139,7 +139,7 @@ const gameState = {
     name: null,
     id: 3,
     actionPoints: 0,
-    hand: ['инструменты', 'кузнечное дело'],
+    hand: [],
     currentAge: 1,
     activeDecks: {
       red: {
@@ -159,7 +159,7 @@ const gameState = {
         shift: null,
       },
       yellow: {
-        cards: ['земледелие'],
+        cards: [],
         shift: null,
       },
     },
