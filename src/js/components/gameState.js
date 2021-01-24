@@ -21,29 +21,29 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['парус'],
+    hand: ['скотоводство', 'письменность', 'парус', 'инструменты'], //! remove
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
       red: {
-        cards: [],
-        shift: 'top', //! test
+        cards: ['станки'],
+        shift: 'right', //! test
       },
       green: {
         cards: [],
         shift: 'right', //! test
       },
       blue: {
-        cards: [],
-        shift: null, //! test
+        cards: ['генетика'],
+        shift: 'right', //! test
       },
       purple: {
         cards: [],
-        shift: 'left', //! test
+        shift: 'right', //! test
       },
       yellow: {
-        cards: ['земледелие'],
-        shift: 'top', //! test
+        cards: ['консервы', 'скотоводство', 'земледелие'],
+        shift: 'left', //! test
       },
     },
     influence: {
@@ -66,23 +66,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'left', //! test
+        shift: 'top', //! test
       },
       green: {
         cards: [],
         shift: 'top', //! test
       },
       blue: {
-        cards: ['инструменты', 'одежда', 'гончарное дело'],
-        shift: 'right', //! test
+        cards: [],
+        shift: 'top', //! test
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: 'top',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: 'top',
       },
     },
     influence: {

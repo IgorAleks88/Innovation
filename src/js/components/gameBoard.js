@@ -75,6 +75,25 @@ const gameBoard = {
     });
   },
 
+  displayActive() {
+    const stacks = document.querySelectorAll('.active-zone__stack');
+    stacks.forEach((stackElement) => {
+      stackElement.innerHTML = '';
+      stackElement.classList.add('active-zone__stack--empty');
+      stackElement.style = null;
+      Object.keys(gameState.activePlayer.activeDecks).forEach((activeDeckName) => {
+        if (activeDeckName === stackElement.id) {
+          gameState.activePlayer.activeDecks[activeDeckName].cards.forEach((card) => {
+            const cardObj = getCardObject.byID(card);
+            const cardElement = getCardElement(cardObj);
+            renderCard.toActive(cardElement);
+            cardElement.classList.remove('xyz-in');
+          });
+        }
+      });
+    });
+  },
+
   init() {
     // set hand events
     const cardElements = document.querySelectorAll('.card');
