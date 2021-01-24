@@ -34,15 +34,21 @@ function showErrorModal(text) {
 
 function addTextToModal(text) {
   const messageContainer = document.querySelector('.container__message');
+  const verification = [...messageContainer.children].map((i) => i.textContent.trim());
+  const cardsInHand = document.querySelector('.hand__cards');
+
+  if (verification.includes(text)) return;
+
   const textMessage = document.createElement('div');
   textMessage.classList.add('text__message');
   textMessage.innerHTML = /* html */`${text} <div class="text__icon"><i class="fas fa-trash" aria-hidden="true"></i></div>`;
   messageContainer.append(textMessage);
 
-  const icon = document.querySelector('.text__icon');
-  icon.addEventListener('click', (e) => {
+  messageContainer.onclick = (e) => {
+    const cardID = e.target.closest('.text__message').textContent.trim();
+    cardsInHand.querySelector(`[data-innovation="${cardID}"]`).classList.remove('selected__card');
     e.target.closest('.text__message').remove();
-  });
+  };
 }
 
 function passTurn(player) {
@@ -385,8 +391,7 @@ const dogmas = {
             const text = e.target.closest('.card').dataset.innovation;
             const containerMessage = document.querySelector('.container__message');
             if (containerMessage.childElementCount >= 1) return;
-            [...cardsInHand].forEach((elem) => elem.classList.remove('player-container--active'));
-            e.target.closest('.card').classList.add('player-container--active');
+            e.target.closest('.card').classList.add('selected__card');
             addTextToModal(text);
           };
         }
@@ -394,11 +399,10 @@ const dogmas = {
         const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
 
         if (answer.length !== 0) {
-          console.log(answer);
           recycle(player.id, answer);
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
-          takeCard(1, ageCardNum, gameState.currentPlayer.id, false);
-          gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
+          takeCard(1, ageCardNum, player.id, false);
+          player.influence.cards.push(player.hand.pop());
           updateGameState(gameState);
           gameState.players.forEach((pl) => header.changePlayerStats(pl));
 
@@ -550,7 +554,6 @@ const dogmas = {
     corporateBonus(arrOfId);
   },
   гончарноедело: async (cardObj) => {
-    console.log(cardObj);
     const arrOfId = getAffectedPlayers(cardObj);
     const currentPlayer = gameState.currentPlayer;
     let bonus = false;
@@ -574,8 +577,7 @@ const dogmas = {
             const text = e.target.closest('.card').dataset.innovation;
             const containerMessage = document.querySelector('.container__message');
             if (containerMessage.childElementCount >= 3) return;
-            [...cardsInHand].forEach((elem) => elem.classList.remove('player-container--active'));
-            e.target.closest('.card').classList.add('player-container--active');
+            e.target.closest('.card').classList.add('selected__card');
             addTextToModal(text);
           };
         }
@@ -583,11 +585,10 @@ const dogmas = {
         const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
 
         if (answer.length !== 0) {
-          console.log(answer);
           recycle(player.id, answer);
-          const ageCardNum = getCardObject.byID(answer[0]).age + 1;
-          takeCard(1, ageCardNum, gameState.currentPlayer.id, false);
-          gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
+          takeCard(1, answer.length, player.id, false);
+          gameState.currentPlayer.influence.cards.push(player.hand.pop());
+          takeCard(1, 1, player.id, true);
           updateGameState(gameState);
           gameState.players.forEach((pl) => header.changePlayerStats(pl));
 
