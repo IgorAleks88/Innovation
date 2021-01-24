@@ -18,6 +18,19 @@ function moveCardToHand(card, id) {
   }
 }
 
+function getMaxCard(stack) {
+  let result = null;
+  if (stack.length > 0) {
+    result = getCardObject.byID(stack[0]);
+    for (let i = 0; i < stack.length; i += 1) {
+      const currentCard = getCardObject.byID(stack[i]);
+      if (result.age < currentCard.age) {
+        result = currentCard;
+      }
+    }
+  }
+  return result;
+}
 function removeCardElement(cardID) {
   const cardElement = document.querySelector(`[data-innovation="${cardID}"]`);
   if (cardElement !== null) cardElement.remove();
@@ -102,7 +115,9 @@ function takeCard(cardsNum, ageNum, playerID, render = true) {
 
 function playCard(cardID, playerID) {
   const cardIndex = gameState.players[playerID].hand.indexOf(cardID);
-  gameState.players[playerID].hand.splice(cardIndex, 1);
+  if (cardIndex > -1) {
+    gameState.players[playerID].hand.splice(cardIndex, 1);
+  }
   const cardObj = getCardObject.byID(cardID);
   const cardElement = getCardElement(cardObj);
   const renderedCard = document.querySelector(`[data-innovation='${cardID}']`);
@@ -274,7 +289,50 @@ const dogmas = {
     getManualDogma()(listener, getAffectedCards, 1);
   },
 
-  инструменты: (cardObj) => {
+  кузнечноедело: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      let repeat = true;
+      do {
+        const actualAge = getActualDeck(1);
+        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+        const currentPlayerName = gameState[`player${id}`].name;
+        console.log(`${currentPlayerName} взял ${cardID}`);
+        const currentCard = getCardObject.byID(cardID);
+        repeat = isHaveResource(currentCard, 'tower');
+        if (repeat) {
+          gameState.players[id].influence.cards.push(cardID);
+        } else {
+          moveCardToHand(cardID, id);
+        }
+      } while (repeat);
+    });
+    corporateBonus(arrOfId);
+  },
+  мистицизм: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const actualAge = getActualDeck(1);
+      const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+      const currentPlayerName = gameState[`player${id}`].name;
+      const currentCard = getCardObject.byID(cardID);
+      console.log(`${currentPlayerName} взял ${cardID} ${currentCard.color}`);
+      if (gameState.players[id].activeDecks[currentCard.color].cards.length > 0) {
+        gameState.players[id].activeDecks[currentCard.color].cards.push(cardID);
+        if (id === gameState.currentPlayer.id) {
+          const cardElement = getCardElement(currentCard);
+          renderCard.toActive(cardElement);
+          if (dogmas[currentCard.innovation]) {
+            cardElement.onclick = () => dogmas[currentCard.innovation](cardObj);
+          }
+        }
+      } else {
+        moveCardToHand(cardID, id);
+      }
+    });
+  },
+
+  инструменты: (cardObj) => { // TODO
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
       const handOfCurrent = gameState.activePlayer.hand;
@@ -319,45 +377,85 @@ const dogmas = {
     }
     getManualDogma()(listener, getAffectedCards, 3);
   },
-  кузнечноедело: (cardObj) => {
+
+  виноделие: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
-      let repeat = true;
-      do {
-        const actualAge = getActualDeck(1);
-        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-        const currentPlayerName = gameState[`player${id}`].name;
-        console.log(`${currentPlayerName} взял ${cardID}`);
-        const currentCard = getCardObject.byID(cardID);
-        repeat = isHaveResource(currentCard, 'tower');
-        if (repeat) {
-          gameState.players[id].influence.cards.push(cardID);
-        } else {
-          moveCardToHand(cardID, id);
-        }
-      } while (repeat);
+      const numberOfCards = Math.trunc(gameState[`player${id}`].tree / 2);
+      takeCard(numberOfCards, 2, id);
     });
     corporateBonus(arrOfId);
   },
-  мистицизм: (cardObj) => {
+  календарь: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
-      const actualAge = getActualDeck(1);
+      if (gameState[`player${id}`].influence.cards.length > gameState[`player${id}`].hand.length) {
+        takeCard(2, 3, id);
+      }
+    });
+    corporateBonus(arrOfId);
+  },
+  эксперименты: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const actualAge = getActualDeck(5);
       const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-      const currentPlayerName = gameState[`player${id}`].name;
-      const currentCard = getCardObject.byID(cardID);
-      console.log(`${currentPlayerName} взял ${cardID} ${currentCard.color}`);
-      if (gameState.players[id].activeDecks[currentCard.color].cards.length > 0) {
-        gameState.players[id].activeDecks[currentCard.color].cards.push(cardID);
-        if (id === gameState.currentPlayer.id) {
-          const cardElement = getCardElement(currentCard);
-          renderCard.toActive(cardElement);
-          if (dogmas[currentCard.innovation]) {
-            cardElement.onclick = () => dogmas[currentCard.innovation](cardObj);
-          }
+      playCard(cardID, id);
+    });
+    corporateBonus(arrOfId);
+  },
+  пароваямашина: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      for (let i = 0; i < 2; i += 1) {
+        const actualAge = getActualDeck(4);
+        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+        const cardObject = getCardObject.byID(cardID);
+        const cardElement = getCardElement(cardObject);
+        const cardColor = cardObject.color;
+        gameState[`player${id}`].activeDecks[cardColor].cards.unshift(cardID);
+        if (gameState.currentPlayer.id === id) {
+          renderCard.archive(cardElement);
         }
-      } else {
-        moveCardToHand(cardID, id);
+      }
+      const lastYellowCardID = gameState[`player${id}`].activeDecks.yellow.cards.shift();
+      gameState[`player${id}`].influence.cards.push(lastYellowCardID);
+      const lastYellowCardElement = getCardElement(getCardObject.byID(lastYellowCardID));
+      renderCard.removeCardFromActive(lastYellowCardElement);
+    });
+    corporateBonus(arrOfId);
+  },
+  станки: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      let currentAge = 1;
+      const currentPlayer = gameState[`player${id}`];
+      const maxCard = getMaxCard(currentPlayer.influence.cards);
+      if (maxCard) {
+        currentAge = maxCard.age;
+      }
+      currentAge = getActualDeck(currentAge);
+      const currentCard = gameState.ageDecks[`age${currentAge}`].pop();
+      currentPlayer.influence.cards.push(currentCard);
+    });
+    corporateBonus(arrOfId);
+  },
+  генетика: (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      const currentPlayer = gameState[`player${id}`];
+      const currentAge = getActualDeck(10);
+      const currentCard = gameState.ageDecks[`age${currentAge}`].pop();
+      const stackColor = getCardObject.byID(currentCard).color;
+      playCard(currentCard, id);
+      const currentDeck = currentPlayer.activeDecks[stackColor].cards;
+      if (currentDeck.length > 1) {
+        for (let i = 0; i < currentDeck.length - 1; i += 1) {
+          const cardID = currentDeck[i];
+          currentPlayer.influence.cards.push(cardID);
+          renderCard.removeCardFromActive(getCardElement(getCardObject.byID(cardID)));
+        }
+        currentDeck.splice(0, currentDeck.length - 1);
       }
     });
     corporateBonus(arrOfId);

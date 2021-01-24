@@ -26,24 +26,24 @@ const gameState = {
     currentDeck: 'age1', // test
     activeDecks: {
       red: {
-        cards: [],
-        shift: 'top', //! test
+        cards: ['станки'],
+        shift: 'right', //! test
       },
       green: {
         cards: [],
         shift: 'right', //! test
       },
       blue: {
-        cards: [],
-        shift: null, //! test
+        cards: ['генетика'],
+        shift: 'right', //! test
       },
       purple: {
         cards: [],
-        shift: 'left', //! test
+        shift: 'right', //! test
       },
       yellow: {
-        cards: [],
-        shift: 'top', //! test
+        cards: ['консервы', 'скотоводство', 'земледелие'],
+        shift: 'left', //! test
       },
     },
     influence: {
@@ -66,7 +66,7 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'left', //! test
+        shift: 'top', //! test
       },
       green: {
         cards: [],
@@ -74,15 +74,15 @@ const gameState = {
       },
       blue: {
         cards: [],
-        shift: 'right', //! test
+        shift: 'top', //! test
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: 'top',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: 'top',
       },
     },
     influence: {
