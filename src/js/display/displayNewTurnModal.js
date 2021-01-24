@@ -1,38 +1,41 @@
 export default function displayModal(playerName) {
-  const modalBg = document.createElement('div');
-  modalBg.classList.add('modal');
-  modalBg.classList.add('modal--hidden');
+  return new Promise((resolve) => {
+    const modalBg = document.createElement('div');
+    modalBg.classList.add('modal');
+    modalBg.classList.add('modal--hidden');
 
-  const modalBlock = document.createElement('div');
-  modalBlock.classList.add('modal__block');
+    const modalBlock = document.createElement('div');
+    modalBlock.classList.add('modal__block');
 
-  const modalOverlay = document.createElement('div');
-  modalOverlay.classList.add('modal__overlay');
+    const modalOverlay = document.createElement('div');
+    modalOverlay.classList.add('modal__overlay');
 
-  const modalWrapper = document.createElement('div');
-  modalWrapper.classList.add('modal__wrapper');
+    const modalWrapper = document.createElement('div');
+    modalWrapper.classList.add('modal__wrapper');
 
-  const modalText = document.createElement('div');
-  modalText.classList.add('modal__text');
-  modalText.innerText = `Сейчас ход игрока ${playerName}`;
+    const modalText = document.createElement('div');
+    modalText.classList.add('modal__text');
+    modalText.innerText = `Сейчас ход игрока ${playerName}`;
 
-  const modalBtn = document.createElement('button');
-  modalBtn.classList.add('modal__btn');
-  modalBtn.innerText = 'Начать ход!';
-  modalBtn.addEventListener('click', () => {
-    modalBg.style = '';
-    modalBg.classList.toggle('modal--hidden');
+    const modalBtn = document.createElement('button');
+    modalBtn.classList.add('modal__btn');
+    modalBtn.innerText = 'Начать ход!';
+    modalBtn.addEventListener('click', () => {
+      modalBg.style = '';
+      modalBg.classList.toggle('modal--hidden');
+      setTimeout(() => {
+        modalBg.remove();
+        resolve();
+      }, 500);
+    });
+
+    modalWrapper.append(modalText, modalBtn);
+    modalBlock.append(modalOverlay, modalWrapper);
+    modalBg.append(modalBlock);
+
+    document.body.prepend(modalBg);
     setTimeout(() => {
-      modalBg.remove();
-    }, 500);
-  });
-
-  modalWrapper.append(modalText, modalBtn);
-  modalBlock.append(modalOverlay, modalWrapper);
-  modalBg.append(modalBlock);
-
-  document.body.prepend(modalBg);
-  setTimeout(() => {
-    modalBg.classList.toggle('modal--hidden');
-  }, 0);
+      modalBg.classList.toggle('modal--hidden');
+    }, 0);
+  })
 }

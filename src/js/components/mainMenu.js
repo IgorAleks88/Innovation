@@ -5,21 +5,13 @@ import gameBoard from './gameBoard';
 import gameState from './gameState';
 
 const users = {};
-
+const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
+let sound = false;
 function isValid(userObj) {
   if (userObj.names.length === userObj.players) {
     return userObj.names.every((name) => name.length > 2 && name.length < 8);
   }
   return false;
-}
-
-function showErrorMessage() {
-  if (document.querySelector('.error')) return;
-  const form = document.querySelector('.form');
-  const errorMessgae = document.createElement('div');
-  errorMessgae.classList.add('menu__link', 'error');
-  errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
-  form.prepend(errorMessgae);
 }
 
 function transform(state) {
@@ -112,6 +104,7 @@ class Menu {
     ${this.createMenuItem('Загрузить игру', 'load disabled')}
     ${this.createMenuItem('О программе', 'about')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
+    ${this.createMenuItem('Включить звук', 'sound')}
     `;
 
     this.parent.append(this.menu);
@@ -143,7 +136,7 @@ class Menu {
           }, 500);
         } else {
           this.validateInputs();
-          showErrorMessage();
+          this.showErrorMessage();
         }
       } else if (e.target.className.includes('back')) {
         this.menu.classList.add('main');
@@ -159,6 +152,17 @@ class Menu {
         this.menu.querySelector('.load').classList.remove('disabled');
         localStorage.setItem('innovation', JSON.stringify(gameState));
         this.showSaveGameModal();
+      } else if (e.target.className.includes('sound')) {
+        audio.loop = true;
+        sound = !sound;
+        if (sound) {
+          audio.play();
+          e.target.textContent = 'Выключить звук';
+        }
+        if (!sound) {
+          audio.pause();
+          e.target.textContent = 'Включить звук';
+        }
       }
     });
   }
@@ -247,5 +251,15 @@ class Menu {
     this.menu.append(modal);
     setTimeout(() => modal.remove(), 1500);
   }
+
+  showErrorMessage() {
+    if (document.querySelector('.error')) return;
+    const form = this.menu.querySelector('.form');
+    const errorMessgae = document.createElement('div');
+    errorMessgae.classList.add('menu__link', 'error');
+    errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
+    form.prepend(errorMessgae);
+  }
 }
+
 export default Menu;

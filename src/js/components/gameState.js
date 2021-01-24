@@ -61,7 +61,7 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: ['алхимия', 'скотоводство', 'кузнечное дело', 'инструменты'],
+    hand: ['алхимия', 'одежда', 'вёсла'],
     currentAge: 1,
     activeDecks: {
       red: {
@@ -120,7 +120,7 @@ const gameState = {
         shift: null,
       },
       yellow: {
-        cards: [],
+        cards: ['земледелие'],
         shift: null,
       },
     },
@@ -139,7 +139,7 @@ const gameState = {
     name: null,
     id: 3,
     actionPoints: 0,
-    hand: [],
+    hand: ['инструменты', 'кузнечное дело'],
     currentAge: 1,
     activeDecks: {
       red: {
@@ -159,7 +159,7 @@ const gameState = {
         shift: null,
       },
       yellow: {
-        cards: [],
+        cards: ['земледелие'],
         shift: null,
       },
     },

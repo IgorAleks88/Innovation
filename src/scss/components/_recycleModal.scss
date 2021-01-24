@@ -1,0 +1,64 @@
+.modal__turn-step {
+  width: 400px;
+  height: 240px;
+  display: flex;
+  padding-top: 20px;
+  font-size: 22px;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background-image: url(../../assets/img/intro/bg.png);
+  top: 42%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, .8);
+  font-variant: all-petite-caps;
+  z-index: 20;
+}
+
+.message {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 19px;
+}
+
+.container__message {
+  margin-top: 15px;
+  max-height: 73px;
+  width: 100%;
+  overflow: auto;
+}
+
+.text__message {
+  display: flex;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.text__icon {
+  margin-left: 15px;
+  font-size: 15px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.wrapper__btn {
+  top: 90%;
+  position: absolute;
+  transform: translateY(-90%);
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal__turn-step-btn, .red {
+  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  background-color: yellowgreen;
+}
+
+.red {
+  background-color: salmon;
+}

@@ -1,12 +1,13 @@
+/* eslint-disable no-await-in-loop */
 import renderCard from '../cards/renderCard';
 import getCardElement from '../cards/getCardElement';
 import getCardObject from '../cards/getCardObject';
 import gameState from './gameState';
 import gameBoard from './gameBoard';
 import header from '../display/playerTable/displayHeader';
+import dogmaModalMessages from './dogmaModal';
+import displayNewTurnModal from '../display/displayNewTurnModal';
 import updateGameState from '../utility/updateGameState';
-
-const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
 
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
@@ -18,6 +19,36 @@ function moveCardToHand(card, id) {
   }
 }
 
+function showErrorModal(text) {
+  const audio = new Audio('../../assets/sounds/error_sound_sms.mp3');
+  const wrraper = document.querySelector('.active-zone__cards-wrapper');
+  const modal = document.createElement('div');
+  modal.classList.add('modal__error');
+  modal.innerHTML = /* html */`
+  <div class="error__message">${text}</div>
+  `;
+  wrraper.append(modal);
+  audio.play();
+  setTimeout(() => modal.remove(), 2000);
+}
+
+function addTextToModal(text) {
+  const messageContainer = document.querySelector('.container__message');
+  const textMessage = document.createElement('div');
+  textMessage.classList.add('text__message');
+  textMessage.innerHTML = /* html */`${text} <div class="text__icon"><i class="fas fa-trash" aria-hidden="true"></i></div>`;
+  messageContainer.append(textMessage);
+
+  const icon = document.querySelector('.text__icon');
+  icon.addEventListener('click', (e) => {
+    e.target.closest('.text__message').remove();
+  });
+}
+
+function passTurn(player) {
+  gameState.currentPlayer = player;
+  gameState.activePlayer = player;
+  gameBoard.display();
 function getMaxCard(stack) {
   let result = null;
   if (stack.length > 0) {
@@ -80,22 +111,21 @@ function isHaveResource(cardObj, res) {
 
 function getAffectedPlayers(cardObj) {
   const res = cardObj.dogma[0].resource;
-  let idPlayers;
+  let playerIDs = [];
   if (cardObj.dogma[0].type === 'corporate') {
-    idPlayers = gameState.players.filter((player) => player[res] >= gameState.currentPlayer[res])
+    playerIDs = gameState.players.filter((player) => player[res] >= gameState.currentPlayer[res])
       .map((player) => player.id);
 
-    const currentPlayerID = idPlayers.splice(gameState.currentPlayer.id, 1);
-    idPlayers.push(currentPlayerID);
+    const currentPlayerID = playerIDs.splice(gameState.currentPlayer.id, 1);
+    playerIDs.push(currentPlayerID);
   } else {
-    idPlayers = gameState.players
+    playerIDs = gameState.players
       .filter((player) => {
         const pl = player[res] < gameState.currentPlayer[res] && player !== gameState.currentPlayer;
         return pl;
       }).map((player) => player.id);
   }
-
-  return idPlayers.flat();
+  return playerIDs.flat();
 }
 
 function takeCard(cardsNum, ageNum, playerID, render = true) {
@@ -331,7 +361,66 @@ const dogmas = {
       }
     });
   },
+  земледелие: async (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    const currentPlayer = gameState.currentPlayer;
+    let bonus = false;
+    if (currentPlayer.hand.length < 1) {
+      showErrorModal('Не достаточно карт');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
 
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+
+      if (player.hand.length >= 1) {
+        await displayNewTurnModal(player.name);
+        passTurn(player);
+        gameBoard.setHeaderCurrent();
+        const cardsInHand = document.querySelector('.hand__cards').children;
+
+        for (let card = 0; card < cardsInHand.length; card += 1) {
+          cardsInHand[card].onclick = (e) => {
+            const text = e.target.closest('.card').dataset.innovation;
+            const containerMessage = document.querySelector('.container__message');
+            if (containerMessage.childElementCount >= 1) return;
+            [...cardsInHand].forEach((elem) => elem.classList.remove('player-container--active'));
+            e.target.closest('.card').classList.add('player-container--active');
+            addTextToModal(text);
+          };
+        }
+
+        const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
+
+        if (answer.length !== 0) {
+          recycle(player.id, answer);
+          const ageCardNum = getCardObject.byID(answer[0]).age + 1;
+          takeCard(1, ageCardNum, gameState.currentPlayer.id);
+          gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
+          updateGameState(gameState);
+          gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+          if (i !== arrOfId.length - 1) {
+            bonus = true;
+          }
+        }
+      }
+    }
+
+    if (bonus) {
+      corporateBonus(arrOfId);
+    }
+
+    gameBoard.display();
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+    if (currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
+  },
   инструменты: (cardObj) => { // TODO
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
