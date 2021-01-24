@@ -49,6 +49,8 @@ function passTurn(player) {
   gameState.currentPlayer = player;
   gameState.activePlayer = player;
   gameBoard.display();
+}
+
 function getMaxCard(stack) {
   let result = null;
   if (stack.length > 0) {
@@ -62,6 +64,7 @@ function getMaxCard(stack) {
   }
   return result;
 }
+
 function removeCardElement(cardID) {
   const cardElement = document.querySelector(`[data-innovation="${cardID}"]`);
   if (cardElement !== null) cardElement.remove();
@@ -172,8 +175,6 @@ function recycle(playerID, arrCardID) {
 
     gameState.ageDecks[`age${cardObjs[arrCardID[id]]}`].unshift(cardID);
     gameState.players[playerID].hand.splice(indexCard, 1);
-    removeCardElement(cardID);
-    gameBoard.update();
   }
 }
 
