@@ -133,3 +133,29 @@ input[type='text'] {
   color: red;
   user-select: none;
 }
+
+@keyframes message {
+  // from { opacity: 1;}
+  // to {  opacity: 0;}
+  from {  background-color: rgba(0, 0, 0, .8);}
+  to {  background-color: rgba(0, 0, 0, .1);}
+}
+
+.modal__save {
+  width: 250px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-variant: all-petite-caps;
+  animation: 1.5s linear forwards  message;
+  z-index: 500;
+}
+
+.save__message {
+  color: white;
+}
