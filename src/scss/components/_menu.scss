@@ -1,18 +1,22 @@
 .menu {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  left: 50%;
-  margin: auto;
+  @include size(60%, 55%);
+  @include flex(column, space-evenly);
   position: absolute;
-  text-align: center;
-  text-align: center;
+  left: 51%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  margin: auto;
+  text-align: center;
   z-index: 5;
+
+  &.main {
+    @include size(60%, 40%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    align-items: center;
+    justify-items: center;
+  }
 }
 
 .menu__skip {
@@ -24,16 +28,43 @@
 }
 
 .menu__link {
-  color: #53b1e7;
-  display: inline-block;
+  @include size(20rem, 5rem);
+  @include flex;
+  color: #fff;
   font-size: 2.2rem;
-  font-weight: 300;
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1;
   padding: 1.4rem 0;
   position: relative;
   text-decoration: none;
+  background: #481802;
+  border-radius: 0.5rem;
+  border: 0.3rem solid #e18d2d;
+  text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    background: url('../../assets/img/menu-gear.png');
+    background-size: cover;
+    @include size(5rem, 5rem);
+    position: absolute;
+    left: -1rem;
+    mix-blend-mode: overlay;
+    top: 1.7rem;
+  }
+
+  &::after {
+    content: '';
+    background: url('../../assets/img/menu-gear.png');
+    background-size: cover;
+    @include size(5rem, 5rem);
+    position: absolute;
+    right: -1rem;
+    mix-blend-mode: overlay;
+    bottom: 1.7rem;
+  }
 
   &.disabled {
     opacity: 0.5;
@@ -41,22 +72,22 @@
   }
 }
 
-.menu__link svg {
+.menu__link svg,
+button svg {
   fill: none;
   left: 50%;
   opacity: 0;
   position: absolute;
-  stroke: #70aec9;
-  stroke-dasharray: 338;
-  stroke-dashoffset: 338;
+  stroke-dasharray: 1100;
+  stroke-dashoffset: 1100;
   stroke-linecap: round;
   stroke-miterlimit: 10;
-  stroke-width: 2;
+  stroke-width: 4;
   top: 50%;
   transform: translate(-50%, -50%);
   transition: stroke-dashoffset 0s 0.2s, opacity 0.2s;
-  width: calc(100% + 6rem);
-  z-index: -1;
+  height: 95%;
+  pointer-events: none;
 }
 
 .menu__link--active svg {
@@ -68,11 +99,12 @@
 }
 
 .menu__link--active svg,
-.menu__link:hover svg {
+.menu__link:hover svg,
+button:hover svg {
   opacity: 1;
   stroke-dashoffset: 0;
-  transition: opacity 0s,
-    stroke-dashoffset 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0.5s,
+    stroke-dashoffset 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .iframe__wrraper {
@@ -105,22 +137,24 @@ label {
 input[type='text'] {
   display: block;
   margin: 5px auto;
-  padding-left: 25px;
+  padding: 0.5rem 0.5rem 0.5rem 3rem;
+  border-radius: 0.5rem;
+  border: 0.3rem solid #e18d2d;
 
   &:valid {
     background-image: url('../../assets/icons/succeess.svg.png');
-    background-position: left;
+    background-position: 0.2rem;
     background-repeat: no-repeat;
     background-size: 20px;
-    border: rgb(0, 136, 0) solid 3px;
+    border: 0.3rem solid #149c02;
   }
 
   &:invalid {
     background-image: url('../../assets/icons/unnamed.png');
-    background-position: left;
+    background-position: 0.2rem;
     background-repeat: no-repeat;
-    background-size: 20px;
-    border: rgb(255, 0, 0) solid 3px;
+    background-size: 18px;
+    border: rgb(197, 2, 2) solid 0.3rem;
   }
 }
 
@@ -132,4 +166,12 @@ input[type='text'] {
   display: block;
   color: red;
   user-select: none;
+}
+
+.form {
+  @include flex(column);
+
+  button {
+    margin-top: 0.5rem;
+  }
 }
