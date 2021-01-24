@@ -113,11 +113,11 @@ const gameBoard = {
       const stackLength = stack.childNodes.length;
       if (stackLength >= 1) {
         const stackTopCardElement = stack.childNodes[stackLength - 1];
-        stackTopCardElement.onclick = async () => {
+        stackTopCardElement.onclick = () => {
           const cardID = stackTopCardElement.dataset.innovation;
           const cardObj = getCardObject.byID(cardID);
           const joinWords = cardID.split(' ').join('');
-          await dogmas[joinWords](cardObj);
+          dogmas[joinWords](cardObj);
           gameBoard.update();
         };
       }

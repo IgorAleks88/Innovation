@@ -394,6 +394,7 @@ const dogmas = {
         const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
 
         if (answer.length !== 0) {
+          console.log(answer);
           recycle(player.id, answer);
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
           takeCard(1, ageCardNum, gameState.currentPlayer.id, false);
@@ -547,6 +548,68 @@ const dogmas = {
       }
     });
     corporateBonus(arrOfId);
+  },
+  гончарноедело: async (cardObj) => {
+    console.log(cardObj);
+    const arrOfId = getAffectedPlayers(cardObj);
+    const currentPlayer = gameState.currentPlayer;
+    let bonus = false;
+    if (currentPlayer.hand.length < 1) {
+      showErrorModal('Не достаточно карт');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+
+      if (player.hand.length >= 1) {
+        await displayNewTurnModal(player.name);
+        passTurn(player);
+        gameBoard.setHeaderCurrent();
+        const cardsInHand = document.querySelector('.hand__cards').children;
+
+        for (let card = 0; card < cardsInHand.length; card += 1) {
+          cardsInHand[card].onclick = (e) => {
+            const text = e.target.closest('.card').dataset.innovation;
+            const containerMessage = document.querySelector('.container__message');
+            if (containerMessage.childElementCount >= 3) return;
+            [...cardsInHand].forEach((elem) => elem.classList.remove('player-container--active'));
+            e.target.closest('.card').classList.add('player-container--active');
+            addTextToModal(text);
+          };
+        }
+
+        const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
+
+        if (answer.length !== 0) {
+          console.log(answer);
+          recycle(player.id, answer);
+          const ageCardNum = getCardObject.byID(answer[0]).age + 1;
+          takeCard(1, ageCardNum, gameState.currentPlayer.id, false);
+          gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
+          updateGameState(gameState);
+          gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+          if (i !== arrOfId.length - 1) {
+            bonus = true;
+          }
+        }
+      }
+    }
+
+    if (bonus) {
+      corporateBonus(arrOfId);
+    }
+
+    gameBoard.display();
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+    if (currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
   },
 };
 

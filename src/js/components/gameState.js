@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: [],
+    hand: ['гончарное дело', 'парус'],
     currentAge: 1,
     currentDeck: 'age1',
     activeDecks: {
@@ -61,7 +61,7 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: [],
+    hand: ['гончарное дело'],
     currentAge: 1,
     activeDecks: {
       red: {
@@ -81,7 +81,7 @@ const gameState = {
         shift: '',
       },
       yellow: {
-        cards: [],
+        cards: ['земледелие'],
         shift: '',
       },
     },
