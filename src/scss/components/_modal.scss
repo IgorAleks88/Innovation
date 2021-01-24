@@ -89,3 +89,30 @@
     font-size: 3.3rem;
   }
 }
+
+@keyframes message-error {
+  from {  background-color: rgba(224, 35, 35, 0.8);}
+  to {  background-color: rgba(236, 43, 43, 0);}
+}
+
+.modal__error {
+  width: 250px;
+  border-radius: 25px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-variant: all-petite-caps;
+  animation: 2s linear forwards  message-error;
+  z-index: 500;
+  background-color: rgb(231, 54, 54);
+}
+
+.error__message {
+  color: white;
+  font-size: 30px;
+}
