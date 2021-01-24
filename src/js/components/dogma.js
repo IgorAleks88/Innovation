@@ -396,7 +396,7 @@ const dogmas = {
         if (answer.length !== 0) {
           recycle(player.id, answer);
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
-          takeCard(1, ageCardNum, gameState.currentPlayer.id);
+          takeCard(1, ageCardNum, gameState.currentPlayer.id, false);
           gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
           updateGameState(gameState);
           gameState.players.forEach((pl) => header.changePlayerStats(pl));
