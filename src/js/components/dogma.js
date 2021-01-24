@@ -319,7 +319,6 @@ const dogmas = {
     }
     getManualDogma()(listener, getAffectedCards, 1);
   },
-
   кузнечноедело: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
@@ -467,7 +466,6 @@ const dogmas = {
     }
     getManualDogma()(listener, getAffectedCards, 3);
   },
-
   виноделие: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
