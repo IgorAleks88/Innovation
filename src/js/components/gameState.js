@@ -42,7 +42,7 @@ const gameState = {
         shift: '',
       },
       yellow: {
-        cards: ['земледелие'],
+        cards: [],
         shift: '',
       },
     },
