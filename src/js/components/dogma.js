@@ -7,7 +7,7 @@ import header from '../display/playerTable/displayHeader';
 import updateGameState from '../utility/updateGameState';
 import getManualDogma from '../utility/getManualDogma';
 
-const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
+// const isAge = (cardID, age) => getCardObject.byID(cardID).age === age;
 
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
