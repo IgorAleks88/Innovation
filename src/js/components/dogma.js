@@ -571,6 +571,25 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
+  математика: (cardObj) => {
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      return gameState.activePlayer.hand.length > 0 ? gameState.activePlayer.hand : [];
+    }
+    function listener(e) {
+      const targetID = getCardID(e);
+      recycle(gameState.activePlayer.id, [targetID]);
+      removeCardElement(targetID);
+      takeCard(1, getCardAge(e) + 1, gameState.activePlayer.id, false);
+      playCard(gameState.activePlayer.hand[gameState.activePlayer.hand.length - 1],
+        gameState.activePlayer.id);
+      [...document.querySelectorAll('.active')].forEach((element) => {
+        element.classList.remove('active');
+      });
+      gameBoard.update();
+    }
+    getManualDogma(listener, getAffectedCards, 1, null, true, true);
+  },
 };
 
 export default dogmas;
