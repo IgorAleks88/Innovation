@@ -207,6 +207,15 @@ const gameBoard = {
     infoTable.append(nextTurnBtn);
   },
 
+  displaySkipActionBtn() {
+    const skipActionBtn = document.createElement('div');
+    skipActionBtn.classList.add('info-table__skip-action-btn');
+    skipActionBtn.classList.add('info-table__next-turn-btn');
+    skipActionBtn.innerText = 'Пропустить';
+    const infoTable = document.querySelector('.info-table');
+    infoTable.append(skipActionBtn);
+  },
+
   displayNextTurnBtn() {
     const nextTurnBtn = document.createElement('div');
     nextTurnBtn.classList.add('info-table__next-turn-btn');
@@ -227,8 +236,12 @@ const gameBoard = {
       setTimeout(() => {
         gameBoard.display();
         gameBoard.init();
-        const excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
-        if (excistedNextTurnBtn !== null) excistedNextTurnBtn.remove();
+        const excistedNextTurnBtns = Array.from(document.querySelectorAll('.info-table__next-turn-btn'));
+        if (excistedNextTurnBtns.length !== 0) {
+          excistedNextTurnBtns.forEach((btn) => {
+            btn.remove();
+          });
+        }
       }, 500);
     });
     const infoTable = document.querySelector('.info-table');
