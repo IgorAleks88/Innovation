@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: [],
+    hand: ['парус'],
     currentAge: 1,
     currentDeck: 'age1',
     activeDecks: {
@@ -30,19 +30,19 @@ const gameState = {
         shift: '',
       },
       green: {
-        cards: [],
+        cards: ['парус'],
         shift: '',
       },
       blue: {
-        cards: [],
+        cards: ['гончарное дело'],
         shift: '',
       },
       purple: {
-        cards: [],
+        cards: ['города'],
         shift: '',
       },
       yellow: {
-        cards: [],
+        cards: ['земледелие'],
         shift: '',
       },
     },
@@ -61,7 +61,7 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: [],
+    hand: ['города'],
     currentAge: 1,
     activeDecks: {
       red: {
@@ -69,7 +69,7 @@ const gameState = {
         shift: '',
       },
       green: {
-        cards: [],
+        cards: ['парус'],
         shift: '',
       },
       blue: {
@@ -77,11 +77,11 @@ const gameState = {
         shift: '',
       },
       purple: {
-        cards: [],
+        cards: ['свод законов', 'мистицизм'],
         shift: '',
       },
       yellow: {
-        cards: [],
+        cards: ['каменная кладка'],
         shift: '',
       },
     },
@@ -108,7 +108,7 @@ const gameState = {
         shift: null,
       },
       green: {
-        cards: [],
+        cards: ['парус'],
         shift: null,
       },
       blue: {
@@ -116,11 +116,11 @@ const gameState = {
         shift: null,
       },
       purple: {
-        cards: [],
+        cards: ['мистицизм'],
         shift: null,
       },
       yellow: {
-        cards: [],
+        cards: ['каменная кладка'],
         shift: null,
       },
     },

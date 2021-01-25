@@ -8,6 +8,7 @@ import header from '../display/playerTable/displayHeader';
 import dogmaModalMessages from './dogmaModal';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import updateGameState from '../utility/updateGameState';
+import helpFuncDogm from '../utility/helpFuncDogm';
 
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
@@ -36,6 +37,7 @@ function addTextToModal(text) {
   const messageContainer = document.querySelector('.container__message');
   const verification = [...messageContainer.children].map((i) => i.textContent.trim());
   const cardsInHand = document.querySelector('.hand__cards');
+  const cardsInActive = document.querySelector('.active-zone__cards-wrapper');
 
   if (verification.includes(text)) return;
 
@@ -46,13 +48,13 @@ function addTextToModal(text) {
 
   messageContainer.onclick = (e) => {
     const cardID = e.target.closest('.text__message').textContent.trim();
-    cardsInHand.querySelector(`[data-innovation="${cardID}"]`).classList.remove('selected__card');
+    cardsInHand.querySelector(`[data-innovation="${cardID}"]`)?.classList.remove('selected__card');
+    cardsInActive.querySelector(`[data-innovation="${cardID}"]`)?.classList.remove('selected__card');
     e.target.closest('.text__message').remove();
   };
 }
 
 function passTurn(player) {
-  gameState.currentPlayer = player;
   gameState.activePlayer = player;
   gameBoard.display();
 }
@@ -280,6 +282,11 @@ const getManualDogma = function closureWrapper() {
   return setManualDogma;
 };
 
+function messageToLog(playerName, message) {
+  const log = document.querySelector('.log-block');
+  log.innerHTML += `<b>${playerName}</b> ${message} ${'_'.repeat(30)}`;
+}
+
 const dogmas = {
   письменность: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
@@ -368,63 +375,9 @@ const dogmas = {
     });
   },
   земледелие: async (cardObj) => {
-    const arrOfId = getAffectedPlayers(cardObj);
-    const currentPlayer = gameState.currentPlayer;
-    let bonus = false;
-    if (currentPlayer.hand.length < 1) {
-      showErrorModal('Не достаточно карт');
-      gameState.currentPlayer.actionPoints += 1;
-      return;
-    }
-
-    for (let i = 0; i < arrOfId.length; i += 1) {
-      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
-
-      if (player.hand.length >= 1) {
-        await displayNewTurnModal(player.name);
-        passTurn(player);
-        gameBoard.setHeaderCurrent();
-        const cardsInHand = document.querySelector('.hand__cards').children;
-
-        for (let card = 0; card < cardsInHand.length; card += 1) {
-          cardsInHand[card].onclick = (e) => {
-            const text = e.target.closest('.card').dataset.innovation;
-            const containerMessage = document.querySelector('.container__message');
-            if (containerMessage.childElementCount >= 1) return;
-            e.target.closest('.card').classList.add('selected__card');
-            addTextToModal(text);
-          };
-        }
-
-        const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
-
-        if (answer.length !== 0) {
-          recycle(player.id, answer);
-          const ageCardNum = getCardObject.byID(answer[0]).age + 1;
-          takeCard(1, ageCardNum, player.id, false);
-          player.influence.cards.push(player.hand.pop());
-          updateGameState(gameState);
-          gameState.players.forEach((pl) => header.changePlayerStats(pl));
-
-          if (i !== arrOfId.length - 1) {
-            bonus = true;
-          }
-        }
-      }
-    }
-
-    if (bonus) {
-      corporateBonus(arrOfId);
-    }
-
-    gameBoard.display();
-    gameState.players.forEach((pl) => header.changePlayerStats(pl));
-
-    if (currentPlayer.actionPoints > 0) {
-      gameBoard.init();
-    } else {
-      gameBoard.disableEvents();
-    }
+    const text = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${text}">${cardObj.innovation}</u>`);
+    await helpFuncDogm(cardObj, 1);
   },
   инструменты: (cardObj) => { // TODO
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
@@ -554,57 +507,52 @@ const dogmas = {
     corporateBonus(arrOfId);
   },
   гончарноедело: async (cardObj) => {
+    const text = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${text}">${cardObj.innovation}</u>`);
+    await helpFuncDogm(cardObj, 3);
+  },
+  города: async (cardObj) => {
+    const message = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${message}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     const currentPlayer = gameState.currentPlayer;
-    let bonus = false;
-    if (currentPlayer.hand.length < 1) {
-      showErrorModal('Не достаточно карт');
-      gameState.currentPlayer.actionPoints += 1;
-      return;
-    }
-
     for (let i = 0; i < arrOfId.length; i += 1) {
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
-
-      if (player.hand.length >= 1) {
+      if (player.tower >= 4) {
         await displayNewTurnModal(player.name);
         passTurn(player);
         gameBoard.setHeaderCurrent();
-        const cardsInHand = document.querySelector('.hand__cards').children;
-
-        for (let card = 0; card < cardsInHand.length; card += 1) {
-          cardsInHand[card].onclick = (e) => {
-            const text = e.target.closest('.card').dataset.innovation;
-            const containerMessage = document.querySelector('.container__message');
-            if (containerMessage.childElementCount >= 3) return;
-            e.target.closest('.card').classList.add('selected__card');
-            addTextToModal(text);
-          };
-        }
-
-        const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
-
-        if (answer.length !== 0) {
-          recycle(player.id, answer);
-          takeCard(1, answer.length, player.id, false);
-          gameState.currentPlayer.influence.cards.push(player.hand.pop());
-          takeCard(1, 1, player.id, true);
-          updateGameState(gameState);
-          gameState.players.forEach((pl) => header.changePlayerStats(pl));
-
-          if (i !== arrOfId.length - 1) {
-            bonus = true;
+        const cardsInActive = document.querySelectorAll('.active-zone__stack');
+        for (let card = 0; card < cardsInActive.length; card += 1) {
+          if (cardsInActive[card].lastElementChild) {
+            cardsInActive[card].lastElementChild.onclick = (e) => {
+              const text = e.target.closest('.card').dataset.innovation;
+              const hasResource = getCardObject.byID(text).resourses.some((resource) => resource.name.includes('tower'));
+              if (!hasResource) return;
+              const containerMessage = document.querySelector('.container__message');
+              if (containerMessage.childElementCount >= 1) return;
+              e.target.closest('.card').classList.add('selected__card');
+              addTextToModal(text);
+            };
           }
         }
+
+        const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, 'agr');
+
+        const color = getCardObject.byID(answer.join('')).color;
+        const card = player.activeDecks[color].cards.pop();
+        gameState.currentPlayer.activeDecks[color].cards.push(card);
+        takeCard(1, 1, player.id);
+        messageToLog(player.name, 'взял карту из колоды');
+        updateGameState(gameState);
+        gameState.players.forEach((pl) => header.changePlayerStats(pl));
       }
     }
 
-    if (bonus) {
-      corporateBonus(arrOfId);
-    }
-
-    gameBoard.display();
+    await displayNewTurnModal(currentPlayer.name);
+    passTurn(currentPlayer);
     gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    gameBoard.setHeaderCurrent();
 
     if (currentPlayer.actionPoints > 0) {
       gameBoard.init();
