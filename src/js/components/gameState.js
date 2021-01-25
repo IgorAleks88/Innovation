@@ -23,6 +23,7 @@ const gameState = {
     actionPoints: 0,
     hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
     currentAge: 1,
+    currentDeck: 'age1', // test
     activeDecks: {
       red: {
         cards: [],
