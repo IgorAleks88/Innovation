@@ -17,6 +17,124 @@
     grid-template-rows: repeat(4, 1fr);
     justify-items: center;
   }
+
+  &.about {
+    @include size(70%, 55%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+
+    div:first-child,
+    div:last-child {
+      grid-column: 1 / span 4;
+    }
+
+    .menu__link.person {
+      font-size: 2rem;
+      text-shadow: 0.25rem 0.2rem 0.1rem rgba(0, 0, 0, 1);
+      filter: drop-shadow(2px 2px 4px black);
+
+      &::before {
+        opacity: 0;
+        transition: opacity 1s linear;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+      }
+
+      &:hover::before {
+        opacity: 1;
+        transition: opacity 1s linear;
+      }
+
+      &.ia {
+        @include about-person('../../assets/img/about/profile-ia.png');
+
+        &::before {
+          content: '';
+          @include about-person('../../assets/img/about/ia.png');
+        }
+      }
+
+      &.ya {
+        @include about-person('../../assets/img/about/profile-ya.png');
+
+        &::before {
+          content: '';
+          @include about-person('../../assets/img/about/ya.png');
+        }
+      }
+
+      &.et {
+        @include about-person('../../assets/img/about/profile-et.png');
+
+        &::before {
+          content: '';
+          @include about-person('../../assets/img/about/et.png');
+        }
+      }
+
+      &.do {
+        @include about-person('../../assets/img/about/profile-do.png');
+
+        &::before {
+          content: '';
+          @include about-person('../../assets/img/about/do.png');
+        }
+      }
+
+      svg {
+        display: none;
+      }
+
+      &::before {
+        content: '';
+        background: none;
+      }
+
+      &::after {
+        content: '';
+        background: none;
+      }
+    }
+
+    .menu__link.logo {
+      background: url('../../assets/img/about/logo.png');
+      @include size(20rem, 12rem);
+      border: none;
+      background-size: cover;
+      filter: drop-shadow(2px 2px 4px black);
+      transition: transform 0.5s linear;
+
+      &::before {
+        content: '';
+        background: none;
+      }
+
+      &::after {
+        content: '';
+        background: none;
+      }
+
+      svg {
+        display: none;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        transition: transform 0.5s linear;
+      }
+    }
+
+    .menu__link.back path {
+      stroke: #fdad00;
+    }
+  }
 }
 
 .menu__skip {
@@ -73,7 +191,7 @@
 }
 
 .menu__link svg,
-button svg {
+.menu button svg {
   fill: none;
   height: 95%;
   left: 50%;
@@ -87,7 +205,9 @@ button svg {
   stroke-width: 4;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: stroke-dashoffset 0s 0.2s, opacity 0.2s;
+  transition: stroke-dashoffset 0s 0.2s;
+  height: 95%;
+  pointer-events: none;
 }
 
 .menu__link--active svg {
@@ -100,11 +220,10 @@ button svg {
 
 .menu__link--active svg,
 .menu__link:hover svg,
-button:hover svg {
+.menu button:hover svg {
   opacity: 1;
   stroke-dashoffset: 0;
-  transition: opacity 0.5s,
-    stroke-dashoffset 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .iframe__wrraper {
