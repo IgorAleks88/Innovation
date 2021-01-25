@@ -13,13 +13,13 @@ export default function displayModal(playerName, activePlayerActionName = null) 
     const modalWrapper = document.createElement('div');
     modalWrapper.classList.add('modal__wrapper');
 
-  const modalText = document.createElement('div');
-  modalText.classList.add('modal__text');
-  if (activePlayerActionName !== null) {
-    modalText.innerText = `Сейчас действие игрока ${activePlayerActionName}`;
-  } else {
-    modalText.innerText = `Сейчас ход игрока ${playerName}`;
-  }
+    const modalText = document.createElement('div');
+    modalText.classList.add('modal__text');
+    if (activePlayerActionName !== null) {
+      modalText.innerText = `Сейчас действие игрока ${activePlayerActionName}`;
+    } else {
+      modalText.innerText = `Сейчас ход игрока ${playerName}`;
+    }
 
     const modalBtn = document.createElement('button');
     modalBtn.classList.add('modal__btn');
@@ -41,5 +41,5 @@ export default function displayModal(playerName, activePlayerActionName = null) 
     setTimeout(() => {
       modalBg.classList.toggle('modal--hidden');
     }, 0);
-  })
+  });
 }

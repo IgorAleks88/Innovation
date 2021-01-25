@@ -35,15 +35,21 @@ function showErrorModal(text) {
 
 function addTextToModal(text) {
   const messageContainer = document.querySelector('.container__message');
+  const verification = [...messageContainer.children].map((i) => i.textContent.trim());
+  const cardsInHand = document.querySelector('.hand__cards');
+
+  if (verification.includes(text)) return;
+
   const textMessage = document.createElement('div');
   textMessage.classList.add('text__message');
   textMessage.innerHTML = /* html */`${text} <div class="text__icon"><i class="fas fa-trash" aria-hidden="true"></i></div>`;
   messageContainer.append(textMessage);
 
-  const icon = document.querySelector('.text__icon');
-  icon.addEventListener('click', (e) => {
+  messageContainer.onclick = (e) => {
+    const cardID = e.target.closest('.text__message').textContent.trim();
+    cardsInHand.querySelector(`[data-innovation="${cardID}"]`).classList.remove('selected__card');
     e.target.closest('.text__message').remove();
-  });
+  };
 }
 
 function passTurn(player) {
@@ -296,8 +302,7 @@ const dogmas = {
             const text = e.target.closest('.card').dataset.innovation;
             const containerMessage = document.querySelector('.container__message');
             if (containerMessage.childElementCount >= 1) return;
-            [...cardsInHand].forEach((elem) => elem.classList.remove('player-container--active'));
-            e.target.closest('.card').classList.add('player-container--active');
+            e.target.closest('.card').classList.add('selected__card');
             addTextToModal(text);
           };
         }
@@ -307,8 +312,8 @@ const dogmas = {
         if (answer.length !== 0) {
           recycle(player.id, answer);
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
-          takeCard(1, ageCardNum, gameState.currentPlayer.id, false);
-          gameState.currentPlayer.influence.cards.push(gameState.currentPlayer.hand.pop());
+          takeCard(1, ageCardNum, player.id, false);
+          player.influence.cards.push(player.hand.pop());
           updateGameState(gameState);
           gameState.players.forEach((pl) => header.changePlayerStats(pl));
 
@@ -332,7 +337,7 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
-  
+
   инструменты: (cardObj) => {
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
@@ -506,6 +511,65 @@ const dogmas = {
       targetStack.classList.remove('active');
     }
     getManualDogma(listener, getAffectedCards, 2, secondListener, true, true);
+  },
+  гончарноедело: async (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    const currentPlayer = gameState.currentPlayer;
+    let bonus = false;
+    if (currentPlayer.hand.length < 1) {
+      showErrorModal('Не достаточно карт');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+
+      if (player.hand.length >= 1) {
+        await displayNewTurnModal(player.name);
+        passTurn(player);
+        gameBoard.setHeaderCurrent();
+        const cardsInHand = document.querySelector('.hand__cards').children;
+
+        for (let card = 0; card < cardsInHand.length; card += 1) {
+          cardsInHand[card].onclick = (e) => {
+            const text = e.target.closest('.card').dataset.innovation;
+            const containerMessage = document.querySelector('.container__message');
+            if (containerMessage.childElementCount >= 3) return;
+            e.target.closest('.card').classList.add('selected__card');
+            addTextToModal(text);
+          };
+        }
+
+        const answer = await dogmaModalMessages(cardObj.dogma[0].effect);
+
+        if (answer.length !== 0) {
+          recycle(player.id, answer);
+          takeCard(1, answer.length, player.id, false);
+          gameState.currentPlayer.influence.cards.push(player.hand.pop());
+          takeCard(1, 1, player.id, true);
+          updateGameState(gameState);
+          gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+          if (i !== arrOfId.length - 1) {
+            bonus = true;
+          }
+        }
+      }
+    }
+
+    if (bonus) {
+      corporateBonus(arrOfId);
+    }
+
+    gameBoard.display();
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+    if (currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
   },
 };
 

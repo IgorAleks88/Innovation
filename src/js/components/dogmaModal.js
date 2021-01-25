@@ -17,8 +17,8 @@ function dogmaModalMessages(text) {
       if (e.target === btnWrapper) return;
       if (e.target.textContent === 'ok' && messages.childElementCount < 1) return;
       if (document.querySelector('.text__message') && e.target.textContent === 'ok') {
-        const cardID = document.querySelector('.text__message').textContent.trim();
-        const arr = [cardID];
+        const cardID = [...document.querySelectorAll('.text__message')].map((element) => element.textContent.trim());
+        const arr = cardID;
         resolve(arr);
       } else {
         resolve([]);
