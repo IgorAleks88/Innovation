@@ -1,6 +1,7 @@
 import gameState from '../components/gameState';
 import gameBoard from '../components/gameBoard';
 import header from '../display/playerTable/displayHeader';
+import displayNewTurnModal from '../display/displayNewTurnModal';
 import { takeCard } from '../components/dogma';
 
 const getManualDogma = function closureWrapper(listener,
@@ -57,7 +58,11 @@ const getManualDogma = function closureWrapper(listener,
         if (gameState.activePlayer !== gameState.currentPlayer) {
           setManualDogma();
         } else {
-          gameState.activePlayer.actionPoints = gameState.storedActionPoints;
+          if (gameState.storedActionPoints === 1) {
+            gameState.activePlayer.actionPoints = gameState.storedActionPoints + 1;
+          } else {
+            gameState.activePlayer.actionPoints = gameState.storedActionPoints;
+          }
           gameBoard.display();
           gameBoard.init();
           gameBoard.update();
@@ -65,7 +70,7 @@ const getManualDogma = function closureWrapper(listener,
       };
     }
 
-    alert(`Дейтсвие игрока ${gameState.activePlayer.name}`);
+    displayNewTurnModal(null, gameState.activePlayer.name);
     gameBoard.display();
     gameBoard.setHeaderCurrent();
     arrOfCardsID.forEach((cardID) => {

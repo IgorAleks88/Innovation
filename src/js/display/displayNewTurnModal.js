@@ -1,4 +1,4 @@
-export default function displayModal(playerName) {
+export default function displayModal(playerName, activePlayerActionName = null) {
   const modalBg = document.createElement('div');
   modalBg.classList.add('modal');
   modalBg.classList.add('modal--hidden');
@@ -14,7 +14,11 @@ export default function displayModal(playerName) {
 
   const modalText = document.createElement('div');
   modalText.classList.add('modal__text');
-  modalText.innerText = `Сейчас ход игрока ${playerName}`;
+  if (activePlayerActionName !== null) {
+    modalText.innerText = `Сейчас действие игрока ${activePlayerActionName}`;
+  } else {
+    modalText.innerText = `Сейчас ход игрока ${playerName}`;
+  }
 
   const modalBtn = document.createElement('button');
   modalBtn.classList.add('modal__btn');
