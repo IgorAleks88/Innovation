@@ -90,7 +90,7 @@ class Menu {
     this.menu.innerHTML = `
     ${this.createMenuItem('Новая игра', 'start')}
     ${this.createMenuItem('Продолжить', 'continue disabled')}
-    ${this.createMenuItem('Загрузить игру', 'load')}
+    ${this.createMenuItem('Загрузить игру', 'load disabled')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
     ${this.createMenuItem('Правила игры', 'rules')}
     ${this.createMenuItem('Обзор игры', 'review')}
@@ -151,6 +151,7 @@ class Menu {
         }
       }
     });
+    if (JSON.parse(localStorage.getItem('innovation'))) this.menu.querySelector('.load').classList.remove('disabled');
   }
 
   renderPdfRules() {
