@@ -49,3 +49,14 @@
   border-image-slice: 72 72 72 72;
   border-image-width: 4rem;
 }
+
+@mixin about-person($url) {
+  background: url($url) no-repeat;
+  border: none;
+  width: 13rem;
+  height: 20rem;
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  align-items: flex-end;
+}
