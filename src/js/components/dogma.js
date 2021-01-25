@@ -8,6 +8,7 @@ import header from '../display/playerTable/displayHeader';
 import dogmaModalMessages from './dogmaModal';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import updateGameState from '../utility/updateGameState';
+import getManualDogma from '../utility/getManualDogma';
 
 function moveCardToHand(card, id) {
   gameState.players[id].hand.push(card);
@@ -190,96 +191,6 @@ function corporateBonus(arrOfId) {
   }
 }
 
-const getManualDogma = function closureWrapper() {
-  // store current action points
-  gameState.storedActionPoints = gameState.activePlayer.actionPoints;
-  let soloCorporate = false;
-  if (gameState.affectedPlayers.length === 1
-    && gameState.affectedPlayers[0] === gameState.currentPlayer.id) {
-    soloCorporate = true;
-  }
-  let corporateCard = false;
-
-  function setManualDogma(listener, getCardsID, count) {
-    // change active players while find one with not null affected cards array
-    let arrOfCardsID = null;
-    let counter = 0;
-    do {
-      counter += 1;
-      if (gameState.affectedPlayers.length - counter < 0) {
-        counter = 0;
-        soloCorporate = true;
-      }
-      gameState.activePlayer = gameState.players[gameState.affectedPlayers.shift()];
-      arrOfCardsID = getCardsID();
-    } while (arrOfCardsID.length === 0 && gameState.affectedPlayers.length >= 1);
-    if (arrOfCardsID.length > 0) {
-      if (gameState.activePlayer !== gameState.currentPlayer) {
-        gameState.activePlayer.actionPoints = count + 1;
-        corporateCard = true;
-      } else if (soloCorporate) {
-        gameState.activePlayer.actionPoints = gameState.storedActionPoints + count;
-      } else {
-        gameState.activePlayer.actionPoints = gameState.storedActionPoints + count - 1;
-      }
-
-      alert(`Дейтсвие игрока ${gameState.activePlayer.name}`);
-      gameBoard.display();
-      gameBoard.setHeaderCurrent();
-      arrOfCardsID.forEach((cardID) => {
-        document.querySelector(`[data-innovation='${cardID}']`).onclick = (e) => {
-          listener(e);
-          if (gameState.activePlayer.actionPoints - 1 <= 0 && gameState.storedActionPoints !== 1
-          && gameState.activePlayer === gameState.currentPlayer) {
-            Array.from(document.querySelectorAll('.active')).forEach((elem) => {
-              elem.classList.remove('active');
-            });
-            if (gameState.activePlayer === gameState.currentPlayer
-              && gameState.activePlayer.actionPoints !== 0) {
-              gameBoard.init();
-              if (corporateCard) {
-                takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
-                header.changePlayerStats(gameState.currentPlayer);
-              }
-            }
-          } else if (gameState.activePlayer.actionPoints === 0) {
-            Array.from(document.querySelectorAll('.active')).forEach((elem) => {
-              elem.classList.remove('active');
-            });
-            if (gameState.activePlayer === gameState.currentPlayer
-              && gameState.activePlayer.actionPoints !== 0) {
-              gameBoard.init();
-              if (corporateCard) {
-                takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
-                header.changePlayerStats(gameState.currentPlayer);
-              }
-            }
-          }
-        };
-        document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
-      });
-      document.querySelector('.info-table').onclick = () => {
-        if (gameState.activePlayer.actionPoints === 0) {
-          const nextActionBtn = document.querySelector('.info-table__next-turn-btn');
-          if (nextActionBtn !== null) nextActionBtn.remove();
-          if (gameState.activePlayer.actionPoints === 0 && gameState.affectedPlayers.length !== 0) {
-            setManualDogma(listener, getCardsID, count);
-          } else if (gameState.affectedPlayers.length === 0) {
-            gameState.activePlayer = gameState.currentPlayer;
-            gameBoard.display();
-            gameBoard.init();
-          }
-        }
-      };
-    } else {
-      alert('Догму нельзя использовать!');
-      gameState.activePlayer.actionPoints += 1;
-    }
-  }
-
-  return setManualDogma;
-};
-
 const dogmas = {
   письменность: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
@@ -426,7 +337,8 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
-  инструменты: (cardObj) => { // TODO
+
+  инструменты: (cardObj) => {
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
       const handOfCurrent = gameState.activePlayer.hand;
@@ -450,12 +362,16 @@ const dogmas = {
       if (getCardAge(e) === 3 && gameState.activePlayer.actionPoints >= 3) {
         gameState.activePlayer.actionPoints -= 2;
         recycle(gameState.activePlayer.id, [getCardID(e)]);
+        removeCardElement(getCardID(e));
+        gameBoard.update();
         takeCard(3, 1, gameState.activePlayer.id);
         updateGameState(gameState);
         header.changePlayerStats(gameState.activePlayer);
         gameBoard.display();
       } else {
         recycle(gameState.activePlayer.id, [getCardID(e)]);
+        removeCardElement(getCardID(e));
+        gameBoard.update();
         counter += 1;
         if (counter === 3) {
           counter = 0;
@@ -469,7 +385,7 @@ const dogmas = {
         }
       }
     }
-    getManualDogma()(listener, getAffectedCards, 3);
+    getManualDogma(listener, getAffectedCards, 3, null, true, true);
   },
   виноделие: (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
@@ -553,6 +469,49 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
+  сводзаконов: (cardObj) => {
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const notEmptyStacks = Object.keys(gameState.activePlayer.activeDecks).filter((deck) => {
+        return gameState.activePlayer.activeDecks[deck].cards.length !== 0;
+      });
+      return gameState.activePlayer.hand.filter((cardID) => {
+        return notEmptyStacks.includes(getCardObject.byID(cardID).color);
+      });
+    }
+    function listener(e) {
+      const cardID = getCardID(e);
+      const cardObject = getCardObject.byID(cardID);
+      const cardElement = document.querySelector(`[data-innovation="${cardID}"]`);
+
+      gameState.activePlayer.hand.splice(gameState.activePlayer.hand.indexOf(cardID), 1);
+      gameState.activePlayer.activeDecks[cardObject.color].cards.unshift(cardID);
+      renderCard.archive(cardElement);
+      cardElement.classList.remove('active');
+      cardElement.onclick = null;
+      gameBoard.update();
+      Array.from(document.querySelector('.hand__cards').childNodes).forEach((cardElem) => {
+        cardElem.classList.remove('active');
+        cardElem.onclick = null;
+      });
+      const targetStack = document.getElementById(`${cardObject.color}`);
+      targetStack.classList.add('active');
+      if (gameState.activePlayer.activeDecks[targetStack.id].shift !== 'left') {
+        return targetStack;
+      }
+      gameBoard.update();
+    }
+    function secondListener(e) {
+      const targetStack = e.target.closest('.active-zone__stack');
+      gameState.activePlayer.activeDecks[targetStack.id].shift = 'left';
+      gameBoard.display();
+      gameBoard.init();
+      gameBoard.update();
+      targetStack.onclick = null;
+      targetStack.classList.remove('active');
+    }
+    getManualDogma(listener, getAffectedCards, 2, secondListener, true, true);
+  },
   гончарноедело: async (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     const currentPlayer = gameState.currentPlayer;
@@ -615,3 +574,5 @@ const dogmas = {
 };
 
 export default dogmas;
+export { takeCard };
+export { showErrorModal };
