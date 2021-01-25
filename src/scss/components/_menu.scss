@@ -27,11 +27,10 @@
   color: #53b1e7;
   display: inline-block;
   font-size: 2.2rem;
-  font-weight: 300;
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1;
-  padding: 1.4rem 0;
+  padding: 0.4rem 0;
   position: relative;
   text-decoration: none;
 
@@ -132,4 +131,33 @@ input[type='text'] {
   color: rgb(255, 0, 0);
   display: block;
   user-select: none;
+}
+
+@keyframes message {
+  from {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.modal__save {
+  align-items: center;
+  animation: 1.5s linear forwards message;
+  display: flex;
+  font-variant: all-petite-caps;
+  height: 65px;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  z-index: 500;
+}
+
+.save__message {
+  color: rgb(255, 255, 255);
 }

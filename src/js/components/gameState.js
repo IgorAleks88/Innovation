@@ -21,29 +21,28 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['инструменты', 'мистицизм', 'свод законов', 'города'], //! remove
+    hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
     currentAge: 1,
-    currentDeck: 'age1', // test
     activeDecks: {
       red: {
         cards: [],
-        shift: null, //! test
+        shift: '',
       },
       green: {
         cards: [],
-        shift: null, //! test
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: null, //! test
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null, //! test
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: null, //! test
+        shift: '',
       },
     },
     influence: {
@@ -61,28 +60,28 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: ['свод законов', 'мистицизм', 'инструменты'],
+    hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
     currentAge: 1,
     activeDecks: {
       red: {
         cards: [],
-        shift: 'left', //! test
+        shift: '',
       },
       green: {
         cards: [],
-        shift: 'top', //! test
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: 'right', //! test
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: '',
       },
     },
     influence: {

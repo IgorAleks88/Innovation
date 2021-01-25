@@ -3,6 +3,7 @@ import gameBoard from '../components/gameBoard';
 import header from '../display/playerTable/displayHeader';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import { takeCard } from '../components/dogma';
+import { showErrorModal } from '../components/dogma';
 
 const getManualDogma = function closureWrapper(listener,
   getCardsID, count, secondListener = null, isCorporate = true, isSkippable = false) {
@@ -18,7 +19,7 @@ const getManualDogma = function closureWrapper(listener,
       gameState.activePlayer = gameState.currentPlayer;
       if (getCardsID().length === 0) {
         gameState.activePlayer.actionPoints += 1; // return point taked on dogm activation
-        alert('У вас нет возможности выполнить эту корпоративную догму!');
+        showErrorModal('У вас нет возможности выполнить эту корпоративную догму!');
         return;
       }
     }

@@ -91,7 +91,6 @@ function getRenderCard() {
       targetStack.dom.append(cardElement);
       targetStack.dom.scrollIntoView();
     },
-
     archive(cardElement) {
       if (hand === null || activeStacks === null) this.initObject();
       // get properties of target stack to calcualte later
@@ -163,7 +162,6 @@ function getRenderCard() {
       targetStack.dom.prepend(cardElement);
       targetStack.dom.scrollIntoView();
     },
-
     removeCardFromActive(cardElement) {
       const targetStack = {};
       activeStacks.forEach((stack) => {
