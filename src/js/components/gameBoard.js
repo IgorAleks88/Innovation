@@ -123,6 +123,8 @@ const gameBoard = {
       }
     });
     this.setHeaderCurrent();
+    updateGameState(gameState);
+    gameState.players.forEach((player) => header.changePlayerStats(player));
   },
 
   update() {
