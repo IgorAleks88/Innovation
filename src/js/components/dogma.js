@@ -376,5 +376,3 @@ const dogmas = {
 };
 
 export default dogmas;
-export { takeCard };
-export { showErrorModal };
