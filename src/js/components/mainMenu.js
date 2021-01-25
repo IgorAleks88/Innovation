@@ -5,7 +5,8 @@ import gameBoard from './gameBoard';
 import gameState from './gameState';
 
 const users = {};
-
+const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
+let sound = false;
 function isValid(userObj) {
   if (userObj.names.length === userObj.players) {
     return userObj.names.every((name) => name.length > 2 && name.length < 8);
@@ -13,14 +14,6 @@ function isValid(userObj) {
   return false;
 }
 
-function showErrorMessage() {
-  if (document.querySelector('.error')) return;
-  const form = document.querySelector('.form');
-  const errorMessgae = document.createElement('div');
-  errorMessgae.classList.add('menu__link', 'error');
-  errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
-  form.prepend(errorMessgae);
-}
 function transform(state) {
   const currPlayerID = state.currentPlayer.id;
   const activePlayerID = state.activePlayer.id;
@@ -49,6 +42,19 @@ function transform(state) {
       state.player3 = player;
     }
   });
+}
+
+function loadTheGame() {
+  const loadedGameState = JSON.parse(localStorage.getItem('innovation'));
+  Object.entries(loadedGameState).forEach(([key, value]) => { gameState[key] = value; });
+  transform(gameState);
+  displayNewTurnModal(gameState.currentPlayer.name);
+  gameBoard.display();
+  const names = loadedGameState.players.map((player) => player.name);
+  header.initPlayerNames(names);
+  gameBoard.init();
+  gameState.activePlayer.actionPoints += 1;
+  gameBoard.update();
 }
 
 class Menu {
@@ -95,9 +101,10 @@ class Menu {
     ${this.createMenuItem('Правила игры', 'rules')}
     ${this.createMenuItem('Продолжить', 'continue disabled')}
     ${this.createMenuItem('Настройки', 'settings')}
-    ${this.createMenuItem('Загрузить', 'load disabled')}
+    ${this.createMenuItem('Загрузить игру', 'load disabled')}
     ${this.createMenuItem('Наша команда', 'about')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
+    ${this.createMenuItem('Включить звук', 'sound')}
     `;
 
     this.parent.append(this.menu);
@@ -118,10 +125,9 @@ class Menu {
       } else if (e.target.dataset.players) {
         this.createNameInputField(e.target.dataset.players);
       } else if (e.target.className.includes('get-names')) {
-        this.addNamesToUsers();
         e.preventDefault();
+        this.addNamesToUsers();
         if (isValid(users)) {
-          e.preventDefault();
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
           setTimeout(() => {
@@ -129,7 +135,7 @@ class Menu {
           }, 500);
         } else {
           this.validateInputs();
-          showErrorMessage();
+          this.showErrorMessage();
         }
       } else if (e.target.className.includes('back')) {
         this.menu.classList.add('main');
@@ -138,21 +144,14 @@ class Menu {
         this.render();
         this.menu.classList.add('menu__used');
       } else if (e.target.className.includes('continue')) {
-        gameBoard.update();
         intro.classList.toggle('intro--hide');
-        displayNewTurnModal(gameState.currentPlayer.name);
       } else if (e.target.className.includes('load')) {
-        this.menu.querySelector('.continue').classList.remove('disabled');
-        const loadedGameState = JSON.parse(localStorage.getItem('innovation'));
-        Object.entries(loadedGameState).forEach(([key, value]) => { gameState[key] = value; });
-        transform(gameState);
-        gameBoard.display();
-        const names = loadedGameState.players.map((player) => player.name);
-        header.initPlayerNames(names);
-        gameBoard.init();
+        loadTheGame();
+        intro.classList.toggle('intro--hide');
       } else if (e.target.className.includes('save')) {
         this.menu.querySelector('.load').classList.remove('disabled');
         localStorage.setItem('innovation', JSON.stringify(gameState));
+        this.showSaveGameModal();
       } else if (e.target.className.includes('about')) {
         this.menu.classList.remove('main');
         this.menu.classList.add('about');
@@ -165,6 +164,17 @@ class Menu {
             item.children[0].removeAttribute('data-link');
           }
         });
+      } else if (e.target.className.includes('sound')) {
+        audio.loop = true;
+        sound = !sound;
+        if (sound) {
+          audio.play();
+          e.target.textContent = 'Выключить звук';
+        }
+        if (!sound) {
+          audio.pause();
+          e.target.textContent = 'Включить звук';
+        }
       }
     });
   }
@@ -257,5 +267,25 @@ class Menu {
     ${this.createMenuItem('Главное меню', 'back')}
     `;
   }
+
+  showSaveGameModal() {
+    const modal = document.createElement('div');
+    modal.classList.add('modal__save');
+    modal.innerHTML = /* html */`
+      <div class="save__message">Игра сохранена</div>
+    `;
+    this.menu.append(modal);
+    setTimeout(() => modal.remove(), 1500);
+  }
+
+  showErrorMessage() {
+    if (document.querySelector('.error')) return;
+    const form = this.menu.querySelector('.form');
+    const errorMessgae = document.createElement('div');
+    errorMessgae.classList.add('menu__link', 'error');
+    errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
+    form.prepend(errorMessgae);
+  }
 }
+
 export default Menu;

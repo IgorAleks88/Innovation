@@ -75,6 +75,25 @@ const gameBoard = {
     });
   },
 
+  displayActive() {
+    const stacks = document.querySelectorAll('.active-zone__stack');
+    stacks.forEach((stackElement) => {
+      stackElement.innerHTML = '';
+      stackElement.classList.add('active-zone__stack--empty');
+      stackElement.style = null;
+      Object.keys(gameState.activePlayer.activeDecks).forEach((activeDeckName) => {
+        if (activeDeckName === stackElement.id) {
+          gameState.activePlayer.activeDecks[activeDeckName].cards.forEach((card) => {
+            const cardObj = getCardObject.byID(card);
+            const cardElement = getCardElement(cardObj);
+            renderCard.toActive(cardElement);
+            cardElement.classList.remove('xyz-in');
+          });
+        }
+      });
+    });
+  },
+
   init() {
     // set hand events
     const cardElements = document.querySelectorAll('.card');
@@ -94,16 +113,18 @@ const gameBoard = {
       const stackLength = stack.childNodes.length;
       if (stackLength >= 1) {
         const stackTopCardElement = stack.childNodes[stackLength - 1];
-        stackTopCardElement.onclick = () => {
+        stackTopCardElement.onclick = async () => {
           const cardID = stackTopCardElement.dataset.innovation;
           const cardObj = getCardObject.byID(cardID);
           const joinWords = cardID.split(' ').join('');
-          dogmas[joinWords](cardObj);
+          await dogmas[joinWords](cardObj);
           gameBoard.update();
         };
       }
     });
     this.setHeaderCurrent();
+    updateGameState(gameState);
+    gameState.players.forEach((player) => header.changePlayerStats(player));
   },
 
   update() {
@@ -188,6 +209,15 @@ const gameBoard = {
     infoTable.append(nextTurnBtn);
   },
 
+  displaySkipActionBtn() {
+    const skipActionBtn = document.createElement('div');
+    skipActionBtn.classList.add('info-table__skip-action-btn');
+    skipActionBtn.classList.add('info-table__next-turn-btn');
+    skipActionBtn.innerText = 'Пропустить';
+    const infoTable = document.querySelector('.info-table');
+    infoTable.append(skipActionBtn);
+  },
+
   displayNextTurnBtn() {
     const nextTurnBtn = document.createElement('div');
     nextTurnBtn.classList.add('info-table__next-turn-btn');
@@ -208,8 +238,12 @@ const gameBoard = {
       setTimeout(() => {
         gameBoard.display();
         gameBoard.init();
-        const excistedNextTurnBtn = document.querySelector('.info-table__next-turn-btn');
-        if (excistedNextTurnBtn !== null) excistedNextTurnBtn.remove();
+        const excistedNextTurnBtns = Array.from(document.querySelectorAll('.info-table__next-turn-btn'));
+        if (excistedNextTurnBtns.length !== 0) {
+          excistedNextTurnBtns.forEach((btn) => {
+            btn.remove();
+          });
+        }
       }, 500);
     });
     const infoTable = document.querySelector('.info-table');
