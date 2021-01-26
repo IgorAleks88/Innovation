@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
+    hand: ['инструменты', 'города', 'свод законов', 'мистицизм'],
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
@@ -42,7 +42,7 @@ const gameState = {
         shift: '',
       },
       yellow: {
-        cards: [],
+        cards: ['каменная кладка'],
         shift: '',
       },
     },

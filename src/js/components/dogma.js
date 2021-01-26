@@ -32,7 +32,7 @@ import {
 const dogmas = {
   письменность: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       takeCard(1, 2, id);
@@ -41,7 +41,7 @@ const dogmas = {
   },
   колесо: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       takeCard(2, 1, id);
@@ -50,7 +50,7 @@ const dogmas = {
   },
   парус: (cardObj) => {
     const text = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${text}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${text}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       takeCard(1, 1, id, false);
@@ -60,7 +60,7 @@ const dogmas = {
   },
   скотоводство: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     // get affected players
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     // function which get affected cards of active player
@@ -84,7 +84,7 @@ const dogmas = {
   },
   кузнечноедело: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       let repeat = true;
@@ -106,7 +106,7 @@ const dogmas = {
   },
   мистицизм: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       const actualAge = getActualDeck(1);
@@ -130,7 +130,7 @@ const dogmas = {
   },
   инструменты: (cardObj) => { // TODO
     const text = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${text}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${text}">${cardObj.innovation}</u>`);
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
       const handOfCurrent = gameState.activePlayer.hand;
@@ -181,7 +181,7 @@ const dogmas = {
   },
   виноделие: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       const numberOfCards = Math.trunc(gameState[`player${id}`].tree / 2);
@@ -200,7 +200,7 @@ const dogmas = {
   },
   эксперименты: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       const actualAge = getActualDeck(5);
@@ -211,7 +211,7 @@ const dogmas = {
   },
   пароваямашина: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       for (let i = 0; i < 2; i += 1) {
@@ -234,7 +234,7 @@ const dogmas = {
   },
   станки: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       let currentAge = 1;
@@ -251,7 +251,7 @@ const dogmas = {
   },
   генетика: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     arrOfId.forEach((id) => {
       const currentPlayer = gameState[`player${id}`];
@@ -316,19 +316,23 @@ const dogmas = {
   },
   земледелие: async (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, 1);
   },
   гончарноедело: async (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, 3);
   },
   города: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     const currentPlayer = gameState.currentPlayer;
+    let isNotTower = true;
+
+    if (gameState.players[arrOfId[0]].tower >= 4) {
+      const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+      messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    }
 
     for (let i = 0; i < arrOfId.length; i += 1) {
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
@@ -360,7 +364,15 @@ const dogmas = {
         messageToLog(player.name, 'взял карту из колоды');
         updateGameState(gameState);
         gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+        isNotTower = false;
       }
+    }
+
+    if (isNotTower) {
+      showErrorModal('У соперников не достаточно карт');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
     }
 
     await displayNewTurnModal(currentPlayer.name);
@@ -376,7 +388,7 @@ const dogmas = {
   },
   лукистрелы: async (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     for (let i = 0; i < arrOfId.length; i += 1) {
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
@@ -447,7 +459,12 @@ const dogmas = {
   },
   деньги: async (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    await canReworkAndInfluence(cardObj, Infinity);
+  },
+  каналы: async (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, Infinity);
   },
 };
