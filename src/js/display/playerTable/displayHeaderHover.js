@@ -27,9 +27,10 @@ const displayHeaderHover = {
         for (let i = 0; i < deck.length; i += 1) {
             const currentCardObj = getCardObject.byID(deck[i]);
             const currentCardElement = getCardBackElement(currentCardObj);
-            currentCardElement.style.bottom = `${i * 35}px`;
+            currentCardElement.style.top = `${-i * 100}px`;
             this.wrapper.appendChild(currentCardElement);
         }
+        this.wrapper.style.height = `${deck.length * 60 + 140}px`;
     
     },
     renderActiveDeck(obj) {

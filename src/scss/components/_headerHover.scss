@@ -1,6 +1,7 @@
 .header-hover__block {
   @include flex(column, center, center);
-  min-width: 40rem;
+  // height: auto;
+  width: 35rem;
 
   /* background: linear-gradient(
     90deg,
@@ -28,11 +29,11 @@
 
 .header-hover__wrapper {
   @include flex(column, flex-end, center);
-  @include size(100%, 100%);
-  flex-wrap: nowrap;
-  overflow: hidden;
-  min-height: 32rem;
-  padding: 6rem;
+  // flex-wrap: nowrap;
+  // overflow: hidden;
+  // height: auto;
+  width: auto;
+  padding: 1rem;
   @include area-border('../../assets/img/border-modal.png');
   border-image-width: 6rem;
   position: relative;
