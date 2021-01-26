@@ -1,3 +1,5 @@
+import displayHeaderHover from '../playerTable/displayHeaderHover';
+
 const displayHeader = {
   wrapper: null,
   headRowNames: [{ hand: ['fas', 'fa-hand-paper', 'yellow'] }, { influence: ['fas', 'fa-shield-alt', 'red'] }, { leadership: ['fas', 'fa-trophy', 'yellow'] }],
@@ -99,6 +101,12 @@ const displayHeader = {
       this[player][i].classList.add('cards-container__counter');
       this[player][i].textContent = 0;
       container.appendChild(this[player][i]);
+      container.addEventListener('mouseover', () => {
+        displayHeaderHover.block.classList.remove('header-hover__block__hidden');
+      });
+      container.addEventListener('mouseout', () => {
+        displayHeaderHover.block.classList.add('header-hover__block__hidden');
+      });
       headRow.appendChild(container);
     });
 
