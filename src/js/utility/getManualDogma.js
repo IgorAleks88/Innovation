@@ -63,6 +63,9 @@ const getManualDogma = function closureWrapper(listener,
           } else {
             gameState.activePlayer.actionPoints = gameState.storedActionPoints;
           }
+          [...document.querySelectorAll('.active-zone__stack')].forEach((element) => {
+            element.onclick = null;
+          });
           gameBoard.display();
           gameBoard.init();
           gameBoard.update();
@@ -71,21 +74,25 @@ const getManualDogma = function closureWrapper(listener,
     }
 
     displayNewTurnModal(null, gameState.activePlayer.name);
-    gameBoard.display();
-    gameBoard.setHeaderCurrent();
-    arrOfCardsID.forEach((cardID) => {
-      document.querySelector(`[data-innovation='${cardID}']`).onclick = (e) => {
-        const targetOfSecondEvent = listener(e);
-        listenerFunc();
-        if (targetOfSecondEvent !== undefined) {
-          targetOfSecondEvent.onclick = () => {
-            secondListener(e);
-            listenerFunc();
-          };
-        }
-      };
-      document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
-    });
+    setTimeout(() => {
+      gameBoard.display();
+      gameBoard.setHeaderCurrent();
+      arrOfCardsID.forEach((cardID) => {
+        document.querySelector(`[data-innovation='${cardID}']`).onclick = (e) => {
+          const targetsOfSecondEvent = listener(e);
+          listenerFunc();
+          if (targetsOfSecondEvent !== undefined) {
+            targetsOfSecondEvent.forEach((elementID) => {
+              document.querySelector(`[data-innovation='${elementID}']`).onclick = (ev) => {
+                secondListener(ev);
+                listenerFunc();
+              };
+            });
+          }
+        };
+        document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
+      });
+    }, 300);
 
     function listenerFunc() {
       if (gameState.affectedPlayers.length === 0

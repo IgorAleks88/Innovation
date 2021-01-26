@@ -497,7 +497,7 @@ const dogmas = {
       const targetStack = document.getElementById(`${cardObject.color}`);
       targetStack.classList.add('active');
       if (gameState.activePlayer.activeDecks[targetStack.id].shift !== 'left') {
-        return targetStack;
+        return [targetStack.id];
       }
       gameBoard.update();
     }
@@ -589,6 +589,39 @@ const dogmas = {
       gameBoard.update();
     }
     getManualDogma(listener, getAffectedCards, 1, null, true, true);
+  },
+  философия: (cardObj) => {
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resultArr = [];
+      Object.keys(gameState.activePlayer.activeDecks).forEach((stackID) => {
+        if (gameState.activePlayer.activeDecks[stackID].cards.length > 1
+          && gameState.activePlayer.activeDecks[stackID].shift !== 'left') resultArr.push(stackID);
+      });
+      return resultArr;
+    }
+    function listener(e) {
+      const targetElement = e.target.closest('.active-zone__stack');
+      gameState.activePlayer.activeDecks[targetElement.id].shift = 'left';
+      [...document.querySelectorAll('.active')].forEach((element) => {
+        element.classList.remove('active');
+      });
+      gameBoard.update();
+      gameBoard.displayActive();
+      gameState.activePlayer.hand.forEach((cardID) => {
+        document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
+      });
+      return gameState.activePlayer.hand;
+    }
+    function listener2(e) {
+      gameState.activePlayer.influence.cards.push(getCardID(e));
+      removeCardElement(getCardID(e));
+      [...document.querySelectorAll('.active')].forEach((element) => {
+        element.classList.remove('active');
+      });
+      gameBoard.update();
+    }
+    getManualDogma(listener, getAffectedCards, 2, listener2, true, true);
   },
 };
 
