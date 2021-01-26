@@ -102,7 +102,7 @@ class Menu {
     ${this.createMenuItem('Продолжить', 'continue disabled')}
     ${this.createMenuItem('Настройки', 'settings')}
     ${this.createMenuItem('Загрузить игру', 'load disabled')}
-    ${this.createMenuItem('О программе', 'about')}
+    ${this.createMenuItem('Наша команда', 'about')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
     ${this.createMenuItem('Включить звук', 'sound')}
     `;
@@ -111,7 +111,6 @@ class Menu {
     this.renderPdfRules();
 
     this.menu.addEventListener('click', (e) => {
-      console.log(e.target.tagName);
       if (e.target.tagName !== 'DIV' && e.target.tagName !== 'A' && e.target.tagName !== 'SPAN' && e.target !== this.menu.querySelector('button')) {
         return;
       }
@@ -140,6 +139,7 @@ class Menu {
         }
       } else if (e.target.className.includes('back')) {
         this.menu.classList.add('main');
+        this.menu.classList.remove('about');
         this.menu.remove();
         this.render();
         this.menu.classList.add('menu__used');
@@ -152,6 +152,18 @@ class Menu {
         this.menu.querySelector('.load').classList.remove('disabled');
         localStorage.setItem('innovation', JSON.stringify(gameState));
         this.showSaveGameModal();
+      } else if (e.target.className.includes('about')) {
+        this.menu.classList.remove('main');
+        this.menu.classList.add('about');
+        this.createAboutItems();
+        Array.from(this.menu.children).forEach((item, ind) => {
+          if (ind < 5) {
+            const href = item.children[0].getAttribute('data-link');
+            item.children[0].setAttribute('href', href);
+            item.children[0].setAttribute('target', 'blank');
+            item.children[0].removeAttribute('data-link');
+          }
+        });
       } else if (e.target.className.includes('sound')) {
         audio.loop = true;
         sound = !sound;
@@ -165,6 +177,7 @@ class Menu {
         }
       }
     });
+    if (JSON.parse(localStorage.getItem('innovation'))) this.menu.querySelector('.load').classList.remove('disabled');
   }
 
   renderPdfRules() {
@@ -240,6 +253,20 @@ class Menu {
     users.names = playerNames;
 
     return playerNames;
+  }
+
+  createAboutItems() {
+    for (let i = 0; i < this.menu.children.length; i += 1) {
+      this.menu.children[i].hidden = true;
+    }
+    this.menu.innerHTML = /* html */ `
+    ${this.createMenuItem('', 'logo', 'data-link="https://rs.school/js/"')}
+    ${this.createMenuItem('Yaroslav Abrasimov', 'person ya', 'data-link="https://github.com/Ferri0"')}
+    ${this.createMenuItem('Igor Alexeyenko', 'person ia', 'data-link="https://github.com/IgorAleks88"')}
+    ${this.createMenuItem('Ekaterina Titova', 'person et', 'data-link="https://github.com/kattitova"')}
+    ${this.createMenuItem('Denis<br>Oleksiuk', 'person do', 'data-link="https://github.com/DenisOleksiuk"')}
+    ${this.createMenuItem('Главное меню', 'back')}
+    `;
   }
 
   showSaveGameModal() {
