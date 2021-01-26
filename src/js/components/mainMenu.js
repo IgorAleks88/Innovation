@@ -177,6 +177,7 @@ class Menu {
         }
       }
     });
+    if (JSON.parse(localStorage.getItem('innovation'))) this.menu.querySelector('.load').classList.remove('disabled');
   }
 
   renderPdfRules() {
