@@ -8,6 +8,7 @@ import header from '../display/playerTable/displayHeader';
 import dogmaModalMessages from './dogmaModal';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import updateGameState from '../utility/updateGameState';
+import getManualDogma from '../utility/getManualDogma';
 import {
   canReworkAndInfluence,
   moveCardToHand,
@@ -25,7 +26,6 @@ import {
   playCard,
   recycle,
   corporateBonus,
-  getManualDogma,
   messageToLog,
 } from '../utility/dogmaTools';
 
@@ -92,7 +92,6 @@ const dogmas = {
         const actualAge = getActualDeck(1);
         const cardID = gameState.ageDecks[`age${actualAge}`].pop();
         const currentPlayerName = gameState[`player${id}`].name;
-        console.log(`${currentPlayerName} взял ${cardID}`);
         const currentCard = getCardObject.byID(cardID);
         repeat = isHaveResource(currentCard, 'tower');
         if (repeat) {
@@ -113,7 +112,6 @@ const dogmas = {
       const cardID = gameState.ageDecks[`age${actualAge}`].pop();
       const currentPlayerName = gameState[`player${id}`].name;
       const currentCard = getCardObject.byID(cardID);
-      console.log(`${currentPlayerName} взял ${cardID} ${currentCard.color}`);
       if (gameState.players[id].activeDecks[currentCard.color].cards.length > 0) {
         gameState.players[id].activeDecks[currentCard.color].cards.push(cardID);
         if (id === gameState.currentPlayer.id) {
