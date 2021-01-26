@@ -189,9 +189,9 @@ const gameBoard = {
     targetStack.push(cardID);
 
     // set dogma function
-    cardElement.onclick = () => {
+    cardElement.onclick = async () => {
       const joinWords = cardID.split(' ').join('');
-      dogmas[joinWords](cardObj);
+      await dogmas[joinWords](cardObj);
       gameBoard.update();
     };
     cardElement.classList.remove('active');
