@@ -21,9 +21,9 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: [],
+    hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
     currentAge: 1,
-    currentDeck: 'age1',
+    currentDeck: 'age1', // test
     activeDecks: {
       red: {
         cards: [],
@@ -61,7 +61,7 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: [],
+    hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
     currentAge: 1,
     activeDecks: {
       red: {

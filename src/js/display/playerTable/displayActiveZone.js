@@ -41,7 +41,9 @@ const displayActiveZone = {
       if (back !== null) back.click();
       const menuItems = document.querySelectorAll('.menu__link');
       menuItems.forEach((i) => {
-        i.classList.remove('disabled');
+        if (!i.classList.contains('load')) {
+          i.classList.remove('disabled');
+        }
       });
       const intro = document.querySelector('.intro');
       intro.classList.toggle('intro--hide');
