@@ -15,6 +15,15 @@ const displayHeaderHover = {
         this.block.append(this.overlay);
         document.body.prepend(this.block);
     },
+
+    renderDeck(deck) {
+        console.log(deck);
+    
+    },
+    renderActiveDeck(obj) {
+        console.log(obj.cards);
+        console.log(obj.shift);
+    },
 }
 
 export default displayHeaderHover;
