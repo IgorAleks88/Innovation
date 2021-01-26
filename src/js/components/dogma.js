@@ -373,6 +373,77 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
+  лукистрелы: async (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    const arrOfId = getAffectedPlayers(cardObj);
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+      await displayNewTurnModal(player.name);
+      passTurn(player);
+      gameBoard.setHeaderCurrent();
+      const cardsInHand = document.querySelector('.hand__cards').children;
+      const deck = document.querySelector('.age-deck--active');
+
+      const eventForCards = (event) => {
+        const text = event.target.closest('.card').dataset.innovation;
+        const containerMessage = document.querySelector('.container__message');
+        if (containerMessage.childElementCount >= 1) return;
+        event.target.closest('.card').classList.add('selected__card');
+        addTextToModal(text);
+      };
+
+      deck.onclick = (e) => {
+        let ageDeck = e.target.id;
+        if (ageDeck === 'cloneCurrentDeck') {
+          ageDeck = gameState.activePlayer.currentDeck;
+        }
+
+        const cardID = gameState.ageDecks[ageDeck].pop();
+        gameState.activePlayer.hand.push(cardID);
+
+        const card = getCardObject.byID(cardID);
+        const movingCardElement = getCardElement(card);
+        renderCard.toHand(movingCardElement);
+        messageToLog(player.name, 'взял карту из колоды');
+        header.changePlayerStats(player);
+
+        const cardIDs = [...cardsInHand]
+          .map((item) => getCardObject.byID(item.dataset.innovation).age);
+
+        const higerAge = Math.max(...cardIDs);
+        const backgroundStyle = `url("./assets/img/cards-bg/age-0${higerAge}.jpg")`;
+
+        const higherCards = [...cardsInHand]
+          .filter((item) => item.style.background === backgroundStyle);
+
+        for (let higherCard = 0; higherCard < higherCards.length; higherCard += 1) {
+          higherCards[higherCard].onclick = eventForCards;
+        }
+        deck.onclick = null;
+      };
+
+      const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, 'agr');
+
+      const cardIdx = player.hand.indexOf(answer.join(''));
+      gameState.currentPlayer.hand.push(player.hand[cardIdx]);
+      player.hand.splice(cardIdx, 1);
+      messageToLog(player.name, `отдал карту ${answer.join('')} игроку ${gameState.currentPlayer.name}`);
+      updateGameState(gameState);
+      gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    }
+
+    await displayNewTurnModal(gameState.currentPlayer.name);
+    passTurn(gameState.currentPlayer);
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    gameBoard.setHeaderCurrent();
+
+    if (gameState.currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
+  },
 };
 
 export default dogmas;
