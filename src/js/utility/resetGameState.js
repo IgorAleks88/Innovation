@@ -20,5 +20,9 @@ export default function resetGameState() {
       // gameState[`player${i}`].activeDecks[key].cards = [];
       gameState[`player${i}`].activeDecks[key].shift = '';
     });
+    Object.keys(gameState[`player${i}`].influence).forEach((key) => {
+      gameState[`player${i}`].influence[key] = 0;
+      gameState[`player${i}`].influence[key] = [];
+    });
   }
 }

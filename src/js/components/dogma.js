@@ -494,6 +494,25 @@ const dogmas = {
     }
     getManualDogma(listener, getAffectedCards, 2, listener2, true, true);
   },
+  перевод: (cardObj) => {
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resultArr = [];
+      if (gameState.activePlayer.influence.cards.length !== 0) {
+        resultArr.push(`influence${gameState.activePlayer.id}`);
+      }
+      return resultArr;
+    }
+    function listener() {
+      gameState.activePlayer.influence.cards.forEach((cardID) => {
+        playCard(cardID, gameState.activePlayer.id);
+      });
+      gameState.activePlayer.influence.cards = [];
+      header.changePlayerStats(gameState.activePlayer);
+      gameBoard.update();
+    }
+    getManualDogma(listener, getAffectedCards, 1, null, true, true);
+  },
 };
 
 export default dogmas;
