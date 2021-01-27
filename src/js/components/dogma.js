@@ -329,7 +329,7 @@ const dogmas = {
     const currentPlayer = gameState.currentPlayer;
     let isNotTower = true;
 
-    if (gameState.players[arrOfId[0]].tower >= 4) {
+    if (gameState.players[arrOfId[0]]?.tower >= 4) {
       const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
       messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     }
