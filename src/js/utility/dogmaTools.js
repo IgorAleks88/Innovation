@@ -311,21 +311,36 @@ async function canReworkAndInfluence(cardObj, quantity) {
           addTextToModal(text);
         };
       }
-
       const answer = await dogmaModal(cardObj.dogma[0].effect, player.name);
 
       if (answer.length !== 0) {
         recycle(player.id, answer);
+
+        if (dogmaName === 'деньги') {
+          const difference = new Set();
+          answer.forEach((cardID) => difference.add(getCardObject.byID(cardID).age));
+
+          for (let it = 0; it < difference.size; it += 1) {
+            takeCard(1, 2, player.id, false);
+            player.influence.cards.push(player.hand.pop());
+          }
+          messageToLog(player.name, `переработал ${answer.length} карт(ы) и ${difference.size} зачёл`);
+        }
+
         if (dogmaName === 'земледелие') {
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
           takeCard(1, ageCardNum, player.id, false);
-        } else {
-          takeCard(1, answer.length, player.id, false);
+          player.influence.cards.push(player.hand.pop());
+          messageToLog(player.name, 'взял карту из колоды и зачёл');
         }
-        player.influence.cards.push(player.hand.pop());
+
         if (dogmaName === 'гончарное дело') {
+          takeCard(1, answer.length, player.id, false);
+          player.influence.cards.push(player.hand.pop());
           takeCard(1, 1, player.id, true);
+          messageToLog(player.name, 'взял карту из колоды и зачёл');
         }
+
         updateGameState(gameState);
         gameState.players.forEach((pl) => header.changePlayerStats(pl));
 
@@ -338,6 +353,7 @@ async function canReworkAndInfluence(cardObj, quantity) {
 
   if (bonus) {
     corporateBonus(arrOfId);
+    messageToLog(currentPlayer.name, 'получил кооперативный бонус');
   }
 
   gameBoard.display();
