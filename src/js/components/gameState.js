@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['земледелие', 'свод законов', 'философия', 'математика', 'города'],
+    hand: ['земледелие', 'свод законов', 'философия', 'математика', 'бумага'],
     currentAge: 1,
     currentDeck: 'age1', // test
     activeDecks: {
@@ -34,7 +34,7 @@ const gameState = {
         shift: '',
       },
       blue: {
-        cards: [],
+        cards: ['перевод', 'алхимия'],
         shift: '',
       },
       purple: {
@@ -69,11 +69,11 @@ const gameState = {
         shift: '',
       },
       green: {
-        cards: [],
+        cards: ['бумага'],
         shift: '',
       },
       blue: {
-        cards: [],
+        cards: ['перевод', 'алхимия'],
         shift: '',
       },
       purple: {

@@ -566,6 +566,8 @@ const dogmas = {
     await canReworkAndInfluence(cardObj, Infinity);
   },
   бумага: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
       const resultArr = [];
@@ -580,6 +582,13 @@ const dogmas = {
     }
     function listener(e) {
       const targetElement = e.target.closest('.active-zone__stack');
+      let textToLog1;
+      if (targetElement.id === 'blue') {
+        textToLog1 = 'синего';
+      } else if (targetElement.id === 'green') {
+        textToLog1 = 'зеленого';
+      }
+      messageToLog(gameState.activePlayer.name, `сдвинул стопку ${textToLog1} цвета влево`);
       gameState.activePlayer.activeDecks[targetElement.id].shift = 'left';
       [...document.querySelectorAll('.active')].forEach((element) => {
         element.classList.remove('active');
@@ -593,6 +602,7 @@ const dogmas = {
       Object.keys(gameState.activePlayer.activeDecks).forEach((stackName) => {
         if (gameState.activePlayer.activeDecks[stackName].shift === 'left') counter += 1;
       });
+      messageToLog(gameState.activePlayer.name, `взял ${counter} карту(ы)`);
       takeCard(counter, 4, gameState.activePlayer.id, true);
       gameBoard.update();
     }
