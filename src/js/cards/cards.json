@@ -1163,7 +1163,7 @@
         "dogma": [
           {
             "type": "corporate",
-            "effect": "<b>Вы можете сдвинуть</b> синюю или зелёную стопку влуво.",
+            "effect": "<b>Вы можете сдвинуть</b> синюю или зелёную стопку влево.",
             "icon": ["fas", "fa-lightbulb"],
             "color": "purple",
             "resource": "bulb"

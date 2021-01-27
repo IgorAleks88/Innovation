@@ -565,6 +565,39 @@ const dogmas = {
     messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, Infinity);
   },
+  бумага: (cardObj) => {
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resultArr = [];
+      Object.keys(gameState.activePlayer.activeDecks).forEach((stackID) => {
+        if (gameState.activePlayer.activeDecks[stackID].cards.length > 1
+          && gameState.activePlayer.activeDecks[stackID].shift !== 'left'
+          && (stackID === 'blue' || stackID === 'green')) {
+          resultArr.push(stackID);
+        }
+      });
+      return resultArr;
+    }
+    function listener(e) {
+      const targetElement = e.target.closest('.active-zone__stack');
+      gameState.activePlayer.activeDecks[targetElement.id].shift = 'left';
+      [...document.querySelectorAll('.active')].forEach((element) => {
+        element.classList.remove('active');
+      });
+      gameBoard.update();
+      gameBoard.displayActive();
+    }
+    function callback() {
+      let counter = 0;
+      gameState.activePlayer.actionPoints += 1;
+      Object.keys(gameState.activePlayer.activeDecks).forEach((stackName) => {
+        if (gameState.activePlayer.activeDecks[stackName].shift === 'left') counter += 1;
+      });
+      takeCard(counter, 4, gameState.activePlayer.id, true);
+      gameBoard.update();
+    }
+    getManualDogma(listener, getAffectedCards, 1, null, true, true, callback);
+  },
 };
 
 export default dogmas;

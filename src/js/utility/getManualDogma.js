@@ -5,7 +5,8 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import { takeCard, showErrorModal } from './dogmaTools';
 
 const getManualDogma = function closureWrapper(listener,
-  getCardsID, count, secondListener = null, isCorporate = true, isSkippable = false) {
+  getCardsID, count, secondListener = null, isCorporate = true,
+  isSkippable = false, callbackFunc = null) {
   // store current action points, -1 becuase dogma activation cost 1 point
   gameState.storedActionPoints = gameState.activePlayer.actionPoints - 1;
 
@@ -101,6 +102,7 @@ const getManualDogma = function closureWrapper(listener,
         gameState.activePlayer.actionPoints = gameState.storedActionPoints;
         const skipActionBtn = document.querySelector('.info-table__skip-action-btn');
         if (skipActionBtn !== null) skipActionBtn.remove();
+        if (callbackFunc !== null) callbackFunc();
         if (corporateCard) {
           takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
           header.changePlayerStats(gameState.currentPlayer);
@@ -109,6 +111,8 @@ const getManualDogma = function closureWrapper(listener,
           gameBoard.display();
           gameBoard.init();
         }
+      } else if (gameState.activePlayer.actionPoints === 0) {
+        if (callbackFunc !== null) callbackFunc();
       }
     }
 
