@@ -126,11 +126,6 @@ const dogmas = {
       }
     });
   },
-  земледелие: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    await canReworkAndInfluence(cardObj, 1);
-  },
   инструменты: (cardObj) => { // TODO
     const text = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
     messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${text}">${cardObj.innovation}</u>`);
@@ -317,6 +312,11 @@ const dogmas = {
     }
     getManualDogma(listener, getAffectedCards, 2, secondListener, true, true);
   },
+  земледелие: async (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    await canReworkAndInfluence(cardObj, 1);
+  },
   гончарноедело: async (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
     messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
@@ -327,6 +327,7 @@ const dogmas = {
     messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     const arrOfId = getAffectedPlayers(cardObj);
     const currentPlayer = gameState.currentPlayer;
+
     for (let i = 0; i < arrOfId.length; i += 1) {
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
       if (player.tower >= 4) {
@@ -558,6 +559,11 @@ const dogmas = {
       gameBoard.update();
     }
     getManualDogma(listener, getAffectedCards, 2, listener2, true, false);
+  },
+  деньги: async (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    await canReworkAndInfluence(cardObj, Infinity);
   },
 };
 
