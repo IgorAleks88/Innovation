@@ -91,7 +91,7 @@ const dogmas = {
       do {
         const actualAge = getActualDeck(1);
         const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-        const currentPlayerName = gameState[`player${id}`].name;
+        // const currentPlayerName = gameState[`player${id}`].name;
         const currentCard = getCardObject.byID(cardID);
         repeat = isHaveResource(currentCard, 'tower');
         if (repeat) {
@@ -110,7 +110,7 @@ const dogmas = {
     arrOfId.forEach((id) => {
       const actualAge = getActualDeck(1);
       const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-      const currentPlayerName = gameState[`player${id}`].name;
+      // const currentPlayerName = gameState[`player${id}`].name;
       const currentCard = getCardObject.byID(cardID);
       if (gameState.players[id].activeDecks[currentCard.color].cards.length > 0) {
         gameState.players[id].activeDecks[currentCard.color].cards.push(cardID);
@@ -444,15 +444,22 @@ const dogmas = {
     }
   },
   математика: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
       return gameState.activePlayer.hand.length > 0 ? gameState.activePlayer.hand : [];
     }
     function listener(e) {
       const targetID = getCardID(e);
+      messageToLog(gameState.activePlayer.name, `переработал карту ${getCardObject.byID(targetID).age} века с руки`);
       recycle(gameState.activePlayer.id, [targetID]);
       removeCardElement(targetID);
       takeCard(1, getCardAge(e) + 1, gameState.activePlayer.id, false);
+      const textToLog1 = getCardElement(getCardObject.byID(gameState.activePlayer
+        .hand[gameState.activePlayer.hand.length - 1])).innerText;
+      messageToLog(gameState.activePlayer.name, `взял и сыграл карту: <u title="${textToLog1}">${getCardObject
+        .byID(gameState.activePlayer.hand[gameState.activePlayer.hand.length - 1]).innovation}</u>`);
       playCard(gameState.activePlayer.hand[gameState.activePlayer.hand.length - 1],
         gameState.activePlayer.id);
       [...document.querySelectorAll('.active')].forEach((element) => {
@@ -463,6 +470,8 @@ const dogmas = {
     getManualDogma(listener, getAffectedCards, 1, null, true, true);
   },
   философия: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
       const resultArr = [];
@@ -473,7 +482,14 @@ const dogmas = {
       return resultArr;
     }
     function listener(e) {
+      let textToLog1;
       const targetElement = e.target.closest('.active-zone__stack');
+      if (targetElement.id === 'red') textToLog1 = 'красную';
+      else if (targetElement.id === 'green') textToLog1 = 'зеленую';
+      else if (targetElement.id === 'blue') textToLog1 = 'синюю';
+      else if (targetElement.id === 'purple') textToLog1 = 'фиолетовую';
+      else if (targetElement.id === 'yellow') textToLog1 = 'желтую';
+      messageToLog(gameState.activePlayer.name, `сдвинул ${textToLog1} стопку влево`);
       gameState.activePlayer.activeDecks[targetElement.id].shift = 'left';
       [...document.querySelectorAll('.active')].forEach((element) => {
         element.classList.remove('active');
@@ -486,6 +502,8 @@ const dogmas = {
       return gameState.activePlayer.hand;
     }
     function listener2(e) {
+      const textToLog1 = document.querySelector(`[data-innovation="${getCardObject.byID(getCardID(e)).innovation}"]`).innerText;
+      messageToLog(gameState.activePlayer.name, `переместил в зону влияния карту: <u title="${textToLog1}">${getCardObject.byID(getCardID(e)).innovation}</u>`);
       gameState.activePlayer.influence.cards.push(getCardID(e));
       removeCardElement(getCardID(e));
       [...document.querySelectorAll('.active')].forEach((element) => {
@@ -495,7 +513,9 @@ const dogmas = {
     }
     getManualDogma(listener, getAffectedCards, 2, listener2, true, true);
   },
-  перевод: (cardObj) => {
+  перевод: (cardObj) => { // TODO
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
     gameState.affectedPlayers = getAffectedPlayers(cardObj);
     function getAffectedCards() {
       const resultArr = [];
@@ -505,6 +525,7 @@ const dogmas = {
       return resultArr;
     }
     function listener() {
+      messageToLog(gameState.activePlayer.name, 'ввел в игру все карты из своей зоны влияния');
       gameState.activePlayer.influence.cards.forEach((cardID) => {
         playCard(cardID, gameState.activePlayer.id);
       });
@@ -515,6 +536,8 @@ const dogmas = {
     getManualDogma(listener, getAffectedCards, 1, null, true, true);
   },
   алхимия: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
     let arrOfId = getAffectedPlayers(cardObj);
     arrOfId = arrOfId.filter((id) => {
       return gameState[`player${id}`].tower >= 3;
@@ -528,11 +551,18 @@ const dogmas = {
         let recycleAll = false;
         const hand = gameState[`player${id}`].hand;
         for (let i = cardsNum; i === 1; i -= 1) {
+          const textToLog1 = getCardObject.byID(hand[hand.length - i]).innovation;
+          messageToLog(gameState.activePlayer.name, `взял и показал всем карту: <u title="${textToLog1}">${hand[hand.length - i]}</u>`);
           if (getCardObject.byID(hand[hand.length - i]).color === 'red') recycleAll = true;
         }
         if (recycleAll) {
+          messageToLog(gameState.activePlayer.name, `Одна из взятых карт красного цвета. 
+          ${gameState.activePlayer.name} переработал все карты с руки`);
           recycle(id, gameState.activePlayer.hand);
           [...document.querySelector('.hand__cards').childNodes].forEach((card) => card.remove());
+        } else {
+          messageToLog(gameState.activePlayer.name, `Все взятые карты не красного цвета. 
+          ${gameState.activePlayer.name} забирает их на руку`);
         }
       });
     }
@@ -544,6 +574,7 @@ const dogmas = {
       return resultArr;
     }
     function listener(e) {
+      messageToLog(gameState.activePlayer.name, `сыграл карту: <u>${getCardID(e)}</u>`);
       playCard(getCardID(e), gameState.activePlayer.id);
       document.querySelector(`[data-innovation="${getCardID(e)}"]`).classList.remove('active');
       header.changePlayerStats(gameState.activePlayer);
@@ -551,6 +582,7 @@ const dogmas = {
       return gameState.activePlayer.hand.length > 0 ? gameState.activePlayer.hand : undefined;
     }
     function listener2(e) {
+      messageToLog(gameState.activePlayer.name, `зачел карту ${getCardObject.byID(getCardID(e)).age} века с руки`);
       gameState.activePlayer.influence.cards.push(getCardID(e));
       removeCardElement(getCardID(e));
       [...document.querySelectorAll('.active')].forEach((element) => {

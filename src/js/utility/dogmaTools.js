@@ -193,96 +193,6 @@ function corporateBonus(arrOfId) {
   }
 }
 
-const getManualDogma = function closureWrapper() {
-  // store current action points
-  gameState.storedActionPoints = gameState.activePlayer.actionPoints;
-  let soloCorporate = false;
-  if (gameState.affectedPlayers.length === 1
-    && gameState.affectedPlayers[0] === gameState.currentPlayer.id) {
-    soloCorporate = true;
-  }
-  let corporateCard = false;
-
-  function setManualDogma(listener, getCardsID, count) {
-    // change active players while find one with not null affected cards array
-    let arrOfCardsID = null;
-    let counter = 0;
-    do {
-      counter += 1;
-      if (gameState.affectedPlayers.length - counter < 0) {
-        counter = 0;
-        soloCorporate = true;
-      }
-      gameState.activePlayer = gameState.players[gameState.affectedPlayers.shift()];
-      arrOfCardsID = getCardsID();
-    } while (arrOfCardsID.length === 0 && gameState.affectedPlayers.length >= 1);
-    if (arrOfCardsID.length > 0) {
-      if (gameState.activePlayer !== gameState.currentPlayer) {
-        gameState.activePlayer.actionPoints = count + 1;
-        corporateCard = true;
-      } else if (soloCorporate) {
-        gameState.activePlayer.actionPoints = gameState.storedActionPoints + count;
-      } else {
-        gameState.activePlayer.actionPoints = gameState.storedActionPoints + count - 1;
-      }
-
-      alert(`Дейтсвие игрока ${gameState.activePlayer.name}`);
-      gameBoard.display();
-      gameBoard.setHeaderCurrent();
-      arrOfCardsID.forEach((cardID) => {
-        document.querySelector(`[data-innovation='${cardID}']`).onclick = (e) => {
-          listener(e);
-          if (gameState.activePlayer.actionPoints - 1 <= 0 && gameState.storedActionPoints !== 1
-          && gameState.activePlayer === gameState.currentPlayer) {
-            Array.from(document.querySelectorAll('.active')).forEach((elem) => {
-              elem.classList.remove('active');
-            });
-            if (gameState.activePlayer === gameState.currentPlayer
-              && gameState.activePlayer.actionPoints !== 0) {
-              gameBoard.init();
-              if (corporateCard) {
-                takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
-                header.changePlayerStats(gameState.currentPlayer);
-              }
-            }
-          } else if (gameState.activePlayer.actionPoints === 0) {
-            Array.from(document.querySelectorAll('.active')).forEach((elem) => {
-              elem.classList.remove('active');
-            });
-            if (gameState.activePlayer === gameState.currentPlayer
-              && gameState.activePlayer.actionPoints !== 0) {
-              gameBoard.init();
-              if (corporateCard) {
-                takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
-                header.changePlayerStats(gameState.currentPlayer);
-              }
-            }
-          }
-        };
-        document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
-      });
-      document.querySelector('.info-table').onclick = () => {
-        if (gameState.activePlayer.actionPoints === 0) {
-          const nextActionBtn = document.querySelector('.info-table__next-turn-btn');
-          if (nextActionBtn !== null) nextActionBtn.remove();
-          if (gameState.activePlayer.actionPoints === 0 && gameState.affectedPlayers.length !== 0) {
-            setManualDogma(listener, getCardsID, count);
-          } else if (gameState.affectedPlayers.length === 0) {
-            gameState.activePlayer = gameState.currentPlayer;
-            gameBoard.display();
-            gameBoard.init();
-          }
-        }
-      };
-    } else {
-      alert('Догму нельзя использовать!');
-      gameState.activePlayer.actionPoints += 1;
-    }
-  }
-
-  return setManualDogma;
-};
-
 async function canReworkAndInfluence(cardObj, quantity) {
   const arrOfId = getAffectedPlayers(cardObj);
   const currentPlayer = gameState.currentPlayer;
@@ -389,6 +299,5 @@ export {
   playCard,
   recycle,
   corporateBonus,
-  getManualDogma,
   messageToLog,
 };
