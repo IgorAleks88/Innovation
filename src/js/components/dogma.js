@@ -513,6 +513,52 @@ const dogmas = {
     }
     getManualDogma(listener, getAffectedCards, 1, null, true, true);
   },
+  алхимия: (cardObj) => {
+    let arrOfId = getAffectedPlayers(cardObj);
+    arrOfId = arrOfId.filter((id) => {
+      return gameState[`player${id}`].tower >= 3;
+    });
+    if (arrOfId.length < 1) {
+      showErrorModal('Первую часть никто не может выполнить');
+    } else {
+      arrOfId.forEach((id) => {
+        const cardsNum = Math.floor(gameState[`player${id}`].tower / 3);
+        takeCard(cardsNum, 4, id, true);
+        let recycleAll = false;
+        const hand = gameState[`player${id}`].hand;
+        for (let i = cardsNum; i === 1; i -= 1) {
+          if (getCardObject.byID(hand[hand.length - i]).color === 'red') recycleAll = true;
+        }
+        if (recycleAll) {
+          recycle(id, gameState.activePlayer.hand);
+          [...document.querySelector('.hand__cards').childNodes].forEach((card) => card.remove());
+        }
+      });
+    }
+    // manual part
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resultArr = [];
+      gameState.activePlayer.hand.forEach((card) => resultArr.push(card));
+      return resultArr;
+    }
+    function listener(e) {
+      playCard(getCardID(e), gameState.activePlayer.id);
+      document.querySelector(`[data-innovation="${getCardID(e)}"]`).classList.remove('active');
+      header.changePlayerStats(gameState.activePlayer);
+      gameBoard.update();
+      return gameState.activePlayer.hand.length > 0 ? gameState.activePlayer.hand : undefined;
+    }
+    function listener2(e) {
+      gameState.activePlayer.influence.cards.push(getCardID(e));
+      removeCardElement(getCardID(e));
+      [...document.querySelectorAll('.active')].forEach((element) => {
+        element.classList.remove('active');
+      });
+      gameBoard.update();
+    }
+    getManualDogma(listener, getAffectedCards, 2, listener2, true, false);
+  },
 };
 
 export default dogmas;
