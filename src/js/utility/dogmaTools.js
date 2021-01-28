@@ -291,6 +291,8 @@ const handleCards = (n) => (event) => {
 };
 
 async function canReworkAndInfluence(cardObj, quantity) {
+  const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+  messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
   const arrOfId = getAffectedPlayers(cardObj);
   const currentPlayer = gameState.currentPlayer;
   const dogmaName = cardObj.innovation;
@@ -311,13 +313,7 @@ async function canReworkAndInfluence(cardObj, quantity) {
       const cardsInHand = document.querySelector('.hand__cards').children;
 
       for (let card = 0; card < cardsInHand.length; card += 1) {
-        cardsInHand[card].onclick = (e) => {
-          const text = e.target.closest('.card').dataset.innovation;
-          const containerMessage = document.querySelector('.container__message');
-          if (containerMessage.childElementCount >= quantity) return;
-          e.target.closest('.card').classList.add('selected__card');
-          addTextToModal(text);
-        };
+        cardsInHand[card].onclick = handleCards(quantity);
       }
       const answer = await dogmaModal(cardObj.dogma[0].effect, player.name);
 
@@ -351,8 +347,6 @@ async function canReworkAndInfluence(cardObj, quantity) {
           takeCard(1, answer.length, player.id, false);
           player.influence.cards.push(player.hand.pop());
           messageToLog(player.name, 'взял карту из колоды и зачёл');
-          takeCard(1, 1, player.id, true);
-          messageToLog(player.name, 'взял карту из колоды');
         }
 
         updateGameState(gameState);

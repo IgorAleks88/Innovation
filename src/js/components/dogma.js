@@ -317,13 +317,9 @@ const dogmas = {
     getManualDogma(listener, getAffectedCards, 2, secondListener, true, true);
   },
   земледелие: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, 1);
   },
   гончарноедело: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, 3);
   },
   города: async (cardObj) => {
@@ -362,6 +358,8 @@ const dogmas = {
         const color = getCardObject.byID(answer.join('')).color;
         const card = player.activeDecks[color].cards.pop();
         gameState.currentPlayer.activeDecks[color].cards.push(card);
+        const textToLog = document.querySelector(`[data-innovation="${answer.join()}"]`).innerText;
+        messageToLog(player.name, `передал карту <u title="${textToLog}">${answer.join()}</u> игроку ${gameState.currentPlayer.name}`);
         takeCard(1, 1, player.id);
         messageToLog(player.name, 'взял карту из колоды');
         updateGameState(gameState);
@@ -452,8 +450,6 @@ const dogmas = {
     }
   },
   деньги: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, Infinity);
   },
   каналы: async (cardObj) => {
@@ -540,6 +536,87 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
+  каменнаякладка: async (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    let bonus = false;
+    let tower = false;
+
+    gameState.currentPlayer.hand.forEach((card) => {
+      const hasResource = getCardObject.byID(card).resourses.some((resource) => resource.name.includes('tower'));
+      if (hasResource) tower = true;
+    });
+
+    if (!tower) {
+      showErrorModal('У Вас нет ресурса "замок"');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+
+      let hasActivePlrResrs = false;
+      player.hand.forEach((card) => {
+        const hasResource = getCardObject.byID(card).resourses.some((resource) => resource.name.includes('tower'));
+        if (hasResource) {
+          hasActivePlrResrs = true;
+        }
+      });
+
+      if (!hasActivePlrResrs) {
+        continue;
+      }
+
+      await displayNewTurnModal(player.name);
+      passTurn(player);
+      gameBoard.setHeaderCurrent();
+      const cardsInActive = document.querySelector('.hand__cards').children;
+      for (let card = 0; card < cardsInActive.length; card += 1) {
+        if (cardsInActive[card]) {
+          cardsInActive[card].onclick = (e) => {
+            const text = e.target.closest('.card').dataset.innovation;
+            const hasResource = getCardObject.byID(text).resourses.some((resource) => resource.name.includes('tower'));
+            if (!hasResource) return;
+            e.target.closest('.card').classList.add('selected__card');
+            addTextToModal(text);
+          };
+        }
+      }
+      const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name);
+
+      if (answer.length !== 0) {
+        answer.forEach((cardID) => playCard(cardID, player.id));
+        let wordEndings = 'т';
+        if (answer.length < 2) wordEndings = 'ту';
+        if (answer.length > 1 && answer.length < 5) wordEndings = 'ты';
+        messageToLog(player.name, `сыграл с руки ${answer.length} кар${wordEndings}`);
+        updateGameState(gameState);
+        gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+        if (i !== arrOfId.length - 1) {
+          bonus = true;
+        }
+      }
+    }
+
+    if (bonus) {
+      corporateBonus(arrOfId);
+      messageToLog(gameState.currentPlayer.name, 'получил кооперативный бонус');
+    }
+
+    gameBoard.display();
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+    if (gameState.currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
+  },
+
 };
 
 export default dogmas;
