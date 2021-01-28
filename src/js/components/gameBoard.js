@@ -132,6 +132,13 @@ const gameBoard = {
     gameState.activePlayer.actionPoints -= 1;
 
     if (gameState.currentPlayer.actionPoints < 1) {
+      const activeElems = document.querySelectorAll('.active');
+      if (activeElems.length !== 0) {
+        activeElems.forEach((elem) => {
+          elem.onclick = null;
+          elem.classList.remove('active');
+        });
+      }
       this.displayNextTurnBtn();
     } else if (gameState.activePlayer.actionPoints === 0
       && gameState.currentPlayer !== gameState.activePlayer) {

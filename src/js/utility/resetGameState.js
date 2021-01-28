@@ -21,9 +21,9 @@ export default function resetGameState() {
     gameState[`player${i}`].currentDeck = 'age1';
     gameState[`player${i}`].specialCards = [];
     gameState[`player${i}`].leadershipCards = [];
-    Object.keys(gameState[`player${i}`].activeDecks).forEach((key) => {
-      gameState[`player${i}`].activeDecks[key].cards = [];
-      gameState[`player${i}`].activeDecks[key].shift = '';
-    });
+    // Object.keys(gameState[`player${i}`].activeDecks).forEach((key) => {
+    //   gameState[`player${i}`].activeDecks[key].cards = [];
+    //   gameState[`player${i}`].activeDecks[key].shift = '';
+    // });
   }
 }

@@ -5,7 +5,8 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import { takeCard, showErrorModal } from './dogmaTools';
 
 const getManualDogma = function closureWrapper(listener,
-  getCardsID, count, secondListener = null, isCorporate = true, isSkippable = false) {
+  getCardsID, count, secondListener = null, isCorporate = true,
+  isSkippable = false, callbackFunc = null) {
   // store current action points, -1 becuase dogma activation cost 1 point
   gameState.storedActionPoints = gameState.activePlayer.actionPoints - 1;
 
@@ -63,6 +64,9 @@ const getManualDogma = function closureWrapper(listener,
           } else {
             gameState.activePlayer.actionPoints = gameState.storedActionPoints;
           }
+          [...document.querySelectorAll('.active-zone__stack')].forEach((element) => {
+            element.onclick = null;
+          });
           gameBoard.display();
           gameBoard.init();
           gameBoard.update();
@@ -71,21 +75,25 @@ const getManualDogma = function closureWrapper(listener,
     }
 
     displayNewTurnModal(null, gameState.activePlayer.name);
-    gameBoard.display();
-    gameBoard.setHeaderCurrent();
-    arrOfCardsID.forEach((cardID) => {
-      document.querySelector(`[data-innovation='${cardID}']`).onclick = (e) => {
-        const targetOfSecondEvent = listener(e);
-        listenerFunc();
-        if (targetOfSecondEvent !== undefined) {
-          targetOfSecondEvent.onclick = () => {
-            secondListener(e);
-            listenerFunc();
-          };
-        }
-      };
-      document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
-    });
+    setTimeout(() => {
+      gameBoard.display();
+      gameBoard.setHeaderCurrent();
+      arrOfCardsID.forEach((cardID) => {
+        document.querySelector(`[data-innovation='${cardID}']`).onclick = (e) => {
+          const targetsOfSecondEvent = listener(e);
+          listenerFunc();
+          if (targetsOfSecondEvent !== undefined) {
+            targetsOfSecondEvent.forEach((elementID) => {
+              document.querySelector(`[data-innovation='${elementID}']`).onclick = (ev) => {
+                secondListener(ev);
+                listenerFunc();
+              };
+            });
+          }
+        };
+        document.querySelector(`[data-innovation='${cardID}']`).classList.add('active');
+      });
+    }, 300);
 
     function listenerFunc() {
       if (gameState.affectedPlayers.length === 0
@@ -94,6 +102,7 @@ const getManualDogma = function closureWrapper(listener,
         gameState.activePlayer.actionPoints = gameState.storedActionPoints;
         const skipActionBtn = document.querySelector('.info-table__skip-action-btn');
         if (skipActionBtn !== null) skipActionBtn.remove();
+        if (callbackFunc !== null) callbackFunc();
         if (corporateCard) {
           takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
           header.changePlayerStats(gameState.currentPlayer);
@@ -102,6 +111,8 @@ const getManualDogma = function closureWrapper(listener,
           gameBoard.display();
           gameBoard.init();
         }
+      } else if (gameState.activePlayer.actionPoints === 0) {
+        if (callbackFunc !== null) callbackFunc();
       }
     }
 
