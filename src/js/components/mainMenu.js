@@ -3,6 +3,7 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 import gameBoard from './gameBoard';
 import gameState from './gameState';
+// import setChat from '../utility/setChat'; // for server
 
 const users = {};
 const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
@@ -130,6 +131,7 @@ class Menu {
         if (isValid(users)) {
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
+          // setChat(users.names); // for server
           setTimeout(() => {
             intro.classList.toggle('intro--hide');
           }, 500);
@@ -290,3 +292,4 @@ class Menu {
 }
 
 export default Menu;
+export { transform };
