@@ -25,7 +25,6 @@ const displayHeaderHover = {
     this.button.innerText = 'Закрыть';
     this.button.addEventListener('click', () => {
       this.clearWrapper();
-      this.button.classList.add('header-hover__button__hidden');
       this.block.classList.add('header-hover__block__hidden');
     });
     this.wrapper.appendChild(this.button);
