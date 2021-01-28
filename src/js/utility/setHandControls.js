@@ -41,7 +41,7 @@ export default function setGameControls() {
   hand.addEventListener('DOMNodeRemoved', () => {
     setTimeout(() => {
       // only one line of card left - disable both buttons
-      if (hand.scrollHeight === cardsLineHeight) {
+      if (hand.scrollHeight <= cardsLineHeight) {
         disableBtn(btnBottom);
         disableBtn(btnTop);
       // if point of view is on last line

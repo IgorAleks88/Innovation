@@ -172,6 +172,8 @@ const displayHeader = {
     this[playerId].factory.textContent = player.factory;
     this[playerId].clock.textContent = player.clock;
     this[playerId].influence.textContent = player.influence.points;
+    this[playerId].leadership.textContent = player.specialCards.length
+      + player.leadershipCards.length;
   },
 
   initPlayerNames(players) {
@@ -179,6 +181,9 @@ const displayHeader = {
       const currentPlayer = `player${i}`;
       this[currentPlayer].name.textContent = players[i];
       this[currentPlayer].container.classList.remove('player-container__hidden');
+
+      const influenceBlocks = document.querySelectorAll('.fa-shield-alt');
+      influenceBlocks[i].parentElement.dataset.innovation = `influence${i}`;
     }
   },
 

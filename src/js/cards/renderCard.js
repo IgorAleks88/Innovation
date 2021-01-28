@@ -159,9 +159,11 @@ function getRenderCard() {
           break;
       }
 
+      gameState.specArchieveCount += 1;
       targetStack.dom.prepend(cardElement);
       targetStack.dom.scrollIntoView();
     },
+
     removeCardFromActive(cardElement) {
       const targetStack = {};
       activeStacks.forEach((stack) => {

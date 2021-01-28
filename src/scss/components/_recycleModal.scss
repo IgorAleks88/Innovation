@@ -1,5 +1,4 @@
 .modal__turn-step {
-  width: 350px;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   background-image: url('../../assets/img/intro/bg.png');
@@ -10,9 +9,10 @@
   height: 240px;
   padding-top: 20px;
   position: absolute;
-  top: 50%;
   right: 15px;
+  top: 50%;
   transform: translateY(-50%);
+  width: 350px;
   z-index: 20;
 }
 
@@ -45,9 +45,9 @@
 .wrapper__btn {
   display: flex;
   justify-content: space-around;
+  margin-top: 5px;
   position: absolute;
   top: 90%;
-  margin-top: 5px;
   transform: translateY(-90%);
   width: 100%;
 }
