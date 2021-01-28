@@ -626,12 +626,11 @@ const dogmas = {
       return;
     }
 
-    if (gameState.players[arrOfId[0]].hand.length > 0) {
-      const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-      messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    }
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
 
     for (let i = 0; i < arrOfId.length; i += 1) {
+      console.log(gameState);
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
 
       if (player.influence.cards.length === 0) {
@@ -646,29 +645,32 @@ const dogmas = {
 
       gameBoard.disableEvents();
       const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, false, 'ok');
-
       if (answer === 'ok') {
-        const influnceAge = player.influence.cards.map((card) => getCardObject.byID(card).age);
-        const higherInfluceNum = Math.max(...influnceAge);
-
-        const handCardsAge = player.hand.map((card) => getCardObject.byID(card).age);
-        const higherCardNum = Math.max(...handCardsAge);
+        const influnceAges = player.influence.cards.map((card) => getCardObject.byID(card).age);
+        const handCardsAges = player.hand.map((card) => getCardObject.byID(card).age);
+        const higherInfluceNum = Math.max(...influnceAges);
+        const higherCardNum = Math.max(...handCardsAges);
+        const cardsFromInflunce = [];
+        const cardsFromHand = [];
 
         player.influence.cards
           .filter((card) => getCardObject.byID(card).age === higherInfluceNum)
           .forEach((card) => {
             const idx = player.influence.cards.indexOf(card);
-            const toHand = player.influence.cards.splice(idx, 1).join();
-            player.hand.push(toHand);
+            const forHand = player.influence.cards.splice(idx, 1).join();
+            cardsFromInflunce.push(forHand);
           });
 
         player.hand
           .filter((card) => getCardObject.byID(card).age === higherCardNum)
           .forEach((card) => {
             const idx = player.hand.indexOf(card);
-            const toInflunce = player.hand.splice(idx, 1).join();
-            player.influence.cards.push(toInflunce);
+            const forInflunce = player.hand.splice(idx, 1).join();
+            cardsFromHand.push(forInflunce);
           });
+
+        cardsFromInflunce.forEach((card) => player.hand.push(card));
+        cardsFromHand.forEach((card) => player.influence.cards.push(card));
 
         messageToLog(player.name, 'обменял карты с руки на карты с зоны влияния');
         updateGameState(gameState);
