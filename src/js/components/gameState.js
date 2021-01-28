@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['земледелие', 'свод законов', 'философия', 'математика', 'бумага'],
+    hand: ['земледелие', 'свод законов', 'философия', 'математика', 'одежда'],
     currentAge: 1,
     currentDeck: 'age1', // test
     specialCards: [],
@@ -46,7 +46,7 @@ const gameState = {
         shift: '',
       },
       yellow: {
-        cards: ['каменная кладка'],
+        cards: [],
         shift: '',
       },
     },
