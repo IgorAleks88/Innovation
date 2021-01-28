@@ -32,7 +32,7 @@
     }
 
     .menu__link.person {
-      filter: drop-shadow(2px 2px 4px black);
+      filter: drop-shadow(2px 2px 4px rgb(0, 0, 0));
       font-size: 2rem;
       text-shadow: 0.25rem 0.2rem 0.1rem rgba(0, 0, 0, 1);
 
@@ -107,8 +107,8 @@
       @include size(20rem, 12rem);
       background: url('../../assets/img/about/logo.png');
       background-size: cover;
-      border: none;
-      filter: drop-shadow(2px 2px 4px black);
+      border: 0;
+      filter: drop-shadow(2px 2px 4px rgb(0, 0, 0));
       transition: transform 0.5s linear;
 
       &::before {
@@ -227,12 +227,12 @@
 }
 
 .iframe__wrraper {
-  height: 70%;
+  height: 200%;
   left: 50%;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
+  width: 200%;
   z-index: 1;
 }
 

@@ -12,7 +12,7 @@ const gameState = {
     age10: [],
   },
   leadershipDeck: [],
-  specialDeck: [],
+  specialDeck: ['Дипломатия', 'Строительство', 'Наука', 'Военное дело', 'Культура'],
   players: [],
   currentPlayer: null,
   activePlayer: null,
@@ -21,9 +21,13 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['письменность'],
+    hand: ['земледелие', 'свод законов', 'философия', 'математика', 'бумага'],
     currentAge: 1,
     currentDeck: 'age1', // test
+    specialCards: [],
+    specArchieveCount: 0,
+    specInfluenceCount: 0,
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
@@ -42,8 +46,8 @@ const gameState = {
         shift: 'top',
       },
       yellow: {
-        cards: [],
-        shift: 'top',
+        cards: ['каменная кладка'],
+        shift: '',
       },
     },
     influence: {
@@ -63,6 +67,8 @@ const gameState = {
     actionPoints: 0,
     hand: ['инструменты', 'земледелие'],
     currentAge: 1,
+    specialCards: [],
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
@@ -102,6 +108,8 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
+    specialCards: [],
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
@@ -141,6 +149,8 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
+    specialCards: [],
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
