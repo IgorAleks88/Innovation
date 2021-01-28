@@ -558,7 +558,9 @@ const dogmas = {
         if (recycleAll) {
           messageToLog(gameState.activePlayer.name, `Одна из взятых карт красного цвета. 
           ${gameState.activePlayer.name} переработал все карты с руки`);
-          recycle(id, gameState.activePlayer.hand);
+          const arrOfCardID = gameState.activePlayer.hand.slice();
+          recycle(id, arrOfCardID);
+          gameState.activePlayer.hand = [];
           [...document.querySelector('.hand__cards').childNodes].forEach((card) => card.remove());
         } else {
           messageToLog(gameState.activePlayer.name, `Все взятые карты не красного цвета. 

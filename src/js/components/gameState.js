@@ -34,7 +34,7 @@ const gameState = {
         shift: '',
       },
       blue: {
-        cards: ['перевод', 'алхимия'],
+        cards: [],
         shift: '',
       },
       purple: {
@@ -69,11 +69,11 @@ const gameState = {
         shift: '',
       },
       green: {
-        cards: ['бумага'],
+        cards: [],
         shift: '',
       },
       blue: {
-        cards: ['перевод', 'алхимия'],
+        cards: [],
         shift: '',
       },
       purple: {
