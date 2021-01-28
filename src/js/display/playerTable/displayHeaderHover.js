@@ -7,6 +7,7 @@ const displayHeaderHover = {
   overlay: null,
   wrapper: null,
   cardContainer: null,
+  button: null,
 
   init() {
     this.block = document.createElement('div');
@@ -16,13 +17,18 @@ const displayHeaderHover = {
     this.overlay.classList.add('header-hover__overlay');
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header-hover__wrapper');
-    this.wrapper.addEventListener('click', () => {
-      this.clearWrapper();
-      this.block.classList.add('header-hover__block__hidden');
-    });
     this.cardContainer = document.createElement('div');
     this.cardContainer.classList.add('header-hover__card-container');
     this.wrapper.appendChild(this.cardContainer);
+    this.button = document.createElement('button');
+    this.button.classList.add('header-hover__button');
+    this.button.innerText = 'Закрыть';
+    this.button.addEventListener('click', () => {
+      this.clearWrapper();
+      this.button.classList.add('header-hover__button__hidden');
+      this.block.classList.add('header-hover__block__hidden');
+    });
+    this.wrapper.appendChild(this.button);
     this.overlay.append(this.wrapper);
     this.block.append(this.overlay);
     document.body.prepend(this.block);
@@ -45,9 +51,9 @@ const displayHeaderHover = {
     this.cardContainer.style.width = `30rem`;
     this.cardContainer.style.height = `${Math.min(
       deck.length * 4 + 16,
-      55
+      44
     )}rem`;
-    this.wrapper.style.height = `${Math.min(deck.length * 4 + 22, 62)}rem`;
+    this.wrapper.style.height = `${Math.min(deck.length * 4 + 32, 62)}rem`;
     this.wrapper.style.width = `40rem`;
   },
   renderActiveDeck(obj) {
@@ -63,7 +69,7 @@ const displayHeaderHover = {
           this.cardContainer.appendChild(activeCardElement);
           this.cardContainer.style.width = `32rem`;
           this.cardContainer.style.height = `22rem`;
-          this.wrapper.style.height = `28rem`;
+          this.wrapper.style.height = `38rem`;
           this.wrapper.style.width = `42rem`;
           break;
         }
@@ -80,11 +86,11 @@ const displayHeaderHover = {
           this.cardContainer.style.width = `32rem`;
           this.cardContainer.style.height = `${Math.min(
             obj.cards.length * 4 + 18,
-            55
+            44
           )}rem`;
           this.wrapper.style.width = `42rem`;
           this.wrapper.style.height = `${Math.min(
-            obj.cards.length * 4 + 24,
+            obj.cards.length * 4 + 34,
             62
           )}rem`;
           break;
@@ -104,7 +110,7 @@ const displayHeaderHover = {
             obj.cards.length * 4 + 28,
             48
           )}rem`;
-          this.wrapper.style.height = `28rem`;
+          this.wrapper.style.height = `38rem`;
           this.wrapper.style.width = `${Math.min(
             obj.cards.length * 4 + 38,
             58
@@ -124,7 +130,7 @@ const displayHeaderHover = {
             obj.cards.length * 4 + 28,
             48
           )}rem`;
-          this.wrapper.style.height = `28rem`;
+          this.wrapper.style.height = `38rem`;
           this.wrapper.style.width = `${Math.min(
             obj.cards.length * 4 + 38,
             58

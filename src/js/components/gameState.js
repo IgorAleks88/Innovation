@@ -27,23 +27,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'left',
+        shift: 'top',
       },
       green: {
         cards: [],
-        shift: 'left',
+        shift: 'top',
       },
       blue: {
         cards: [],
-        shift: 'left',
+        shift: 'top',
       },
       purple: {
         cards: [],
-        shift: 'left',
+        shift: 'top',
       },
       yellow: {
         cards: [],
-        shift: 'left',
+        shift: 'top',
       },
     },
     influence: {

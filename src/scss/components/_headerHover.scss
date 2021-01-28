@@ -16,7 +16,7 @@
 }
 
 .header-hover__wrapper {
-  @include flex(column, center, center);
+  @include flex(column, space-evenly, center);
   @include area-border('../../assets/img/border-modal.png');
   background: linear-gradient(
     90deg,
@@ -35,4 +35,26 @@
   overflow-x: auto;
   overflow-y: auto;
   position: relative;
+}
+
+.header-hover__button {
+  @include size(26.5rem, 8rem);
+  @include flex;
+  background: #3b1105;
+  background: url('../../assets/img/info-table.png');
+  background-size: cover;
+  color: #ffc658;
+  filter: drop-shadow(2px 4px 6px rgb(0, 0, 0));
+  font-family: 'Caesar';
+  font-size: 3rem;
+  font-weight: 100;
+  transition: all 0.5s;
+
+  &:hover {
+    font-size: 3.3rem;
+  }
+
+  &__hidden {
+    visibility: hidden;
+  }
 }

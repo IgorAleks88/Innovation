@@ -126,26 +126,6 @@ const displayHeader = {
     this[player].name.textContent = `Player${id}`;
     headRow.appendChild(this[player].name);
 
-    /* this.headRowNames.forEach((e) => {
-      const i = Object.keys(e)[0];
-      const container = document.createElement('div');
-      container.classList.add('cards-container');
-      const iconContainer = document.createElement('div');
-      iconContainer.classList.add(`${e[i][0]}`, `${e[i][1]}`, 'cards-container__icon', `card__icon-color--${e[i][2]}`);
-      container.appendChild(iconContainer);
-      this[player][i] = document.createElement('div');
-      this[player][i].classList.add('cards-container__counter');
-      this[player][i].textContent = 0;
-      container.appendChild(this[player][i]);
-      container.addEventListener('mouseover', () => {
-        displayHeaderHover.block.classList.remove('header-hover__block__hidden');
-      });
-      container.addEventListener('mouseout', () => {
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      });
-      headRow.appendChild(container);
-    }); */
-
     this[player].handContainer = document.createElement('div');
     this[player].handContainer.classList.add('cards-container');
     this[player].handIcon = document.createElement('div');
@@ -162,13 +142,13 @@ const displayHeader = {
     this[player].handContainer.appendChild(this[player].hand);
     this[player].handContainer.addEventListener('click', (e) => {
       displayHeaderHover.block.classList.remove('header-hover__block__hidden');
+      displayHeaderHover.button.classList.remove(
+        'header-hover__button__hidden'
+      );
       displayHeaderHover.renderDeck(gameState[player].hand);
       const coordX = Math.max(e.clientX - 150, 0);
       displayHeaderHover.wrapper.style.left = `${coordX}px`;
     });
-    /* this[player].handContainer.addEventListener('mouseleave', () => {
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      }); */
     headRow.appendChild(this[player].handContainer);
 
     this[player].influenceContainer = document.createElement('div');
@@ -186,14 +166,14 @@ const displayHeader = {
     this[player].influence.textContent = 0;
     this[player].influenceContainer.appendChild(this[player].influence);
     this[player].influenceContainer.addEventListener('click', (e) => {
+      displayHeaderHover.button.classList.remove(
+        'header-hover__button__hidden'
+      );
       displayHeaderHover.block.classList.remove('header-hover__block__hidden');
       displayHeaderHover.renderDeck(gameState[player].influence.cards);
       const coordX = Math.max(e.clientX - 150, 0);
       displayHeaderHover.wrapper.style.left = `${coordX}px`;
     });
-    /* this[player].influenceContainer.addEventListener('mouseleave', () => {
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      }); */
     headRow.appendChild(this[player].influenceContainer);
 
     this[player].leadershipContainer = document.createElement('div');
@@ -221,75 +201,70 @@ const displayHeader = {
     this[player].red.classList.add('active-zone-row__red');
     this[player].red.textContent = 0;
     this[player].red.addEventListener('click', (e) => {
+      displayHeaderHover.button.classList.remove(
+        'header-hover__button__hidden'
+      );
       displayHeaderHover.block.classList.remove('header-hover__block__hidden');
       displayHeaderHover.renderActiveDeck(gameState[player].activeDecks.red);
       const coordX = Math.max(e.clientX - 150, 0);
       displayHeaderHover.wrapper.style.left = `${coordX}px`;
     });
-    /* this[player].red.addEventListener('mouseleave', () => {
-      displayHeaderHover.clearWrapper();
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      }); */
     activeZoneRow.appendChild(this[player].red);
 
     this[player].green = document.createElement('div');
     this[player].green.classList.add('active-zone-row__green');
     this[player].green.textContent = 0;
     this[player].green.addEventListener('click', (e) => {
+      displayHeaderHover.button.classList.remove(
+        'header-hover__button__hidden'
+      );
       displayHeaderHover.block.classList.remove('header-hover__block__hidden');
       displayHeaderHover.renderActiveDeck(gameState[player].activeDecks.green);
       const coordX = Math.max(e.clientX - 150, 0);
       displayHeaderHover.wrapper.style.left = `${coordX}px`;
     });
-    /* this[player].green.addEventListener('mouseleave', () => {
-      displayHeaderHover.clearWrapper();
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      }); */
     activeZoneRow.appendChild(this[player].green);
 
     this[player].blue = document.createElement('div');
     this[player].blue.classList.add('active-zone-row__blue');
     this[player].blue.textContent = 0;
     this[player].blue.addEventListener('click', (e) => {
+      displayHeaderHover.button.classList.remove(
+        'header-hover__button__hidden'
+      );
       displayHeaderHover.block.classList.remove('header-hover__block__hidden');
       displayHeaderHover.renderActiveDeck(gameState[player].activeDecks.blue);
       const coordX = Math.max(e.clientX - 150, 0);
       displayHeaderHover.wrapper.style.left = `${coordX}px`;
     });
-    /* this[player].blue.addEventListener('mouseleave', () => {
-      displayHeaderHover.clearWrapper();
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      }); */
     activeZoneRow.appendChild(this[player].blue);
 
     this[player].purple = document.createElement('div');
     this[player].purple.classList.add('active-zone-row__purple');
     this[player].purple.textContent = 0;
     this[player].purple.addEventListener('click', (e) => {
+      displayHeaderHover.button.classList.remove(
+        'header-hover__button__hidden'
+      );
       displayHeaderHover.block.classList.remove('header-hover__block__hidden');
       displayHeaderHover.renderActiveDeck(gameState[player].activeDecks.purple);
       const coordX = Math.max(e.clientX - 150, 0);
       displayHeaderHover.wrapper.style.left = `${coordX}px`;
     });
-    /* this[player].purple.addEventListener('mouseleave', () => {
-      displayHeaderHover.clearWrapper();
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      }); */
     activeZoneRow.appendChild(this[player].purple);
 
     this[player].yellow = document.createElement('div');
     this[player].yellow.classList.add('active-zone-row__yellow');
     this[player].yellow.textContent = 0;
     this[player].yellow.addEventListener('click', (e) => {
+      displayHeaderHover.button.classList.remove(
+        'header-hover__button__hidden'
+      );
       displayHeaderHover.block.classList.remove('header-hover__block__hidden');
       displayHeaderHover.renderActiveDeck(gameState[player].activeDecks.yellow);
       const coordX = Math.max(e.clientX - 150, 0);
       displayHeaderHover.wrapper.style.left = `${coordX}px`;
     });
-    /* this[player].yellow.addEventListener('mouseleave', () => {
-      displayHeaderHover.clearWrapper();
-        displayHeaderHover.block.classList.add('header-hover__block__hidden');
-      }); */
     activeZoneRow.appendChild(this[player].yellow);
 
     this[player].container.appendChild(activeZoneRow);
