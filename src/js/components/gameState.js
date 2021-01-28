@@ -25,6 +25,8 @@ const gameState = {
     currentAge: 1,
     currentDeck: 'age1', // test
     specialCards: [],
+    specArchieveCount: 0,
+    specInfluenceCount: 0,
     leadershipCards: [],
     activeDecks: {
       red: {
