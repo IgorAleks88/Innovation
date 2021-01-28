@@ -51,12 +51,19 @@
 }
 
 @mixin about-person($url) {
-  background: url($url) no-repeat;
-  border: none;
-  width: 13rem;
-  height: 20rem;
-  background-size: cover;
-  background-position: top;
-  display: flex;
   align-items: flex-end;
+  background: url($url) no-repeat;
+  background-position: top;
+  background-size: cover;
+  border: none;
+  display: flex;
+  height: 20rem;
+  width: 13rem;
+}
+
+@mixin position-absolute-center {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

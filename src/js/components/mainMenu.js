@@ -3,6 +3,7 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 import gameBoard from './gameBoard';
 import gameState from './gameState';
+import { flipRules } from './rules';
 
 const users = {};
 const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
@@ -108,7 +109,7 @@ class Menu {
     `;
 
     this.parent.append(this.menu);
-    this.renderPdfRules();
+    // this.renderPdfRules();
 
     this.menu.addEventListener('click', (e) => {
       if (e.target.tagName !== 'DIV' && e.target.tagName !== 'A' && e.target.tagName !== 'SPAN' && e.target !== this.menu.querySelector('button')) {
@@ -119,7 +120,8 @@ class Menu {
         this.menu.classList.remove('main');
         this.createChoosePlayersItems();
       } else if (e.target.className.includes('rules')) {
-        this.rulesWrraper.hidden = false;
+        // this.rulesWrraper.hidden = false;
+        flipRules();
       } else if (e.target.className.includes('close')) {
         this.rulesWrraper.hidden = true;
       } else if (e.target.dataset.players) {
@@ -189,7 +191,7 @@ class Menu {
         <iframe class="iframe" src="./assets/innovation_rules_rus_final.pdf" width="70%" height="70%"></iframe>
     `;
 
-    this.menu.append(this.rulesWrraper);
+    document.body.appendChild(this.rulesWrraper);
   }
 
   createChoosePlayersItems() {
