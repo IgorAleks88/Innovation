@@ -8,11 +8,12 @@ import header from '../display/playerTable/displayHeader';
 import dogmaModalMessages from './dogmaModal';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import updateGameState from '../utility/updateGameState';
+import specCard from '../specCards/specCard';
 import getManualDogma from '../utility/getManualDogma';
 import {
   canReworkAndInfluence,
   moveCardToHand,
-  showErrorModal,
+  // showErrorModal,
   addTextToModal,
   passTurn,
   getMaxCard,
@@ -95,6 +96,7 @@ const dogmas = {
         const currentCard = getCardObject.byID(cardID);
         repeat = isHaveResource(currentCard, 'tower');
         if (repeat) {
+          gameState.specInfluenceCount += 1;
           gameState.players[id].influence.cards.push(cardID);
         } else {
           moveCardToHand(cardID, id);
@@ -224,6 +226,7 @@ const dogmas = {
         }
       }
       const lastYellowCardID = gameState[`player${id}`].activeDecks.yellow.cards.shift();
+      gameState.specInfluenceCount += 1;
       gameState[`player${id}`].influence.cards.push(lastYellowCardID);
       const lastYellowCardElement = getCardElement(getCardObject.byID(lastYellowCardID));
       renderCard.removeCardFromActive(lastYellowCardElement);
@@ -243,6 +246,7 @@ const dogmas = {
       }
       currentAge = getActualDeck(currentAge);
       const currentCard = gameState.ageDecks[`age${currentAge}`].pop();
+      gameState.specInfluenceCount += 1;
       currentPlayer.influence.cards.push(currentCard);
     });
     corporateBonus(arrOfId);
@@ -261,6 +265,7 @@ const dogmas = {
       if (currentDeck.length > 1) {
         for (let i = 0; i < currentDeck.length - 1; i += 1) {
           const cardID = currentDeck[i];
+          gameState.specInfluenceCount += 1;
           currentPlayer.influence.cards.push(cardID);
           renderCard.removeCardFromActive(getCardElement(getCardObject.byID(cardID)));
         }

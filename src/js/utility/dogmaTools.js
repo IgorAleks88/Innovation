@@ -232,6 +232,7 @@ async function canReworkAndInfluence(cardObj, quantity) {
 
           for (let it = 0; it < difference.size; it += 1) {
             takeCard(1, 2, player.id, false);
+            gameState.specInfluenceCount += 1;
             player.influence.cards.push(player.hand.pop());
           }
           messageToLog(player.name, `переработал ${answer.length} карт(ы) и ${difference.size} зачёл`);
@@ -240,12 +241,14 @@ async function canReworkAndInfluence(cardObj, quantity) {
         if (dogmaName === 'земледелие') {
           const ageCardNum = getCardObject.byID(answer[0]).age + 1;
           takeCard(1, ageCardNum, player.id, false);
+          gameState.specInfluenceCount += 1;
           player.influence.cards.push(player.hand.pop());
           messageToLog(player.name, 'взял карту из колоды и зачёл');
         }
 
         if (dogmaName === 'гончарное дело') {
           takeCard(1, answer.length, player.id, false);
+          gameState.specInfluenceCount += 1;
           player.influence.cards.push(player.hand.pop());
           takeCard(1, 1, player.id, true);
           messageToLog(player.name, 'взял карту из колоды и зачёл');
