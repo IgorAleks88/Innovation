@@ -1,4 +1,4 @@
-function dogmaModalMessages(text, playerName, isAggressive) {
+function dogmaModalMessages(text, playerName, isAggressive, qa) {
   return new Promise((resolve) => {
     const modal = document.createElement('div');
     modal.classList.add('modal__turn-step');
@@ -15,7 +15,8 @@ function dogmaModalMessages(text, playerName, isAggressive) {
 
     btnWrapper.addEventListener('click', (e) => {
       if (e.target === btnWrapper) return;
-      if (e.target.textContent === 'ok' && messages.childElementCount < 1) return;
+      if (e.target.textContent === 'ok' && qa === 'ok') resolve('ok');
+      if (e.target.textContent === 'ok' && messages.childElementCount < 1 && !qa) return;
       if (document.querySelector('.text__message') && e.target.textContent === 'ok') {
         const cardID = [...document.querySelectorAll('.text__message')].map((element) => element.textContent.trim());
         resolve(cardID);

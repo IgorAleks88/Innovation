@@ -192,6 +192,14 @@ function corporateBonus(arrOfId) {
   }
 }
 
+const handleCards = (n) => (event) => {
+  const text = event.target.closest('.card').dataset.innovation;
+  const containerMessage = document.querySelector('.container__message');
+  if (containerMessage.childElementCount >= n) return;
+  event.target.closest('.card').classList.add('selected__card');
+  addTextToModal(text);
+};
+
 async function canReworkAndInfluence(cardObj, quantity) {
   const arrOfId = getAffectedPlayers(cardObj);
   const currentPlayer = gameState.currentPlayer;
@@ -224,7 +232,12 @@ async function canReworkAndInfluence(cardObj, quantity) {
       const answer = await dogmaModal(cardObj.dogma[0].effect, player.name);
 
       if (answer.length !== 0) {
+        let wordEndings = 'т';
+        if (answer.length < 2) wordEndings = 'ту';
+        if (answer.length > 1 && answer.length < 5) wordEndings = 'ты';
+
         recycle(player.id, answer);
+        messageToLog(player.name, `переработал ${answer.length} кар${wordEndings}`);
 
         if (dogmaName === 'деньги') {
           const difference = new Set();
@@ -235,7 +248,7 @@ async function canReworkAndInfluence(cardObj, quantity) {
             gameState.specInfluenceCount += 1;
             player.influence.cards.push(player.hand.pop());
           }
-          messageToLog(player.name, `переработал ${answer.length} карт(ы) и ${difference.size} зачёл`);
+          messageToLog(player.name, `переработал ${answer.length} кар${wordEndings} и ${difference.size} зачёл`);
         }
 
         if (dogmaName === 'земледелие') {
@@ -250,8 +263,9 @@ async function canReworkAndInfluence(cardObj, quantity) {
           takeCard(1, answer.length, player.id, false);
           gameState.specInfluenceCount += 1;
           player.influence.cards.push(player.hand.pop());
-          takeCard(1, 1, player.id, true);
           messageToLog(player.name, 'взял карту из колоды и зачёл');
+          takeCard(1, 1, player.id, true);
+          messageToLog(player.name, 'взял карту из колоды');
         }
 
         updateGameState(gameState);
@@ -302,4 +316,5 @@ export {
   recycle,
   corporateBonus,
   messageToLog,
+  handleCards,
 };
