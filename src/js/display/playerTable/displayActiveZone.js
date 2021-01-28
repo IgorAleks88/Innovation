@@ -25,6 +25,7 @@ const displayActiveZone = {
       stack.classList.add('active-zone__stack');
       stack.classList.add('active-zone__stack--empty');
       stack.id = stacksNames[i];
+      stack.dataset.innovation = stacksNames[i];
       this.cardsBlockWrapper.append(stack);
     }
 
