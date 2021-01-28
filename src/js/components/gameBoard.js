@@ -139,7 +139,7 @@ const gameBoard = {
     }
 
     updateGameState(gameState);
-    specCard.getAvaiable();
+    specCard.getAvailable();
     gameState.players.forEach((player) => header.changePlayerStats(player));
 
     document.querySelector('.info-table__player-name').innerText = gameState.activePlayer.name;

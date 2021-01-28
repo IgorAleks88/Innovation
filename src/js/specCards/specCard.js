@@ -3,7 +3,7 @@ import getCardObject from '../cards/getCardObject';
 import { messageToLog } from '../utility/dogmaTools';
 
 const specCard = {
-  getAvaiable() {
+  getAvailable() {
     if (gameState.specArchieveCount >= 12) {
       this.getCard('Дипломатия');
     }
