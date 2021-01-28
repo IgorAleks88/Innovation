@@ -27,23 +27,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: '',
+        shift: 'left',
       },
       green: {
         cards: [],
-        shift: '',
+        shift: 'left',
       },
       blue: {
         cards: [],
-        shift: '',
+        shift: 'left',
       },
       purple: {
         cards: [],
-        shift: '',
+        shift: 'left',
       },
       yellow: {
         cards: [],
-        shift: '',
+        shift: 'left',
       },
     },
     influence: {
@@ -66,23 +66,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       green: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       blue: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       purple: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       yellow: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
     },
     influence: {
@@ -105,23 +105,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       green: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: '',
       },
     },
     influence: {
@@ -144,23 +144,41 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       green: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       yellow: {
-        cards: [],
-        shift: null,
+        cards: [
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+          'каменная кладка',
+        ],
+        shift: 'right',
       },
     },
     influence: {

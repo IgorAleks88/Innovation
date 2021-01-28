@@ -1,12 +1,7 @@
 .header-hover__block {
   @include flex(column, center, center);
-  // height: auto;
-  width: 35rem;
-
-  // box-shadow: 0 0 8px 8px rgba(86, 54, 5, 0.7) inset,
-  //  0 0 8px 8px rgba(86, 54, 5, 0.3);
-  top: 17rem;
   position: absolute;
+  top: 17rem;
   z-index: 15;
 
   &__hidden {
@@ -21,20 +16,23 @@
 }
 
 .header-hover__wrapper {
-  // @include flex(column, flex-end, center);
-  // flex-wrap: nowrap;
-  border-radius: 7rem;
+  @include flex(column, center, center);
+  @include area-border('../../assets/img/border-modal.png');
   background: linear-gradient(
     90deg,
     rgba(33, 14, 6, 1) 0%,
     rgba(77, 35, 12, 1) 50%,
     rgba(33, 14, 6, 1) 100%
   );
-  overflow: hidden;
-  //width: auto;
-  padding: 1rem;
-  @include area-border('../../assets/img/border-modal.png');
   border-image-width: 6rem;
+  border-radius: 7rem;
+  flex-wrap: nowrap;
   position: relative;
   z-index: 17;
+}
+
+.header-hover__card-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  position: relative;
 }
