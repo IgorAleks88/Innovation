@@ -30,7 +30,7 @@ const specCard = {
     if (index !== -1) {
       gameState.activePlayer.specialCards.push(gameState.specialDeck.splice(index, 1).join());
       document.querySelector(`[data-name="${cardName}"]`).classList.add('inactive');
-      messageToLog(gameState.currentPlayer.name, `получил специальную карту ${cardName}`);
+      messageToLog(gameState.activePlayer.name, `получил специальную карту ${cardName}`);
     }
   },
 };

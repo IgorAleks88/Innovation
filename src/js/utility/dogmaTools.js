@@ -228,12 +228,8 @@ async function canReworkAndInfluence(cardObj, quantity) {
       const answer = await dogmaModal(cardObj.dogma[0].effect, player.name);
 
       if (answer.length !== 0) {
-        let wordEndings = 'т';
-        if (answer.length < 2) wordEndings = 'ту';
-        if (answer.length > 1 && answer.length < 5) wordEndings = 'ты';
-
         recycle(player.id, answer);
-        messageToLog(player.name, `переработал ${answer.length} кар${wordEndings}`);
+        messageToLog(player.name, `переработал ${answer.length} ${cardWord(answer)}`);
 
         if (dogmaName === 'деньги') {
           const difference = new Set();
@@ -244,7 +240,7 @@ async function canReworkAndInfluence(cardObj, quantity) {
             gameState.specInfluenceCount += 1;
             player.influence.cards.push(player.hand.pop());
           }
-          messageToLog(player.name, `переработал ${answer.length} кар${wordEndings} и ${difference.size} зачёл`);
+          messageToLog(player.name, `переработал ${answer.length} ${cardWord(answer)} и ${difference.size} зачёл`);
         }
 
         if (dogmaName === 'земледелие') {
@@ -287,6 +283,14 @@ async function canReworkAndInfluence(cardObj, quantity) {
   }
 }
 
+function cardWord(answer) {
+  let wordEndings = 'карт';
+  if (answer.length < 2) wordEndings += 'у';
+  if (answer.length > 1 && answer.length < 5) wordEndings += 'ы';
+
+  return wordEndings;
+}
+
 function messageToLog(playerName, message) {
   const log = document.querySelector('.log-block');
   log.innerHTML += `<b>${playerName}</b> ${message} ${'_'.repeat(30)}`;
@@ -311,4 +315,5 @@ export {
   corporateBonus,
   messageToLog,
   handleCards,
+  cardWord,
 };
