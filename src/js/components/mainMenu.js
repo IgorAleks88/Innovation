@@ -1,5 +1,6 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
 import displayNewTurnModal from '../display/displayNewTurnModal';
+import displayHeaderHover from '../display/playerTable/displayHeaderHover';
 import header from '../display/playerTable/displayHeader';
 import gameBoard from './gameBoard';
 import gameState from './gameState';
@@ -128,6 +129,7 @@ class Menu {
         e.preventDefault();
         this.addNamesToUsers();
         if (isValid(users)) {
+          displayHeaderHover.init();
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
           setTimeout(() => {
