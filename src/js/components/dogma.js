@@ -319,140 +319,48 @@ const dogmas = {
     }
     getManualDogma(listener, getAffectedCards, 2, secondListener, true, true);
   },
-  земледелие: async (cardObj) => {
+  бумага: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    await canReworkAndInfluence(cardObj, 1);
-  },
-  гончарноедело: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    await canReworkAndInfluence(cardObj, 3);
-  },
-  города: async (cardObj) => {
-    const arrOfId = getAffectedPlayers(cardObj);
-    const currentPlayer = gameState.currentPlayer;
-    let isNotTower = true;
-
-    if (gameState.players[arrOfId[0]]?.tower >= 4) {
-      const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-      messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    }
-
-    for (let i = 0; i < arrOfId.length; i += 1) {
-      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
-      if (player.tower >= 4) {
-        await displayNewTurnModal(player.name);
-        passTurn(player);
-        gameBoard.setHeaderCurrent();
-        const cardsInActive = document.querySelectorAll('.active-zone__stack');
-        for (let card = 0; card < cardsInActive.length; card += 1) {
-          if (cardsInActive[card].lastElementChild) {
-            cardsInActive[card].lastElementChild.onclick = (e) => {
-              const text = e.target.closest('.card').dataset.innovation;
-              const hasResource = getCardObject.byID(text).resourses.some((resource) => resource.name.includes('tower'));
-              if (!hasResource) return;
-              const containerMessage = document.querySelector('.container__message');
-              if (containerMessage.childElementCount >= 1) return;
-              e.target.closest('.card').classList.add('selected__card');
-              addTextToModal(text);
-            };
-          }
+    messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resultArr = [];
+      Object.keys(gameState.activePlayer.activeDecks).forEach((stackID) => {
+        if (gameState.activePlayer.activeDecks[stackID].cards.length > 1
+          && gameState.activePlayer.activeDecks[stackID].shift !== 'left'
+          && (stackID === 'blue' || stackID === 'green')) {
+          resultArr.push(stackID);
         }
-
-        const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, 'agr');
-
-        const color = getCardObject.byID(answer.join('')).color;
-        const card = player.activeDecks[color].cards.pop();
-        gameState.currentPlayer.activeDecks[color].cards.push(card);
-        takeCard(1, 1, player.id);
-        messageToLog(player.name, 'взял карту из колоды');
-        updateGameState(gameState);
-        gameState.players.forEach((pl) => header.changePlayerStats(pl));
-
-        isNotTower = false;
+      });
+      return resultArr;
+    }
+    function listener(e) {
+      const targetElement = e.target.closest('.active-zone__stack');
+      let textToLog1;
+      if (targetElement.id === 'blue') {
+        textToLog1 = 'синего';
+      } else if (targetElement.id === 'green') {
+        textToLog1 = 'зеленого';
       }
+      messageToLog(gameState.activePlayer.name, `сдвинул стопку ${textToLog1} цвета влево`);
+      gameState.activePlayer.activeDecks[targetElement.id].shift = 'left';
+      [...document.querySelectorAll('.active')].forEach((element) => {
+        element.classList.remove('active');
+      });
+      gameBoard.update();
+      gameBoard.displayActive();
     }
-
-    if (isNotTower) {
-      showErrorModal('У соперников не достаточно карт');
-      gameState.currentPlayer.actionPoints += 1;
-      return;
+    function callback() {
+      let counter = 0;
+      gameState.activePlayer.actionPoints += 1;
+      Object.keys(gameState.activePlayer.activeDecks).forEach((stackName) => {
+        if (gameState.activePlayer.activeDecks[stackName].shift === 'left') counter += 1;
+      });
+      messageToLog(gameState.activePlayer.name, `взял ${counter} карту(ы)`);
+      takeCard(counter, 4, gameState.activePlayer.id, true);
+      gameBoard.update();
     }
-
-    await displayNewTurnModal(currentPlayer.name);
-    passTurn(currentPlayer);
-    gameState.players.forEach((pl) => header.changePlayerStats(pl));
-    gameBoard.setHeaderCurrent();
-
-    if (currentPlayer.actionPoints > 0) {
-      gameBoard.init();
-    } else {
-      gameBoard.disableEvents();
-    }
-  },
-  лукистрелы: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    const arrOfId = getAffectedPlayers(cardObj);
-    for (let i = 0; i < arrOfId.length; i += 1) {
-      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
-      await displayNewTurnModal(player.name);
-      passTurn(player);
-      gameBoard.setHeaderCurrent();
-      const cardsInHand = document.querySelector('.hand__cards').children;
-      const deck = document.querySelector('.age-deck--active');
-
-      deck.onclick = (e) => {
-        let ageDeck = e.target.id;
-        if (ageDeck === 'cloneCurrentDeck') {
-          ageDeck = gameState.activePlayer.currentDeck;
-        }
-
-        const cardID = gameState.ageDecks[ageDeck].pop();
-        gameState.activePlayer.hand.push(cardID);
-
-        const card = getCardObject.byID(cardID);
-        const movingCardElement = getCardElement(card);
-        renderCard.toHand(movingCardElement);
-        messageToLog(player.name, 'взял карту из колоды');
-        header.changePlayerStats(player);
-
-        const cardIDs = [...cardsInHand]
-          .map((item) => getCardObject.byID(item.dataset.innovation).age);
-
-        const higerAge = Math.max(...cardIDs);
-        const backgroundStyle = `url("./assets/img/cards-bg/age-0${higerAge}.jpg")`;
-
-        const higherCards = [...cardsInHand]
-          .filter((item) => item.style.background === backgroundStyle);
-
-        for (let higherCard = 0; higherCard < higherCards.length; higherCard += 1) {
-          higherCards[higherCard].onclick = handleCards(1);
-        }
-        deck.onclick = null;
-      };
-
-      const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, 'agr');
-
-      const cardIdx = player.hand.indexOf(answer.join(''));
-      gameState.currentPlayer.hand.push(player.hand[cardIdx]);
-      player.hand.splice(cardIdx, 1);
-      messageToLog(player.name, `отдал карту игроку ${gameState.currentPlayer.name}`);
-      updateGameState(gameState);
-      gameState.players.forEach((pl) => header.changePlayerStats(pl));
-    }
-
-    await displayNewTurnModal(gameState.currentPlayer.name);
-    passTurn(gameState.currentPlayer);
-    gameState.players.forEach((pl) => header.changePlayerStats(pl));
-    gameBoard.setHeaderCurrent();
-
-    if (gameState.currentPlayer.actionPoints > 0) {
-      gameBoard.init();
-    } else {
-      gameBoard.disableEvents();
-    }
+    getManualDogma(listener, getAffectedCards, 1, null, true, true, callback);
   },
   математика: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
@@ -605,9 +513,140 @@ const dogmas = {
     }
     getManualDogma(listener, getAffectedCards, 2, listener2, true, false);
   },
-  деньги: async (cardObj) => {
+  земледелие: async (cardObj) => {
+    await canReworkAndInfluence(cardObj, 1);
+  },
+  гончарноедело: async (cardObj) => {
+    await canReworkAndInfluence(cardObj, 3);
+  },
+  города: async (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    const currentPlayer = gameState.currentPlayer;
+    let isNotTower = true;
+
+    if (gameState.players[arrOfId[0]]?.tower >= 4) {
+      const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+      messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    }
+
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+      if (player.tower >= 4) {
+        await displayNewTurnModal(player.name);
+        passTurn(player);
+        gameBoard.setHeaderCurrent();
+        const cardsInActive = document.querySelectorAll('.active-zone__stack');
+        for (let card = 0; card < cardsInActive.length; card += 1) {
+          if (cardsInActive[card].lastElementChild) {
+            cardsInActive[card].lastElementChild.onclick = (e) => {
+              const text = e.target.closest('.card').dataset.innovation;
+              const hasResource = getCardObject.byID(text).resourses.some((resource) => resource.name.includes('tower'));
+              if (!hasResource) return;
+              const containerMessage = document.querySelector('.container__message');
+              if (containerMessage.childElementCount >= 1) return;
+              e.target.closest('.card').classList.add('selected__card');
+              addTextToModal(text);
+            };
+          }
+        }
+
+        const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, 'agr');
+
+        const color = getCardObject.byID(answer.join('')).color;
+        const card = player.activeDecks[color].cards.pop();
+        gameState.currentPlayer.activeDecks[color].cards.push(card);
+        const textToLog = document.querySelector(`[data-innovation="${answer.join()}"]`).innerText;
+        messageToLog(player.name, `передал карту <u title="${textToLog}">${answer.join()}</u> игроку ${gameState.currentPlayer.name}`);
+        takeCard(1, 1, player.id);
+        messageToLog(player.name, 'взял карту из колоды');
+        updateGameState(gameState);
+        gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+        isNotTower = false;
+      }
+    }
+
+    if (isNotTower) {
+      showErrorModal('У соперников не достаточно карт');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
+    await displayNewTurnModal(currentPlayer.name);
+    passTurn(currentPlayer);
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    gameBoard.setHeaderCurrent();
+
+    if (currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
+  },
+  лукистрелы: async (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
     messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    const arrOfId = getAffectedPlayers(cardObj);
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+      await displayNewTurnModal(player.name);
+      passTurn(player);
+      gameBoard.setHeaderCurrent();
+      const cardsInHand = document.querySelector('.hand__cards').children;
+      const deck = document.querySelector('.age-deck--active');
+
+      deck.onclick = (e) => {
+        let ageDeck = e.target.id;
+        if (ageDeck === 'cloneCurrentDeck') {
+          ageDeck = gameState.activePlayer.currentDeck;
+        }
+
+        const cardID = gameState.ageDecks[ageDeck].pop();
+        gameState.activePlayer.hand.push(cardID);
+
+        const card = getCardObject.byID(cardID);
+        const movingCardElement = getCardElement(card);
+        renderCard.toHand(movingCardElement);
+        messageToLog(player.name, 'взял карту из колоды');
+        header.changePlayerStats(player);
+
+        const cardIDs = [...cardsInHand]
+          .map((item) => getCardObject.byID(item.dataset.innovation).age);
+
+        const higerAge = Math.max(...cardIDs);
+        const backgroundStyle = `url("./assets/img/cards-bg/age-0${higerAge}.jpg")`;
+
+        const higherCards = [...cardsInHand]
+          .filter((item) => item.style.background === backgroundStyle);
+
+        for (let higherCard = 0; higherCard < higherCards.length; higherCard += 1) {
+          higherCards[higherCard].onclick = handleCards(1);
+        }
+        deck.onclick = null;
+      };
+
+      const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, 'agr');
+
+      const cardIdx = player.hand.indexOf(answer.join(''));
+      gameState.currentPlayer.hand.push(player.hand[cardIdx]);
+      player.hand.splice(cardIdx, 1);
+      messageToLog(player.name, `отдал карту игроку ${gameState.currentPlayer.name}`);
+      updateGameState(gameState);
+      gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    }
+
+    await displayNewTurnModal(gameState.currentPlayer.name);
+    passTurn(gameState.currentPlayer);
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    gameBoard.setHeaderCurrent();
+
+    if (gameState.currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
+  },
+  деньги: async (cardObj) => {
     await canReworkAndInfluence(cardObj, Infinity);
   },
   каналы: async (cardObj) => {
@@ -630,7 +669,6 @@ const dogmas = {
     messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
 
     for (let i = 0; i < arrOfId.length; i += 1) {
-      console.log(gameState);
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
 
       if (player.influence.cards.length === 0) {
@@ -696,48 +734,89 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
-  бумага: (cardObj) => {
+  каменнаякладка: async (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    let bonus = false;
+    let tower = false;
+
+    gameState.currentPlayer.hand.forEach((card) => {
+      const hasResource = getCardObject.byID(card).resourses.some((resource) => resource.name.includes('tower'));
+      if (hasResource) tower = true;
+    });
+
+    if (!tower) {
+      showErrorModal('У Вас нет ресурса "замок"');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    gameState.affectedPlayers = getAffectedPlayers(cardObj);
-    function getAffectedCards() {
-      const resultArr = [];
-      Object.keys(gameState.activePlayer.activeDecks).forEach((stackID) => {
-        if (gameState.activePlayer.activeDecks[stackID].cards.length > 1
-          && gameState.activePlayer.activeDecks[stackID].shift !== 'left'
-          && (stackID === 'blue' || stackID === 'green')) {
-          resultArr.push(stackID);
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+
+      let hasActivePlrResrs = false;
+      player.hand.forEach((card) => {
+        const hasResource = getCardObject.byID(card).resourses.some((resource) => resource.name.includes('tower'));
+        if (hasResource) {
+          hasActivePlrResrs = true;
         }
       });
-      return resultArr;
-    }
-    function listener(e) {
-      const targetElement = e.target.closest('.active-zone__stack');
-      let textToLog1;
-      if (targetElement.id === 'blue') {
-        textToLog1 = 'синего';
-      } else if (targetElement.id === 'green') {
-        textToLog1 = 'зеленого';
+
+      if (!hasActivePlrResrs) {
+        continue;
       }
-      messageToLog(gameState.activePlayer.name, `сдвинул стопку ${textToLog1} цвета влево`);
-      gameState.activePlayer.activeDecks[targetElement.id].shift = 'left';
-      [...document.querySelectorAll('.active')].forEach((element) => {
-        element.classList.remove('active');
-      });
-      gameBoard.update();
-      gameBoard.displayActive();
+
+      await displayNewTurnModal(player.name);
+      passTurn(player);
+      gameBoard.setHeaderCurrent();
+      const cardsInActive = document.querySelector('.hand__cards').children;
+      for (let card = 0; card < cardsInActive.length; card += 1) {
+        if (cardsInActive[card]) {
+          cardsInActive[card].onclick = (e) => {
+            const text = e.target.closest('.card').dataset.innovation;
+            const hasResource = getCardObject.byID(text).resourses.some((resource) => resource.name.includes('tower'));
+            if (!hasResource) return;
+            e.target.closest('.card').classList.add('selected__card');
+            addTextToModal(text);
+          };
+        }
+      }
+      const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name);
+
+      if (answer.length !== 0) {
+        answer.forEach((cardID) => playCard(cardID, player.id));
+        let wordEndings = 'т';
+        if (answer.length < 2) wordEndings = 'ту';
+        if (answer.length > 1 && answer.length < 5) wordEndings = 'ты';
+        messageToLog(player.name, `сыграл с руки ${answer.length} кар${wordEndings}`);
+
+        if (answer.length >= 4) {
+          specCard.getCard('Строительство');
+        }
+        updateGameState(gameState);
+        gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+        if (i !== arrOfId.length - 1) {
+          bonus = true;
+        }
+      }
     }
-    function callback() {
-      let counter = 0;
-      gameState.activePlayer.actionPoints += 1;
-      Object.keys(gameState.activePlayer.activeDecks).forEach((stackName) => {
-        if (gameState.activePlayer.activeDecks[stackName].shift === 'left') counter += 1;
-      });
-      messageToLog(gameState.activePlayer.name, `взял ${counter} карту(ы)`);
-      takeCard(counter, 4, gameState.activePlayer.id, true);
-      gameBoard.update();
+
+    if (bonus) {
+      corporateBonus(arrOfId);
+      messageToLog(gameState.currentPlayer.name, 'получил кооперативный бонус');
     }
-    getManualDogma(listener, getAffectedCards, 1, null, true, true, callback);
+
+    gameBoard.display();
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+    if (gameState.currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
   },
 };
 

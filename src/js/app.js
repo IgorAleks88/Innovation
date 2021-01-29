@@ -8,6 +8,8 @@ import displayPlayerTable from './display/playerTable/displayPlayerTable';
 import setHandControls from './utility/setHandControls';
 import setAsideControls from './utility/setAsideControls';
 
+// eslint-disable-next-line no-undef
+// const socket = io(); // for server
 // display intro & menu
 intro.init();
 
@@ -15,3 +17,5 @@ intro.init();
 document.body.prepend(displayPlayerTable.init());
 setHandControls();
 setAsideControls();
+
+// export default socket; // for server
