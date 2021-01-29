@@ -31,19 +31,19 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       green: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       blue: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       purple: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       yellow: {
         cards: [],
@@ -72,23 +72,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       green: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       blue: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       purple: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       yellow: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
     },
     influence: {
@@ -113,23 +113,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       green: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: '',
       },
     },
     influence: {
@@ -154,23 +154,23 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       green: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: 'right',
       },
     },
     influence: {
