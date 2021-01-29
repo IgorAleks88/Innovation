@@ -27,6 +27,8 @@
   }
 }
 
+
+
 .modal__block {
   @include flex(column, center, center);
   @include size(50rem, 50rem);
@@ -48,7 +50,7 @@
   }
 
   .modal__wrapper {
-    @include flex(column, space-around, center);
+    @include flex(column, space-evenly, center);
     @include size(100%, 100%);
     @include area-border('../../assets/img/border-modal.png');
     border-image-width: 6rem;
@@ -71,6 +73,8 @@
   text-align: center;
   text-shadow: 1px 2px 3px rgb(0, 0, 0);
 }
+
+
 
 .modal__btn {
   @include size(26.5rem, 8rem);
@@ -121,4 +125,14 @@
   color: rgb(255, 255, 255);
   font-size: 30px;
   text-align: center;
+}
+
+.modal-tutorial__background {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 100;
 }

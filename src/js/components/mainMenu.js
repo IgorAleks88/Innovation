@@ -1,10 +1,12 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
 import initTutorial from '../utility/initTutorial';
 import displayNewTurnModal from '../display/displayNewTurnModal';
+import displayModal from '../display/displayModal';
 import displayHeaderHover from '../display/playerTable/displayHeaderHover';
 import header from '../display/playerTable/displayHeader';
 import gameBoard from './gameBoard';
 import gameState from './gameState';
+import tutorial from './tutorial';
 // import setChat from '../utility/setChat'; // for server
 
 const users = {};
@@ -73,9 +75,9 @@ class Menu {
     for (let i = 0; i < inputs.length; i += 1) {
       const { value } = inputs[i];
       if (
-        value.length < 3 ||
-        value.length > 7 ||
-        values.filter((v) => v === value).length > 1
+        value.length < 3
+        || value.length > 7
+        || values.filter((v) => v === value).length > 1
       ) {
         inputs[i].setCustomValidity('Invalid');
       } else {
@@ -123,10 +125,10 @@ class Menu {
 
     this.menu.addEventListener('click', (e) => {
       if (
-        e.target.tagName !== 'DIV' &&
-        e.target.tagName !== 'A' &&
-        e.target.tagName !== 'SPAN' &&
-        e.target !== this.menu.querySelector('button')
+        e.target.tagName !== 'DIV'
+        && e.target.tagName !== 'A'
+        && e.target.tagName !== 'SPAN'
+        && e.target !== this.menu.querySelector('button')
       ) {
         return;
       }
@@ -184,16 +186,21 @@ class Menu {
         });
       } else if (e.target.className.includes('tutorial')) {
         displayHeaderHover.init();
-        displayNewTurnModal('Игрок1');
+        displayModal.init();
+        displayModal.modalBg.classList.toggle('modal-tutorial--hidden');
+        displayModal.modalBlock.classList.toggle('modal-tutorial__block--hidden');
+        displayModal.setMessageText('Добро пожаловать в режим обучения Инновации!');
+        displayModal.setButtonText('Продолжить');
+        displayModal.modalBtn.onclick = tutorial.clickFunctions.stage1;
         initTutorial();
+        intro.classList.toggle('intro--hide');
         // setChat(users.names); // for server
-        setTimeout(() => {
+        /* setTimeout(() => {
           intro.classList.toggle('intro--hide');
-        }, 500);
+        }, 500); */
       }
     });
-    if (JSON.parse(localStorage.getItem('innovation')))
-      this.menu.querySelector('.load').classList.remove('disabled');
+    if (JSON.parse(localStorage.getItem('innovation'))) this.menu.querySelector('.load').classList.remove('disabled');
   }
 
   renderPdfRules() {
@@ -276,25 +283,25 @@ class Menu {
     this.menu.innerHTML = /* html */ `
     ${this.createMenuItem('', 'logo', 'data-link="https://rs.school/js/"')}
     ${this.createMenuItem(
-      'Yaroslav Abrasimov',
-      'person ya',
-      'data-link="https://github.com/Ferri0"'
-    )}
+    'Yaroslav Abrasimov',
+    'person ya',
+    'data-link="https://github.com/Ferri0"',
+  )}
     ${this.createMenuItem(
-      'Igor Alexeyenko',
-      'person ia',
-      'data-link="https://github.com/IgorAleks88"'
-    )}
+    'Igor Alexeyenko',
+    'person ia',
+    'data-link="https://github.com/IgorAleks88"',
+  )}
     ${this.createMenuItem(
-      'Ekaterina Titova',
-      'person et',
-      'data-link="https://github.com/kattitova"'
-    )}
+    'Ekaterina Titova',
+    'person et',
+    'data-link="https://github.com/kattitova"',
+  )}
     ${this.createMenuItem(
-      'Denis<br>Oleksiuk',
-      'person do',
-      'data-link="https://github.com/DenisOleksiuk"'
-    )}
+    'Denis<br>Oleksiuk',
+    'person do',
+    'data-link="https://github.com/DenisOleksiuk"',
+  )}
     ${this.createMenuItem('Главное меню', 'back')}
     `;
   }
@@ -314,8 +321,7 @@ class Menu {
     const form = this.menu.querySelector('.form');
     const errorMessgae = document.createElement('div');
     errorMessgae.classList.add('menu__link', 'error');
-    errorMessgae.innerHTML =
-      'Имена не должны повторяться<br> Длина от 3 до 7 символов';
+    errorMessgae.innerHTML = 'Имена не должны повторяться<br> Длина от 3 до 7 символов';
     form.prepend(errorMessgae);
   }
 }
