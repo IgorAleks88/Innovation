@@ -128,6 +128,7 @@ const gameBoard = {
       [...leadershipCardBlock.childNodes][0].innerText = [...firstAvaiableLeadership
         .childNodes][0].innerText;
     } else {
+      leadershipCardBlock.classList.remove('extra-cards__leadership-block--active');
       const firstAvaiableCard = [...leadershipCards].find((card) => {
         return !card.classList.contains('inactive');
       });
