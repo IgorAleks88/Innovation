@@ -56,5 +56,21 @@ export default function initGameState(usersInfo) {
   }
   gameState.currentPlayer = gameState.players[0];
   gameState.activePlayer = gameState.players[0];
-  gameState.currentPlayer.actionPoints = 2; // test
+  gameState.currentPlayer.actionPoints = 2;
+
+  // init win condition
+  gameState.winCondition.finalAge = 3; // 10 in rules, set 3 for demo
+  switch (gameState.players.length) {
+    case 2:
+      gameState.winCondition.winPoints = 3; // 6 in rules, set 3 for demo
+      break;
+    case 3:
+      gameState.winCondition.winPoints = 3; // 5 in rules, set 3 for demo
+      break;
+    case 4:
+      gameState.winCondition.winPoints = 2; // 4 in rules, set 2 for demo
+      break;
+    default:
+      throw new Error('Passed wrong number of players');
+  }
 }

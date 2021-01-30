@@ -7,6 +7,7 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 import dogmas from './dogma';
 import specCard from '../specCards/specCard';
+import checkWinCondition from '../utility/checkWinCondition';
 import { messageToLog } from '../utility/dogmaTools';
 
 const gameBoard = {
@@ -233,6 +234,8 @@ const gameBoard = {
 
     document.querySelector('.info-table__player-name').innerText = gameState.activePlayer.name;
     document.querySelector('.info-table__action-points').innerText = gameState.activePlayer.actionPoints;
+
+    checkWinCondition();
   },
 
   takeCard(e) {

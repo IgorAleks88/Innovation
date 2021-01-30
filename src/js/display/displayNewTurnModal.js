@@ -1,4 +1,7 @@
-export default function displayModal(playerName, activePlayerActionName = null) {
+import startNewGame from '../utility/startNewGame';
+
+export default function displayModal(playerName, activePlayerActionName = null,
+  winnerName = null, draw = false) {
   return new Promise((resolve) => {
     const modalBg = document.createElement('div');
     modalBg.classList.add('modal');
@@ -17,19 +20,25 @@ export default function displayModal(playerName, activePlayerActionName = null) 
     modalText.classList.add('modal__text');
     if (activePlayerActionName !== null) {
       modalText.innerText = `Сейчас действие игрока ${activePlayerActionName}`;
+    } else if (winnerName !== null) {
+      modalText.innerText = `Игрок ${winnerName} одержал победу!!!`;
+    } else if (draw === true) {
+      modalText.innerText = 'Ничья!';
     } else {
       modalText.innerText = `Сейчас ход игрока ${playerName}`;
     }
 
     const modalBtn = document.createElement('button');
     modalBtn.classList.add('modal__btn');
-    modalBtn.innerText = 'Начать ход!';
+    if (winnerName !== null || draw === true) modalBtn.innerText = 'В меню';
+    else modalBtn.innerText = 'Начать ход!';
     modalBtn.addEventListener('click', () => {
       modalBg.style = '';
       modalBg.classList.toggle('modal--hidden');
       setTimeout(() => {
         modalBg.remove();
         resolve();
+        if (winnerName !== null || draw === true) startNewGame();
       }, 500);
     });
 
