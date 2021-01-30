@@ -5,6 +5,7 @@ import getCardObject from '../cards/getCardObject';
 import getCardElement from '../cards/getCardElement';
 import updateGameState from '../utility/updateGameState';
 import displayHeader from '../display/playerTable/displayHeader';
+import gameBoard from './gameBoard';
 
 const tutorial = {
   currentDOMElement: null,
@@ -34,7 +35,7 @@ const tutorial = {
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage4;
     },
     stage4: () => {
-      tutorial.currentDOMElement.innerHTML = '';
+      document.querySelector('.hand__cards').innerHTML = '';
       tutorial.currentDOMElement.style.zIndex = 0;
       displayModal.setMessageText('По центру распологаются карты в активной зоне игрока');
       gameState.player0.activeDecks.green.shift = 'top';
@@ -105,7 +106,46 @@ const tutorial = {
       tutorial.currentDOMElement = document.querySelector('#player1-active');
       tutorial.currentDOMElement.style.zIndex = 2;
       displayModal.setMessageText('Чтобы посмотреть активную стопку соперника, нажмите на прямоугольник соответствующего цвета');
-      displayModal.modalBtn.onclick = tutorial.clickFunctions.stage7;
+      displayModal.modalBtn.onclick = tutorial.clickFunctions.stage10;
+    },
+    stage10: () => {
+      tutorial.currentDOMElement.style.zIndex = 0;
+      displayHeader.shader.classList.add('header__shader--hidden');
+      tutorial.currentDOMElement = document.querySelector('.header');
+      tutorial.currentDOMElement.style.zIndex = 0;
+      displayModal.setMessageText('С игровым полем разобрались. Теперь поговорим об игровом процессе. В свой ход игрок может выполнить одно из четрёх действий: взять карту в руку, сыграть карту с руки в активную зону, прочитать догму со своей активной карты или добиться лидерства');
+      displayModal.modalBtn.onclick = tutorial.clickFunctions.stage11;
+    },
+    stage11: () => {
+      gameState.player0.activeDecks.green.cards = [];
+      gameState.player0.activeDecks.purple.cards = [];
+      gameState.player0.activeDecks.yellow.cards = [];
+      updateGameState(gameState);
+      displayHeader.changePlayerStats(gameState.player0);
+      document.querySelectorAll('.active-zone__stack').forEach((e) => {
+        e.innerHTML = '';
+      });
+      document.querySelectorAll('.age-deck--active').forEach((e) => {
+        e.onclick = gameBoard.takeCard;
+      });
+      tutorial.currentDOMElement = document.querySelector('.aside');
+      tutorial.currentDOMElement.style.zIndex = 120;
+      tutorial.currentDOMElement = document.querySelector('.hand');
+      tutorial.currentDOMElement.style.zIndex = 120;
+      displayModal.setMessageText('Возьмите карту из колоды веков в руку');
+      displayModal.modalBtn.classList.add('modal-tutorial__btn--hidden');
+      // displayModal.modalBtn.onclick = tutorial.clickFunctions.stage7;
+      document.body.onclick = tutorial.clickFunctions.stage12;
+    },
+    stage12: (e) => {
+      if (e.target.classList.contains('age-deck--active')) {
+        tutorial.currentDOMElement = document.querySelector('.aside');
+        tutorial.currentDOMElement.style.zIndex = 0;
+        tutorial.currentDOMElement = document.querySelector('.active-zone');
+        tutorial.currentDOMElement.style.zIndex = 120;
+        displayModal.setMessageText('Теперь сыграйте эту карту в активную зону');
+        document.body.onclick = tutorial.clickFunctions.stage12;
+      }
     },
   },
 

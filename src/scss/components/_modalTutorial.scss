@@ -81,7 +81,10 @@
   font-family: 'Caesar';
   font-size: 3rem;
   font-weight: 100;
-  transition: all 1.5s;
+  
+  &--hidden {
+    visibility: hidden;
+  }
   
   &:hover {
     font-size: 3.3rem;
