@@ -1,0 +1,59 @@
+.header-hover__block {
+  @include flex(column, center, center);
+  position: absolute;
+  top: 17rem;
+  z-index: 15;
+
+  &__hidden {
+    visibility: hidden;
+  }
+}
+
+.header-hover__overlay {
+  @include block-background-overlay;
+  width: 96%;
+  z-index: 16;
+}
+
+.header-hover__wrapper {
+  @include flex(column, space-evenly, center);
+  @include area-border('../../assets/img/border-modal.png');
+  background: linear-gradient(
+    90deg,
+    rgba(33, 14, 6, 1) 0%,
+    rgba(77, 35, 12, 1) 50%,
+    rgba(33, 14, 6, 1) 100%
+  );
+  border-image-width: 6rem;
+  border-radius: 7rem;
+  flex-wrap: nowrap;
+  position: relative;
+  z-index: 17;
+}
+
+.header-hover__card-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  position: relative;
+}
+
+.header-hover__button {
+  @include size(26.5rem, 8rem);
+  @include flex;
+  background: #3b1105;
+  background: url('../../assets/img/info-table.png');
+  background-size: cover;
+  color: #ffc658;
+  filter: drop-shadow(2px 4px 6px rgb(0, 0, 0));
+  font-family: 'Caesar';
+  font-size: 3rem;
+  font-weight: 100;
+  
+  &:hover {
+    font-size: 3.3rem;
+  }
+
+  &__hidden {
+    visibility: hidden;
+  }
+}

@@ -6,6 +6,8 @@ import updateGameState from '../utility/updateGameState';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 import dogmas from './dogma';
+import specCard from '../specCards/specCard';
+// import socket from '../app'; // for server
 
 const gameBoard = {
   display() {
@@ -131,6 +133,13 @@ const gameBoard = {
     gameState.activePlayer.actionPoints -= 1;
 
     if (gameState.currentPlayer.actionPoints < 1) {
+      const activeElems = document.querySelectorAll('.active');
+      if (activeElems.length !== 0) {
+        activeElems.forEach((elem) => {
+          elem.onclick = null;
+          elem.classList.remove('active');
+        });
+      }
       this.displayNextTurnBtn();
     } else if (gameState.activePlayer.actionPoints === 0
       && gameState.currentPlayer !== gameState.activePlayer) {
@@ -138,6 +147,7 @@ const gameBoard = {
     }
 
     updateGameState(gameState);
+    specCard.getAvailable();
     gameState.players.forEach((player) => header.changePlayerStats(player));
 
     document.querySelector('.info-table__player-name').innerText = gameState.activePlayer.name;
@@ -174,6 +184,9 @@ const gameBoard = {
         e.target.onclick = gameBoard.takeCard;
       }
     }, 250);
+
+    // const state = JSON.stringify(gameState); // for server
+    // socket.emit('state', state); // for server
   },
 
   playCard(e) {
@@ -198,6 +211,9 @@ const gameBoard = {
     renderCard.toActive(cardElement);
 
     gameBoard.update();
+
+    // const state = JSON.stringify(gameState); // for server
+    // socket.emit('state', state); // for server
   },
 
   displayFinishActionBtn() {
@@ -223,6 +239,8 @@ const gameBoard = {
     nextTurnBtn.classList.add('info-table__next-turn-btn');
     nextTurnBtn.innerText = 'Закончить ход';
     nextTurnBtn.addEventListener('click', () => {
+      gameState.specArchieveCount = 0;
+      gameState.specInfluenceCount = 0;
       // change current player
       for (let i = 0; i < gameState.players.length; i += 1) {
         if (gameState.currentPlayer === gameState.players[i]) {

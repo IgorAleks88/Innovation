@@ -21,25 +21,29 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
+    hand: [],
     currentAge: 1,
     currentDeck: 'age1', // test
+    specialCards: [],
+    specArchieveCount: 0,
+    specInfluenceCount: 0,
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       green: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       blue: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       purple: {
         cards: [],
-        shift: '',
+        shift: 'top',
       },
       yellow: {
         cards: [],
@@ -61,28 +65,30 @@ const gameState = {
     name: null,
     id: 1,
     actionPoints: 0,
-    hand: ['инструменты', 'земледелие', 'свод законов', 'мистицизм'],
+    hand: [],
     currentAge: 1,
+    specialCards: [],
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       green: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       blue: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       purple: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
       yellow: {
         cards: [],
-        shift: '',
+        shift: 'right',
       },
     },
     influence: {
@@ -102,26 +108,28 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
+    specialCards: [],
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       green: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: '',
       },
     },
     influence: {
@@ -141,26 +149,28 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
+    specialCards: [],
+    leadershipCards: [],
     activeDecks: {
       red: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       green: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: null,
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: null,
+        shift: 'right',
       },
     },
     influence: {
