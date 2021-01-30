@@ -34,7 +34,7 @@ const displayModal = {
   },
 
   setMessageText(text) {
-    this.modalText.innerText = text;
+    this.modalText.innerHTML = text;
   },
 
   setButtonText(text) {

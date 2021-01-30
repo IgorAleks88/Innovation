@@ -1,8 +1,9 @@
-import displayHeaderHover from '../playerTable/displayHeaderHover';
+import displayHeaderHover from './displayHeaderHover';
 import gameState from '../../components/gameState';
 
 const displayHeader = {
   wrapper: null,
+  shader: null,
   headRowNames: [
     { hand: ['fas', 'fa-hand-paper', 'yellow'] },
     { influence: ['fas', 'fa-shield-alt', 'red'] },
@@ -128,12 +129,13 @@ const displayHeader = {
 
     this[player].handContainer = document.createElement('div');
     this[player].handContainer.classList.add('cards-container');
+    this[player].handContainer.id = `${player}-hand`;
     this[player].handIcon = document.createElement('div');
     this[player].handIcon.classList.add(
       'fas',
       'fa-hand-paper',
       'cards-container__icon',
-      `card__icon-color--yellow`
+      'card__icon-color--yellow',
     );
     this[player].handContainer.appendChild(this[player].handIcon);
     this[player].hand = document.createElement('div');
@@ -150,12 +152,13 @@ const displayHeader = {
 
     this[player].influenceContainer = document.createElement('div');
     this[player].influenceContainer.classList.add('cards-container');
+    this[player].influenceContainer.id = `${player}-influence`;
     this[player].influenceIcon = document.createElement('div');
     this[player].influenceIcon.classList.add(
       'fas',
       'fa-shield-alt',
       'cards-container__icon',
-      `card__icon-color--red`
+      'card__icon-color--red',
     );
     this[player].influenceContainer.appendChild(this[player].influenceIcon);
     this[player].influence = document.createElement('div');
@@ -177,7 +180,7 @@ const displayHeader = {
       'fas',
       'fa-trophy',
       'cards-container__icon',
-      `card__icon-color--yellow`
+      'card__icon-color--yellow',
     );
     this[player].leadershipContainer.appendChild(this[player].leadershipIcon);
     this[player].leadership = document.createElement('div');
@@ -190,6 +193,7 @@ const displayHeader = {
 
     const activeZoneRow = document.createElement('div');
     activeZoneRow.classList.add('active-zone-row');
+    activeZoneRow.id = `${player}-active`;
 
     this[player].red = document.createElement('div');
     this[player].red.classList.add('active-zone-row__red');
@@ -259,7 +263,7 @@ const displayHeader = {
         `${e[i][0]}`,
         `${e[i][1]}`,
         'recource-container__icon',
-        `card__icon-color--${e[i][2]}`
+        `card__icon-color--${e[i][2]}`,
       );
       container.appendChild(iconContainer);
       this[player][i] = document.createElement('div');
@@ -299,7 +303,7 @@ const displayHeader = {
       const currentPlayer = `player${i}`;
       this[currentPlayer].name.textContent = players[i];
       this[currentPlayer].container.classList.remove(
-        'player-container__hidden'
+        'player-container__hidden',
       );
       this[currentPlayer].container.classList.remove('player-container__hidden');
 
@@ -311,6 +315,10 @@ const displayHeader = {
   init() {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
+
+    this.shader = document.createElement('div');
+    this.shader.classList.add('header__shader');
+    this.shader.classList.add('header__shader--hidden');
 
     this.headerTitle = document.createElement('div');
     this.headerTitle.classList.add('header__title');
@@ -326,6 +334,7 @@ const displayHeader = {
     this.headerTableWrapper.classList.add('header__table__wrapper');
     this.headerTable.appendChild(this.headerTableWrapper);
     this.wrapper.appendChild(this.headerTable);
+    this.wrapper.appendChild(this.shader);
 
     this.initPlayerStats(0);
     this.initPlayerStats(1);

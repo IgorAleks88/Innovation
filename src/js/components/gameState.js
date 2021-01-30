@@ -31,19 +31,19 @@ const gameState = {
     activeDecks: {
       red: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       green: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       yellow: {
         cards: [],
