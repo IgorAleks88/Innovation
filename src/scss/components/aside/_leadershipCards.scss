@@ -35,6 +35,11 @@
   font-size: 10rem;
   position: relative;
 
+  &--active {
+    border: 3px solid rgb(255, 0, 0);
+    cursor: pointer;
+  }
+
   .extra-cards__leadership-title {
     bottom: 2.6rem;
   }

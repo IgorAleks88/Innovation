@@ -7,6 +7,7 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 import dogmas from './dogma';
 import specCard from '../specCards/specCard';
+import { messageToLog } from '../utility/dogmaTools';
 
 const gameBoard = {
   display() {
@@ -47,6 +48,29 @@ const gameBoard = {
     }
     // display cloned deck in currentDeck block
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
+
+    // set avaiable leadership card
+    const leadershipCards = document.querySelectorAll('.leadership-cards__card');
+    [...leadershipCards].forEach((card, num) => {
+      const age = num + 1;
+      card.classList.remove('leadership-cards__card--active');
+      const isCardAvaiable = gameState.leadershipDeck.some((cardID) => {
+        return getCardObject.byID(cardID).age === age;
+      });
+      if (!isCardAvaiable) card.classList.add('inactive');
+      if (gameState.activePlayer.influence.points / age >= 5
+        && !card.classList.contains('inactive')) {
+        card.classList.add('leadership-cards__card--active');
+      }
+    });
+    // add effect to aside if leadership card avaiable
+    const leadershipCardBlock = document.querySelector('.extra-cards__leadership-block');
+    if ([...document.querySelectorAll('.leadership-cards__card--active')].length > 0) {
+      leadershipCardBlock.classList.add('extra-cards__leadership-block--active');
+    } else {
+      leadershipCardBlock.classList.remove('extra-cards__leadership-block--active');
+    }
+    this.setAsideLeadershipText();
 
     // get hand cards of active player
     const hand = document.querySelector('.hand__cards');
@@ -95,6 +119,22 @@ const gameBoard = {
     });
   },
 
+  setAsideLeadershipText() {
+    const leadershipCardBlock = document.querySelector('.extra-cards__leadership-block');
+    const leadershipCards = document.querySelectorAll('.leadership-cards__card');
+    const firstAvaiableLeadership = document.querySelector('.leadership-cards__card--active');
+    if (firstAvaiableLeadership !== null) {
+      [...leadershipCardBlock.childNodes][0].innerText = [...firstAvaiableLeadership
+        .childNodes][0].innerText;
+    } else {
+      const firstAvaiableCard = [...leadershipCards].find((card) => {
+        return !card.classList.contains('inactive');
+      });
+      [...leadershipCardBlock.childNodes][0].innerText = [...firstAvaiableCard
+        .childNodes][0].innerText;
+    }
+  },
+
   init() {
     // set hand events
     const cardElements = document.querySelectorAll('.card');
@@ -123,9 +163,51 @@ const gameBoard = {
         };
       }
     });
+    // set leadership cards event
+    const avaiableLeadershipCards = document.querySelectorAll('.leadership-cards__card--active');
+    [...avaiableLeadershipCards].forEach((card) => {
+      card.onclick = (e) => {
+        const eTarget = e.target.closest('.leadership-cards__card');
+        let targetAge = +[...eTarget.childNodes][0].innerText.split('').splice(-1, 1).join();
+        if (targetAge === 0) targetAge = 10;
+        messageToLog(gameState.activePlayer.name, `добился лидерства в ${targetAge} веке!`);
+        gameState.leadershipDeck.forEach((cardID) => {
+          if (getCardObject.byID(cardID).age === targetAge) {
+            const targetIndex = gameState.leadershipDeck.indexOf(cardID);
+            gameState.activePlayer.leadershipCards.push(gameState
+              .leadershipDeck.splice(targetIndex, 1).join());
+            eTarget.classList.add('inactive');
+            eTarget.classList.remove('leadership-cards__card--active');
+            eTarget.onclick = null;
+            this.setAsideLeadershipText();
+          }
+        });
+        gameBoard.update();
+      };
+    });
     this.setHeaderCurrent();
     updateGameState(gameState);
     gameState.players.forEach((player) => header.changePlayerStats(player));
+
+    // set leadership block event
+    this.setLeadershipBlock();
+  },
+
+  setLeadershipBlock() {
+    const activeLeadershipCard = document.querySelector('.leadership-cards__card--active');
+    const leadershipDeckBlock = document.querySelector('.extra-cards__leadership-block');
+    if (activeLeadershipCard !== null) {
+      leadershipDeckBlock.onclick = (e) => {
+        if (e.target.classList.contains('hover-btn')) {
+          return false;
+        }
+        activeLeadershipCard.click();
+        this.setLeadershipBlock();
+      };
+    } else {
+      leadershipDeckBlock.onclick = null;
+      leadershipDeckBlock.classList.remove('extra-cards__leadership-block--active');
+    }
   },
 
   update() {
@@ -291,6 +373,16 @@ const gameBoard = {
       deck.onclick = '';
       deck.classList.remove('age-deck--active');
     });
+    const leadershipCards = Array.from(document.querySelectorAll('.leadership-cards__card--active'));
+    leadershipCards.forEach((card) => {
+      card.classList.remove('leadership-cards__card--active');
+      card.onclick = null;
+    });
+    const activeLeadershipBlock = document.querySelector('.extra-cards__leadership-block--active');
+    if (activeLeadershipBlock !== null) {
+      activeLeadershipBlock.classList.remove('extra-cards__leadership-block--active');
+      activeLeadershipBlock.onclick = null;
+    }
   },
 };
 
