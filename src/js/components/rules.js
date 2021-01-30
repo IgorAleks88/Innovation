@@ -7,8 +7,15 @@ const rulesBook = document.createElement('div');
 export default function renderRules() {
   rules.classList.add('rules__container', 'rules__container--hide');
   rulesWrraper.classList.add('rules__wrapper');
-
   rulesBook.classList.add('rules__book');
+
+  const closeBook = document.createElement('div');
+  closeBook.classList.add('book__close');
+  closeBook.innerHTML = '<i class="fas fa-times"></i>';
+  closeBook.addEventListener('click', () => {
+    rules.classList.add('rules__container--hide');
+  });
+  rulesBook.appendChild(closeBook);
 
   for (let i = 1; i <= 8; i += 1) {
     rulesBook.appendChild(getPage(i));
@@ -17,11 +24,11 @@ export default function renderRules() {
   rulesWrraper.appendChild(rulesBook);
   rules.appendChild(rulesWrraper);
   document.body.appendChild(rules);
+  flipRules();
+  // showRules();
 }
 
-export function flipRules() {
-  rules.classList.remove('rules__container--hide');
-
+function flipRules() {
   const pageFlip = new PageFlip(rulesBook, {
     width: 400, // base page width
     height: 600, // base page height
@@ -38,7 +45,6 @@ export function flipRules() {
   });
   // load pages
   pageFlip.loadFromHTML(document.querySelectorAll('.book__page'));
-  // pageFlip.loadFromImages(['./assets/img/rules/innovation_rules_rus_1.jpg', './assets/img/rules/innovation_rules_rus_2.jpg', './assets/img/rules/innovation_rules_rus_3.jpg', './assets/img/rules/innovation_rules_rus_4.jpg']);
 }
 
 function getPage(num) {
@@ -46,8 +52,6 @@ function getPage(num) {
   page.classList.add('book__page', `book__page--${num}`);
   const pageHeader = document.createElement('div');
   pageHeader.classList.add('page__header');
-  const headerTitle = document.createElement('div');
-  headerTitle.classList.add('header__title');
   const pageTitle = document.createElement('div');
   pageTitle.classList.add('page__title');
 
@@ -55,6 +59,7 @@ function getPage(num) {
   pageMain.classList.add('page__main');
   const textBlock = document.createElement('div');
   textBlock.classList.add('main__text');
+  const imgBlock = document.createElement('img');
 
   const pageFooter = document.createElement('div');
   pageFooter.classList.add('page__footer');
@@ -69,7 +74,7 @@ function getPage(num) {
       <div class="icon__time">1 час</div>`;
       pageHeader.appendChild(headerIcons);
 
-      headerTitle.style.background = 'url("./assets/img/rules/page1_header.jpg")';
+      pageHeader.style.background = 'url("./assets/img/rules/page1_header.jpg")';
 
       textBlock.innerHTML = `<p><b>• СОСТАВ ИГРЫ</b><br>• 4 планшета / памятки<br>• 105 карт инноваций<br>• 5 карт сфер развития<br>• правила игры
       <br></p><p><b>• ОБ ИГРЕ</b><br>
@@ -105,7 +110,6 @@ function getPage(num) {
 и второй, если играют четверо) совершает только одно действие вместо двух положенных.</p>`;
       pageMain.appendChild(textBlockCenter);
 
-      const imgBlock = document.createElement('img');
       imgBlock.classList.add('page2__img');
       imgBlock.src = './assets/img/rules/page2_img.jpg';
       pageMain.appendChild(imgBlock);
@@ -209,44 +213,107 @@ function getPage(num) {
       pageMain.appendChild(textDevider);
 
       textBlock.innerHTML = `<p><b>• КОНЕЦ ИГРЫ</b></p>
-      • ПОБЕДА ПО ЛИДЕРСТВУ
-Игрок, набравший определённое число
-карт лидерства (учитываются как эпохи,
-так и сферы), немедленно побеждает.
-Выигрышное количество карт лидерства зависит от числа игроков:
-2 игрока — 6 карт лидерства
-3 игрока — 5 карт лидерства
-4 игрока — 4 карты лидерства
-• ПОБЕДА ПО ДОГМЕ
-В эпохах 8, 9 и 10 встречаются карты
-инноваций с догмами, которые могут
-сделать одного из игроков победителем. Если такая карта активирована
-и игрок выполняет условия победной
-догмы, он немедленно выигрывает.
-• ПОБЕДА ПО ВЛИЯНИЮ
-Если никто не победил ни по лидерству, ни по догме, партия завершается
-в одном из следующих случаев:
-• игрок должен взять карту из колоды
-с номером больше 10 (например, ему
-нужно взять карту из колоды 10, но там
-не осталось карт), либо
-• игрок воспользовался догмой,
-которая предписывает партии завершиться.
-Побеждает тот из игроков, у кого
-больше влияния. Если на победу по
-влиянию претендует несколько игроков, выигрывает тот
-из них, у кого больше
-карт лидерства. Если
-и это не разрешает
-спор, претенденты
-делят победу.`;
+      <p><strong>• ПОБЕДА ПО ЛИДЕРСТВУ</strong><br>
+Игрок, набравший определённое число карт лидерства (учитываются как эпохи, так и сферы), немедленно побеждает. Выигрышное количество карт лидерства зависит от числа игроков:</p>
+<p><span class="light-box">2 игрока — 6 карт лидерства<br>
+3 игрока — 5 карт лидерства<br>
+4 игрока — 4 карты лидерства</span></p>
+<p><strong>• ПОБЕДА ПО ДОГМЕ</strong><br>
+В эпохах 8, 9 и 10 встречаются карты инноваций с догмами, которые могут сделать одного из игроков победителем.</p>
+<p>Если такая карта активирована и игрок выполняет условия победной догмы, он немедленно выигрывает.</p>
+<p><strong>• ПОБЕДА ПО ВЛИЯНИЮ</strong><br>
+Если никто не победил ни по лидерству, ни по догме, партия завершается в одном из следующих случаев:</p>
+<p>• игрок должен взять карту из колоды с номером больше <span class = 'age__number'>10</span> (например, ему нужно взять карту из колоды <span class = 'age__number'>10</span>, но там не осталось карт), либо<br>
+• игрок воспользовался догмой, которая предписывает партии завершиться.</p>
+<p>Побеждает тот из игроков, у кого больше влияния. Если на победу по влиянию претендует несколько игроков, выигрывает тот из них, у кого больше карт лидерства. Если и это не разрешает спор, претенденты делят победу.</p>`;
+      break;
+    }
+
+    case 6: {
+      textBlock.innerHTML = `<p><b>• Игровые ТЕРМИНЫ</b><br>
+<strong>• Сыграйте, введите в игру</strong> — выложите карту на верх своей стопки того же цвета. Если такой стопки у вас в игре ещё нет, начните выложенной картой новую стопку.<br>
+<strong>• Активная карта</strong> — верхняя карта любой стопки в игре. Даже если стопка сдвинута, активной картой считается только верхняя.<br>
+<strong>• Нижняя карта</strong> — самая нижняя карта любой стопки в игре. Если в стопке только одна карта, она считается и нижней, и активной одновременно.<br>
+<strong>• Старше, младше</strong> — старшинство определяется по уровню карты. «Все старшие (младшие) карты» — это все карты с максимальным (минимальным) уровнем.<br>
+<i>У вас на руке две <span class = 'age__number'>7</span> и три <span class = 'age__number'>5</span>, и вы должны переместить все старшие карты с руки. Вы перемещаете две <span class = 'age__number'>7</span>.
+А требование переместить три старшие карты с руки заставит вас переместить две <span class = 'age__number'>7</span> и одну из <span class = 'age__number'>5</span>.</i><br>
+<strong>• Уровень карты</strong> — равен номеру эпохи, к которой она относится (от 1 до 10). Он указан с обеих сторон карты.
+Если эффект отсылает к уровню карты, которой у вас нет (например, старшей карты на руке, когда у вас на руке нет карт; или активной карты того цвета, которого у вас нет в игре), считайте, что этот уровень равен нулю. Старшинство карты определяется по уровню.<br>
+<strong>• Влияние</strong> — в ходе игры вы будете подкладывать карты под свой планшет с левой стороны (в зону влияния). Ваше влияние = сумме уровней всех этих карт.<br>
+<b>• ЭФФЕКТЫ ДОГМ</b><br>
+Когда догма (не важно, своя или чужая) требует от вас что-нибудь сделать с картами (стопками, зоной влияния), всегда имеются в виду ваши карты (стопки, зона влияния), если не сказано иного.</p>
+<p><strong>• Архивируйте</strong> — подложите карту под низ своей стопки того же цвета, сохраняя сдвиг (если стопка была сдвинута).
+Если такой стопки ещё нет, начните этой картой новую стопку.<br>
+<strong>• Возьмите и…</strong> — обычно вы забираете вытянутую из колоды карту на руку, однако догма может заставить вас
+поступить со взятой картой иначе. Когда от вас требуется взять и сыграть (архивировать, зачесть) карту, вы должны
+сыграть (архивировать, зачесть) карту сразу после того, как взяли её из колоды.
+Вы не можете заменить её другой картой с руки. Если вам надо взять карту из опустевшей колоды эпохи, берите её из следующей по старшинству.<br>
+<strong>• Единолично</strong> — если вы выполняете догму единолично, ваши соперники не получают от неё пользы. Однако они могут стать целью такой догмы.<br> 
+<strong>• Зачтите</strong> — подложите карту лицом вниз под свой планшет с левой стороны (в зону влияния).<br>
+<strong>• Обменяйтесь</strong> — дайте карты сопернику и получите от него другие взамен. Игрок может обмениваться, даже если
+у него нет подходящих для обмена карт — в таком случае он просто получит карту от соперника.<br>
+<strong>• Переместите</strong> — если вы должны переместить больше карт, чем у вас есть, переместите столько, сколько можете.
+Но если вы должны переместить карту конкретного уровня, а у вас нет такой карты, не перемещайте ничего.<br>
+<i>Пример: догма требует переместить <span class = 'age__number'>5</span> из вашей зоны влияния. Если там нет такой карты, вам не надо перемещать <span class = 'age__number'>6</span>.
+Карты, перемещённые вам в игру, кладите поверх своих стопок того же цвета, если догма не требует иного.</i><br>
+<strong>• Переработайте</strong> — подложите карту под низ соответствующей колоды эпохи лицом вниз. Перерабатывая несколько
+карт разом, вы сами решаете, в каком порядке их подложить.</p>`;
+      break;
+    }
+
+    case 7: {
+      textBlock.innerHTML = `<p><strong>• Победная догма</strong> — догма с эффектом «игрок выигрывает» или «вы выиграли». Если догма предписывает
+выиграть «единственному игроку», но необходимое условие выполняют несколько соперников, победа не достаётся никому, и партия продолжается.<br>
+<strong>• Сдвиньте стопку</strong> — сместите все карты в стопке «лесенкой» в указанном направлении, так, чтобы на противоположном краю неактивных карт были
+видны символы ресурсов.<br>
+<i>В примере внизу жёлтая стопка сдвинута вверх, фиолетовая — вправо, а красная — влево.</i><br>
+Стопка может быть сдвинута только в одном направлении. Чтобы изменить направление сдвига, сначала верните стопку в первоначальное положение, а потом сдвиньте в новом направлении.<br>
+В сдвиге участвуют все карты стопки. Когда в сдвинутую стопку добавляется новая карта, кладите её так, чтобы сохранить сдвиг.<br>
+Нельзя сдвинуть стопку, в которой одна карта (или нет карт). Если в сдвинутой стопке становится меньше двух карт, она больше не считается сдвинутой.<br>
+<strong>• Сбросьте</strong> — выведите из игры.<br>
+<i>Если условие первой догмы с карты «Ядерная реакция» будет выполнено, каждый игрок сбросит все карты с руки, из игры и из зоны влияния.
+Все эти карты покидают игру: уберите их в коробку. На столе остаются только карты лидерства (как у игроков, так и ещё не полученные)
+и колоды эпох.</i></p>
+<p><span class="dark-box"><b>СИМВОЛЫ</b><br>
+<img class="dogma-type__icon" src='./assets/img/cards-bg/corporate.png'> Кооперативная догма<br>
+<img class="dogma-type__icon" src='./assets/img/cards-bg/aggressive.png'> Агрессивная догма<br>
+<i class='fab fa-fort-awesome rules__icon card__icon-color--grey'></i><i class='fas fa-crown rules__icon card__icon-color--yellow'></i><i class='far fa-clock rules__icon card__icon-color--blue'></i><i class='fas fa-lightbulb rules__icon card__icon-color--purple'></i><i class='fab fa-pagelines rules__icon card__icon-color--green'></i><i class='fas fa-industry rules__icon card__icon-color--red'></i> : Ресурсы<br>
+<span class = 'age__number'>X</span>: Карта уровня (эпохи) X,<br>
+например, <span class = 'age__number'>10</span> — карта эпохи 10</span></p>`;
+
+      imgBlock.classList.add('page7__img');
+      imgBlock.src = './assets/img/rules/page7_img.jpg';
+      pageMain.appendChild(imgBlock);
+      break;
+    }
+
+    case 8: {
+      pageTitle.textContent = 'ПРИМЕР ХОДА';
+      pageHeader.appendChild(pageTitle);
+
+      textBlock.innerHTML = `<p>Играют четверо, сейчас ход Андрея. У него в игре две стопки:</p>
+<p class="image-center"><img src="./assets/img/rules/page8-img1.png"></p>
+Его карты приносят 3<i class='fas fa-lightbulb rules__icon card__icon-color--purple'></i>, 2<i class='fas fa-crown rules__icon card__icon-color--yellow'></i>, 1<i class='fab fa-pagelines rules__icon card__icon-color--green'></i> и 1<i class='fas fa-industry rules__icon card__icon-color--red'></i>.<br>
+<strong>Первым действием</strong> Андрей активирует карту «Банковское дело». Её ресурс — <i class='fas fa-crown rules__icon card__icon-color--yellow'></i>.<br>
+Первая догма этой карты — <strong>агрессивная</strong>. Она затрагивает Бориса (только у него меньше <i class='fas fa-crown rules__icon card__icon-color--yellow'></i>, чем у Андрея), и тот должен отдать Андрею одну из своих активных не зелёных карт, которая приносит <i class='fas fa-industry rules__icon card__icon-color--red'></i>. Борис перемещает «Химию».
+Андрей кладёт эту карту поверх «Эволюции», продолжая <strong>сдвиг</strong> стопки вправо:</p>
+<p class="image-center"><img src="./assets/img/rules/page8-img2.png"></p>
+Затем, поскольку Борис переместил карту, он берёт <span class = 'age__number'>5</span> и <strong>зачитывает</strong> её.<br>
+Вторая догма карты — <strong>кооперативная</strong>. У Виктора столько же <i class='fas fa-crown rules__icon card__icon-color--yellow'></i>, как у Андрея,
+а у Галины — даже больше. Они оба могут получить пользу от этой догмы.
+Виктор решает сдвинуть свою зелёную стопку вправо. У Галины нет зелёных карт в игре, поэтому она ничего не делает. Наконец, Андрей сдвигает свою зелёную стопку вправо:</p>
+<p class="image-center"><img src="./assets/img/rules/page8-img3.png"></p>
+Теперь его карты приносят 3<i class='fas fa-lightbulb rules__icon card__icon-color--purple'></i>, 3<i class='fas fa-crown rules__icon card__icon-color--yellow'></i>, 3<i class='fas fa-industry rules__icon card__icon-color--red'></i> и 1<i class='fab fa-pagelines rules__icon card__icon-color--green'></i>.<br>
+Поскольку Виктор получил пользу от его догмы, Андрей берёт карту из колоды того же уровня, что и его старшая активная карта, — <span class = 'age__number'>5</span>.<br>
+<strong>Вторым действием</strong> Андрей берёт карту.
+Он должен взять <span class = 'age__number'>5</span>, однако эта колода пуста, поэтому он тянет <span class = 'age__number'>6</span>.</p>`;
+
       break;
     }
     default: break;
   }
   pageNumber.textContent = num;
 
-  pageHeader.appendChild(headerTitle);
   page.appendChild(pageHeader);
 
   pageMain.appendChild(textBlock);
@@ -260,4 +327,8 @@ function getPage(num) {
   page.appendChild(pageShadow);
 
   return page;
+}
+
+export function showRules() {
+  rules.classList.remove('rules__container--hide');
 }

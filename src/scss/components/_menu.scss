@@ -32,7 +32,7 @@
     }
 
     .menu__link.person {
-      filter: drop-shadow(2px 2px 4px black);
+      filter: drop-shadow(2px 2px 4px #000);
       font-size: 2rem;
       text-shadow: 0.25rem 0.2rem 0.1rem rgba(0, 0, 0, 1);
 
@@ -107,8 +107,8 @@
       @include size(20rem, 12rem);
       background: url('../../assets/img/about/logo.png');
       background-size: cover;
-      border: none;
-      filter: drop-shadow(2px 2px 4px black);
+      border: 0;
+      filter: drop-shadow(2px 2px 4px #000);
       transition: transform 0.5s linear;
 
       &::before {
@@ -224,29 +224,6 @@
   opacity: 1;
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.iframe__wrraper {
-  height: 70%;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  z-index: 1;
-}
-
-.close {
-  color: rgb(252, 4, 4);
-  cursor: pointer;
-  position: absolute;
-  right: -2rem;
-  top: -2rem;
-}
-
-.iframe {
-  height: 100%;
-  width: 100%;
 }
 
 label {
