@@ -1,4 +1,4 @@
-import displayHeaderHover from '../playerTable/displayHeaderHover';
+import displayHeaderHover from './displayHeaderHover';
 import gameState from '../../components/gameState';
 
 const displayHeader = {
@@ -133,7 +133,7 @@ const displayHeader = {
       'fas',
       'fa-hand-paper',
       'cards-container__icon',
-      `card__icon-color--yellow`
+      'card__icon-color--yellow',
     );
     this[player].handContainer.appendChild(this[player].handIcon);
     this[player].hand = document.createElement('div');
@@ -155,7 +155,7 @@ const displayHeader = {
       'fas',
       'fa-shield-alt',
       'cards-container__icon',
-      `card__icon-color--red`
+      'card__icon-color--red',
     );
     this[player].influenceContainer.appendChild(this[player].influenceIcon);
     this[player].influence = document.createElement('div');
@@ -177,7 +177,7 @@ const displayHeader = {
       'fas',
       'fa-trophy',
       'cards-container__icon',
-      `card__icon-color--yellow`
+      'card__icon-color--yellow',
     );
     this[player].leadershipContainer.appendChild(this[player].leadershipIcon);
     this[player].leadership = document.createElement('div');
@@ -259,7 +259,7 @@ const displayHeader = {
         `${e[i][0]}`,
         `${e[i][1]}`,
         'recource-container__icon',
-        `card__icon-color--${e[i][2]}`
+        `card__icon-color--${e[i][2]}`,
       );
       container.appendChild(iconContainer);
       this[player][i] = document.createElement('div');
@@ -299,7 +299,7 @@ const displayHeader = {
       const currentPlayer = `player${i}`;
       this[currentPlayer].name.textContent = players[i];
       this[currentPlayer].container.classList.remove(
-        'player-container__hidden'
+        'player-container__hidden',
       );
       this[currentPlayer].container.classList.remove('player-container__hidden');
 

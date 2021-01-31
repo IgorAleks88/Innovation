@@ -21,7 +21,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: [],
+    hand: ['города', 'земледелие', 'гончарное дело', 'каменная кладка', 'лук и стрелы'],
     currentAge: 1,
     currentDeck: 'age1', // test
     specialCards: [],

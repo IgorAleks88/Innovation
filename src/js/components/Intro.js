@@ -1,4 +1,5 @@
 import Menu from './mainMenu';
+import renderRules from './rules';
 
 const intro = {
   init() {
@@ -124,6 +125,7 @@ c2.513-1.183,2.621-2.839,2.621-6.74V46.458z"/>
       // set up and display main menu
       const menu = new Menu(introTop);
       menu.render();
+      renderRules();
     });
 
     divIntro.addEventListener('click', (event) => {
