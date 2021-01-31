@@ -9,10 +9,26 @@
   color: rgb(226, 226, 226);
   font-size: 2rem;
   margin: 1rem;
+  overflow: hidden;
   padding: 1rem;
+  position: relative;
   transition: 0.3s linear;
 
   &:hover {
-    transform: scale(1.05);
+    font-size: 2.5rem;
+  }
+
+  &::before {
+    @include button-gear;
+    @include size(5rem, 5rem);
+    left: -1rem;
+    top: 1.7rem;
+  }
+
+  &::after {
+    @include button-gear;
+    @include size(5rem, 5rem);
+    bottom: 1.7rem;
+    right: -1rem;
   }
 }
