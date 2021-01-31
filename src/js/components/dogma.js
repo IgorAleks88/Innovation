@@ -1053,6 +1053,122 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
+  укрепления: async (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    const currentPlayer = gameState.currentPlayer;
+    let hasCards = false;
+    let fiveStack = false;
+    let bonus = false;
+    const specialCardInDeck = gameState.specialDeck.includes('Военное дело');
+
+    for (let i = 0; i < gameState.players.length; i += 1) {
+      if (gameState.players[i] !== currentPlayer) {
+        if (gameState.players[i].hand.length >= 2) {
+          hasCards = true;
+        }
+      }
+    }
+
+    for (let i = 0; i < gameState.players.length; i += 1) {
+      fiveStack = Object.values(gameState.players[i].activeDecks)
+        .every((elem) => elem.cards.length > 0) && specialCardInDeck;
+      if (fiveStack) {
+        break;
+      }
+    }
+
+    if (!hasCards && !fiveStack) {
+      showErrorModal('Эти две догмы ни на кого не действуют');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
+    if (!hasCards && fiveStack && !specialCardInDeck) {
+      showErrorModal('Эти две догмы ни на кого не действуют');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
+    if (hasCards || fiveStack) {
+      const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+      messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    }
+
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+      if (player.hand.length < 2) continue;
+      await displayNewTurnModal(player.name);
+      passTurn(player);
+      gameBoard.setHeaderCurrent();
+
+      const cardsInHand = document.querySelector('.hand__cards').children;
+
+      for (let card = 0; card < cardsInHand.length; card += 1) {
+        cardsInHand[card].onclick = handleCards(2);
+      }
+
+      const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name, 'defenceDogma');
+
+      const indices = answer.map((card) => player.hand.indexOf(card));
+      indices.forEach((idx) => player.hand.splice(idx, 1));
+      answer.forEach((card) => currentPlayer.hand.push(card));
+
+      messageToLog(player.name, `передал ${answer.length} ${cardWord(answer)} игроку ${currentPlayer.name}`);
+      takeCard(1, 2, player.id);
+      messageToLog(player.name, 'взял карту из колоды');
+      const hasStacks = Object.values(player.activeDecks).every((elem) => elem.cards.length > 0);
+
+      if (hasStacks) {
+        specCard.getCard('Военное дело');
+      }
+
+      updateGameState(gameState);
+      gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    }
+
+    // start cooperative dogm
+    const resource = cardObj.dogma[1].resource;
+    let availablePlayers = [];
+    availablePlayers = gameState.players
+      .filter((player) => player[resource] >= gameState.currentPlayer[resource])
+      .map((player) => player);
+
+    const currentPlayerID = availablePlayers.splice(gameState.currentPlayer.id, 1);
+    availablePlayers.push(currentPlayerID);
+    availablePlayers = availablePlayers.flat();
+
+    for (let i = 0; i < availablePlayers.length; i += 1) {
+      const player = availablePlayers[i];
+      const hasStacks = Object.values(player.activeDecks)
+        .every((elem) => elem.cards.length > 0);
+
+      if (hasStacks) {
+        passTurn(player);
+        gameBoard.setHeaderCurrent();
+        specCard.getCard('Военное дело');
+
+        if (i !== availablePlayers.length - 1) {
+          bonus = true;
+        }
+      }
+    }
+
+    await displayNewTurnModal(currentPlayer.name);
+    passTurn(currentPlayer);
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+    gameBoard.setHeaderCurrent();
+
+    if (bonus) {
+      corporateBonus(availablePlayers);
+      messageToLog(currentPlayer.name, 'получил кооперативный бонус');
+    }
+
+    if (currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
+  },
 };
 
 export default dogmas;
