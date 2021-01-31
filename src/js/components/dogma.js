@@ -290,7 +290,7 @@ const dogmas = {
       takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
       gameBoard.playCard(e);
     }
-    getManualDogma()(listener, getAffectedCards, 1);
+    getManualDogma(listener, getAffectedCards, 1, null, true, true, null);
   },
   кузнечноедело: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
