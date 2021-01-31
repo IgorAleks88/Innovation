@@ -53,49 +53,6 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
-  сводзаконов: (cardObj) => {
-    gameState.affectedPlayers = getAffectedPlayers(cardObj);
-    function getAffectedCards() {
-      const notEmptyStacks = Object.keys(gameState.activePlayer.activeDecks).filter((deck) => {
-        return gameState.activePlayer.activeDecks[deck].cards.length !== 0;
-      });
-      return gameState.activePlayer.hand.filter((cardID) => {
-        return notEmptyStacks.includes(getCardObject.byID(cardID).color);
-      });
-    }
-    function listener(e) {
-      const cardID = getCardID(e);
-      const cardObject = getCardObject.byID(cardID);
-      const cardElement = document.querySelector(`[data-innovation="${cardID}"]`);
-
-      gameState.activePlayer.hand.splice(gameState.activePlayer.hand.indexOf(cardID), 1);
-      gameState.activePlayer.activeDecks[cardObject.color].cards.unshift(cardID);
-      renderCard.archive(cardElement);
-      cardElement.classList.remove('active');
-      cardElement.onclick = null;
-      gameBoard.update();
-      Array.from(document.querySelector('.hand__cards').childNodes).forEach((cardElem) => {
-        cardElem.classList.remove('active');
-        cardElem.onclick = null;
-      });
-      const targetStack = document.getElementById(`${cardObject.color}`);
-      targetStack.classList.add('active');
-      if (gameState.activePlayer.activeDecks[targetStack.id].shift !== 'left') {
-        return [targetStack.id];
-      }
-      gameBoard.update();
-    }
-    function secondListener(e) {
-      const targetStack = e.target.closest('.active-zone__stack');
-      gameState.activePlayer.activeDecks[targetStack.id].shift = 'left';
-      gameBoard.display();
-      gameBoard.init();
-      gameBoard.update();
-      targetStack.onclick = null;
-      targetStack.classList.remove('active');
-    }
-    getManualDogma(listener, getAffectedCards, 2, secondListener, true, true);
-  },
   инструменты: (cardObj) => { // need fix
     const text = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
     messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${text}">${cardObj.innovation}</u>`);
@@ -179,11 +136,6 @@ const dogmas = {
       }
     });
   },
-  гончарноедело: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    await canReworkAndInfluence(cardObj, 3);
-  },
   одежда: (cardObj) => { // TODO
     console.log(`${cardObj.innovation} dogm not implemented yet`);
   },
@@ -223,6 +175,8 @@ const dogmas = {
         const color = getCardObject.byID(answer.join('')).color;
         const card = player.activeDecks[color].cards.pop();
         gameState.currentPlayer.activeDecks[color].cards.push(card);
+        const textToLog = document.querySelector(`[data-innovation="${answer.join()}"]`).innerText;
+        messageToLog(player.name, `передал карту <u title="${textToLog}">${answer.join()}</u> игроку ${gameState.currentPlayer.name}`);
         takeCard(1, 1, player.id);
         messageToLog(player.name, 'взял карту из колоды');
         updateGameState(gameState);
@@ -244,6 +198,188 @@ const dogmas = {
     gameBoard.setHeaderCurrent();
 
     if (currentPlayer.actionPoints > 0) {
+      gameBoard.init();
+    } else {
+      gameBoard.disableEvents();
+    }
+  },
+  сводзаконов: (cardObj) => {
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const notEmptyStacks = Object.keys(gameState.activePlayer.activeDecks).filter((deck) => {
+        return gameState.activePlayer.activeDecks[deck].cards.length !== 0;
+      });
+      return gameState.activePlayer.hand.filter((cardID) => {
+        return notEmptyStacks.includes(getCardObject.byID(cardID).color);
+      });
+    }
+    function listener(e) {
+      const cardID = getCardID(e);
+      const cardObject = getCardObject.byID(cardID);
+      const cardElement = document.querySelector(`[data-innovation="${cardID}"]`);
+
+      gameState.activePlayer.hand.splice(gameState.activePlayer.hand.indexOf(cardID), 1);
+      gameState.activePlayer.activeDecks[cardObject.color].cards.unshift(cardID);
+      renderCard.archive(cardElement);
+      cardElement.classList.remove('active');
+      cardElement.onclick = null;
+      gameBoard.update();
+      Array.from(document.querySelector('.hand__cards').childNodes).forEach((cardElem) => {
+        cardElem.classList.remove('active');
+        cardElem.onclick = null;
+      });
+      const targetStack = document.getElementById(`${cardObject.color}`);
+      targetStack.classList.add('active');
+      if (gameState.activePlayer.activeDecks[targetStack.id].shift !== 'left') {
+        return [targetStack.id];
+      }
+      gameBoard.update();
+    }
+    function secondListener(e) {
+      const targetStack = e.target.closest('.active-zone__stack');
+      gameState.activePlayer.activeDecks[targetStack.id].shift = 'left';
+      gameBoard.display();
+      gameBoard.init();
+      gameBoard.update();
+      targetStack.onclick = null;
+      targetStack.classList.remove('active');
+    }
+    getManualDogma(listener, getAffectedCards, 2, secondListener, true, true);
+  },
+  земледелие: async (cardObj) => {
+    await canReworkAndInfluence(cardObj, 1);
+  },
+  гончарноедело: async (cardObj) => {
+    await canReworkAndInfluence(cardObj, 3);
+  },
+  вёсла: (cardObj) => { // TODO
+    console.log(`${cardObj.innovation} dogm not implemented yet`);
+  },
+  скотоводство: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    // get affected players
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    // function which get affected cards of active player
+    // return empty arr if any properties dont match!
+    function getAffectedCards() {
+      const cardsFromHand = [];
+      gameState.activePlayer.hand.forEach((cardID) => {
+        cardsFromHand.push(getCardObject.byID(cardID));
+      });
+      const lowerCards = cardsFromHand.sort((a, b) => b.age - a.age).filter((card, i, arr) => {
+        return card.age === arr[arr.length - 1].age;
+      });
+      const lowerCardsID = lowerCards.map((cardObject) => cardObject.innovation);
+      return lowerCardsID;
+    }
+    function listener(e) {
+      takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
+      gameBoard.playCard(e);
+    }
+    getManualDogma()(listener, getAffectedCards, 1);
+  },
+  кузнечноедело: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+    const arrOfId = getAffectedPlayers(cardObj);
+    arrOfId.forEach((id) => {
+      let repeat = true;
+      do {
+        const actualAge = getActualDeck(1);
+        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
+        // const currentPlayerName = gameState[`player${id}`].name;
+        const currentCard = getCardObject.byID(cardID);
+        repeat = isHaveResource(currentCard, 'tower');
+        if (repeat) {
+          gameState.specInfluenceCount += 1;
+          gameState.players[id].influence.cards.push(cardID);
+        } else {
+          moveCardToHand(cardID, id);
+        }
+      } while (repeat);
+    });
+    corporateBonus(arrOfId);
+  },
+  каменнаякладка: async (cardObj) => {
+    const arrOfId = getAffectedPlayers(cardObj);
+    let bonus = false;
+    let tower = false;
+
+    gameState.currentPlayer.hand.forEach((card) => {
+      const hasResource = getCardObject.byID(card).resourses.some((resource) => resource.name.includes('tower'));
+      if (hasResource) tower = true;
+    });
+
+    if (!tower) {
+      showErrorModal('У Вас нет ресурса "замок"');
+      gameState.currentPlayer.actionPoints += 1;
+      return;
+    }
+
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+
+    for (let i = 0; i < arrOfId.length; i += 1) {
+      const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
+
+      let hasActivePlrResrs = false;
+      player.hand.forEach((card) => {
+        const hasResource = getCardObject.byID(card).resourses.some((resource) => resource.name.includes('tower'));
+        if (hasResource) {
+          hasActivePlrResrs = true;
+        }
+      });
+
+      if (!hasActivePlrResrs) {
+        continue;
+      }
+
+      await displayNewTurnModal(player.name);
+      passTurn(player);
+      gameBoard.setHeaderCurrent();
+      const cardsInActive = document.querySelector('.hand__cards').children;
+      for (let card = 0; card < cardsInActive.length; card += 1) {
+        if (cardsInActive[card]) {
+          cardsInActive[card].onclick = (e) => {
+            const text = e.target.closest('.card').dataset.innovation;
+            const hasResource = getCardObject.byID(text).resourses.some((resource) => resource.name.includes('tower'));
+            if (!hasResource) return;
+            e.target.closest('.card').classList.add('selected__card');
+            addTextToModal(text);
+          };
+        }
+      }
+      const answer = await dogmaModalMessages(cardObj.dogma[0].effect, player.name);
+
+      if (answer.length !== 0) {
+        answer.forEach((cardID) => playCard(cardID, player.id));
+        let wordEndings = 'т';
+        if (answer.length < 2) wordEndings = 'ту';
+        if (answer.length > 1 && answer.length < 5) wordEndings = 'ты';
+        messageToLog(player.name, `сыграл с руки ${answer.length} кар${wordEndings}`);
+
+        if (answer.length >= 4) {
+          specCard.getCard('Строительство');
+        }
+        updateGameState(gameState);
+        gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+        if (i !== arrOfId.length - 1) {
+          bonus = true;
+        }
+      }
+    }
+
+    if (bonus) {
+      corporateBonus(arrOfId);
+      messageToLog(gameState.currentPlayer.name, 'получил кооперативный бонус');
+    }
+
+    gameBoard.display();
+    gameState.players.forEach((pl) => header.changePlayerStats(pl));
+
+    if (gameState.currentPlayer.actionPoints > 0) {
       gameBoard.init();
     } else {
       gameBoard.disableEvents();
@@ -312,63 +448,6 @@ const dogmas = {
       gameBoard.disableEvents();
     }
   },
-  земледелие: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    await canReworkAndInfluence(cardObj, 1);
-  },
-  вёсла: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
-  },
-  скотоводство: (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    // get affected players
-    gameState.affectedPlayers = getAffectedPlayers(cardObj);
-    // function which get affected cards of active player
-    // return empty arr if any properties dont match!
-    function getAffectedCards() {
-      const cardsFromHand = [];
-      gameState.activePlayer.hand.forEach((cardID) => {
-        cardsFromHand.push(getCardObject.byID(cardID));
-      });
-      const lowerCards = cardsFromHand.sort((a, b) => b.age - a.age).filter((card, i, arr) => {
-        return card.age === arr[arr.length - 1].age;
-      });
-      const lowerCardsID = lowerCards.map((cardObject) => cardObject.innovation);
-      return lowerCardsID;
-    }
-    function listener(e) {
-      takeCard(1, gameState.activePlayer.currentAge, gameState.activePlayer.id);
-      gameBoard.playCard(e);
-    }
-    getManualDogma()(listener, getAffectedCards, 1);
-  },
-  кузнечноедело: (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
-    const arrOfId = getAffectedPlayers(cardObj);
-    arrOfId.forEach((id) => {
-      let repeat = true;
-      do {
-        const actualAge = getActualDeck(1);
-        const cardID = gameState.ageDecks[`age${actualAge}`].pop();
-        // const currentPlayerName = gameState[`player${id}`].name;
-        const currentCard = getCardObject.byID(cardID);
-        repeat = isHaveResource(currentCard, 'tower');
-        if (repeat) {
-          gameState.specInfluenceCount += 1;
-          gameState.players[id].influence.cards.push(cardID);
-        } else {
-          moveCardToHand(cardID, id);
-        }
-      } while (repeat);
-    });
-    corporateBonus(arrOfId);
-  },
-  каменнаякладка: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
-  },
 
   // 2 AGE
   календарь: (cardObj) => {
@@ -387,8 +466,6 @@ const dogmas = {
     console.log(`${cardObj.innovation} dogm not implemented yet`);
   },
   деньги: async (cardObj) => {
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
     await canReworkAndInfluence(cardObj, Infinity);
   },
   монотеизм: (cardObj) => { // TODO
@@ -484,7 +561,6 @@ const dogmas = {
     messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
 
     for (let i = 0; i < arrOfId.length; i += 1) {
-      console.log(gameState);
       const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
 
       if (player.influence.cards.length === 0) {
