@@ -16,7 +16,7 @@ export default function resetGameState() {
   for (let i = 0; i < 4; i += 1) {
     gameState[`player${i}`].name = null;
     gameState[`player${i}`].actionPoints = 0;
-    // gameState[`player${i}`].hand = [];
+    gameState[`player${i}`].hand = [];
     gameState[`player${i}`].currentAge = 1;
     gameState[`player${i}`].currentDeck = 'age1';
     gameState[`player${i}`].winPoints = 0;
