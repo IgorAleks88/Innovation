@@ -7,6 +7,7 @@ import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 import dogmas from './dogma';
 import specCard from '../specCards/specCard';
+import { messageToLog } from '../utility/dogmaTools';
 // import socket from '../app'; // for server
 
 const gameBoard = {
@@ -176,6 +177,8 @@ const gameBoard = {
     movingCardElement.onclick = gameBoard.playCard;
     renderCard.toHand(movingCardElement);
 
+    messageToLog(gameState.activePlayer.name, `взял карту ${cardObj.age} века`);
+
     gameBoard.update();
 
     // protection of multiple clicks
@@ -209,6 +212,9 @@ const gameBoard = {
     };
     cardElement.classList.remove('active');
     renderCard.toActive(cardElement);
+
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `сыграл карту ${cardObj.age} века <u title="${textToLog}">${cardObj.innovation}</u>`);
 
     gameBoard.update();
 
@@ -254,6 +260,7 @@ const gameBoard = {
       }
       displayNewTurnModal(gameState.currentPlayer.name);
       setTimeout(() => {
+        messageToLog(gameState.activePlayer.name, 'Ваш ход!');
         gameBoard.display();
         gameBoard.init();
         const excistedNextTurnBtns = Array.from(document.querySelectorAll('.info-table__next-turn-btn'));
