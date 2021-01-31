@@ -96,6 +96,46 @@ const gameBoard = {
     });
   },
 
+  displayAvaiableAge() {
+    // remove previous active age deck
+    let cloneCurrentDeck = document.querySelector('#cloneCurrentDeck');
+    if (cloneCurrentDeck !== null) cloneCurrentDeck.onclick = '';
+    const activeDeck = document.querySelector('.age-deck--active');
+    if (activeDeck !== null) {
+      activeDeck.classList.remove('age-deck--active');
+      activeDeck.onclick = '';
+    }
+
+    // set avaiable age deck in modal block
+    while (gameState.ageDecks[`age${gameState.activePlayer.currentAge}`].length === 0) {
+      gameState.activePlayer.currentAge += 1;
+    }
+    const avaiableAgeDeck = document.querySelector(`#age${gameState.activePlayer.currentAge}`);
+    avaiableAgeDeck.classList.add('age-deck--active');
+
+    // set avaiable age deck in aside
+    const prevDeckClone = document.querySelector('#cloneCurrentDeck');
+    if (prevDeckClone !== null) prevDeckClone.remove();
+    // clone current active deck
+    cloneCurrentDeck = avaiableAgeDeck.cloneNode();
+    cloneCurrentDeck.id = 'cloneCurrentDeck';
+    cloneCurrentDeck.classList.add('age-deck--active');
+    cloneCurrentDeck.classList.remove('xyz-in');
+    if (gameState.activePlayer.currentAge !== 10) {
+      cloneCurrentDeck.style.backgroundImage = `url(/assets/img/cards-bg/age-0${gameState.activePlayer.currentAge}-title.png)`;
+    } else {
+      cloneCurrentDeck.style.backgroundImage = 'url(/assets/img/cards-bg/age-10-title.png)';
+    }
+    // display cloned deck in currentDeck block
+    document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
+
+    // set age decks events
+    const ageDeckElements = document.querySelectorAll('.age-deck--active');
+    ageDeckElements.forEach((elem) => {
+      elem.onclick = this.takeCard;
+    });
+  },
+
   init() {
     // set hand events
     const cardElements = document.querySelectorAll('.card');
@@ -149,6 +189,7 @@ const gameBoard = {
     updateGameState(gameState);
     specCard.getAvailable();
     gameState.players.forEach((player) => header.changePlayerStats(player));
+    this.displayAvaiableAge();
 
     document.querySelector('.info-table__player-name').innerText = gameState.activePlayer.name;
     document.querySelector('.info-table__action-points').innerText = gameState.activePlayer.actionPoints;
