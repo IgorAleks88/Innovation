@@ -9,7 +9,7 @@
 .active-zone__title {
   @include title-settings('../../assets/img/title-active-zone.png');
   transform: translate(-52%);
-  z-index: 15;
+  z-index: 14;
 }
 
 .active-zone__overlay {
