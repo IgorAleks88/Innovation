@@ -60,3 +60,10 @@
   height: 20rem;
   width: 13rem;
 }
+
+@mixin position-absolute-center {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

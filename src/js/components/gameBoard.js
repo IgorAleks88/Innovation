@@ -9,6 +9,7 @@ import dogmas from './dogma';
 import specCard from '../specCards/specCard';
 import checkWinCondition from '../utility/checkWinCondition';
 import { messageToLog } from '../utility/dogmaTools';
+// import socket from '../app'; // for server
 
 const gameBoard = {
   display() {
@@ -269,6 +270,9 @@ const gameBoard = {
         e.target.onclick = gameBoard.takeCard;
       }
     }, 250);
+
+    // const state = JSON.stringify(gameState); // for server
+    // socket.emit('state', state); // for server
   },
 
   playCard(e) {
@@ -293,6 +297,9 @@ const gameBoard = {
     renderCard.toActive(cardElement);
 
     gameBoard.update();
+
+    // const state = JSON.stringify(gameState); // for server
+    // socket.emit('state', state); // for server
   },
 
   displayFinishActionBtn() {

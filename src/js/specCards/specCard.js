@@ -28,7 +28,7 @@ const specCard = {
   getCard(cardName) {
     const index = gameState.specialDeck.indexOf(`${cardName}`);
     if (index !== -1) {
-      gameState.activePlayer.specialCards.push(gameState.specialDeck.splice(index, 1));
+      gameState.activePlayer.specialCards.push(gameState.specialDeck.splice(index, 1).join());
       document.querySelector(`[data-name="${cardName}"]`).classList.add('inactive');
       messageToLog(gameState.currentPlayer.name, `получил специальную карту <br>${cardName}`);
     }
