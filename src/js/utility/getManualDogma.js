@@ -6,7 +6,7 @@ import { takeCard, showErrorModal } from './dogmaTools';
 
 const getManualDogma = function closureWrapper(listener,
   getCardsID, count, secondListener = null, isCorporate = true,
-  isSkippable = false, callbackFunc = null) {
+  isSkippable = false, callbackFunc = null, listenerAfterSkip = false) {
   // store current action points, -1 becuase dogma activation cost 1 point
   gameState.storedActionPoints = gameState.activePlayer.actionPoints - 1;
 
@@ -20,6 +20,10 @@ const getManualDogma = function closureWrapper(listener,
       if (getCardsID().length === 0) {
         gameState.activePlayer.actionPoints += 1; // return point taked on dogm activation
         showErrorModal('У вас нет возможности выполнить эту корпоративную догму!');
+        return;
+      }
+      if (getCardsID().length === 1 && getCardsID()[0] === null) {
+        listener();
         return;
       }
     }
@@ -51,6 +55,9 @@ const getManualDogma = function closureWrapper(listener,
       gameBoard.displaySkipActionBtn();
       const skipBtn = document.querySelector('.info-table__skip-action-btn');
       skipBtn.onclick = () => {
+        if (listenerAfterSkip) {
+          listener();
+        }
         gameState.activePlayer.actionPoints = 0;
         skipBtn.remove();
         [...document.querySelectorAll('.active')].forEach((element) => {

@@ -170,7 +170,7 @@ function playCard(cardID, playerID) {
     renderCard.toActive(cardElement);
   }
   const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-  messageToLog(gameState.activePlayer.name, `сыграл карту с руки <u title="${textToLog}">${cardObj.innovation}</u>`);
+  messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
 }
 
 function recycle(playerID, arrCardID) {
