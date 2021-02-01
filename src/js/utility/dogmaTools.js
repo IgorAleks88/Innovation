@@ -30,7 +30,7 @@ function showErrorModal(text) {
   `;
   wrraper.append(modal);
   audio.play();
-  setTimeout(() => modal.remove(), 2000);
+  setTimeout(() => modal.remove(), 3000);
 }
 
 function addTextToModal(text) {
@@ -43,7 +43,7 @@ function addTextToModal(text) {
 
   const textMessage = document.createElement('div');
   textMessage.classList.add('text__message');
-  textMessage.innerHTML = /* html */`${text} <div class="text__icon"><i class="fas fa-trash" aria-hidden="true"></i></div>`;
+  textMessage.innerHTML = /* html */`${text} <div class="text__icon"><i class="fas fa-times" aria-hidden="true"></i></div>`;
   messageContainer.append(textMessage);
 
   messageContainer.onclick = (e) => {
@@ -295,7 +295,8 @@ function cardWord(answer) {
 
 function messageToLog(playerName, message) {
   const log = document.querySelector('.log-block');
-  log.innerHTML += `<b>${playerName}</b> ${message} ${'_'.repeat(30)}`;
+  log.innerHTML += `<b>${playerName}</b> ${message} <hr>`;
+  log.scrollTop = log.scrollHeight;
 }
 
 export {

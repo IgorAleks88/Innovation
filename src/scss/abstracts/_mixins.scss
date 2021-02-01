@@ -67,3 +67,11 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin button-gear($mode: overlay) {
+  background: url('../../assets/img/menu-gear.png');
+  background-size: cover;
+  content: '';
+  mix-blend-mode: $mode;
+  position: absolute;
+}
