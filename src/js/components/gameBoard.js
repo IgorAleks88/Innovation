@@ -74,6 +74,17 @@ const gameBoard = {
     }
     this.setAsideLeadershipText();
 
+    // set special cards deck
+    const specialTitle = document.querySelector('.extra-cards__special-title');
+    const specialCards = [...document.querySelectorAll('.special-cards__card')];
+    let activeSpecCounter = 0;
+    specialCards.forEach((card) => {
+      if (!card.classList.contains('inactive')) activeSpecCounter += 1;
+    });
+    if (activeSpecCounter === 5) specialTitle.innerText = '5 карт';
+    else if (activeSpecCounter === 1) specialTitle.innerText = '1 карта';
+    else specialTitle.innerText = `${activeSpecCounter} карты`;
+
     // get hand cards of active player
     const hand = document.querySelector('.hand__cards');
     hand.innerHTML = '';
