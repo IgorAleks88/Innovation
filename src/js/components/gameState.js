@@ -25,7 +25,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['университеты'],
+    hand: [],
     currentAge: 1,
     currentDeck: 'age1', // test
     winPoints: 0,
@@ -55,7 +55,7 @@ const gameState = {
     },
     influence: {
       points: 0,
-      cards: ['университеты', 'университеты'],
+      cards: [],
     },
     tree: 0,
     tower: 0,
