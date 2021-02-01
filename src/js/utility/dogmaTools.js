@@ -295,7 +295,8 @@ function cardWord(answer) {
 
 function messageToLog(playerName, message) {
   const log = document.querySelector('.log-block');
-  log.innerHTML += `<b>${playerName}</b> ${message} ${'_'.repeat(30)}`;
+  log.innerHTML += `<b>${playerName}</b> ${message} <hr>`;
+  log.scrollTop = log.scrollHeight;
 }
 
 export {
