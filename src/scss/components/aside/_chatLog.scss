@@ -58,7 +58,8 @@
   left: 0;
   line-height: 2.4rem;
   opacity: 0;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 0 1rem 0.5rem;
   position: absolute;
   text-align: start;

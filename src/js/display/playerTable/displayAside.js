@@ -295,7 +295,6 @@ const displayAside = {
     for (let i = 0; i < numOfLeadershipCards; i += 1) {
       const leadershipCard = document.createElement('div');
       leadershipCard.classList.add('leadership-cards__card');
-      // leadershipCard.innerText = `${i + 1}`;
 
       const leadershipCardsTitle = document.createElement('div');
       leadershipCardsTitle.classList.add('extra-cards__leadership-title');
