@@ -11,6 +11,9 @@ const tutorial = {
   currentDOMElement: null,
   clickFunctions: {
     stage1: () => {
+      tutorial.currentDOMElement = document.querySelector('.active-zone');
+      tutorial.currentDOMElement.style.zIndex = 120;
+      document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
       displayModal.setMessageText('Игровое поле разделено на четыре зоны: стол, рука, активная зона и зона информации о всех игроках');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage2;
     },
@@ -46,8 +49,7 @@ const tutorial = {
       renderCard.toActive(getCardElement(getCardObject.byID('скотоводство')));
       gameState.player0.activeDecks.purple.cards.push('мистицизм');
       renderCard.toActive(getCardElement(getCardObject.byID('мистицизм')));
-      tutorial.currentDOMElement = document.querySelector('.active-zone');
-      tutorial.currentDOMElement.style.zIndex = 120;
+      document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage5;
     },
     stage5: () => {
@@ -63,7 +65,7 @@ const tutorial = {
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage6;
     },
     stage6: () => {
-      tutorial.currentDOMElement.style.zIndex = 0;
+      document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
       gameState.player1.activeDecks.green.cards.push('деньги');
       gameState.player1.activeDecks.green.cards.push('картография');
       gameState.player1.activeDecks.green.shift = 'right';
@@ -117,6 +119,8 @@ const tutorial = {
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage11;
     },
     stage11: () => {
+      tutorial.currentDOMElement.style.zIndex = 120;
+      document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
       gameState.player0.activeDecks.green.cards = [];
       gameState.player0.activeDecks.purple.cards = [];
       gameState.player0.activeDecks.yellow.cards = [];
@@ -146,8 +150,6 @@ const tutorial = {
         gameState.player0.actionPoints = 2;
         tutorial.currentDOMElement = document.querySelector('.aside');
         tutorial.currentDOMElement.style.zIndex = 0;
-        tutorial.currentDOMElement = document.querySelector('.active-zone');
-        tutorial.currentDOMElement.style.zIndex = 120;
         displayModal.setMessageText('Теперь сыграйте эту карту в активную зону');
         document.body.onclick = tutorial.clickFunctions.stage13;
       }
@@ -180,6 +182,7 @@ const tutorial = {
     },
     stage15: (e) => {
       if (e.target.closest('.info-table__next-turn-btn')) {
+        document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
         displayModal.setMessageText('Одно из условий победы - набрать достаточное количество очков лидерства. Чтобы достичь лидерства в эпохе, необходимо иметь 5*номер эпохи очков влияния и хотя бы одну активную карту с уровнем не меньше, чем номер этой эпохи. Добейтесь лидерства в 1 эпохе');
         document.body.onclick = tutorial.clickFunctions.stage16;
       }
@@ -188,12 +191,35 @@ const tutorial = {
       if (e.target.closest('.extra-cards__leadership-cards')) {
         tutorial.currentDOMElement.style.zIndex = 0;
         tutorial.currentDOMElement = document.querySelector('.hand');
-        tutorial.currentDOMElement.style.zIndex = 120;
-        tutorial.currentDOMElement = document.querySelector('.active-zone');
-        tutorial.currentDOMElement.style.zIndex = 120;
-        displayModal.setMessageText('Ещё один способ получить победные очки - добиться лидерства в одной из пяти сфер. Сыграйте догму Каменная кладка, чтобы добиться лидерства в строительстве');
-        document.body.onclick = tutorial.clickFunctions.stage16;
+        tutorial.currentDOMElement.style.zIndex = 0;
+        document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
+        displayModal.setMessageText('Ещё один способ получить победные очки - добиться лидерства в одной из пяти сфер. Сыграйте догму Каменная кладка и сыграйте  четыре карты с руки, чтобы добиться лидерства в строительстве');
+        document.body.onclick = tutorial.clickFunctions.stage17;
       }
+    },
+    stage17: (e) => {
+      if (e.target.closest('.card')) {
+        document.querySelector('.hand').style.zIndex = 120;
+        document.body.onclick = tutorial.clickFunctions.stage18;
+      }
+    },
+    stage18: (e) => {
+      if (e.target.classList.contains('modal__turn-step-btn') && !(e.target.classList.contains('red'))) {
+        displayModal.setMessageText('Также в игре есть догмы, выполнив условия которых, игрок может победить сразу.');
+        displayModal.modalBtn.classList.remove('modal-tutorial__btn--hidden');
+        displayModal.modalBlock.classList.remove('modal-tutorial__block--small');
+        document.body.onclick = '';
+        displayModal.modalBtn.onclick = tutorial.clickFunctions.stage19;
+      }
+    },
+    stage19: () => {
+      displayModal.setMessageText('Если игрок не может взять карту - колода, из которой он должен взять карту, и все старшие колоды пусты, либо активирована догма преписывающая закончить игру, побеждает игрок, имеюший наибольшее влияние ');
+      displayModal.modalBtn.onclick = tutorial.clickFunctions.stage20;
+    },
+    stage20: () => {
+      displayModal.setMessageText('На этом обучение завершено. Чтобы узнать больше ньюансов, ознакомтесь с правилами игры в меню');
+      displayModal.setButtonText('Завершить');
+      displayModal.modalBtn.onclick = tutorial.clickFunctions.stage20;
     },
   },
 

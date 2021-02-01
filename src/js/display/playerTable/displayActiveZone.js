@@ -4,6 +4,11 @@ const displayActiveZone = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('active-zone');
 
+    this.shader = document.createElement('div');
+    this.shader.classList.add('active-zone__shader');
+    this.shader.classList.add('active-zone__shader--hidden');
+    this.wrapper.append(this.shader);
+
     this.activeZoneTitle = document.createElement('div');
     this.activeZoneTitle.classList.add('active-zone__title');
 
