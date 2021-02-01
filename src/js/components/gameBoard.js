@@ -52,6 +52,7 @@ const gameBoard = {
     document.querySelector('.current-deck__cards').append(cloneCurrentDeck);
 
     // set avaiable leadership card
+    console.log(gameState.activePlayer.influence.points);
     const leadershipCards = document.querySelectorAll('.leadership-cards__card');
     [...leadershipCards].forEach((card, num) => {
       const age = num + 1;

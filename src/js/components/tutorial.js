@@ -154,8 +154,45 @@ const tutorial = {
     },
     stage13: (e) => {
       if (e.target.closest('.card')) {
-        displayModal.setMessageText('Догмы бывают двух типов: корпоративные и агрессивные. Список игроков, на которых подействует догма, определяется количеством ресурсов, который указан в догме');
-        document.body.onclick = tutorial.clickFunctions.stage12;
+        displayModal.setMessageText('Догмы бывают двух типов: корпоративные и агрессивные. Список игроков, на которых подействует догма, определяется количеством ресурсов, который указан в догме. Сыграйте догму Письменность');
+        document.body.onclick = tutorial.clickFunctions.stage14;
+      }
+    },
+    stage14: (e) => {
+      if (e.target.closest('.card')) {
+        tutorial.currentDOMElement.style.zIndex = 0;
+        tutorial.currentDOMElement = document.querySelector('.hand');
+        tutorial.currentDOMElement.style.zIndex = 0;
+        tutorial.currentDOMElement = document.querySelector('.aside');
+        tutorial.currentDOMElement.style.zIndex = 120;
+        gameState.player1.activeDecks.red.cards = [];
+        gameState.player1.activeDecks.green.cards = [];
+        gameState.player1.activeDecks.blue.cards = [];
+        gameState.player1.activeDecks.yellow.cards = ['каменная кладка'];
+        gameState.player1.hand = [];
+        gameState.player1.hand.push('инструменты');
+        gameState.player1.hand.push('города');
+        gameState.player1.hand.push('колесо');
+        gameState.player1.hand.push('кузнечное дело');
+        displayModal.setMessageText('За ход игрок может совершить два действия. Когда очки действий заканчиваются, нажмите кнопку "Закончить ход" ');
+        document.body.onclick = tutorial.clickFunctions.stage15;
+      }
+    },
+    stage15: (e) => {
+      if (e.target.closest('.info-table__next-turn-btn')) {
+        displayModal.setMessageText('Одно из условий победы - набрать достаточное количество очков лидерства. Чтобы достичь лидерства в эпохе, необходимо иметь 5*номер эпохи очков влияния и хотя бы одну активную карту с уровнем не меньше, чем номер этой эпохи. Добейтесь лидерства в 1 эпохе');
+        document.body.onclick = tutorial.clickFunctions.stage16;
+      }
+    },
+    stage16: (e) => {
+      if (e.target.closest('.extra-cards__leadership-cards')) {
+        tutorial.currentDOMElement.style.zIndex = 0;
+        tutorial.currentDOMElement = document.querySelector('.hand');
+        tutorial.currentDOMElement.style.zIndex = 120;
+        tutorial.currentDOMElement = document.querySelector('.active-zone');
+        tutorial.currentDOMElement.style.zIndex = 120;
+        displayModal.setMessageText('Ещё один способ получить победные очки - добиться лидерства в одной из пяти сфер. Сыграйте догму Каменная кладка, чтобы добиться лидерства в строительстве');
+        document.body.onclick = tutorial.clickFunctions.stage16;
       }
     },
   },
