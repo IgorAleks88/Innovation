@@ -101,19 +101,15 @@
 }
 
 .modal__error {
-  align-items: center;
+  @include flex;
+  @include position-absolute-center;
+  @include size(31rem, 16rem);
   animation: 2s linear forwards message-error;
   background-color: rgb(231, 54, 54);
-  border-radius: 25px;
-  display: flex;
+  border: 1px dashed #fff;
+  border-radius: 2rem;
   font-variant: all-petite-caps;
-  height: 130px;
-  justify-content: center;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 250px;
+  padding: 0 2rem;
   z-index: 500;
 }
 
