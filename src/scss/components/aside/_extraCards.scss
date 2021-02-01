@@ -40,6 +40,17 @@
   @include size(14.5rem, 23rem);
   @include flex(column, flex-start, center);
   position: relative;
+
+  &--active {
+    animation: sizeBlinker 2s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  @keyframes sizeBlinker {
+    50% {
+      transform: scale(1.1);
+    }
+  }
 }
 
 .extra-cards__leadership-title {

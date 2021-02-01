@@ -17,33 +17,36 @@ const gameState = {
   currentPlayer: null,
   activePlayer: null,
   dogmPlayers: null,
+  winCondition: {
+    finalAge: 0,
+    winPoints: 0,
+  },
   player0: {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['города', 'земледелие', 'гончарное дело', 'каменная кладка', 'лук и стрелы'],
+    hand: [],
     currentAge: 1,
     currentDeck: 'age1', // test
-    specialCards: [],
-    specArchieveCount: 0,
-    specInfluenceCount: 0,
+    winPoints: 0,
     leadershipCards: [],
+    specialCards: [],
     activeDecks: {
       red: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       green: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: 'top',
+        shift: '',
       },
       yellow: {
         cards: [],
@@ -67,28 +70,29 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
-    specialCards: [],
+    winPoints: 0,
     leadershipCards: [],
+    specialCards: [],
     activeDecks: {
       red: {
         cards: [],
-        shift: 'right',
+        shift: '',
       },
       green: {
         cards: [],
-        shift: 'right',
+        shift: '',
       },
       blue: {
         cards: [],
-        shift: 'right',
+        shift: '',
       },
       purple: {
         cards: [],
-        shift: 'right',
+        shift: '',
       },
       yellow: {
         cards: [],
-        shift: 'right',
+        shift: '',
       },
     },
     influence: {
@@ -108,8 +112,9 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
-    specialCards: [],
+    winPoints: 0,
     leadershipCards: [],
+    specialCards: [],
     activeDecks: {
       red: {
         cards: [],
@@ -149,8 +154,9 @@ const gameState = {
     actionPoints: 0,
     hand: [],
     currentAge: 1,
-    specialCards: [],
+    winPoints: 0,
     leadershipCards: [],
+    specialCards: [],
     activeDecks: {
       red: {
         cards: [],
@@ -170,7 +176,7 @@ const gameState = {
       },
       yellow: {
         cards: [],
-        shift: 'right',
+        shift: '',
       },
     },
     influence: {
