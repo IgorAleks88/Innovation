@@ -6,6 +6,7 @@ import getCardElement from '../cards/getCardElement';
 import updateGameState from '../utility/updateGameState';
 import displayHeader from '../display/playerTable/displayHeader';
 import gameBoard from './gameBoard';
+import startNewGame from '../utility/startNewGame';
 
 const tutorial = {
   currentDOMElement: null,
@@ -14,13 +15,15 @@ const tutorial = {
       tutorial.currentDOMElement = document.querySelector('.active-zone');
       tutorial.currentDOMElement.style.zIndex = 120;
       document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
+      tutorial.currentDOMElement = document.querySelector('.aside');
+      tutorial.currentDOMElement.style.zIndex = 120;
+      document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
       displayModal.setMessageText('Игровое поле разделено на четыре зоны: стол, рука, активная зона и зона информации о всех игроках');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage2;
     },
     stage2: () => {
       displayModal.setMessageText('На столе справа расположены карты, которые доступны для всех игроков: колоды эпох, лидерства и особые карты');
-      tutorial.currentDOMElement = document.querySelector('.aside');
-      tutorial.currentDOMElement.style.zIndex = 120;
+      document.querySelector('.aside__shader').classList.add('aside__shader--hidden');
       // remove onclick event from active decks
       document.querySelectorAll('.age-deck--active').forEach((e) => {
         e.onclick = '';
@@ -28,7 +31,7 @@ const tutorial = {
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage3;
     },
     stage3: () => {
-      tutorial.currentDOMElement.style.zIndex = 0;
+      document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
       displayModal.setMessageText('Внизу распологаются карты в руке игрока');
       tutorial.currentDOMElement = document.querySelector('.hand');
       renderCard.toHand(getCardElement(getCardObject.byID('колесо')));
@@ -132,9 +135,9 @@ const tutorial = {
       document.querySelectorAll('.age-deck--active').forEach((e) => {
         e.onclick = gameBoard.takeCard;
       });
-      tutorial.currentDOMElement = document.querySelector('.aside');
-      tutorial.currentDOMElement.style.zIndex = 120;
       tutorial.currentDOMElement = document.querySelector('.hand');
+      tutorial.currentDOMElement.style.zIndex = 120;
+      tutorial.currentDOMElement = document.querySelector('.current-deck');
       tutorial.currentDOMElement.style.zIndex = 120;
       if (gameState.ageDecks.age1.indexOf('письменность') > -1) {
         gameState.ageDecks.age1.splice(gameState.ageDecks.age1.indexOf('письменность'), 1);
@@ -148,7 +151,6 @@ const tutorial = {
     stage12: (e) => {
       if (e.target.classList.contains('age-deck--active')) {
         gameState.player0.actionPoints = 2;
-        tutorial.currentDOMElement = document.querySelector('.aside');
         tutorial.currentDOMElement.style.zIndex = 0;
         displayModal.setMessageText('Теперь сыграйте эту карту в активную зону');
         document.body.onclick = tutorial.clickFunctions.stage13;
@@ -165,7 +167,7 @@ const tutorial = {
         tutorial.currentDOMElement.style.zIndex = 0;
         tutorial.currentDOMElement = document.querySelector('.hand');
         tutorial.currentDOMElement.style.zIndex = 0;
-        tutorial.currentDOMElement = document.querySelector('.aside');
+        tutorial.currentDOMElement = document.querySelector('.info-table');
         tutorial.currentDOMElement.style.zIndex = 120;
         gameState.player1.activeDecks.red.cards = [];
         gameState.player1.activeDecks.green.cards = [];
@@ -182,6 +184,9 @@ const tutorial = {
     },
     stage15: (e) => {
       if (e.target.closest('.info-table__next-turn-btn')) {
+        tutorial.currentDOMElement.style.zIndex = 0;
+        tutorial.currentDOMElement = document.querySelector('.extra-cards__leadership-block');
+        tutorial.currentDOMElement.style.zIndex = 120;
         document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
         displayModal.setMessageText('Одно из условий победы - набрать достаточное количество очков лидерства. Чтобы достичь лидерства в эпохе, необходимо иметь 5*номер эпохи очков влияния и хотя бы одну активную карту с уровнем не меньше, чем номер этой эпохи. Добейтесь лидерства в 1 эпохе');
         document.body.onclick = tutorial.clickFunctions.stage16;
@@ -199,6 +204,7 @@ const tutorial = {
     },
     stage17: (e) => {
       if (e.target.closest('.card')) {
+        document.querySelector('.aside__shader').classList.add('aside__shader--hidden');
         document.querySelector('.hand').style.zIndex = 120;
         document.body.onclick = tutorial.clickFunctions.stage18;
       }
@@ -219,7 +225,10 @@ const tutorial = {
     stage20: () => {
       displayModal.setMessageText('На этом обучение завершено. Чтобы узнать больше ньюансов, ознакомтесь с правилами игры в меню');
       displayModal.setButtonText('Завершить');
-      displayModal.modalBtn.onclick = tutorial.clickFunctions.stage20;
+      displayModal.modalBtn.onclick = tutorial.clickFunctions.stage21;
+    },
+    stage21: () => {
+      startNewGame();
     },
   },
 
