@@ -6,5 +6,8 @@ export default function startNewGame() {
   resetGameState();
   document.querySelector('.chat-block').innerText = '';
   document.querySelector('.log-block').innerText = '';
+  [...document.querySelectorAll('.inactive')].forEach((element) => {
+    element.classList.remove('inactive');
+  });
   intro.init();
 }
