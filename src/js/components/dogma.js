@@ -883,8 +883,46 @@ const dogmas = {
   компас: (cardObj) => { // TODO
     console.log(`${cardObj.innovation} dogm not implemented yet`);
   },
-  университеты: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
+  университеты: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resultArr = [];
+      if (gameState.activePlayer.influence.cards.length !== 0) {
+        resultArr.push(`influence${gameState.activePlayer.id}`);
+      }
+      return resultArr;
+    }
+    function listener() {
+      messageToLog(gameState.activePlayer.name, 'переработал старшую карту из зоны влияния');
+      gameState.activePlayer.influence.cards.sort((a, b) => {
+        return getCardObject.byID(a).age - getCardObject.byID(b).age;
+      });
+      let highestInfluenceCard = gameState.activePlayer.influence
+        .cards[gameState.activePlayer.influence.cards.length - 1];
+      recycle(gameState.activePlayer.id, [highestInfluenceCard]);
+      gameState.activePlayer.influence.cards.splice(-1, 1);
+      let highestInfluenceAge;
+      if (gameState.activePlayer.influence.cards.length > 0) {
+        highestInfluenceCard = gameState.activePlayer.influence
+          .cards[gameState.activePlayer.influence.cards.length - 1];
+        highestInfluenceAge = getCardObject.byID(highestInfluenceCard).age;
+      } else {
+        highestInfluenceAge = 0;
+      }
+      takeCard(1, highestInfluenceAge + 2, gameState.activePlayer.id, true);
+      gameBoard.update();
+      document.querySelector('.header-hover__button').click();
+      const cardContainers = [...document.querySelectorAll('.cards-container')];
+      cardContainers.forEach((cardContainer) => {
+        if (cardContainer.classList.contains('active')) {
+          cardContainer.classList.remove('active');
+          cardContainer.onclick = null;
+        };
+      });
+    }
+    getManualDogma(listener, getAffectedCards, 1, null, true, true, null);
   },
   перевод: (cardObj) => { // need fix
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
