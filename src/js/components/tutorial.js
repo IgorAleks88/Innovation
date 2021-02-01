@@ -132,18 +132,29 @@ const tutorial = {
       tutorial.currentDOMElement.style.zIndex = 120;
       tutorial.currentDOMElement = document.querySelector('.hand');
       tutorial.currentDOMElement.style.zIndex = 120;
+      if (gameState.ageDecks.age1.indexOf('письменность') > -1) {
+        gameState.ageDecks.age1.splice(gameState.ageDecks.age1.indexOf('письменность'), 1);
+      }
+      gameState.ageDecks.age1.push('письменность');
       displayModal.setMessageText('Возьмите карту из колоды веков в руку');
       displayModal.modalBtn.classList.add('modal-tutorial__btn--hidden');
-      // displayModal.modalBtn.onclick = tutorial.clickFunctions.stage7;
+      displayModal.modalBlock.classList.add('modal-tutorial__block--small');
       document.body.onclick = tutorial.clickFunctions.stage12;
     },
     stage12: (e) => {
       if (e.target.classList.contains('age-deck--active')) {
+        gameState.player0.actionPoints = 2;
         tutorial.currentDOMElement = document.querySelector('.aside');
         tutorial.currentDOMElement.style.zIndex = 0;
         tutorial.currentDOMElement = document.querySelector('.active-zone');
         tutorial.currentDOMElement.style.zIndex = 120;
         displayModal.setMessageText('Теперь сыграйте эту карту в активную зону');
+        document.body.onclick = tutorial.clickFunctions.stage13;
+      }
+    },
+    stage13: (e) => {
+      if (e.target.closest('.card')) {
+        displayModal.setMessageText('Догмы бывают двух типов: корпоративные и агрессивные. Список игроков, на которых подействует догма, определяется количеством ресурсов, который указан в догме');
         document.body.onclick = tutorial.clickFunctions.stage12;
       }
     },

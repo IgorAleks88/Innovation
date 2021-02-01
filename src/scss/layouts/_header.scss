@@ -96,8 +96,8 @@
     2px 0 3px 1px rgba(0, 0, 0, 0.5);
   height: 100%;
   padding: 0.3rem;
-  position:relative;
-  transition: all 0.5s;
+  position: relative;
+  transition: transform 0.5s;
   width: 17%;
 
   &:not(:last-child):hover {

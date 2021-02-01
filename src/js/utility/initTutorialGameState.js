@@ -48,6 +48,10 @@ export default function initTutorialGameState() {
     gameState.leadershipDeck.push(ageDeck.pop());
   });
 
+  // init win condition
+  gameState.winCondition.finalAge = 3; // 10 in rules, set 3 for demo
+  gameState.winCondition.winPoints = 3;
+
   // set up players fields
   for (let i = 0; i < 2; i += 1) {
     const player = `player${i}`;

@@ -35,6 +35,10 @@
   transition: all 1.5s;
   z-index: 125;
 
+  &--small {
+    height: 38rem;
+  }
+
   &--hidden {
     opacity: 0;
   }
@@ -83,7 +87,7 @@
   font-weight: 100;
   
   &--hidden {
-    visibility: hidden;
+    display: none;
   }
   
   &:hover {
