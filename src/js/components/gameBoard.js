@@ -172,6 +172,11 @@ const gameBoard = {
   update() {
     gameState.activePlayer.actionPoints -= 1;
 
+    updateGameState(gameState);
+    specCard.getAvailable();
+    gameState.players.forEach((player) => header.changePlayerStats(player));
+    this.displayAvaiableAge();
+
     if (gameState.currentPlayer.actionPoints < 1) {
       const activeElems = document.querySelectorAll('.active');
       if (activeElems.length !== 0) {
@@ -185,11 +190,6 @@ const gameBoard = {
       && gameState.currentPlayer !== gameState.activePlayer) {
       this.displayFinishActionBtn();
     }
-
-    updateGameState(gameState);
-    specCard.getAvailable();
-    gameState.players.forEach((player) => header.changePlayerStats(player));
-    this.displayAvaiableAge();
 
     document.querySelector('.info-table__player-name').innerText = gameState.activePlayer.name;
     document.querySelector('.info-table__action-points').innerText = gameState.activePlayer.actionPoints;
