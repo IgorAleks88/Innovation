@@ -30,7 +30,7 @@ const specCard = {
     if (index !== -1) {
       gameState.activePlayer.specialCards.push(gameState.specialDeck.splice(index, 1).join());
       document.querySelector(`[data-name="${cardName}"]`).classList.add('inactive');
-      messageToLog(gameState.activePlayer.name, `получил специальную карту ${cardName}`);
+      messageToLog(gameState.currentPlayer.name, `получил специальную карту <br>${cardName}`);
     }
   },
 };
@@ -43,7 +43,9 @@ function isAllActive8() {
         .activeDecks[deckColor].cards.length - 1]).age);
   });
   const filteredResArr = resArr.filter((element) => {
-    if (element < 8) return false;
+    if (element < 8 || element === undefined) {
+      return false;
+    }
     return true;
   });
   return resArr.length === filteredResArr.length;

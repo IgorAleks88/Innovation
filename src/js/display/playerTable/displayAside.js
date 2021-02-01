@@ -172,19 +172,19 @@ const displayAside = {
     const logBlock = document.createElement('div');
     logBlock.classList.add('chat-log');
 
-    // chat tab
+    // log tab
     logBlock.innerHTML = `<div class="chat-log__tab">
-      <input type="radio" id="chat-block" name="tab-group" checked>
-      <label for="chat-block" class="chat-log__tab-title">Чат</label> 
-      <section class="chat-log__tab-content chat-block">
+      <input type="radio" id="log-block" name="tab-group" checked>
+      <label for="log-block" class="chat-log__tab-title">Лог</label> 
+      <section class="chat-log__tab-content log-block">
       </section> 
     </div>`;
 
-    // log tab
+    // chat tab
     logBlock.innerHTML += `<div class="chat-log__tab">
-      <input type="radio" id="log-block" name="tab-group">
-      <label for="log-block" class="chat-log__tab-title">Лог</label> 
-      <section class="chat-log__tab-content log-block">
+      <input type="radio" id="chat-block" name="tab-group">
+      <label for="chat-block" class="chat-log__tab-title">Чат</label> 
+      <section class="chat-log__tab-content chat-block">
       </section> 
     </div>`;
 
@@ -295,7 +295,6 @@ const displayAside = {
     for (let i = 0; i < numOfLeadershipCards; i += 1) {
       const leadershipCard = document.createElement('div');
       leadershipCard.classList.add('leadership-cards__card');
-      // leadershipCard.innerText = `${i + 1}`;
 
       const leadershipCardsTitle = document.createElement('div');
       leadershipCardsTitle.classList.add('extra-cards__leadership-title');
