@@ -47,13 +47,13 @@ const displayHeaderHover = {
       currentCardElement.style.top = `${(deck.length - 1 - i) * 4}rem`;
       this.cardContainer.append(currentCardElement);
     }
-    this.cardContainer.style.width = `30rem`;
+    this.cardContainer.style.width = '30rem';
     this.cardContainer.style.height = `${Math.min(
       deck.length * 4 + 16,
-      44
+      44,
     )}rem`;
     this.wrapper.style.height = `${Math.min(deck.length * 4 + 32, 62)}rem`;
-    this.wrapper.style.width = `40rem`;
+    this.wrapper.style.width = '40rem';
   },
   renderActiveDeck(obj) {
     console.log(obj);
@@ -63,13 +63,13 @@ const displayHeaderHover = {
         case '': {
           const activeCardId = obj.cards[obj.cards.length - 1];
           const activeCardElement = getCardElement(
-            getCardObject.byID(activeCardId)
+            getCardObject.byID(activeCardId),
           );
           this.cardContainer.appendChild(activeCardElement);
-          this.cardContainer.style.width = `32rem`;
-          this.cardContainer.style.height = `22rem`;
-          this.wrapper.style.height = `38rem`;
-          this.wrapper.style.width = `42rem`;
+          this.cardContainer.style.width = '32rem';
+          this.cardContainer.style.height = '22rem';
+          this.wrapper.style.height = '38rem';
+          this.wrapper.style.width = '42rem';
           break;
         }
         case 'top': {
@@ -82,15 +82,15 @@ const displayHeaderHover = {
             currentCardElement.style.position = 'absolute';
             this.cardContainer.append(currentCardElement);
           }
-          this.cardContainer.style.width = `32rem`;
+          this.cardContainer.style.width = '32rem';
           this.cardContainer.style.height = `${Math.min(
             obj.cards.length * 4 + 18,
-            44
+            44,
           )}rem`;
-          this.wrapper.style.width = `42rem`;
+          this.wrapper.style.width = '42rem';
           this.wrapper.style.height = `${Math.min(
             obj.cards.length * 4 + 34,
-            62
+            62,
           )}rem`;
           break;
         }
@@ -104,15 +104,15 @@ const displayHeaderHover = {
             currentCardElement.style.position = 'absolute';
             this.cardContainer.append(currentCardElement);
           }
-          this.cardContainer.style.height = `22rem`;
+          this.cardContainer.style.height = '22rem';
           this.cardContainer.style.width = `${Math.min(
             obj.cards.length * 4 + 28,
-            48
+            48,
           )}rem`;
-          this.wrapper.style.height = `38rem`;
+          this.wrapper.style.height = '38rem';
           this.wrapper.style.width = `${Math.min(
             obj.cards.length * 4 + 38,
-            58
+            58,
           )}rem`;
           break;
         }
@@ -124,15 +124,15 @@ const displayHeaderHover = {
             currentCardElement.style.position = 'absolute';
             this.cardContainer.append(currentCardElement);
           }
-          this.cardContainer.style.height = `22rem`;
+          this.cardContainer.style.height = '22rem';
           this.cardContainer.style.width = `${Math.min(
             obj.cards.length * 4 + 28,
-            48
+            48,
           )}rem`;
-          this.wrapper.style.height = `38rem`;
+          this.wrapper.style.height = '38rem';
           this.wrapper.style.width = `${Math.min(
             obj.cards.length * 4 + 38,
-            58
+            58,
           )}rem`;
           break;
         }

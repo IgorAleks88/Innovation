@@ -14,10 +14,14 @@ function dogmaModalMessages(text, playerName, isAggressive, qa) {
     const btnWrapper = modal.querySelector('.wrapper__btn');
 
     btnWrapper.addEventListener('click', (e) => {
+      const target = e.target.textContent;
       if (e.target === btnWrapper) return;
-      if (e.target.textContent === 'ok' && qa === 'ok') resolve('ok');
-      if (e.target.textContent === 'ok' && messages.childElementCount < 1 && !qa) return;
-      if (document.querySelector('.text__message') && e.target.textContent === 'ok') {
+      if (target === 'ok' && qa === 'ok') resolve('ok');
+      if (target === 'ok' && messages.childElementCount < 1 && !qa) return;
+      if (isAggressive === 'defenceDogma' && messages.childElementCount !== 2 && target === 'ok') {
+        return;
+      }
+      if (document.querySelector('.text__message') && target === 'ok') {
         const cardID = [...document.querySelectorAll('.text__message')].map((element) => element.textContent.trim());
         resolve(cardID);
       } else {

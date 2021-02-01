@@ -11,9 +11,10 @@
     height: 100%;
     width: 100%;
     opacity: 0.85;
+    // z-index: 1;
 
     &--hidden {
-      opacity: 0;
+      visibility: hidden;
     }
   }
 
