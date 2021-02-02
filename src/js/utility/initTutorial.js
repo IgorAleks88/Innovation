@@ -28,6 +28,9 @@ export default function initTutorial() {
   document.querySelector('#player1-hand').style.zIndex = 0;
   document.querySelector('#player1-influence').style.zIndex = 0;
   document.querySelector('#player1-active').style.zIndex = 0;
+  document.querySelector('.header__title').style.zIndex = 0;
+  document.querySelector('.active-zone__title').style.zIndex = 15;
+  document.querySelector('.hand__title').style.zIndex = 10;
   // initialize new game
   initTutorialGameState();
   gameBoard.display();
