@@ -9,6 +9,20 @@
   width: 37rem;
   // z-index: 10;
 
+  .aside__shader {
+    position: absolute;
+    background: rgb(0,0,0);
+    top: -2rem;
+    height: 100%;
+    width: 100%;
+    opacity: 0.85;
+    z-index: 20;
+  
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
   .aside__overlay {
     @include block-background-overlay;
     margin: 0;

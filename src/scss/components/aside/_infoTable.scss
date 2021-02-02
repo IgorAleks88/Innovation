@@ -35,12 +35,12 @@
 .info-table__next-turn-btn {
   @include size(26.5rem, 8rem);
   @include flex(column, center, center);
+  @include cursor-pointer;
   animation: blinker 2s ease-in-out infinite;
   background: url('../../assets/img/info-table.png');
   background-size: cover;
   border-radius: 1rem;
   border-radius: 1rem;
-  cursor: pointer;
   font-family: 'Caesar';
   font-size: 1.5rem;
   left: 50%;

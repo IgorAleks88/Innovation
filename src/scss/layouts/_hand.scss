@@ -5,6 +5,7 @@
   position: relative;
   transition: all 0.5s;
   width: 100%;
+  z-index: 2;
 
   .card {
     margin: 3.5rem;
@@ -13,7 +14,14 @@
   .hand__title {
     @include title-settings('../../assets/img/title-hand.png');
     z-index: 14;
+
+    &--shade {
+      background: url('../../assets/img/title-hand-shade.png');
+      background-size: cover;
+      transform: translate(-52%);
+    }
   }
+ 
 }
 
 .hand__overlay {
@@ -32,8 +40,8 @@
   z-index: 2;
 
   .card {
+    @include cursor-pointer;
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
-    cursor: pointer;
     transition: all 0.2s linear;
 
     &:hover {
@@ -75,7 +83,7 @@
 .hand__btn {
   @include size(6.3rem, 6.5rem);
   @include flex(row, center, center);
-  cursor: pointer;
+  @include cursor-pointer;
   filter: drop-shadow(-0.2rem 0 0.5rem #000);
   transition: all 0.5s ease;
 
@@ -99,7 +107,7 @@
   }
 
   &--disabled {
-    cursor: default;
+    @include cursor-default;
     filter: brightness(0.5);
     opacity: 0.5;
   }
@@ -138,5 +146,18 @@
       opacity: 1;
       stroke-dashoffset: 0;
     }
+  }
+}
+
+.hand__shader {
+  position: absolute;
+  background: rgb(0,0,0);
+  height: 100%;
+  width: 100%;
+  opacity: 0.85;
+  z-index: 24;
+
+  &--hidden {
+    visibility: hidden;
   }
 }

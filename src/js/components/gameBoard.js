@@ -6,9 +6,9 @@ import updateGameState from '../utility/updateGameState';
 import displayNewTurnModal from '../display/displayNewTurnModal';
 import header from '../display/playerTable/displayHeader';
 import dogmas from './dogma';
+import { messageToLog } from '../utility/dogmaTools';
 import specCard from '../specCards/specCard';
 import checkWinCondition from '../utility/checkWinCondition';
-import { messageToLog } from '../utility/dogmaTools';
 // import socket from '../app'; // for server
 
 const gameBoard = {
@@ -327,6 +327,8 @@ const gameBoard = {
 
     // const state = JSON.stringify(gameState); // for server
     // socket.emit('state', state); // for server
+
+    messageToLog(gameState.currentPlayer.name, 'взял карту из колоды');
   },
 
   playCard(e) {
@@ -350,13 +352,16 @@ const gameBoard = {
     cardElement.classList.remove('active');
     renderCard.toActive(cardElement);
 
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.activePlayer.name, `сыграл карту ${cardObj.age} века <u title="${textToLog}">${cardObj.innovation}</u>`);
+    /* const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `сыграл карту ${cardObj.age} века <u title="${textToLog}">${cardObj.innovation}</u>`); */
 
     gameBoard.update();
 
     // const state = JSON.stringify(gameState); // for server
     // socket.emit('state', state); // for server
+
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u> с руки`);
   },
 
   displayFinishActionBtn() {

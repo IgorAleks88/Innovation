@@ -10,27 +10,29 @@ const displayHeaderHover = {
   button: null,
 
   init() {
-    this.block = document.createElement('div');
-    this.block.classList.add('header-hover__block');
-    this.block.classList.add('header-hover__block__hidden');
-    this.overlay = document.createElement('div');
-    this.overlay.classList.add('header-hover__overlay');
-    this.wrapper = document.createElement('div');
-    this.wrapper.classList.add('header-hover__wrapper');
-    this.cardContainer = document.createElement('div');
-    this.cardContainer.classList.add('header-hover__card-container');
-    this.wrapper.appendChild(this.cardContainer);
-    this.button = document.createElement('button');
-    this.button.classList.add('header-hover__button');
-    this.button.innerText = 'Закрыть';
-    this.button.addEventListener('click', () => {
-      this.clearWrapper();
+    if (!this.block) {
+      this.block = document.createElement('div');
+      this.block.classList.add('header-hover__block');
       this.block.classList.add('header-hover__block__hidden');
-    });
-    this.wrapper.appendChild(this.button);
-    this.overlay.append(this.wrapper);
-    this.block.append(this.overlay);
-    document.body.prepend(this.block);
+      this.overlay = document.createElement('div');
+      this.overlay.classList.add('header-hover__overlay');
+      this.wrapper = document.createElement('div');
+      this.wrapper.classList.add('header-hover__wrapper');
+      this.cardContainer = document.createElement('div');
+      this.cardContainer.classList.add('header-hover__card-container');
+      this.wrapper.appendChild(this.cardContainer);
+      this.button = document.createElement('button');
+      this.button.classList.add('header-hover__button');
+      this.button.innerText = 'Закрыть';
+      this.button.addEventListener('click', () => {
+        this.clearWrapper();
+        this.block.classList.add('header-hover__block__hidden');
+      });
+      this.wrapper.appendChild(this.button);
+      this.overlay.append(this.wrapper);
+      this.block.append(this.overlay);
+      document.body.prepend(this.block);
+    }
   },
 
   clearWrapper() {

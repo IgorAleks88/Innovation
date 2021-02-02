@@ -36,9 +36,9 @@
   position: relative;
 
   &--active {
+    @include cursor-pointer;
     border-radius: 25%;
     box-shadow: inset 0 0 15px 8px #f8c31d, 0 0 15px 5px #f8c31d;
-    cursor: pointer;
   }
 
   .extra-cards__leadership-title {

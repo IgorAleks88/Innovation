@@ -39,7 +39,7 @@
   top: -25px; // don't change on rem
   transform: translateX(-50%);
   width: 150px;
-  z-index: 3;
+  // z-index: 3;
 }
 
 @mixin area-border($url) {
@@ -74,4 +74,16 @@
   content: '';
   mix-blend-mode: $mode;
   position: absolute;
+}
+
+@mixin cursor-default {
+  cursor: url('../../assets/icons/cursor.png'), auto;
+}
+
+@mixin cursor-pointer {
+  cursor: url('../../assets/icons/pointer.png'), auto;
+}
+
+@mixin cursor-move {
+  cursor: url('../../assets/icons/move.png'), auto;
 }

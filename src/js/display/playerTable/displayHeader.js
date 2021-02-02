@@ -3,6 +3,7 @@ import gameState from '../../components/gameState';
 
 const displayHeader = {
   wrapper: null,
+  shader: null,
   headRowNames: [
     { hand: ['fas', 'fa-hand-paper', 'yellow'] },
     { influence: ['fas', 'fa-shield-alt', 'red'] },
@@ -128,6 +129,7 @@ const displayHeader = {
 
     this[player].handContainer = document.createElement('div');
     this[player].handContainer.classList.add('cards-container');
+    this[player].handContainer.id = `${player}-hand`;
     this[player].handIcon = document.createElement('div');
     this[player].handIcon.classList.add(
       'fas',
@@ -150,6 +152,7 @@ const displayHeader = {
 
     this[player].influenceContainer = document.createElement('div');
     this[player].influenceContainer.classList.add('cards-container');
+    this[player].influenceContainer.id = `${player}-influence`;
     this[player].influenceIcon = document.createElement('div');
     this[player].influenceIcon.classList.add(
       'fas',
@@ -190,6 +193,7 @@ const displayHeader = {
 
     const activeZoneRow = document.createElement('div');
     activeZoneRow.classList.add('active-zone-row');
+    activeZoneRow.id = `${player}-active`;
 
     this[player].red = document.createElement('div');
     this[player].red.classList.add('active-zone-row__red');
@@ -312,6 +316,10 @@ const displayHeader = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('header');
 
+    this.shader = document.createElement('div');
+    this.shader.classList.add('header__shader');
+    this.shader.classList.add('header__shader--hidden');
+
     this.headerTitle = document.createElement('div');
     this.headerTitle.classList.add('header__title');
     this.wrapper.appendChild(this.headerTitle);
@@ -326,6 +334,7 @@ const displayHeader = {
     this.headerTableWrapper.classList.add('header__table__wrapper');
     this.headerTable.appendChild(this.headerTableWrapper);
     this.wrapper.appendChild(this.headerTable);
+    this.wrapper.appendChild(this.shader);
 
     this.initPlayerStats(0);
     this.initPlayerStats(1);

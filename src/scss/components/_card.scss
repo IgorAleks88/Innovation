@@ -176,7 +176,7 @@
       margin-top: 0.2rem;
 
       &:hover {
-        cursor: pointer;
+        @include cursor-pointer;
       }
 
       .dogma__effect {

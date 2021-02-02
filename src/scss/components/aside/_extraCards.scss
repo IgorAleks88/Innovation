@@ -42,8 +42,8 @@
   position: relative;
 
   &--active {
+    @include cursor-pointer;
     animation: sizeBlinker 2s ease-in-out infinite;
-    cursor: pointer;
   }
 
   @keyframes sizeBlinker {
