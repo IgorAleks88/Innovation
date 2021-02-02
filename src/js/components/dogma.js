@@ -1491,8 +1491,18 @@ const dogmas = {
   оптика: (cardObj) => { // TODO
     console.log(`${cardObj.innovation} dogm not implemented yet`);
   },
-  медицина: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
+  медицина: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
+    const affectedPlayers = getAffectedPlayers(cardObj);
+    affectedPlayers.filter((playerID) => {
+      messageToLog(gameState.activePlayer.name, 'взял и зачел карту');
+      takeCard(1, 1, gameState[`player${playerID}`].id, false);
+      const targetCardID = gameState[`player${playerID}`].hand.splice(-1, 1).join();
+      gameState.activePlayer.influence.cards.push(targetCardID);
+      gameState.activePlayer.actionPoints += 1;
+      gameBoard.update();
+    }
   },
 
   // 4 AGE
