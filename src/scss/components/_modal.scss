@@ -107,13 +107,14 @@
 .modal__error {
   @include flex;
   @include position-absolute-center;
-  @include size(31rem, 16rem);
+  @include size(31rem, auto);
   animation: 2s linear forwards message-error;
   background-color: rgb(231, 54, 54);
   border: 1px dashed #fff;
   border-radius: 2rem;
   font-variant: all-petite-caps;
-  padding: 0 2rem;
+  min-height: 16rem;
+  padding: 1rem 2rem;
   z-index: 500;
 }
 

@@ -101,7 +101,7 @@
   width: 17%;
 
   &:not(:last-child):hover {
-    cursor: pointer;
+    @include cursor-pointer;
     transform: scale(1.1);
   }
 
@@ -120,7 +120,7 @@
   width: 100%;
 
   div:hover {
-    cursor: pointer;
+    @include cursor-pointer;
     transform: scale(1.2);
   }
 

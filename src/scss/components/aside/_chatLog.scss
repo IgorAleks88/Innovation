@@ -36,7 +36,7 @@
 }
 
 .chat-log__tab-title {
-  cursor: pointer;
+  @include cursor-pointer;
 }
 
 .chat-log__tab :checked + .chat-log__tab-title {
@@ -111,13 +111,13 @@
 }
 
 .chat-log__spread {
+  @include cursor-pointer;
   background-color: #e2e2e2;
   background-image: url('/assets/icons/aside-spread-btn.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 1rem;
-  cursor: pointer;
   height: 2rem;
   position: absolute;
   right: 0.5rem;

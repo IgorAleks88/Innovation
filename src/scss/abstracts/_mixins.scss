@@ -75,3 +75,15 @@
   mix-blend-mode: $mode;
   position: absolute;
 }
+
+@mixin cursor-default {
+  cursor: url('../../assets/icons/cursor.png'), auto;
+}
+
+@mixin cursor-pointer {
+  cursor: url('../../assets/icons/pointer.png'), auto;
+}
+
+@mixin cursor-move {
+  cursor: url('../../assets/icons/move.png'), auto;
+}
