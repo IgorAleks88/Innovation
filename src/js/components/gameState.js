@@ -49,7 +49,7 @@ const gameState = {
         shift: '',
       },
       yellow: {
-        cards: ['каменная кладка'],
+        cards: [],
         shift: '',
       },
     },
@@ -79,7 +79,7 @@ const gameState = {
         shift: '',
       },
       green: {
-        cards: ['колесо'],
+        cards: [],
         shift: '',
       },
       blue: {

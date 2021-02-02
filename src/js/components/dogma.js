@@ -1492,17 +1492,35 @@ const dogmas = {
     console.log(`${cardObj.innovation} dogm not implemented yet`);
   },
   медицина: (cardObj) => {
+    let affectedPlayers = getAffectedPlayers(cardObj);
+    affectedPlayers = affectedPlayers.filter((playerID) => {
+      if (gameState.activePlayer.influence.cards.length === 0
+        || gameState[`player${playerID}`].influence.cards.length === 0) return false;
+      return true;
+    });
+    if (affectedPlayers.length === 0) {
+      gameState.activePlayer.actionPoints += 1;
+      showErrorModal('Не достаточно карт влияния для активации догмы');
+      return;
+    }
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
     messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
-    const affectedPlayers = getAffectedPlayers(cardObj);
-    affectedPlayers.filter((playerID) => {
-      messageToLog(gameState.activePlayer.name, 'взял и зачел карту');
-      takeCard(1, 1, gameState[`player${playerID}`].id, false);
-      const targetCardID = gameState[`player${playerID}`].hand.splice(-1, 1).join();
-      gameState.activePlayer.influence.cards.push(targetCardID);
+    affectedPlayers.forEach((playerID) => {
+      gameState.activePlayer.influence.cards.sort((a, b) => {
+        return getCardObject.byID(a).age - getCardObject.byID(b).age;
+      });
+      const lowestInflCard = gameState.activePlayer.influence.cards.splice(0, 1).join();
+      gameState[`player${playerID}`].influence.cards.sort((a, b) => {
+        return getCardObject.byID(a).age - getCardObject.byID(b).age;
+      });
+
+      const highestInflCard = gameState[`player${playerID}`].influence.cards.splice(-1, 1).join();
+      gameState.activePlayer.influence.cards.push(highestInflCard);
+      gameState[`player${playerID}`].influence.cards.push(lowestInflCard);
+      messageToLog(gameState[`player${playerID}`].name, `обменял старшую карту из своей зоны влияния на младшую карту из зоны влияния игрока ${gameState.activePlayer.name}`);
       gameState.activePlayer.actionPoints += 1;
       gameBoard.update();
-    }
+    });
   },
 
   // 4 AGE

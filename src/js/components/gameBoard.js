@@ -327,8 +327,6 @@ const gameBoard = {
 
     // const state = JSON.stringify(gameState); // for server
     // socket.emit('state', state); // for server
-
-    messageToLog(gameState.currentPlayer.name, 'взял карту из колоды');
   },
 
   playCard(e) {
@@ -351,9 +349,6 @@ const gameBoard = {
     };
     cardElement.classList.remove('active');
     renderCard.toActive(cardElement);
-
-    /* const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.activePlayer.name, `сыграл карту ${cardObj.age} века <u title="${textToLog}">${cardObj.innovation}</u>`); */
 
     gameBoard.update();
 
