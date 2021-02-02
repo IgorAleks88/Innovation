@@ -193,7 +193,8 @@ const getManualDogma = function closureWrapper(listener,
                 element.remove();
               });
             }
-            if (gameState.activePlayer.actionPoints === 0 && gameState.affectedPlayers.length !== 0) {
+            if (gameState.activePlayer.actionPoints === 0
+              && gameState.affectedPlayers.length !== 0) {
               setManualDogma(listener, getCardsID, count, isSkippable);
             } else if (gameState.affectedPlayers.length === 0) {
               gameState.activePlayer = gameState.currentPlayer;
@@ -202,6 +203,7 @@ const getManualDogma = function closureWrapper(listener,
               }
               displayNewTurnModal(null, gameState.currentPlayer.name);
               setTimeout(() => {
+                if (callbackFunc !== null) callbackFunc();
                 gameBoard.display();
                 gameBoard.init();
                 gameBoard.update();

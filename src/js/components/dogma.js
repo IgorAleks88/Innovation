@@ -735,6 +735,8 @@ const dogmas = {
       return resArr;
     }
     function listener(e) {
+      messageToLog(gameState.activePlayer.name, `переместил карту из своей зоны влияния в зону влияния ${gameState.currentPlayer.name}`);
+      messageToLog(gameState.activePlayer.name, 'взял и архивировал карту');
       const stackColor = e.target.closest('.active-zone__stack').id;
       const targetCardID = gameState.activePlayer.activeDecks[stackColor].cards.pop();
       gameState.currentPlayer.influence.cards.push(targetCardID);
@@ -748,16 +750,18 @@ const dogmas = {
       gameBoard.displayActive();
     }
     function callback() {
-      // const affectedPlayers = getAffectedPlayers(cardObj, true);
-      // affectedPlayers.forEach((playerID) => {
-      //   takeCard(1, 1, gameState[`player${playerID}`].id, false);
-      //   const targetCardID = gameState[`player${playerID}`].hand.splice(-1, 1).join();
-      //   const targetCardColor = getCardObject.byID(targetCardID).color;
-      //   gameState[`player${playerID}`].activeDecks[targetCardColor].cards.unshift(targetCardID);
-      //   gameState.activePlayer.actionPoints += 1;
-      //   gameBoard.update();
-      // });
-      console.log('callback')
+      if (gameState.activePlayer.id === gameState.currentPlayer.id) {
+        const affectedPlayers = getAffectedPlayers(cardObj, true);
+        affectedPlayers.forEach((playerID) => {
+          messageToLog(gameState.activePlayer.name, 'взял и архивировал карту');
+          takeCard(1, 1, gameState[`player${playerID}`].id, false);
+          const targetCardID = gameState[`player${playerID}`].hand.splice(-1, 1).join();
+          const targetCardColor = getCardObject.byID(targetCardID).color;
+          gameState[`player${playerID}`].activeDecks[targetCardColor].cards.unshift(targetCardID);
+          gameState.activePlayer.actionPoints += 1;
+          gameBoard.update();
+        });
+      }
     }
     getManualDogma(listener, getAffectedCards, 1, null, false, false, callback, false);
   },
