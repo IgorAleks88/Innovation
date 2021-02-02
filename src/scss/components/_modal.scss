@@ -103,7 +103,7 @@
 .modal__error {
   @include flex;
   @include position-absolute-center;
-  @include size(31rem, 16rem);
+  @include size(30rem, 22rem);
   animation: 2s linear forwards message-error;
   background-color: rgb(231, 54, 54);
   border: 1px dashed #fff;
@@ -115,6 +115,6 @@
 
 .error__message {
   color: rgb(255, 255, 255);
-  font-size: 30px;
+  font-size: 3rem;
   text-align: center;
 }
