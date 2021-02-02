@@ -276,7 +276,7 @@ async function canReworkAndInfluence(cardObj, quantity) {
     corporateBonus(arrOfId);
     messageToLog(currentPlayer.name, 'получил кооперативный бонус');
   }
-
+  updateGameState(gameState);
   gameBoard.display();
   gameState.players.forEach((pl) => header.changePlayerStats(pl));
 
