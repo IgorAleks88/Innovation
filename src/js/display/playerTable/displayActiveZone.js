@@ -4,6 +4,11 @@ const displayActiveZone = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('active-zone');
 
+    this.shader = document.createElement('div');
+    this.shader.classList.add('active-zone__shader');
+    this.shader.classList.add('active-zone__shader--hidden');
+    this.wrapper.append(this.shader);
+
     this.activeZoneTitle = document.createElement('div');
     this.activeZoneTitle.classList.add('active-zone__title');
 
@@ -19,7 +24,7 @@ const displayActiveZone = {
     this.cardsBlockOverlay.classList.add('active-zone__overlay');
 
     // create players active stacks
-    const stacksNames = ['red', 'green', 'blue', 'purple', 'yellow'];
+    const stacksNames = ['blue', 'red', 'green', 'purple', 'yellow'];
     for (let i = 0; i < stacksNames.length; i += 1) {
       const stack = document.createElement('div');
       stack.classList.add('active-zone__stack');

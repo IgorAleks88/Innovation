@@ -3,6 +3,11 @@ const displayHand = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('hand');
 
+    this.shader = document.createElement('div');
+    this.shader.classList.add('hand__shader');
+    this.shader.classList.add('hand__shader--hidden');
+    this.wrapper.append(this.shader);
+
     this.handTitle = document.createElement('div');
     this.handTitle.classList.add('hand__title');
 

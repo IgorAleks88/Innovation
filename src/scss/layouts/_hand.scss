@@ -5,6 +5,7 @@
   position: relative;
   transition: all 0.5s;
   width: 100%;
+  z-index: 2;
 
   .card {
     margin: 3.5rem;
@@ -13,7 +14,14 @@
   .hand__title {
     @include title-settings('../../assets/img/title-hand.png');
     z-index: 14;
+
+    &--shade {
+      background: url('../../assets/img/title-hand-shade.png');
+      background-size: cover;
+      transform: translate(-52%);
+    }
   }
+ 
 }
 
 .hand__overlay {
@@ -138,5 +146,18 @@
       opacity: 1;
       stroke-dashoffset: 0;
     }
+  }
+}
+
+.hand__shader {
+  position: absolute;
+  background: rgb(0,0,0);
+  height: 100%;
+  width: 100%;
+  opacity: 0.85;
+  z-index: 24;
+
+  &--hidden {
+    visibility: hidden;
   }
 }

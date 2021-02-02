@@ -8,6 +8,11 @@ const displayAside = {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('aside');
 
+    this.shader = document.createElement('div');
+    this.shader.classList.add('aside__shader');
+    this.shader.classList.add('aside__shader--hidden');
+    this.wrapper.append(this.shader);
+
     // append block for style aside backgroung and border
     this.wrapper.append(this.getStyleBlock('overlay'));
     this.wrapper.append(this.getStyleBlock('top'));
