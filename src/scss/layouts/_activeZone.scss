@@ -56,9 +56,9 @@
   }
 
   .card {
+    @include cursor-pointer;
     bottom: 0;
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
-    cursor: pointer;
     margin-bottom: 0.3rem;
     transition: all 0.2s linear;
   }
@@ -75,7 +75,7 @@
   z-index: 15;
 
   &:hover {
-    cursor: pointer;
+    @include cursor-pointer;
     filter: none;
     left: 0;
     transition: all 0.5s linear;

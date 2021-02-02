@@ -300,3 +300,33 @@ input[type='text'] {
     color: rgb(255, 255, 255);
   }
 }
+
+@media (max-width: 700px) {
+  .menu.about {
+    .menu__link.logo {
+      @include size(22.85vw, 13.71vw);
+    }
+
+    .menu__link.person {
+      height: 22.85vw !important;
+      width: 14.85vw !important;
+
+      &::before {
+        height: 22.85vw !important;
+        width: 14.85vw !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .menu__link {
+    @include size(17rem, 4rem);
+    font-size: 2rem;
+  }
+
+  .menu__link svg,
+  .menu button svg {
+    height: 110%;
+  }
+}

@@ -6,16 +6,16 @@
 }
 
 a {
+  @include cursor-pointer;
   color: inherit;
-  cursor: pointer;
   text-decoration: none;
 }
 
 button {
+  @include cursor-pointer;
   background-color: transparent;
   border-width: 0;
   color: inherit;
-  cursor: pointer;
   outline: none;
   padding: 0;
 }

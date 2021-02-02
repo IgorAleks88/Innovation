@@ -15,6 +15,7 @@ html {
 }
 
 body {
+  @include cursor-default;
   font-family: 'Fira Sans Condensed';
   font-size: 2rem;
   height: auto;
