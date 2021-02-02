@@ -838,6 +838,7 @@ const dogmas = {
           gameState.activePlayer.actionPoints += 1;
           gameBoard.update();
         });
+        corporateBonus(affectedPlayers);
       } else if (gameState.activePlayer.id === gameState.currentPlayer.id
         && gameState.counter === 0) {
         gameState.activePlayer.actionPoints += 1;
