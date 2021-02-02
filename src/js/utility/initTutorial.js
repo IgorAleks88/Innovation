@@ -18,9 +18,10 @@ export default function initTutorial() {
 
   document.querySelector('.active-zone').style.zIndex = 120;
   document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
+  document.querySelector('.active-zone__title').classList.add('active-zone__title--shade');
   document.querySelector('.aside').style.zIndex = 120;
   document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
-  document.querySelector('.hand').style.zIndex = 0;
+  document.querySelector('.hand').style.zIndex = 120;
   document.querySelector('.aside').style.zIndex = 120;
   document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
   document.querySelector('.header').style.zIndex = 120;
