@@ -16,22 +16,19 @@ export default function initTutorial() {
 
   // initialize game board shaders
 
-  document.querySelector('.active-zone').style.zIndex = 120;
   document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
   document.querySelector('.active-zone__title').classList.add('active-zone__title--shade');
-  document.querySelector('.aside').style.zIndex = 120;
   document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
-  document.querySelector('.hand').style.zIndex = 120;
-  document.querySelector('.aside').style.zIndex = 120;
+  document.querySelector('.hand__shader').classList.remove('hand__shader--hidden');
+  document.querySelector('.hand__title').classList.add('hand__title--shade');
   document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
-  document.querySelector('.header').style.zIndex = 120;
   document.querySelector('.header__shader').classList.remove('header__shader--hidden');
   document.querySelector('#player1-hand').style.zIndex = 0;
   document.querySelector('#player1-influence').style.zIndex = 0;
   document.querySelector('#player1-active').style.zIndex = 0;
   document.querySelector('.header__title').style.zIndex = 0;
-  document.querySelector('.active-zone__title').style.zIndex = 15;
-  document.querySelector('.hand__title').style.zIndex = 10;
+  document.querySelector('.active-zone__title').style.zIndex = 25;
+  document.querySelector('.hand__title').style.zIndex = 25;
   // initialize new game
   initTutorialGameState();
   gameBoard.display();

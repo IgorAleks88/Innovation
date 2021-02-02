@@ -1,5 +1,4 @@
 const displayModal = {
-  modalBg: null,
   modalBlock: null,
   modalOverlay: null,
   modalWrapper: null,
@@ -7,11 +6,7 @@ const displayModal = {
   modalBtn: null,
 
   init() {
-    if (!this.modalBg) {
-      this.modalBg = document.createElement('div');
-      this.modalBg.classList.add('modal-tutorial');
-      this.modalBg.classList.add('modal-tutorial--hidden');
-
+    if (!this.modalBlock) {
       this.modalBlock = document.createElement('div');
       this.modalBlock.classList.add('modal-tutorial__block');
       this.modalBlock.classList.add('modal-tutorial__block--hidden');
@@ -31,7 +26,7 @@ const displayModal = {
       this.modalWrapper.append(this.modalText, this.modalBtn);
       this.modalBlock.append(this.modalOverlay, this.modalWrapper);
 
-      document.body.prepend(this.modalBg, this.modalBlock);
+      document.body.prepend(this.modalBlock);
     }
   },
 

@@ -187,7 +187,6 @@ class Menu {
       } else if (e.target.className.includes('tutorial')) {
         displayHeaderHover.init();
         displayModal.init();
-        displayModal.modalBg.classList.remove('modal-tutorial--hidden');
         displayModal.modalBlock.classList.remove('modal-tutorial__block--hidden');
         displayModal.modalBtn.classList.remove('modal-tutorial__btn--hidden');
         displayModal.modalBlock.classList.remove('modal-tutorial__block--small');

@@ -26,17 +26,18 @@ const tutorial = {
     },
     stage3: () => {
       document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
+      document.querySelector('.hand__shader').classList.add('hand__shader--hidden');
+      document.querySelector('.hand__title').classList.remove('hand__title--shade');
       displayModal.setMessageText('Внизу распологаются карты в руке игрока');
-      tutorial.currentDOMElement = document.querySelector('.hand');
       renderCard.toHand(getCardElement(getCardObject.byID('колесо')));
       renderCard.toHand(getCardElement(getCardObject.byID('скотоводство')));
       renderCard.toHand(getCardElement(getCardObject.byID('мистицизм')));
-      tutorial.currentDOMElement.style.zIndex = 120;
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage4;
     },
     stage4: () => {
       document.querySelector('.hand__cards').innerHTML = '';
-      tutorial.currentDOMElement.style.zIndex = 0;
+      document.querySelector('.hand__shader').classList.remove('hand__shader--hidden');
+      document.querySelector('.hand__title').classList.add('hand__title--shade');
       displayModal.setMessageText('По центру распологаются карты в активной зоне игрока');
       gameState.player0.activeDecks.green.shift = 'top';
       gameState.player0.activeDecks.purple.shift = 'left';
@@ -111,13 +112,12 @@ const tutorial = {
     stage10: () => {
       tutorial.currentDOMElement.style.zIndex = 0;
       displayHeader.shader.classList.add('header__shader--hidden');
-      tutorial.currentDOMElement = document.querySelector('.header');
-      tutorial.currentDOMElement.style.zIndex = 0;
       displayModal.setMessageText('С игровым полем разобрались. Теперь поговорим об игровом процессе. В свой ход игрок может выполнить одно из четрёх действий: взять карту в руку, сыграть карту с руки в активную зону, сыграть догму со своей активной карты или добиться лидерства');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage11;
     },
     stage11: () => {
-      tutorial.currentDOMElement.style.zIndex = 120;
+      document.querySelector('.hand__shader').classList.add('hand__shader--hidden');
+      document.querySelector('.hand__title').classList.remove('hand__title--shade');
       document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
       document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
       gameState.player0.activeDecks.green.cards = [];
@@ -131,8 +131,6 @@ const tutorial = {
       document.querySelectorAll('.age-deck--active').forEach((e) => {
         e.onclick = gameBoard.takeCard;
       });
-      tutorial.currentDOMElement = document.querySelector('.hand');
-      tutorial.currentDOMElement.style.zIndex = 120;
       tutorial.currentDOMElement = document.querySelector('.current-deck');
       tutorial.currentDOMElement.style.zIndex = 120;
       if (gameState.ageDecks.age1.indexOf('письменность') > -1) {
@@ -161,8 +159,6 @@ const tutorial = {
     stage14: (e) => {
       if (e.target.closest('.card')) {
         tutorial.currentDOMElement.style.zIndex = 0;
-        tutorial.currentDOMElement = document.querySelector('.hand');
-        tutorial.currentDOMElement.style.zIndex = 0;
         tutorial.currentDOMElement = document.querySelector('.info-table');
         tutorial.currentDOMElement.style.zIndex = 120;
         gameState.player1.activeDecks.red.cards = [];
@@ -180,6 +176,8 @@ const tutorial = {
     },
     stage15: (e) => {
       if (e.target.closest('.info-table__next-turn-btn')) {
+        document.querySelector('.hand__shader').classList.remove('hand__shader--hidden');
+        document.querySelector('.hand__title').classList.add('hand__title--shade');
         tutorial.currentDOMElement.style.zIndex = 0;
         tutorial.currentDOMElement = document.querySelector('.extra-cards__leadership-block');
         tutorial.currentDOMElement.style.zIndex = 120;
@@ -192,8 +190,8 @@ const tutorial = {
     stage16: (e) => {
       if (e.target.closest('.extra-cards__leadership-cards')) {
         tutorial.currentDOMElement.style.zIndex = 0;
-        tutorial.currentDOMElement = document.querySelector('.hand');
-        tutorial.currentDOMElement.style.zIndex = 0;
+        document.querySelector('.hand__shader').classList.remove('hand__shader--hidden');
+        document.querySelector('.hand__title').classList.add('hand__title--shade');
         document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
         document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
         displayModal.setMessageText('Ещё один способ получить победные очки - добиться лидерства в одной из пяти сфер. Сыграйте догму Каменная кладка и сыграйте  четыре карты с руки, чтобы добиться лидерства в строительстве');
@@ -202,6 +200,8 @@ const tutorial = {
     },
     stage17: (e) => {
       if (e.target.closest('.card')) {
+        document.querySelector('.hand__shader').classList.add('hand__shader--hidden');
+        document.querySelector('.hand__title').classList.remove('hand__title--shade');
         document.querySelector('.aside__shader').classList.add('aside__shader--hidden');
         document.querySelector('.hand').style.zIndex = 120;
         document.body.onclick = tutorial.clickFunctions.stage18;
