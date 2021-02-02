@@ -213,7 +213,7 @@ const getManualDogma = function closureWrapper(listener,
         };
       } else {
         gameState.activePlayer = gameState.currentPlayer;
-        showErrorModal('Нет подходящих целей для агрессивной догмы!');
+        showErrorModal('Нет подходящих целей для догмы!');
         if (callbackFunc !== null) callbackFunc();
       }
     }
