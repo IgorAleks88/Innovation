@@ -9,7 +9,6 @@ import dogmas from './dogma';
 import { messageToLog } from '../utility/dogmaTools';
 import specCard from '../specCards/specCard';
 import checkWinCondition from '../utility/checkWinCondition';
-import { messageToLog } from '../utility/dogmaTools';
 // import socket from '../app'; // for server
 
 const gameBoard = {
@@ -353,8 +352,8 @@ const gameBoard = {
     cardElement.classList.remove('active');
     renderCard.toActive(cardElement);
 
-    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.activePlayer.name, `сыграл карту ${cardObj.age} века <u title="${textToLog}">${cardObj.innovation}</u>`);
+    /* const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `сыграл карту ${cardObj.age} века <u title="${textToLog}">${cardObj.innovation}</u>`); */
 
     gameBoard.update();
 
