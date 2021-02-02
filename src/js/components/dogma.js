@@ -1007,6 +1007,7 @@ const dogmas = {
           gameState.activePlayer.actionPoints += 1;
           gameBoard.update();
         });
+        corporateBonus(affectedPlayers);
       }
     }
     getManualDogma(listener, getAffectedCards, 1, null, false, false, callback, false);

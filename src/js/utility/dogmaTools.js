@@ -193,6 +193,8 @@ function recycle(playerID, arrCardID) {
 function corporateBonus(arrOfId) {
   if (arrOfId.length > 1) {
     takeCard(1, gameState.currentPlayer.currentAge, gameState.currentPlayer.id);
+    updateGameState();
+    header.changePlayerStats(gameState.currentPlayer);
   }
 }
 
