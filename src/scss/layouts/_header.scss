@@ -5,6 +5,19 @@
   position: relative;
   width: calc(100vw - 37rem);
 
+  .header__shader {
+    position: absolute;
+    background: rgb(0,0,0);
+    height: 100%;
+    width: 100%;
+    opacity: 0.85;
+    // z-index: 1;
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
   .header__title {
     @include title-settings('../../assets/img/title-header.png');
   }
@@ -28,7 +41,7 @@
       overflow-x: auto;
       position: relative;
       width: 100%;
-      z-index: 2;
+      // z-index: 2;
     }
   }
 }
@@ -83,7 +96,8 @@
     2px 0 3px 1px rgba(0, 0, 0, 0.5);
   height: 100%;
   padding: 0.3rem;
-  transition: all 0.5s;
+  position: relative;
+  transition: transform 0.5s;
   width: 17%;
 
   &:not(:last-child):hover {

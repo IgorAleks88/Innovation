@@ -1,15 +1,18 @@
 import initHotSeatGame from '../utility/initHotSeatGame';
+import initTutorial from '../utility/initTutorial';
 import displayNewTurnModal from '../display/displayNewTurnModal';
+import displayModal from '../display/displayModal';
 import displayHeaderHover from '../display/playerTable/displayHeaderHover';
 import header from '../display/playerTable/displayHeader';
 import gameBoard from './gameBoard';
 import gameState from './gameState';
+import tutorial from './tutorial';
 import { showRules } from './rules';
 // import setChat from '../utility/setChat'; // for server
 
 const users = {};
 const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
-let sound = false;
+const sound = false;
 function isValid(userObj) {
   if (userObj.names.length === userObj.players) {
     return userObj.names.every((name) => name.length > 2 && name.length < 8);
@@ -49,7 +52,9 @@ function transform(state) {
 
 function loadTheGame() {
   const loadedGameState = JSON.parse(localStorage.getItem('innovation'));
-  Object.entries(loadedGameState).forEach(([key, value]) => { gameState[key] = value; });
+  Object.entries(loadedGameState).forEach(([key, value]) => {
+    gameState[key] = value;
+  });
   transform(gameState);
   displayNewTurnModal(gameState.currentPlayer.name);
   gameBoard.display();
@@ -70,7 +75,11 @@ class Menu {
     const values = [...inputs].map((input) => input.value);
     for (let i = 0; i < inputs.length; i += 1) {
       const { value } = inputs[i];
-      if (value.length < 3 || value.length > 7 || values.filter((v) => v === value).length > 1) {
+      if (
+        value.length < 3
+        || value.length > 7
+        || values.filter((v) => v === value).length > 1
+      ) {
         inputs[i].setCustomValidity('Invalid');
       } else {
         inputs[i].setCustomValidity('');
@@ -79,7 +88,9 @@ class Menu {
   }
 
   createMenuItem(text, ...dopParam) {
-    return /* html */ `<div><a href="#" class="menu__link ${dopParam[0] || ''}" ${dopParam[1] || ''}>
+    return /* html */ `<div><a href="#" class="menu__link ${
+      dopParam[0] || ''
+    }" ${dopParam[1] || ''}>
       ${text}
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 120" style="enable-background:new 0 0 500 120;" xml:space="preserve">
       <linearGradient id="grad" gradientUnits="userSpaceOnUse" x1="122.5156" y1="182.4863" x2="382.0009" y2="-76.9989">
@@ -107,13 +118,18 @@ class Menu {
     ${this.createMenuItem('Загрузить игру', 'load disabled')}
     ${this.createMenuItem('Наша команда', 'about')}
     ${this.createMenuItem('Сохранить игру', 'save disabled')}
-    ${this.createMenuItem('Включить звук', 'sound')}
+    ${this.createMenuItem('Обучение', 'tutorial')}
     `;
 
     this.parent.append(this.menu);
 
     this.menu.addEventListener('click', (e) => {
-      if (e.target.tagName !== 'DIV' && e.target.tagName !== 'A' && e.target.tagName !== 'SPAN' && e.target !== this.menu.querySelector('button')) {
+      if (
+        e.target.tagName !== 'DIV'
+        && e.target.tagName !== 'A'
+        && e.target.tagName !== 'SPAN'
+        && e.target !== this.menu.querySelector('button')
+      ) {
         return;
       }
       const intro = this.menu.parentElement.parentElement.parentElement;
@@ -168,17 +184,21 @@ class Menu {
             item.children[0].removeAttribute('data-link');
           }
         });
-      } else if (e.target.className.includes('sound')) {
-        audio.loop = true;
-        sound = !sound;
-        if (sound) {
-          audio.play();
-          e.target.textContent = 'Выключить звук';
-        }
-        if (!sound) {
-          audio.pause();
-          e.target.textContent = 'Включить звук';
-        }
+      } else if (e.target.className.includes('tutorial')) {
+        displayHeaderHover.init();
+        displayModal.init();
+        displayModal.modalBlock.classList.remove('modal-tutorial__block--hidden');
+        displayModal.modalBtn.classList.remove('modal-tutorial__btn--hidden');
+        displayModal.modalBlock.classList.remove('modal-tutorial__block--small');
+        displayModal.setMessageText('Добро пожаловать в режим обучения Инновации!');
+        displayModal.setButtonText('Продолжить');
+        displayModal.modalBtn.onclick = tutorial.clickFunctions.stage1;
+        initTutorial();
+        intro.classList.toggle('intro--hide');
+        // setChat(users.names); // for server
+        /* setTimeout(() => {
+          intro.classList.toggle('intro--hide');
+        }, 500); */
       }
     });
     if (JSON.parse(localStorage.getItem('innovation'))) this.menu.querySelector('.load').classList.remove('disabled');
@@ -223,12 +243,10 @@ class Menu {
     const inputHTML = [];
 
     for (let i = 1; i <= num; i += 1) {
-      inputHTML.push(
-        /* html */ `
+      inputHTML.push(/* html */ `
         <label for="plaeyr${i}">Введите имя игрока № ${i}</label>
         <input type="text" id="player${i}" value="player${i}" name="name" data-name="" pattern="[a-zA-Zа-яА-Я0-9_]{3,7}" title="Введите от 3 до 7 символов" required>
-      `,
-      );
+      `);
     }
 
     return inputHTML.join('');
@@ -253,10 +271,26 @@ class Menu {
     }
     this.menu.innerHTML = /* html */ `
     ${this.createMenuItem('', 'logo', 'data-link="https://rs.school/js/"')}
-    ${this.createMenuItem('Yaroslav Abrasimov', 'person ya', 'data-link="https://github.com/Ferri0"')}
-    ${this.createMenuItem('Igor Alexeyenko', 'person ia', 'data-link="https://github.com/IgorAleks88"')}
-    ${this.createMenuItem('Ekaterina Titova', 'person et', 'data-link="https://github.com/kattitova"')}
-    ${this.createMenuItem('Denis<br>Oleksiuk', 'person do', 'data-link="https://github.com/DenisOleksiuk"')}
+    ${this.createMenuItem(
+    'Yaroslav Abrasimov',
+    'person ya',
+    'data-link="https://github.com/Ferri0"',
+  )}
+    ${this.createMenuItem(
+    'Igor Alexeyenko',
+    'person ia',
+    'data-link="https://github.com/IgorAleks88"',
+  )}
+    ${this.createMenuItem(
+    'Ekaterina Titova',
+    'person et',
+    'data-link="https://github.com/kattitova"',
+  )}
+    ${this.createMenuItem(
+    'Denis<br>Oleksiuk',
+    'person do',
+    'data-link="https://github.com/DenisOleksiuk"',
+  )}
     ${this.createMenuItem('Главное меню', 'back')}
     `;
   }
@@ -264,7 +298,7 @@ class Menu {
   showSaveGameModal() {
     const modal = document.createElement('div');
     modal.classList.add('modal__save');
-    modal.innerHTML = /* html */`
+    modal.innerHTML = /* html */ `
       <div class="save__message">Игра сохранена</div>
     `;
     this.menu.append(modal);

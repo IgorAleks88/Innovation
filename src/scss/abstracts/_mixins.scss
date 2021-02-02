@@ -39,7 +39,7 @@
   top: -25px; // don't change on rem
   transform: translateX(-50%);
   width: 150px;
-  z-index: 3;
+  // z-index: 3;
 }
 
 @mixin area-border($url) {
