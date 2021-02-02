@@ -12,17 +12,11 @@ const tutorial = {
   currentDOMElement: null,
   clickFunctions: {
     stage1: () => {
-      tutorial.currentDOMElement = document.querySelector('.active-zone');
-      tutorial.currentDOMElement.style.zIndex = 120;
-      document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
-      tutorial.currentDOMElement = document.querySelector('.aside');
-      tutorial.currentDOMElement.style.zIndex = 120;
-      document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
-      displayModal.setMessageText('Игровое поле разделено на четыре зоны: стол, рука, активная зона и зона информации о всех игроках');
+      displayModal.setMessageText('Игровое поле разделено на четыре зоны: боковая зона, рука, активная зона и зона информации о всех игроках');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage2;
     },
     stage2: () => {
-      displayModal.setMessageText('На столе справа расположены карты, которые доступны для всех игроков: колоды эпох, лидерства и особые карты');
+      displayModal.setMessageText('В боковой зоне справа расположены карты, которые доступны для всех игроков: колоды эпох, лидерства и особые карты');
       document.querySelector('.aside__shader').classList.add('aside__shader--hidden');
       // remove onclick event from active decks
       document.querySelectorAll('.age-deck--active').forEach((e) => {
@@ -87,8 +81,7 @@ const tutorial = {
       updateGameState(gameState);
       displayHeader.changePlayerStats(gameState.player1);
       displayModal.setMessageText('Количество ресурсов, количество карт в руке, активной зоне, зоне влияния и лидерства каждого игрока можно увидеть в информационной зоне');
-      tutorial.currentDOMElement = document.querySelector('.header');
-      tutorial.currentDOMElement.style.zIndex = 120;
+      document.querySelector('.header__shader').classList.add('header__shader--hidden');
       document.querySelector('.header-hover__block').style.zIndex = 130;
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage7;
     },
@@ -118,7 +111,7 @@ const tutorial = {
       displayHeader.shader.classList.add('header__shader--hidden');
       tutorial.currentDOMElement = document.querySelector('.header');
       tutorial.currentDOMElement.style.zIndex = 0;
-      displayModal.setMessageText('С игровым полем разобрались. Теперь поговорим об игровом процессе. В свой ход игрок может выполнить одно из четрёх действий: взять карту в руку, сыграть карту с руки в активную зону, прочитать догму со своей активной карты или добиться лидерства');
+      displayModal.setMessageText('С игровым полем разобрались. Теперь поговорим об игровом процессе. В свой ход игрок может выполнить одно из четрёх действий: взять карту в руку, сыграть карту с руки в активную зону, сыграть догму со своей активной карты или добиться лидерства');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage11;
     },
     stage11: () => {

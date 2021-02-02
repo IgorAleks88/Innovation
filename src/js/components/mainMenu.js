@@ -187,8 +187,10 @@ class Menu {
       } else if (e.target.className.includes('tutorial')) {
         displayHeaderHover.init();
         displayModal.init();
-        displayModal.modalBg.classList.toggle('modal-tutorial--hidden');
-        displayModal.modalBlock.classList.toggle('modal-tutorial__block--hidden');
+        displayModal.modalBg.classList.remove('modal-tutorial--hidden');
+        displayModal.modalBlock.classList.remove('modal-tutorial__block--hidden');
+        displayModal.modalBtn.classList.remove('modal-tutorial__btn--hidden');
+        displayModal.modalBlock.classList.remove('modal-tutorial__block--small');
         displayModal.setMessageText('Добро пожаловать в режим обучения Инновации!');
         displayModal.setButtonText('Продолжить');
         displayModal.modalBtn.onclick = tutorial.clickFunctions.stage1;
