@@ -122,8 +122,6 @@ class Menu {
         this.createChoosePlayersItems();
       } else if (e.target.className.includes('rules')) {
         showRules();
-      } else if (e.target.className.includes('close')) {
-        this.rulesWrraper.hidden = true;
       } else if (e.target.dataset.players) {
         this.createNameInputField(e.target.dataset.players);
       } else if (e.target.className.includes('get-names')) {
@@ -168,17 +166,21 @@ class Menu {
             item.children[0].removeAttribute('data-link');
           }
         });
-      } else if (e.target.className.includes('sound')) {
+      } else if (e.target.className.includes('settings')) {
+        this.menu.classList.remove('main');
+        this.createSettingsMenu();
+      } else if (e.target.className.includes('music')) {
+        e.target.classList.toggle('on');
         audio.loop = true;
         sound = !sound;
         if (sound) {
           audio.play();
-          e.target.textContent = 'Выключить звук';
         }
         if (!sound) {
           audio.pause();
-          e.target.textContent = 'Включить звук';
         }
+      } else if (e.target.className.includes('sounds')) {
+        e.target.classList.toggle('on');
       }
     });
     if (JSON.parse(localStorage.getItem('innovation'))) this.menu.querySelector('.load').classList.remove('disabled');
@@ -257,6 +259,17 @@ class Menu {
     ${this.createMenuItem('Igor Alexeyenko', 'person ia', 'data-link="https://github.com/IgorAleks88"')}
     ${this.createMenuItem('Ekaterina Titova', 'person et', 'data-link="https://github.com/kattitova"')}
     ${this.createMenuItem('Denis<br>Oleksiuk', 'person do', 'data-link="https://github.com/DenisOleksiuk"')}
+    ${this.createMenuItem('Главное меню', 'back')}
+    `;
+  }
+
+  createSettingsMenu() {
+    for (let i = 0; i < this.menu.children.length; i += 1) {
+      this.menu.children[i].hidden = true;
+    }
+    this.menu.innerHTML = /* html */ `
+    ${this.createMenuItem('', 'music')}
+    ${this.createMenuItem('', 'sounds')}
     ${this.createMenuItem('Главное меню', 'back')}
     `;
   }
