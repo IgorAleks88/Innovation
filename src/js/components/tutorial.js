@@ -142,7 +142,7 @@ const tutorial = {
       document.body.onclick = tutorial.clickFunctions.stage12;
     },
     stage12: (e) => {
-      if (e.target.classList.contains('age-deck--active')) {
+      if (e.target.closest('.age-deck')) {
         gameState.player0.actionPoints = 2;
         tutorial.currentDOMElement.style.zIndex = 0;
         displayModal.setMessageText('Теперь сыграйте эту карту в активную зону');
