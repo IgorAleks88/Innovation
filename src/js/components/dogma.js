@@ -1453,6 +1453,7 @@ const dogmas = {
         .hand[gameState[`player${playerID}`].hand.length - 1];
       playCard(lastCardInHand, playerID, false);
       messageToLog(gameState[`player${playerID}`].name, `взял и сыграл карту: <u>${lastCardInHand}</u>`);
+      corporateBonus(affectedPlayers);
       const hasResource = getCardObject.byID(lastCardInHand).resourses.some((resource) => resource.name.includes('crown'));
       if (hasResource) {
         takeCard(1, 4, playerID, false);
