@@ -20,6 +20,7 @@ export default function initHotSeatGame(usersInfo) {
     displayModal.modalBlock.classList.add('modal-tutorial__block--hidden');
   }
   document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
+  document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
   document.querySelector('.aside__shader').classList.add('aside__shader--hidden');
   document.querySelector('.header__shader').classList.add('header__shader--hidden');
   document.querySelector('.header__title').style.zIndex = 3;

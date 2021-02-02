@@ -47,6 +47,7 @@ const tutorial = {
       gameState.player0.activeDecks.purple.cards.push('мистицизм');
       renderCard.toActive(getCardElement(getCardObject.byID('мистицизм')));
       document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
+      document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage5;
     },
     stage5: () => {
@@ -63,6 +64,7 @@ const tutorial = {
     },
     stage6: () => {
       document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
+      document.querySelector('.active-zone__title').classList.add('active-zone__title--shade');
       gameState.player1.activeDecks.green.cards.push('деньги');
       gameState.player1.activeDecks.green.cards.push('картография');
       gameState.player1.activeDecks.green.shift = 'right';
@@ -117,6 +119,7 @@ const tutorial = {
     stage11: () => {
       tutorial.currentDOMElement.style.zIndex = 120;
       document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
+      document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
       gameState.player0.activeDecks.green.cards = [];
       gameState.player0.activeDecks.purple.cards = [];
       gameState.player0.activeDecks.yellow.cards = [];
@@ -181,6 +184,7 @@ const tutorial = {
         tutorial.currentDOMElement = document.querySelector('.extra-cards__leadership-block');
         tutorial.currentDOMElement.style.zIndex = 120;
         document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
+        document.querySelector('.active-zone__title').classList.add('active-zone__title--shade');
         displayModal.setMessageText('Одно из условий победы - набрать достаточное количество очков лидерства. Чтобы достичь лидерства в эпохе, необходимо иметь 5*номер эпохи очков влияния и хотя бы одну активную карту с уровнем не меньше, чем номер этой эпохи. Добейтесь лидерства в 1 эпохе');
         document.body.onclick = tutorial.clickFunctions.stage16;
       }
@@ -191,6 +195,7 @@ const tutorial = {
         tutorial.currentDOMElement = document.querySelector('.hand');
         tutorial.currentDOMElement.style.zIndex = 0;
         document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
+        document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
         displayModal.setMessageText('Ещё один способ получить победные очки - добиться лидерства в одной из пяти сфер. Сыграйте догму Каменная кладка и сыграйте  четыре карты с руки, чтобы добиться лидерства в строительстве');
         document.body.onclick = tutorial.clickFunctions.stage17;
       }
