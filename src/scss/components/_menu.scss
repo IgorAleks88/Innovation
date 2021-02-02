@@ -130,11 +130,11 @@
         transition: transform 0.5s linear;
       }
     }
-
-    .menu__link.back path {
-      stroke: #fdad00;
-    }
   }
+}
+
+.menu__link.back path {
+  stroke: #fdad00;
 }
 
 .menu__skip {
@@ -187,6 +187,70 @@
   &.disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  &.music,
+  &.sounds {
+    @include size(28rem, 5rem);
+    background: url('../../assets/img/sound-switch-.png') no-repeat right;
+    background-size: cover;
+    border: 0;
+    position: relative;
+    transition: all 1s ease;
+
+    svg {
+      display: none;
+    }
+
+    &::after {
+      @include size(3rem, 3rem);
+      background: url('../../assets/img/switch-ball.png');
+      background-size: cover;
+      content: '';
+      filter: hue-rotate(250deg);
+      mix-blend-mode: normal;
+      position: absolute;
+      right: 3.2rem;
+      top: 1rem;
+      transition: all 1s ease;
+    }
+
+    &.on::after {
+      animation: move-switch-on 1s ease forwards;
+    }
+
+    @keyframes move-switch-on {
+      100% {
+        filter: none;
+        right: 1rem;
+      }
+    }
+  }
+
+  &.music {
+    &::before {
+      @include cursor-default;
+      @include size(18rem);
+      background: none;
+      content: 'Фоновая музыка';
+      left: 1rem;
+      mix-blend-mode: normal;
+      position: absolute;
+      white-space: nowrap;
+    }
+  }
+
+  &.sounds {
+    &::before {
+      @include cursor-default;
+      @include size(18rem);
+      background: none;
+      content: 'Звук';
+      left: 1rem;
+      mix-blend-mode: normal;
+      position: absolute;
+      text-align: left;
+    }
   }
 }
 
