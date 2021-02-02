@@ -27,8 +27,6 @@
   }
 }
 
-
-
 .modal__block {
   @include flex(column, center, center);
   @include size(50rem, 50rem);
@@ -74,8 +72,6 @@
   text-shadow: 1px 2px 3px rgb(0, 0, 0);
 }
 
-
-
 .modal__btn {
   @include size(26.5rem, 8rem);
   @include flex;
@@ -120,7 +116,7 @@
 
 .error__message {
   color: rgb(255, 255, 255);
-  font-size: 30px;
+  font-size: 3rem;
   text-align: center;
 }
 

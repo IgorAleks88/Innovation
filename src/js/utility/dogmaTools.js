@@ -120,10 +120,12 @@ function isHaveResource(cardObj, res) {
   return result;
 }
 
-function getAffectedPlayers(cardObj) {
-  const res = cardObj.dogma[0].resource;
+function getAffectedPlayers(cardObj, isSecondDogm = false) {
+  let dogmNum = 0;
+  if (isSecondDogm) dogmNum = 1;
+  const res = cardObj.dogma[dogmNum].resource;
   let playerIDs = [];
-  if (cardObj.dogma[0].type === 'corporate') {
+  if (cardObj.dogma[dogmNum].type === 'corporate') {
     playerIDs = gameState.players.filter((player) => player[res] >= gameState.currentPlayer[res])
       .map((player) => player.id);
 

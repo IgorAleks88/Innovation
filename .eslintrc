@@ -18,6 +18,7 @@
       "wrap-iife": "off",
       "arrow-body-style": "off",
       "consistent-return": "off",
-      "import/no-named-as-default-export": "off"
+      "import/no-named-as-default-export": "off",
+      "no-inner-declarations": "off"
     }
 }

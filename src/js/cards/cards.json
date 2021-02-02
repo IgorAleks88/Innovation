@@ -809,7 +809,7 @@
             "resource": "tower"
           },
           {
-            "type": "aggressive",
+            "type": "corporate",
             "effect": "Возьмите и архивируйте <span class = 'age__number'>1</span>.",
             "icon": ["fab", "fa-fort-awesome"],
             "color": "grey",

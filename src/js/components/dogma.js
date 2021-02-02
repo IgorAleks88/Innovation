@@ -919,8 +919,51 @@ const dogmas = {
   деньги: async (cardObj) => {
     await canReworkAndInfluence(cardObj, Infinity);
   },
-  монотеизм: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
+  монотеизм: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resArr = [];
+      Object.keys(gameState.activePlayer.activeDecks).forEach((deckColor) => {
+        if (gameState.activePlayer.activeDecks[deckColor].cards.length > 0
+          && gameState.currentPlayer.activeDecks[deckColor].cards.length === 0) {
+          resArr.push(gameState.activePlayer.activeDecks[deckColor].cards[gameState
+            .activePlayer.activeDecks[deckColor].cards.length - 1]);
+        }
+      });
+      return resArr;
+    }
+    function listener(e) {
+      messageToLog(gameState.activePlayer.name, `переместил карту из своей зоны влияния в зону влияния ${gameState.currentPlayer.name}`);
+      messageToLog(gameState.activePlayer.name, 'взял и архивировал карту');
+      const stackColor = e.target.closest('.active-zone__stack').id;
+      const targetCardID = gameState.activePlayer.activeDecks[stackColor].cards.pop();
+      gameState.currentPlayer.influence.cards.push(targetCardID);
+      gameBoard.displayActive();
+      takeCard(1, 1, gameState.activePlayer.id, false);
+      const lastCardInHandObj = getCardObject.byID(gameState.activePlayer
+        .hand.splice(-1, 1).join());
+      gameState.activePlayer.activeDecks[lastCardInHandObj.color].cards
+        .unshift(lastCardInHandObj.innovation);
+      gameBoard.update();
+      gameBoard.displayActive();
+    }
+    function callback() {
+      if (gameState.activePlayer.id === gameState.currentPlayer.id) {
+        const affectedPlayers = getAffectedPlayers(cardObj, true);
+        affectedPlayers.forEach((playerID) => {
+          messageToLog(gameState.activePlayer.name, 'взял и архивировал карту');
+          takeCard(1, 1, gameState[`player${playerID}`].id, false);
+          const targetCardID = gameState[`player${playerID}`].hand.splice(-1, 1).join();
+          const targetCardColor = getCardObject.byID(targetCardID).color;
+          gameState[`player${playerID}`].activeDecks[targetCardColor].cards.unshift(targetCardID);
+          gameState.activePlayer.actionPoints += 1;
+          gameBoard.update();
+        });
+      }
+    }
+    getManualDogma(listener, getAffectedCards, 1, null, false, false, callback, false);
   },
   математика: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
