@@ -314,8 +314,6 @@ const gameBoard = {
     movingCardElement.onclick = gameBoard.playCard;
     renderCard.toHand(movingCardElement);
 
-    messageToLog(gameState.activePlayer.name, `взял карту ${cardObj.age} века`);
-
     gameBoard.update();
 
     // protection of multiple clicks
@@ -328,7 +326,7 @@ const gameBoard = {
     // const state = JSON.stringify(gameState); // for server
     // socket.emit('state', state); // for server
 
-    messageToLog(gameState.currentPlayer.name, 'взял карту из колоды');
+    messageToLog(gameState.activePlayer.name, `взял карту ${cardObj.age} века из колоды`);
   },
 
   playCard(e) {
@@ -351,9 +349,6 @@ const gameBoard = {
     };
     cardElement.classList.remove('active');
     renderCard.toActive(cardElement);
-
-    /* const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-    messageToLog(gameState.activePlayer.name, `сыграл карту ${cardObj.age} века <u title="${textToLog}">${cardObj.innovation}</u>`); */
 
     gameBoard.update();
 

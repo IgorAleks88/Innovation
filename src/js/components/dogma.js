@@ -1443,8 +1443,46 @@ const dogmas = {
   осадныемашины: (cardObj) => { // TODO
     console.log(`${cardObj.innovation} dogm not implemented yet`);
   },
-  оптика: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
+  оптика: (cardObj) => {
+    const affectedPlayers = getAffectedPlayers(cardObj);
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
+    affectedPlayers.forEach((playerID) => {
+      takeCard(1, 3, playerID, false);
+      const lastCardInHand = gameState[`player${playerID}`]
+        .hand[gameState[`player${playerID}`].hand.length - 1];
+      playCard(lastCardInHand, playerID, false);
+      messageToLog(gameState[`player${playerID}`].name, `взял и сыграл карту: <u>${lastCardInHand}</u>`);
+      const hasResource = getCardObject.byID(lastCardInHand).resourses.some((resource) => resource.name.includes('crown'));
+      if (hasResource) {
+        takeCard(1, 4, playerID, false);
+        gameState.specInfluenceCount += 1;
+        gameState[`player${playerID}`].influence.cards.push(gameState[`player${playerID}`].hand.pop());
+        updateGameState(gameState);
+        header.changePlayerStats(gameState[`player${playerID}`]);
+        messageToLog(gameState[`player${playerID}`].name, `взял и зачел карту 4 века поскольку сыгранная карта ${lastCardInHand} приносит ресурс "Корона"`);
+      } else {
+        let lowerInflPlayer = null;
+        gameState.players.forEach((player) => {
+          if (player.id !== playerID) {
+            if (player.influence.points < gameState[`player${playerID}`].influence.points) lowerInflPlayer = player;
+          }
+        });
+        if (lowerInflPlayer !== null
+          && gameState[`player${playerID}`].influence.cards.length > 0) {
+          gameState[`player${playerID}`].influence.cards.sort((a, b) => {
+            return getCardObject.byID(a).age - getCardObject.byID(b).age;
+          });
+          const lowestInflCard = gameState[`player${playerID}`].influence.cards.splice(0, 1).join();
+          lowerInflPlayer.influence.cards.push(lowestInflCard);
+          messageToLog(gameState[`player${playerID}`].name, `переместил младшую карту из зоны влияния в зону влияния игрока ${lowerInflPlayer.name} поскольку сыгранная карта ${lastCardInHand} приносит ресурс "Корона"`);
+        }
+      }
+      gameBoard.display();
+      gameBoard.init();
+      gameState.activePlayer.actionPoints += 1;
+      gameBoard.update();
+    });
   },
   медицина: (cardObj) => { // TODO
     console.log(`${cardObj.innovation} dogm not implemented yet`);
