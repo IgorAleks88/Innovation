@@ -1,5 +1,6 @@
 const audioPlayer = {
   player: null,
+  tutorialSpeech: false,
   init() {
     if (!this.player) {
       this.player = document.createElement('audio');
@@ -7,8 +8,10 @@ const audioPlayer = {
     }
   },
   playTutorial(stage) {
-    const path = `../../assets/sounds/tutorial/${stage}.mp3`;
-    this.play(path);
+    if (this.tutorialSpeech) {
+      const path = `../../assets/sounds/tutorial/${stage}.mp3`;
+      this.play(path);
+    }
   },
 
   play(path) {

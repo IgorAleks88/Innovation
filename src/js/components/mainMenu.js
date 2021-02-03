@@ -9,6 +9,7 @@ import gameState from './gameState';
 import tutorial from './tutorial';
 import { showRules } from './rules';
 import setChat from '../utility/setChat'; // for server
+import audioPlayer from './audioPlayer';
 
 const users = {};
 const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
@@ -202,6 +203,7 @@ class Menu {
         }
       } else if (e.target.className.includes('sounds')) {
         e.target.classList.toggle('on');
+        audioPlayer.tutorialSpeech = !audioPlayer.tutorialSpeech;
       } else if (e.target.className.includes('tutorial')) {
         displayHeaderHover.init();
         displayModal.init();
