@@ -7,6 +7,7 @@ import updateGameState from '../utility/updateGameState';
 import displayHeader from '../display/playerTable/displayHeader';
 import gameBoard from './gameBoard';
 import startNewGame from '../utility/startNewGame';
+import audioPlayer from './audioPlayer';
 
 const tutorial = {
   currentDOMElement: null,
@@ -14,6 +15,7 @@ const tutorial = {
     stage1: () => {
       displayModal.setMessageText('Игровое поле разделено на четыре зоны: боковая зона, рука, активная зона и зона информации о всех игроках');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage2;
+      audioPlayer.playTutorial('stage_1');
     },
     stage2: () => {
       displayModal.setMessageText('В боковой зоне справа расположены карты, которые доступны для всех игроков: колоды эпох, лидерства и особые карты');
@@ -23,6 +25,7 @@ const tutorial = {
         e.onclick = '';
       });
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage3;
+      audioPlayer.playTutorial('stage_2');
     },
     stage3: () => {
       document.querySelector('.aside__shader').classList.remove('aside__shader--hidden');
@@ -33,6 +36,7 @@ const tutorial = {
       renderCard.toHand(getCardElement(getCardObject.byID('скотоводство')));
       renderCard.toHand(getCardElement(getCardObject.byID('мистицизм')));
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage4;
+      audioPlayer.playTutorial('stage_3');
     },
     stage4: () => {
       document.querySelector('.hand__cards').innerHTML = '';
@@ -50,6 +54,7 @@ const tutorial = {
       document.querySelector('.active-zone__shader').classList.add('active-zone__shader--hidden');
       document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage5;
+      audioPlayer.playTutorial('stage_4');
     },
     stage5: () => {
       displayModal.setMessageText('Некоторые догмы позволяют сдвигать стопки в активной зоне, увеличивая таким образом количество получаемых ресурсов');
@@ -62,6 +67,7 @@ const tutorial = {
       updateGameState(gameState);
       displayHeader.changePlayerStats(gameState.player0);
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage6;
+      audioPlayer.playTutorial('stage_5');
     },
     stage6: () => {
       document.querySelector('.active-zone__shader').classList.remove('active-zone__shader--hidden');
@@ -87,6 +93,7 @@ const tutorial = {
       document.querySelector('.header__shader').classList.add('header__shader--hidden');
       document.querySelector('.header-hover__block').style.zIndex = 130;
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage7;
+      audioPlayer.playTutorial('stage_6');
     },
     stage7: () => {
       displayModal.setMessageText("Чтобы посмотреть карты каких веков находятся у соперника в руке, нажмите <i class='fas fa-hand-paper cards-container__icon card__icon-color--yellow'></i>");
@@ -94,6 +101,7 @@ const tutorial = {
       tutorial.currentDOMElement = document.querySelector('#player1-hand');
       tutorial.currentDOMElement.style.zIndex = 2;
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage8;
+      audioPlayer.playTutorial('stage_7');
     },
     stage8: () => {
       tutorial.currentDOMElement.style.zIndex = 0;
@@ -101,6 +109,7 @@ const tutorial = {
       tutorial.currentDOMElement.style.zIndex = 2;
       displayModal.setMessageText("Чтобы посмотреть карты каких веков находятся у соперника в зоне влияния, нажмите <i class='fas fa-shield-alt cards-container__icon card__icon-color--red'></i>");
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage9;
+      audioPlayer.playTutorial('stage_8');
     },
     stage9: () => {
       tutorial.currentDOMElement.style.zIndex = 0;
@@ -108,12 +117,14 @@ const tutorial = {
       tutorial.currentDOMElement.style.zIndex = 2;
       displayModal.setMessageText('Чтобы посмотреть активную стопку соперника, нажмите на прямоугольник соответствующего цвета');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage10;
+      audioPlayer.playTutorial('stage_9');
     },
     stage10: () => {
       tutorial.currentDOMElement.style.zIndex = 0;
       displayHeader.shader.classList.add('header__shader--hidden');
       displayModal.setMessageText('С игровым полем разобрались. Теперь поговорим об игровом процессе. В свой ход игрок может выполнить одно из четрёх действий: взять карту в руку, сыграть карту с руки в активную зону, сыграть догму со своей активной карты или добиться лидерства');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage11;
+      audioPlayer.playTutorial('stage_10');
     },
     stage11: () => {
       document.querySelector('.hand__shader').classList.add('hand__shader--hidden');
@@ -141,6 +152,7 @@ const tutorial = {
       displayModal.modalBtn.classList.add('modal-tutorial__btn--hidden');
       displayModal.modalBlock.classList.add('modal-tutorial__block--small');
       document.body.onclick = tutorial.clickFunctions.stage12;
+      audioPlayer.playTutorial('stage_11');
     },
     stage12: (e) => {
       if (e.target.closest('.age-deck')) {
@@ -148,12 +160,14 @@ const tutorial = {
         tutorial.currentDOMElement.style.zIndex = 0;
         displayModal.setMessageText('Теперь сыграйте эту карту в активную зону');
         document.body.onclick = tutorial.clickFunctions.stage13;
+        audioPlayer.playTutorial('stage_12');
       }
     },
     stage13: (e) => {
       if (e.target.closest('.card')) {
         displayModal.setMessageText('Догмы бывают двух типов: корпоративные и агрессивные. Список игроков, на которых подействует догма, определяется количеством ресурсов, который указан в догме. Сыграйте догму Письменность');
         document.body.onclick = tutorial.clickFunctions.stage14;
+        audioPlayer.playTutorial('stage_13');
       }
     },
     stage14: (e) => {
@@ -172,6 +186,7 @@ const tutorial = {
         gameState.player1.hand.push('кузнечное дело');
         displayModal.setMessageText('За ход игрок может совершить два действия. Когда очки действий заканчиваются, нажмите кнопку "Закончить ход" ');
         document.body.onclick = tutorial.clickFunctions.stage15;
+        audioPlayer.playTutorial('stage_14');
       }
     },
     stage15: (e) => {
@@ -185,6 +200,7 @@ const tutorial = {
         document.querySelector('.active-zone__title').classList.add('active-zone__title--shade');
         displayModal.setMessageText('Одно из условий победы - набрать достаточное количество очков лидерства. Чтобы достичь лидерства в эпохе, необходимо иметь 5*номер эпохи очков влияния и хотя бы одну активную карту с уровнем не меньше, чем номер этой эпохи. Добейтесь лидерства в 1 эпохе');
         document.body.onclick = tutorial.clickFunctions.stage16;
+        audioPlayer.playTutorial('stage_15');
       }
     },
     stage16: (e) => {
@@ -196,6 +212,7 @@ const tutorial = {
         document.querySelector('.active-zone__title').classList.remove('active-zone__title--shade');
         displayModal.setMessageText('Ещё один способ получить победные очки - добиться лидерства в одной из пяти сфер. Сыграйте догму Каменная кладка и сыграйте  четыре карты с руки, чтобы добиться лидерства в строительстве');
         document.body.onclick = tutorial.clickFunctions.stage17;
+        audioPlayer.playTutorial('stage_16');
       }
     },
     stage17: (e) => {
@@ -214,18 +231,22 @@ const tutorial = {
         displayModal.modalBlock.classList.remove('modal-tutorial__block--small');
         document.body.onclick = '';
         displayModal.modalBtn.onclick = tutorial.clickFunctions.stage19;
+        audioPlayer.playTutorial('stage_17');
       }
     },
     stage19: () => {
       displayModal.setMessageText('Если игрок не может взять карту - колода, из которой он должен взять карту, и все старшие колоды пусты, либо активирована догма преписывающая закончить игру, побеждает игрок, имеюший наибольшее влияние ');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage20;
+      audioPlayer.playTutorial('stage_18');
     },
     stage20: () => {
       displayModal.setMessageText('На этом обучение завершено. Чтобы узнать больше ньюансов, ознакомтесь с правилами игры в меню');
       displayModal.setButtonText('Завершить');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage21;
+      audioPlayer.playTutorial('stage_19');
     },
     stage21: () => {
+      audioPlayer.player.pause();
       startNewGame();
     },
   },
