@@ -150,6 +150,7 @@ class Menu {
         e.preventDefault();
         this.addNamesToUsers();
         if (isValid(users)) {
+          document.querySelector('.modal__turn-step')?.remove();
           displayHeaderHover.init();
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);

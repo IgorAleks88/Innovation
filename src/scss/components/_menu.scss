@@ -335,34 +335,40 @@ input[type='text'] {
     margin-top: 0.5rem;
   }
 
-  @keyframes message {
-    from {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
+  
+}
 
-    to {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
+@keyframes message {
+  from { background-color: rgba(0, 0, 0, 0.8); }
 
-  .modal__save {
-    align-items: center;
-    animation: 1.5s linear forwards message;
-    display: flex;
-    font-variant: all-petite-caps;
-    height: 65px;
-    justify-content: center;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    z-index: 500;
-  }
+  to { background-color: rgba(0, 0, 0, 0.1); }
+}
 
-  .save__message {
-    color: rgb(255, 255, 255);
-  }
+@keyframes text {
+  from { color: rgba(255, 255, 255, 1); }
+
+  to { color: rgba(255, 255, 255, 0.4); }
+}
+
+.modal__save {
+  align-items: center;
+  animation: 1.5s linear forwards message;
+  display: flex;
+  font-variant: all-petite-caps;
+  height: 65px;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  z-index: 500;
+}
+
+.save__message {
+  font-family: 'Font Awesome 5 Pro';
+  animation: 2s linear forwards text;
+  color: rgb(255, 255, 255);
 }
 
 @media (max-width: 700px) {
