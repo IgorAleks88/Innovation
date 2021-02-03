@@ -1062,6 +1062,7 @@ const dogmas = {
       gameState.activePlayer.activeDecks[targetElement.id].shift = 'left';
       [...document.querySelectorAll('.active')].forEach((element) => {
         element.classList.remove('active');
+        element.onclick = null;
       });
       gameBoard.update();
       gameBoard.displayActive();
