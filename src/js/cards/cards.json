@@ -1129,7 +1129,7 @@
         "agePosition": "topLeft",
         "dogma": [
           {
-            "type": "corporate",
+            "type": "aggressive",
             "effect": "<b>Я требую:</b>переместите мне в игру активную не зелёную карту, которая приносит <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i>! Затем переместите себе в игру мою активную карту которая не приносит <i class='fab fa-pagelines resourse__icon card__icon-color--green'></i>!",
             "icon": ["fab", "fa-fort-awesome"],
             "color": "grey",

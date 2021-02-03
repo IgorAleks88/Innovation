@@ -33,15 +33,15 @@ const gameState = {
     specialCards: [],
     activeDecks: {
       red: {
-        cards: [],
+        cards: ['дороги'],
         shift: '',
       },
       green: {
-        cards: [],
+        cards: ['компас'],
         shift: '',
       },
       blue: {
-        cards: [],
+        cards: ['перевод'],
         shift: '',
       },
       purple: {
@@ -87,11 +87,11 @@ const gameState = {
         shift: '',
       },
       purple: {
-        cards: [],
+        cards: ['феодализм'],
         shift: '',
       },
       yellow: {
-        cards: [],
+        cards: ['каналы'],
         shift: '',
       },
     },

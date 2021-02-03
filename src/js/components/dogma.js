@@ -1251,8 +1251,82 @@ const dogmas = {
   },
 
   // 3 AGE
-  компас: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
+  компас: (cardObj) => { //! TEST
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
+    let affectedPlayers = getAffectedPlayers(cardObj);
+    console.log(affectedPlayers.length)
+    affectedPlayers = affectedPlayers.filter((playerID) => {
+      console.log('start filter!')
+      let isTopCardGreen = false;
+      Object.keys(gameState[`player${playerID}`].activeDecks).forEach((deckColor) => {
+        const activeCards = gameState[`player${playerID}`].activeDecks[deckColor].cards;
+        if (activeCards.length > 0) {
+          const topCardObj = getCardObject.byID(activeCards[activeCards.length - 1]);
+          topCardObj.resourses.forEach((resourseID) => {
+            console.log(resourseID.name)
+            if (resourseID.name === 'tree') {
+              console.log('we are in true')
+              isTopCardGreen = true;
+            }
+          });
+        }
+      });
+      console.log(isTopCardGreen)
+      return isTopCardGreen;
+    });
+    console.log(affectedPlayers.length)
+    if (affectedPlayers.length === 0) {
+      gameState.activePlayer.actionPoints += 1;
+      showErrorModal('Нет возможности выполнить эту догму');
+    } else {
+      affectedPlayers.forEach((playerID) => {
+        // move card with tree to active player active zone
+        let treeCard = null;
+        Object.keys(gameState[`player${playerID}`].activeDecks).forEach((deckColor) => {
+          const activeCards = gameState[`player${playerID}`].activeDecks[deckColor].cards;
+          if (activeCards.length > 0) {
+            if (deckColor !== 'green') {
+              const topCardObj = getCardObject.byID(activeCards[activeCards.length - 1]);
+              topCardObj.resourses.forEach((resourseID) => {
+                if (resourseID.name === 'tree'
+                  && treeCard === null) {
+                  treeCard = activeCards.splice(-1, 1).join();
+                }
+              });
+            }
+          }
+        });
+        playCard(treeCard, gameState.activePlayer.id, false);
+        messageToLog(gameState[`player${playerID}`].name, `переместил игроку ${gameState.activePlayer.name} активную карту <u>${treeCard}</u>`);
+        // move active players card without tree to another player
+        let noTreeCard = null;
+        Object.keys(gameState.activePlayer.activeDecks).forEach((deckColor) => {
+          const activeCards = gameState.activePlayer.activeDecks[deckColor].cards;
+          if (activeCards.length > 0) {
+            const topCardObj = getCardObject.byID(activeCards[activeCards.length - 1]);
+            let cardNotContainTree = true;
+            topCardObj.resourses.forEach((resourseID) => {
+              if (resourseID.name === 'tree'
+                && noTreeCard === null) {
+                cardNotContainTree = false;
+              }
+            });
+            if (cardNotContainTree === true) {
+              noTreeCard = gameState.activePlayer.activeDecks[deckColor].cards.splice(-1, 1).join();
+            }
+          }
+        });
+        if (noTreeCard !== null) {
+          playCard(noTreeCard, playerID, false);
+          messageToLog(gameState.activePlayer.name, `переместил игроку ${gameState[`player${playerID}`].name} активную карту <u>${noTreeCard}</u>`);
+        }
+        gameBoard.display();
+        gameBoard.init();
+        gameBoard.activePlayer.actioPoints += 1;
+        gameBoard.update();
+      });
+    }
   },
   университеты: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
