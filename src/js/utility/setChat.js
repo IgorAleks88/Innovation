@@ -9,7 +9,6 @@ export default function setChat(names) {
   const messageContainer = parent.querySelector('.chat-block');
   const messageForm = parent.querySelector('.chat-log__form');
   const messageInput = parent.querySelector('.chat-log__input');
-  const players = document.querySelectorAll('.head-row__name');
 
   function appendMessage(message) {
     const messageElement = document.createElement('div');
@@ -41,13 +40,6 @@ export default function setChat(names) {
 
   socket.on('user-connected', (name) => {
     appendMessage(`${name} connected`);
-  });
-
-  socket.on('players', (name) => {
-    const nameOfUsers = Object.values(name);
-    players.forEach((el, i) => {
-      el.textContent = nameOfUsers[i];
-    });
   });
 
   socket.on('user-disconnected', (name) => {

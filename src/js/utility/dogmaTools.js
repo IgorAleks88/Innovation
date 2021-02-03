@@ -156,7 +156,7 @@ function takeCard(cardsNum, ageNum, playerID, render = true) {
   }
 }
 
-function playCard(cardID, playerID) {
+function playCard(cardID, playerID, typeMessageToLog = true) {
   const cardIndex = gameState.players[playerID].hand.indexOf(cardID);
   if (cardIndex > -1) {
     gameState.players[playerID].hand.splice(cardIndex, 1);
@@ -168,11 +168,17 @@ function playCard(cardID, playerID) {
   const targetStack = gameState.players[playerID].activeDecks[cardObj.color].cards;
   targetStack.push(cardID);
   if (gameState.players[playerID] === gameState.activePlayer) {
-    cardElement.onclick = () => dogmas['письменность'](cardObj); //! change later
+    cardElement.onclick = async () => {
+      const joinWords = cardID.split(' ').join('');
+      await dogmas[joinWords](cardObj);
+      gameBoard.update();
+    };
     renderCard.toActive(cardElement);
   }
-  const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-  messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+  if (typeMessageToLog) {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+  }
 }
 
 function recycle(playerID, arrCardID) {
@@ -193,6 +199,8 @@ function recycle(playerID, arrCardID) {
 function corporateBonus(arrOfId) {
   if (arrOfId.length > 1) {
     takeCard(1, gameState.currentPlayer.currentAge, gameState.currentPlayer.id);
+    updateGameState(gameState);
+    header.changePlayerStats(gameState.currentPlayer);
   }
 }
 
@@ -205,8 +213,6 @@ const handleCards = (n) => (event) => {
 };
 
 async function canReworkAndInfluence(cardObj, quantity) {
-  const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-  messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
   const arrOfId = getAffectedPlayers(cardObj);
   const currentPlayer = gameState.currentPlayer;
   const dogmaName = cardObj.innovation;
@@ -216,6 +222,9 @@ async function canReworkAndInfluence(cardObj, quantity) {
     gameState.currentPlayer.actionPoints += 1;
     return;
   }
+
+  const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+  messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
 
   for (let i = 0; i < arrOfId.length; i += 1) {
     const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
@@ -276,7 +285,7 @@ async function canReworkAndInfluence(cardObj, quantity) {
     corporateBonus(arrOfId);
     messageToLog(currentPlayer.name, 'получил кооперативный бонус');
   }
-
+  updateGameState(gameState);
   gameBoard.display();
   gameState.players.forEach((pl) => header.changePlayerStats(pl));
 

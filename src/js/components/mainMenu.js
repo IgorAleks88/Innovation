@@ -8,11 +8,12 @@ import gameBoard from './gameBoard';
 import gameState from './gameState';
 import tutorial from './tutorial';
 import { showRules } from './rules';
-// import setChat from '../utility/setChat'; // for server
+import setChat from '../utility/setChat'; // for server
+import audioPlayer from './audioPlayer';
 
 const users = {};
 const audio = new Audio('../../assets/sounds/Dear-Friends.mp3');
-const sound = false;
+let sound = false;
 function isValid(userObj) {
   if (userObj.names.length === userObj.players) {
     return userObj.names.every((name) => name.length > 2 && name.length < 8);
@@ -55,6 +56,11 @@ function loadTheGame() {
   Object.entries(loadedGameState).forEach(([key, value]) => {
     gameState[key] = value;
   });
+
+  [...document.querySelectorAll('.player-container')].forEach((playerBlock) => {
+    playerBlock.classList.add('player-container__hidden');
+  });
+
   transform(gameState);
   displayNewTurnModal(gameState.currentPlayer.name);
   gameBoard.display();
@@ -144,10 +150,11 @@ class Menu {
         e.preventDefault();
         this.addNamesToUsers();
         if (isValid(users)) {
+          document.querySelector('.modal__turn-step')?.remove();
           displayHeaderHover.init();
           displayNewTurnModal(users.names[0]);
           initHotSeatGame(users);
-          // setChat(users.names); // for server
+          setChat(users.names); // for server
           setTimeout(() => {
             intro.classList.toggle('intro--hide');
           }, 500);
@@ -160,6 +167,7 @@ class Menu {
         this.menu.classList.remove('about');
         this.menu.remove();
         this.render();
+        this.menu.querySelector('.continue').classList.remove('disabled');
         this.menu.classList.add('menu__used');
       } else if (e.target.className.includes('continue')) {
         intro.classList.toggle('intro--hide');
@@ -167,7 +175,6 @@ class Menu {
         loadTheGame();
         intro.classList.toggle('intro--hide');
       } else if (e.target.className.includes('save')) {
-        this.menu.querySelector('.load').classList.remove('disabled');
         localStorage.setItem('innovation', JSON.stringify(gameState));
         this.showSaveGameModal();
       } else if (e.target.className.includes('about')) {
@@ -197,6 +204,7 @@ class Menu {
         }
       } else if (e.target.className.includes('sounds')) {
         e.target.classList.toggle('on');
+        audioPlayer.tutorialSpeech = !audioPlayer.tutorialSpeech;
       } else if (e.target.className.includes('tutorial')) {
         displayHeaderHover.init();
         displayModal.init();
