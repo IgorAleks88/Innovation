@@ -326,7 +326,7 @@ const gameBoard = {
     const state = JSON.stringify(gameState); // for server
     socket.emit('state', state); // for server
 
-    messageToLog(gameState.currentPlayer.name, 'взял карту из колоды');
+    messageToLog(gameState.activePlayer.name, `взял карту ${cardObj.age} века из колоды`);
   },
 
   playCard(e) {

@@ -156,7 +156,7 @@ function takeCard(cardsNum, ageNum, playerID, render = true) {
   }
 }
 
-function playCard(cardID, playerID) {
+function playCard(cardID, playerID, typeMessageToLog = true) {
   const cardIndex = gameState.players[playerID].hand.indexOf(cardID);
   if (cardIndex > -1) {
     gameState.players[playerID].hand.splice(cardIndex, 1);
@@ -168,11 +168,17 @@ function playCard(cardID, playerID) {
   const targetStack = gameState.players[playerID].activeDecks[cardObj.color].cards;
   targetStack.push(cardID);
   if (gameState.players[playerID] === gameState.activePlayer) {
-    cardElement.onclick = () => dogmas['письменность'](cardObj); //! change later
+    cardElement.onclick = async () => {
+      const joinWords = cardID.split(' ').join('');
+      await dogmas[joinWords](cardObj);
+      gameBoard.update();
+    };
     renderCard.toActive(cardElement);
   }
-  const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-  messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+  if (typeMessageToLog) {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u>`);
+  }
 }
 
 function recycle(playerID, arrCardID) {
