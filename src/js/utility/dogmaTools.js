@@ -207,8 +207,6 @@ const handleCards = (n) => (event) => {
 };
 
 async function canReworkAndInfluence(cardObj, quantity) {
-  const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
-  messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
   const arrOfId = getAffectedPlayers(cardObj);
   const currentPlayer = gameState.currentPlayer;
   const dogmaName = cardObj.innovation;
@@ -218,6 +216,9 @@ async function canReworkAndInfluence(cardObj, quantity) {
     gameState.currentPlayer.actionPoints += 1;
     return;
   }
+
+  const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+  messageToLog(gameState.currentPlayer.name, `активировал карту <u title="${textToLog}">${cardObj.innovation}</u>`);
 
   for (let i = 0; i < arrOfId.length; i += 1) {
     const player = gameState.players.find((pl) => pl.id === arrOfId[i]);
