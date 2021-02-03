@@ -585,7 +585,6 @@ const dogmas = {
   вёсла: async (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
     const haveAvailablePlayers = !!gameState.players[arrOfId[0]]?.hand.find((card) => getCardObject.byID(card).resourses.find((resource) => resource.name === 'crown'));
-    console.log(haveAvailablePlayers);
     let bonus = false;
 
     if (haveAvailablePlayers) {
