@@ -1066,31 +1066,25 @@ const dogmas = {
   },
 
   // 3 AGE
-  компас: (cardObj) => { //! TEST
+  компас: (cardObj) => {
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
     messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
     let affectedPlayers = getAffectedPlayers(cardObj);
-    console.log(affectedPlayers.length)
     affectedPlayers = affectedPlayers.filter((playerID) => {
-      console.log('start filter!')
       let isTopCardGreen = false;
       Object.keys(gameState[`player${playerID}`].activeDecks).forEach((deckColor) => {
         const activeCards = gameState[`player${playerID}`].activeDecks[deckColor].cards;
         if (activeCards.length > 0) {
           const topCardObj = getCardObject.byID(activeCards[activeCards.length - 1]);
           topCardObj.resourses.forEach((resourseID) => {
-            console.log(resourseID.name)
             if (resourseID.name === 'tree') {
-              console.log('we are in true')
               isTopCardGreen = true;
             }
           });
         }
       });
-      console.log(isTopCardGreen)
       return isTopCardGreen;
     });
-    console.log(affectedPlayers.length)
     if (affectedPlayers.length === 0) {
       gameState.activePlayer.actionPoints += 1;
       showErrorModal('Нет возможности выполнить эту догму');
@@ -1127,7 +1121,7 @@ const dogmas = {
                 cardNotContainTree = false;
               }
             });
-            if (cardNotContainTree === true) {
+            if (cardNotContainTree === true && noTreeCard === null) {
               noTreeCard = gameState.activePlayer.activeDecks[deckColor].cards.splice(-1, 1).join();
             }
           }
@@ -1138,7 +1132,7 @@ const dogmas = {
         }
         gameBoard.display();
         gameBoard.init();
-        gameBoard.activePlayer.actioPoints += 1;
+        gameState.activePlayer.actionPoints += 1;
         gameBoard.update();
       });
     }
