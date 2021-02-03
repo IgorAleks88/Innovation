@@ -797,8 +797,54 @@ const dogmas = {
     });
     corporateBonus(arrOfId);
   },
-  картография: (cardObj) => { // TODO
-    console.log(`${cardObj.innovation} dogm not implemented yet`);
+  картография: (cardObj) => {
+    const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
+    messageToLog(gameState.activePlayer.name, `активировал карту: <u title="${textToLog}">${cardObj.innovation}</u>`);
+    gameState.counter = 0;
+    gameState.affectedPlayers = getAffectedPlayers(cardObj);
+    function getAffectedCards() {
+      const resArr = [];
+      let isFirstAgeInfluence = false;
+      gameState.activePlayer.influence.cards.forEach((card) => {
+        if (getCardObject.byID(card).age === 1) isFirstAgeInfluence = true;
+      });
+      if (isFirstAgeInfluence) resArr.push(`influence${gameState.activePlayer.id}`);
+      return resArr;
+    }
+    function listener(e) {
+      messageToLog(gameState.activePlayer.name, `переместил карту из своей зоны влияния в зону влияния ${gameState.currentPlayer.name}`);
+      gameState.counter += 1;
+      const eTarget = e.target.closest('.cards-container');
+      let indexOfFirstAge = null;
+      gameState.activePlayer.influence.cards.forEach((card, index) => {
+        if (getCardObject.byID(card).age === 1) indexOfFirstAge = index;
+      });
+      gameState.currentPlayer.influence.cards.push(gameState
+        .activePlayer.influence.cards.splice(indexOfFirstAge, 1).join());
+      eTarget.classList.remove('active');
+      eTarget.onclick = null;
+      document.querySelector('.header-hover__button').click();
+      gameBoard.update();
+    }
+    function callback() {
+      if (gameState.activePlayer.id === gameState.currentPlayer.id
+      && gameState.counter > 0) {
+        const affectedPlayers = getAffectedPlayers(cardObj, true);
+        affectedPlayers.forEach((playerID) => {
+          messageToLog(gameState.activePlayer.name, 'взял и зачел карту');
+          takeCard(1, 1, gameState[`player${playerID}`].id, false);
+          const targetCardID = gameState[`player${playerID}`].hand.splice(-1, 1).join();
+          gameState.activePlayer.influence.cards.push(targetCardID);
+          gameState.activePlayer.actionPoints += 1;
+          gameBoard.update();
+        });
+        corporateBonus(affectedPlayers);
+      } else if (gameState.activePlayer.id === gameState.currentPlayer.id
+        && gameState.counter === 0) {
+        gameState.activePlayer.actionPoints += 1;
+      }
+    }
+    getManualDogma(listener, getAffectedCards, 1, null, false, false, callback, false);
   },
   укрепления: async (cardObj) => {
     const arrOfId = getAffectedPlayers(cardObj);
@@ -961,6 +1007,7 @@ const dogmas = {
           gameState.activePlayer.actionPoints += 1;
           gameBoard.update();
         });
+        corporateBonus(affectedPlayers);
       }
     }
     getManualDogma(listener, getAffectedCards, 1, null, false, false, callback, false);

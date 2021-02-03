@@ -25,7 +25,7 @@ const gameState = {
     name: null,
     id: 0,
     actionPoints: 0,
-    hand: ['монотеизм'],
+    hand: [],
     currentAge: 1,
     currentDeck: 'age1', // test
     winPoints: 0,
@@ -49,7 +49,7 @@ const gameState = {
         shift: '',
       },
       yellow: {
-        cards: ['каменная кладка'],
+        cards: [],
         shift: '',
       },
     },
@@ -79,7 +79,7 @@ const gameState = {
         shift: '',
       },
       green: {
-        cards: ['колесо'],
+        cards: [],
         shift: '',
       },
       blue: {
