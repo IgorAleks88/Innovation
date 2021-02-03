@@ -1,6 +1,6 @@
 const audioPlayer = {
   player: null,
-  tutorialSpeech: false,
+  tutorialSpeech: true,
   init() {
     if (!this.player) {
       this.player = document.createElement('audio');

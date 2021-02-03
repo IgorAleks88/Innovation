@@ -122,7 +122,7 @@ const tutorial = {
     stage10: () => {
       tutorial.currentDOMElement.style.zIndex = 0;
       displayHeader.shader.classList.add('header__shader--hidden');
-      displayModal.setMessageText('С игровым полем разобрались. Теперь поговорим об игровом процессе. В свой ход игрок может выполнить одно из четрёх действий: взять карту в руку, сыграть карту с руки в активную зону, сыграть догму со своей активной карты или добиться лидерства');
+      displayModal.setMessageText('С игровым полем разобрались. Теперь поговорим об игровом процессе. В свой ход игрок может выполнить одно из четырёх действий: взять карту в руку, сыграть карту с руки в активную зону, сыграть догму со своей активной карты или добиться лидерства');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage11;
       audioPlayer.playTutorial('stage_10');
     },
@@ -235,7 +235,7 @@ const tutorial = {
       }
     },
     stage19: () => {
-      displayModal.setMessageText('Если игрок не может взять карту - колода, из которой он должен взять карту, и все старшие колоды пусты, либо активирована догма преписывающая закончить игру, побеждает игрок, имеюший наибольшее влияние ');
+      displayModal.setMessageText('Если игрок не может взять карту - колода, из которой он должен взять карту, и все старшие колоды пусты, либо активирована догма предписывающая закончить игру, побеждает игрок, имеющий наибольшее влияние ');
       displayModal.modalBtn.onclick = tutorial.clickFunctions.stage20;
       audioPlayer.playTutorial('stage_18');
     },
