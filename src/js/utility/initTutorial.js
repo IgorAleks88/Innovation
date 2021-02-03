@@ -2,6 +2,7 @@ import initTutorialGameState from './initTutorialGameState';
 import gameBoard from '../components/gameBoard';
 import header from '../display/playerTable/displayHeader';
 import resetGameState from './resetGameState';
+import audioPlayer from '../components/audioPlayer';
 
 export default function initTutorial() {
   // remove existed btn left from previous game
@@ -34,4 +35,8 @@ export default function initTutorial() {
   gameBoard.display();
   header.initPlayerNames(['Игрок1', 'Игрок2']);
   gameBoard.init();
+
+  // init sound
+  audioPlayer.init();
+  audioPlayer.playTutorial('stage_0');
 }
