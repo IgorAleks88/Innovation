@@ -9,7 +9,7 @@ import dogmas from './dogma';
 import { messageToLog } from '../utility/dogmaTools';
 import specCard from '../specCards/specCard';
 import checkWinCondition from '../utility/checkWinCondition';
-// import socket from '../app'; // for server
+import socket from '../app'; // for server
 
 const gameBoard = {
   display() {
@@ -314,8 +314,6 @@ const gameBoard = {
     movingCardElement.onclick = gameBoard.playCard;
     renderCard.toHand(movingCardElement);
 
-    messageToLog(gameState.activePlayer.name, `взял карту ${cardObj.age} века`);
-
     gameBoard.update();
 
     // protection of multiple clicks
@@ -325,8 +323,10 @@ const gameBoard = {
       }
     }, 250);
 
-    // const state = JSON.stringify(gameState); // for server
-    // socket.emit('state', state); // for server
+    const state = JSON.stringify(gameState); // for server
+    socket.emit('state', state); // for server
+
+    messageToLog(gameState.currentPlayer.name, 'взял карту из колоды');
   },
 
   playCard(e) {
@@ -352,8 +352,8 @@ const gameBoard = {
 
     gameBoard.update();
 
-    // const state = JSON.stringify(gameState); // for server
-    // socket.emit('state', state); // for server
+    const state = JSON.stringify(gameState); // for server
+    socket.emit('state', state); // for server
 
     const textToLog = document.querySelector(`[data-innovation="${cardObj.innovation}"]`).innerText;
     messageToLog(gameState.currentPlayer.name, `сыграл карту <u title="${textToLog}">${cardObj.innovation}</u> с руки`);
