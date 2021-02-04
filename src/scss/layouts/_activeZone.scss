@@ -1,0 +1,124 @@
+.active-zone {
+  @include flex(row, flex-start, flex-end);
+  background: $tables-bg;
+  height: calc(100vh - 44rem); // 44rem = 17rem header + 27rem hand
+  position: relative;
+  width: calc(100vw - 36.3rem);
+  z-index: 1;
+}
+
+.active-zone__shader {
+  position: absolute;
+  background: rgb(0,0,0);
+  height: 100%;
+  width: 100%;
+  opacity: 0.85;
+  z-index: 24;
+
+  &--hidden {
+    visibility: hidden;
+  }
+}
+
+.active-zone__title {
+  @include title-settings('../../assets/img/title-active-zone.png');
+  transform: translate(-52%);
+  z-index: 25;
+
+  &--shade {
+    background: url('../../assets/img/title-active-zone-shade.png');
+    background-size: cover;
+    transform: translate(-52%);
+  }
+}
+
+.active-zone__overlay {
+  @include block-background-overlay;
+  top: 1.5rem;
+  transform: none;
+  width: 100%;
+}
+
+.active-zone__cards-block {
+  @include flex(row, flex-start, flex-end);
+  @include area-border('../../assets/img/border-center.png');
+  flex-wrap: nowrap;
+  height: 100%;
+  overflow: auto;
+  padding: 0 0 0 0.7rem;
+  // padding: 0 0.4rem 0 1rem;
+  scroll-behavior: smooth;
+  width: 100%;
+  z-index: 11;
+}
+
+.active-zone__cards-wrapper {
+  @include flex(row, flex-start, flex-end);
+  flex-wrap: nowrap;
+  height: calc(100vh - 43.5rem);
+  margin-left: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.active-zone__stack {
+  @include flex(column, flex-start, flex-start);
+  flex-shrink: 0;
+  height: calc(100vh - 46.7rem);
+  position: relative;
+  width: 32rem;
+
+  &--empty {
+    height: 0;
+    width: 0;
+  }
+
+  .card {
+    @include cursor-pointer;
+    bottom: 0;
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.3rem;
+    transition: all 0.2s linear;
+  }
+}
+
+.active-zone__menu-icon {
+  @include flex;
+  filter: drop-shadow(-1px 0 8px rgb(5, 213, 228));
+  left: -3.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.5s linear;
+  z-index: 25;
+
+  &:hover {
+    @include cursor-pointer;
+    filter: none;
+    left: 0;
+    transition: all 0.5s linear;
+
+    .menu-icon__open-arrow {
+      transform: rotate(180deg);
+      transition: transform 0.5s linear;
+    }
+  }
+
+  .menu-icon__menu-button {
+    background: url('../../assets/img/menu-table.png') no-repeat center;
+    background-size: contain;
+    height: 20rem;
+    width: 6rem;
+  }
+
+  .menu-icon__open-arrow {
+    background: url('../../assets/img/open-arrow.png') no-repeat center;
+    background-size: contain;
+    height: 3.2rem;
+    margin-left: -1.5rem;
+    transition: transform 0.5s linear;
+    width: 3rem;
+  }
+}

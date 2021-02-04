@@ -1,0 +1,57 @@
+.info-table {
+  @include size(26.5rem, 8rem);
+  @include flex(column);
+  background: url('../../assets/img/info-table.png');
+  background-size: cover;
+  border-radius: 1rem;
+  color: #ffd000;
+  filter: drop-shadow(2px 4px 6px rgb(0, 0, 0));
+  position: relative;
+}
+
+.info-table__player-block {
+  @include flex(row, center, center);
+  @include size(100%, 3rem);
+  font-size: 2rem;
+}
+
+.info-table__player-name {
+  font-weight: 700;
+  margin-left: 0.5rem;
+}
+
+.info-table__action-points-block {
+  @include flex(row, center, center);
+  @include size(100%, 3rem);
+  font-size: 2rem;
+  text-align: center;
+}
+
+.info-table__action-points {
+  font-weight: 700;
+  margin-left: 0.5rem;
+}
+
+.info-table__next-turn-btn {
+  @include size(26.5rem, 8rem);
+  @include flex(column, center, center);
+  @include cursor-pointer;
+  animation: blinker 2s ease-in-out infinite;
+  background: url('../../assets/img/info-table.png');
+  background-size: cover;
+  border-radius: 1rem;
+  border-radius: 1rem;
+  font-family: 'Caesar';
+  font-size: 1.5rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5000;
+}
+
+@keyframes blinker {
+  50% {
+    font-size: 2.4rem;
+  }
+}

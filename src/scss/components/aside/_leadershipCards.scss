@@ -1,0 +1,47 @@
+.leadership-cards {
+  @include flex(column, center, center);
+  @include size(100%, 100vh);
+  background-color: rgba(0, 0, 0, 0.7);
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s linear;
+  z-index: 10000;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.leadership-cards__first-line,
+.leadership-cards__second-line,
+.leadership-cards__btn-line {
+  @include flex(row, center, center);
+  @include size(100%, auto);
+
+  > div {
+    margin: 1rem;
+  }
+}
+
+.leadership-cards__card {
+  @include flex(column, center, center);
+  @include size(14.5rem, 20rem);
+  background-image: url('/assets/img/lead-title.png');
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  font-size: 10rem;
+  position: relative;
+
+  &--active {
+    @include cursor-pointer;
+    border-radius: 25%;
+    box-shadow: inset 0 0 15px 8px #f8c31d, 0 0 15px 5px #f8c31d;
+  }
+
+  .extra-cards__leadership-title {
+    bottom: 2.6rem;
+  }
+}

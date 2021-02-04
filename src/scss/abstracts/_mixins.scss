@@ -1,0 +1,89 @@
+@mixin size($w: auto, $h: auto) {
+  height: $h;
+  width: $w;
+}
+
+@mixin flex($fd: row, $jc: center, $ai: center, $d: flex) {
+  align-items: $ai;
+  display: $d;
+  flex-direction: $fd;
+  justify-content: $jc;
+}
+
+@mixin header-active-card {
+  border: solid 0.1rem #000;
+  border-radius: 0.4rem;
+  font-size: 1.8rem;
+  height: 2.2rem;
+  text-align: center;
+  transition: all 0.5s;
+  width: 3.8rem;
+}
+
+@mixin block-background-overlay {
+  background: url('../../assets/img/block-bg.png') center;
+  height: 96%;
+  mix-blend-mode: overlay;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin title-settings($url, $size: cover) {
+  background: url($url);
+  background-size: $size;
+  filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.8));
+  height: 62px;
+  left: 50%;
+  position: absolute;
+  top: -25px; // don't change on rem
+  transform: translateX(-50%);
+  width: 150px;
+  // z-index: 3;
+}
+
+@mixin area-border($url) {
+  border: 0.1rem solid transparent;
+  border-image: url($url);
+  border-image-repeat: round;
+  border-image-slice: 72 72 72 72;
+  border-image-width: 4rem;
+}
+
+@mixin about-person($url) {
+  align-items: flex-end;
+  background: url($url) no-repeat;
+  background-position: top;
+  background-size: cover;
+  border: 0;
+  display: flex;
+  height: 20rem;
+  width: 13rem;
+}
+
+@mixin position-absolute-center {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin button-gear($mode: overlay) {
+  background: url('../../assets/img/menu-gear.png');
+  background-size: cover;
+  content: '';
+  mix-blend-mode: $mode;
+  position: absolute;
+}
+
+@mixin cursor-default {
+  cursor: url('../../assets/icons/cursor.png'), auto;
+}
+
+@mixin cursor-pointer {
+  cursor: url('../../assets/icons/pointer.png'), auto;
+}
+
+@mixin cursor-move {
+  cursor: url('../../assets/icons/move.png'), auto;
+}
